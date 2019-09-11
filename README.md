@@ -1,2 +1,2 @@
-# StudyBuddy
-Study Buddy VU app/project  
+# StudForU
+StudentForYou project
