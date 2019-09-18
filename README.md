@@ -18,18 +18,22 @@ Projekto funkcijos:
 
 Vaizdo aprašymas
 1. Login Page ->
+
   1.1. Recent posts ->
     *Recent Questions
     *Friend Questions (Ignore your own course)
+    
   1.2. My Profile ->
     *Settings
     *Profile info - edit
+    
   1.3. Courses ->
     *About(Overview)
     *Chat
     *Comments
     *Questions
     *Conspectus(Summary)
+    
   1.4. Others ->
     *Report User
     *Upvote User (to increase rank)
