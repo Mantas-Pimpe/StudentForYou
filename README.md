@@ -19,7 +19,7 @@ Projekto funkcijos:
 Vaizdo aprašymas
 1. Login Page (Mantas P.) ->
 
-  1.1. Recent posts (?) ->
+  1.1. Recent posts (Karolis) ->
     *Recent Questions
     *Friend Questions (Ignore your own course)
     
@@ -34,6 +34,6 @@ Vaizdo aprašymas
     *Questions
     *Conspectus(Summary)
     
-  1.4. Other Users (Karolis) ->
+  1.4. Other Users (?) ->
     *Report User
     *Upvote User (to increase rank)
