@@ -4,7 +4,7 @@ StudentForYou project
 Projekto funkcijos:
 1. galimybe kelti failus
 2. rasyti komentarus
-3. ikelti, rasyti dalyku paiskinimus
+3. ikelti, rasyti dalyku paaiskinimus
 4. bendrauti su kitais vartotojais (chat)
 5. naudingu nuoruodu sarasas
 6. atskiri skyriai skirtingiems dalykams
