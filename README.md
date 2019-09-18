@@ -2,15 +2,15 @@
 StudentForYou project
 
 Projekto funkcijos:
-1. galimybe kelti failus
-2. rasyti komentarus
-3. ikelti, rasyti dalyku paaiskinimus
-4. bendrauti su kitais vartotojais (chat)
-5. naudingu nuoruodu sarasas
-6. atskiri skyriai skirtingiems dalykams
-7. reitinguoti nuorodas, komentarus, ikeltus dalyku paiskinimus
-8. galimybe pranesti apie netinkama turini
-9. nustatymai
-11. integracija su VU prisijungimo sistema? (FB GOOGLE)
-12. ranks
-13. pasirinkimas dalyku kuriuos jau turejai
+1. Galimybė kelti failus
+2. Rašyti komentarus
+3. Įkelti, rašyti dalykų paaiškinimus
+4. Bendrauti su kitais vartotojais (chat)
+5. Naudingų nuoruodų sąrašas
+6. Atskiri skyriai skirtingiems dalykams
+7. Reitinguoti nuorodas, komentarus, įkeltus dalykų paaiškinimus
+8. Galimybė pranešti apie netinkamą turinį
+9. Nustatymai
+11. Integracija su VU prisijungimo sistema? (FB GOOGLE)
+12. Ranks
+13. Pasirinkimas dalykų kuriuos jau turėjai (nustato pagal kursą?)
