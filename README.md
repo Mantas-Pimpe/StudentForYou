@@ -17,23 +17,23 @@ Projekto funkcijos:
 14. Friends/Circle?
 
 Vaizdo aprašymas
-1. Login Page ->
+1. Login Page (Mantas P.) ->
 
-  1.1. Recent posts ->
+  1.1. Recent posts (?) ->
     *Recent Questions
     *Friend Questions (Ignore your own course)
     
-  1.2. My Profile ->
+  1.2. My Profile (Simas) ->
     *Settings
     *Profile info - edit
     
-  1.3. Courses ->
+  1.3. Courses (Kestusis) ->
     *About(Overview)
     *Chat
     *Comments
     *Questions
     *Conspectus(Summary)
     
-  1.4. Others ->
+  1.4. Other Users (Karolis) ->
     *Report User
     *Upvote User (to increase rank)
