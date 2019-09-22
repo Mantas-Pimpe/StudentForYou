@@ -21,5 +21,14 @@ namespace StudentForYou
         {
 
         }
+
+        private void UserProfile_Click(object sender, EventArgs e)
+        {
+            // Username is required to ender it into user profile
+            String Username = "Jeff";
+            UserProfile Profile = new UserProfile(Username);
+            this.Hide();
+            Profile.Show();
+        }
     }
 }

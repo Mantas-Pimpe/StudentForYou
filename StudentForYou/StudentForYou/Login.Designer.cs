@@ -28,36 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.UserProfile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // checkBox1
+            // UserProfile
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(562, 154);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(192, 36);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.UserProfile.Location = new System.Drawing.Point(192, 154);
+            this.UserProfile.Name = "UserProfile";
+            this.UserProfile.Size = new System.Drawing.Size(99, 23);
+            this.UserProfile.TabIndex = 1;
+            this.UserProfile.Text = "TestUserProfile";
+            this.UserProfile.UseVisualStyleBackColor = true;
+            this.UserProfile.Click += new System.EventHandler(this.UserProfile_Click);
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.checkBox1);
+            this.ClientSize = new System.Drawing.Size(300, 189);
+            this.Controls.Add(this.UserProfile);
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "Login";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button UserProfile;
     }
 }
 
