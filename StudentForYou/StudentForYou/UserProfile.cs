@@ -17,6 +17,7 @@ namespace StudentForYou
         private RoundPicturebox roundPicturebox1;
         private RoundedButton loggingOut;
         private RoundedButton usernameChange;
+        private RoundedButton roundedButton1;
         private Label label1;
 
         public UserProfile(String username)
@@ -32,9 +33,10 @@ namespace StudentForYou
             this.UserInfo = new System.Windows.Forms.TextBox();
             this.UserName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
-            this.loggingOut = new StudentForYou.RoundedButton();
             this.usernameChange = new StudentForYou.RoundedButton();
+            this.loggingOut = new StudentForYou.RoundedButton();
+            this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
+            this.roundedButton1 = new StudentForYou.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,15 +70,15 @@ namespace StudentForYou
             this.label1.TabIndex = 5;
             this.label1.Text = "About ";
             // 
-            // roundPicturebox1
+            // usernameChange
             // 
-            this.roundPicturebox1.Image = ((System.Drawing.Image)(resources.GetObject("roundPicturebox1.Image")));
-            this.roundPicturebox1.Location = new System.Drawing.Point(79, 12);
-            this.roundPicturebox1.Name = "roundPicturebox1";
-            this.roundPicturebox1.Size = new System.Drawing.Size(135, 124);
-            this.roundPicturebox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.roundPicturebox1.TabIndex = 6;
-            this.roundPicturebox1.TabStop = false;
+            this.usernameChange.Location = new System.Drawing.Point(12, 244);
+            this.usernameChange.Name = "usernameChange";
+            this.usernameChange.Size = new System.Drawing.Size(138, 43);
+            this.usernameChange.TabIndex = 8;
+            this.usernameChange.Text = "Change Username";
+            this.usernameChange.UseVisualStyleBackColor = true;
+            this.usernameChange.Click += new System.EventHandler(this.UsernameChange_Click);
             // 
             // loggingOut
             // 
@@ -88,19 +90,30 @@ namespace StudentForYou
             this.loggingOut.UseVisualStyleBackColor = true;
             this.loggingOut.Click += new System.EventHandler(this.LoggingOut_Click);
             // 
-            // usernameChange
+            // roundPicturebox1
             // 
-            this.usernameChange.Location = new System.Drawing.Point(12, 244);
-            this.usernameChange.Name = "usernameChange";
-            this.usernameChange.Size = new System.Drawing.Size(138, 43);
-            this.usernameChange.TabIndex = 8;
-            this.usernameChange.Text = "Change Username";
-            this.usernameChange.UseVisualStyleBackColor = true;
-            this.usernameChange.Click += new System.EventHandler(this.UsernameChange_Click);
+            this.roundPicturebox1.Image = ((System.Drawing.Image)(resources.GetObject("roundPicturebox1.Image")));
+            this.roundPicturebox1.Location = new System.Drawing.Point(79, 12);
+            this.roundPicturebox1.Name = "roundPicturebox1";
+            this.roundPicturebox1.Size = new System.Drawing.Size(135, 124);
+            this.roundPicturebox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.roundPicturebox1.TabIndex = 6;
+            this.roundPicturebox1.TabStop = false;
+            // 
+            // roundedButton1
+            // 
+            this.roundedButton1.Location = new System.Drawing.Point(12, 293);
+            this.roundedButton1.Name = "roundedButton1";
+            this.roundedButton1.Size = new System.Drawing.Size(138, 42);
+            this.roundedButton1.TabIndex = 9;
+            this.roundedButton1.Text = "Subjects";
+            this.roundedButton1.UseVisualStyleBackColor = true;
+            this.roundedButton1.Click += new System.EventHandler(this.RoundedButton1_Click);
             // 
             // UserProfile
             // 
             this.ClientSize = new System.Drawing.Size(284, 480);
+            this.Controls.Add(this.roundedButton1);
             this.Controls.Add(this.usernameChange);
             this.Controls.Add(this.loggingOut);
             this.Controls.Add(this.roundPicturebox1);
@@ -134,6 +147,15 @@ namespace StudentForYou
             //
             // Log out and promt to the login screen again, or just reopen the app
             // 
+        }
+
+        private void RoundedButton1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Subjects subjects = new Subjects();
+            subjects.Show();
+            
+            
         }
     }
 }
