@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,13 +22,54 @@ namespace StudentForYou
         private RoundedButton backToPreviousForm;
         private Label label1;
         private Form previousForm = null;
+        private int counter = 0;
 
         public UserProfile(String username, Login loginform)
         {
             InitializeComponent();
+            getUserData(username);
+            setPreviousForm(loginform, ref previousForm);
+        }
+        // should be called in constructor to get user data from database
+        // also set required fields
+        private void getUserData(String username)
+        {
+            bool isNameFound = false;
+            string line;
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\sprus\source\repos\StudentForYou\StudentForYou\StudentForYou\Temporary User Name Database.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                System.Console.WriteLine(line);
+                if(line.Contains(username))
+                {
+                    int spaceCounter = 0;
+                    for(int i=0;i<line.Length;i++)
+                    {
+                        if(spaceCounter==1 && line[i]== ' ')
+                        {
+                            counter = i + 1;
+                            for(int j=i+1;j<line.Length;j++)
+                            {
+                                UserInfo.Text = UserInfo.Text + line[j];
+                            }
+
+                        }
+                        if(line[i]== ' ')
+                            spaceCounter++;
+                    }
+                    isNameFound = true;
+                }
+                
+            }
+            file.Close();
+
+            if (!isNameFound)
+            {
+                MessageBox.Show("Name not found in database", "Unexpected error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Restart();
+            }
             this.label1.Text = this.label1.Text + username;
             this.UserName.Text = username;
-            setPreviousForm(loginform, ref previousForm);
         }
         private void UserInfo_Leave(object sender, EventArgs e)
         {
@@ -46,7 +89,6 @@ namespace StudentForYou
             // save
             // Close and reopen app
             // 
-            // 
             Application.Restart();
         }
         private void setPreviousForm(Login loginform, ref Form previousForm)
@@ -56,20 +98,24 @@ namespace StudentForYou
 
         private void BackToPreviousForm_Click(object sender, EventArgs e)
         {
-            this.Close();
             previousForm.Show();
+            this.Close();
+            
         }
         private void UserProfile_FormClosing_1(object sender, FormClosingEventArgs e)
         {
             //
             // save current data
             //
-            Application.Exit();
+            if(previousForm.Visible == false)
+                Application.Exit();
         }
-        private int SaveData()
+        private void saveBioInfo()
         {
-
-            return 0;
+            string bio = UserInfo.Text;
+            //
+            // need to somehow figure out how to save this shit
+            // 
         }
 
 

@@ -79,7 +79,7 @@ namespace StudentForYou
             // Check if the username is avaliable
             // Change it with the old one
             // close this from
-            //
+            // username can't have any unallowed symbols like .,/';][<>?
             if(textBox1.Text == "")
             {
                 MessageBox.Show("Username can't be empty", "Username Error 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
