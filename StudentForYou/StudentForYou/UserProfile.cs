@@ -17,24 +17,72 @@ namespace StudentForYou
         private RoundPicturebox roundPicturebox1;
         private RoundedButton loggingOut;
         private RoundedButton usernameChange;
+        private RoundedButton backToPreviousForm;
         private Label label1;
+        private Form previousForm = null;
 
-        public UserProfile(String username)
+        public UserProfile(String username, Login loginform)
         {
             InitializeComponent();
             this.label1.Text = this.label1.Text + username;
-            this.UserName.Text = username; 
+            this.UserName.Text = username;
+            setPreviousForm(loginform, ref previousForm);
+        }
+        private void UserInfo_Leave(object sender, EventArgs e)
+        {
+            //
+            // Save textbox contents to file/ database
+            //
         }
 
-        private void InitializeComponent( )
+        private void UsernameChange_Click(object sender, EventArgs e)
+        {
+            UsernameChangeWindow UsernameChange = new UsernameChangeWindow();
+            UsernameChange.ShowDialog();
+        }
+
+        private void LoggingOut_Click(object sender, EventArgs e)
+        {
+            // save
+            // Close and reopen app
+            // 
+            // 
+            Application.Restart();
+        }
+        private void setPreviousForm(Login loginform, ref Form previousForm)
+        {
+            previousForm = loginform;
+        }
+
+        private void BackToPreviousForm_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            previousForm.Show();
+        }
+        private void UserProfile_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            //
+            // save current data
+            //
+            Application.Exit();
+        }
+        private int SaveData()
+        {
+
+            return 0;
+        }
+
+
+        private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserProfile));
             this.UserInfo = new System.Windows.Forms.TextBox();
             this.UserName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
-            this.loggingOut = new StudentForYou.RoundedButton();
+            this.backToPreviousForm = new StudentForYou.RoundedButton();
             this.usernameChange = new StudentForYou.RoundedButton();
+            this.loggingOut = new StudentForYou.RoundedButton();
+            this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,25 +116,15 @@ namespace StudentForYou
             this.label1.TabIndex = 5;
             this.label1.Text = "About ";
             // 
-            // roundPicturebox1
+            // backToPreviousForm
             // 
-            this.roundPicturebox1.Image = ((System.Drawing.Image)(resources.GetObject("roundPicturebox1.Image")));
-            this.roundPicturebox1.Location = new System.Drawing.Point(79, 12);
-            this.roundPicturebox1.Name = "roundPicturebox1";
-            this.roundPicturebox1.Size = new System.Drawing.Size(135, 124);
-            this.roundPicturebox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.roundPicturebox1.TabIndex = 6;
-            this.roundPicturebox1.TabStop = false;
-            // 
-            // loggingOut
-            // 
-            this.loggingOut.Location = new System.Drawing.Point(12, 425);
-            this.loggingOut.Name = "loggingOut";
-            this.loggingOut.Size = new System.Drawing.Size(138, 43);
-            this.loggingOut.TabIndex = 7;
-            this.loggingOut.Text = "Log Out";
-            this.loggingOut.UseVisualStyleBackColor = true;
-            this.loggingOut.Click += new System.EventHandler(this.LoggingOut_Click);
+            this.backToPreviousForm.Location = new System.Drawing.Point(2, 2);
+            this.backToPreviousForm.Name = "backToPreviousForm";
+            this.backToPreviousForm.Size = new System.Drawing.Size(71, 41);
+            this.backToPreviousForm.TabIndex = 9;
+            this.backToPreviousForm.Text = "Back";
+            this.backToPreviousForm.UseVisualStyleBackColor = true;
+            this.backToPreviousForm.Click += new System.EventHandler(this.BackToPreviousForm_Click);
             // 
             // usernameChange
             // 
@@ -98,9 +136,30 @@ namespace StudentForYou
             this.usernameChange.UseVisualStyleBackColor = true;
             this.usernameChange.Click += new System.EventHandler(this.UsernameChange_Click);
             // 
+            // loggingOut
+            // 
+            this.loggingOut.Location = new System.Drawing.Point(12, 425);
+            this.loggingOut.Name = "loggingOut";
+            this.loggingOut.Size = new System.Drawing.Size(138, 43);
+            this.loggingOut.TabIndex = 7;
+            this.loggingOut.Text = "Log Out";
+            this.loggingOut.UseVisualStyleBackColor = true;
+            this.loggingOut.Click += new System.EventHandler(this.LoggingOut_Click);
+            // 
+            // roundPicturebox1
+            // 
+            this.roundPicturebox1.Image = ((System.Drawing.Image)(resources.GetObject("roundPicturebox1.Image")));
+            this.roundPicturebox1.Location = new System.Drawing.Point(79, 12);
+            this.roundPicturebox1.Name = "roundPicturebox1";
+            this.roundPicturebox1.Size = new System.Drawing.Size(135, 124);
+            this.roundPicturebox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.roundPicturebox1.TabIndex = 6;
+            this.roundPicturebox1.TabStop = false;
+            // 
             // UserProfile
             // 
             this.ClientSize = new System.Drawing.Size(284, 480);
+            this.Controls.Add(this.backToPreviousForm);
             this.Controls.Add(this.usernameChange);
             this.Controls.Add(this.loggingOut);
             this.Controls.Add(this.roundPicturebox1);
@@ -110,30 +169,11 @@ namespace StudentForYou
             this.MaximumSize = new System.Drawing.Size(1920, 1080);
             this.MinimumSize = new System.Drawing.Size(300, 400);
             this.Name = "UserProfile";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserProfile_FormClosing_1);
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        private void UserInfo_Leave(object sender, EventArgs e)
-        {
-            //
-            // Save textbox contents to file/ database
-            //
-        }
-
-        private void UsernameChange_Click(object sender, EventArgs e)
-        {
-            UsernameChangeWindow UsernameChange = new UsernameChangeWindow();
-            UsernameChange.ShowDialog();
-        }
-
-        private void LoggingOut_Click(object sender, EventArgs e)
-        {
-            //
-            // Log out and promt to the login screen again, or just reopen the app
-            // 
         }
     }
 }

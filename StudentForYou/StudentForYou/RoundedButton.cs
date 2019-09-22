@@ -19,8 +19,7 @@ namespace StudentForYou
             GraphPath.AddLine(Rect.X + r2, Rect.Y, Rect.Width - r2, Rect.Y);
             GraphPath.AddArc(Rect.X + Rect.Width - radius, Rect.Y, radius, radius, 270, 90);
             GraphPath.AddLine(Rect.Width, Rect.Y + r2, Rect.Width, Rect.Height - r2);
-            GraphPath.AddArc(Rect.X + Rect.Width - radius,
-                             Rect.Y + Rect.Height - radius, radius, radius, 0, 90);
+            GraphPath.AddArc(Rect.X + Rect.Width - radius, Rect.Y + Rect.Height - radius, radius, radius, 0, 90);
             GraphPath.AddLine(Rect.Width - r2, Rect.Height, Rect.X + r2, Rect.Height);
             GraphPath.AddArc(Rect.X, Rect.Y + Rect.Height - radius, radius, radius, 90, 90);
             GraphPath.AddLine(Rect.X, Rect.Height - r2, Rect.X, Rect.Y + r2);
@@ -35,7 +34,7 @@ namespace StudentForYou
             using (GraphicsPath GraphPath = GetRoundPath(Rect, 50))
             {
                 this.Region = new Region(GraphPath);
-                using (Pen pen = new Pen(Color.CadetBlue, 1.75f))
+                using (Pen pen = new Pen(Color.CadetBlue, 1.8f))
                 {
                     pen.Alignment = PenAlignment.Inset;
                     e.Graphics.DrawPath(pen, GraphPath);
