@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,18 @@ using System.Windows.Forms;
 
 namespace StudentForYou
 {
-    public partial class Subjects : Form
+    public partial class form1 : Form
     {
-        public Subjects()
+        public form1()
         {
             InitializeComponent();
+            List<string> data = File.ReadAllLines("allcourses.txt").ToList();
+            foreach (string d in data)
+            {
+                string[] items = d.Split(new char[] { ',' },
+                       StringSplitOptions.RemoveEmptyEntries);
+                listView1.Items.Add(new ListViewItem(items));
+            }
         }
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,12 +42,17 @@ namespace StudentForYou
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Add(textBox1.Text);
+           
             
               
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

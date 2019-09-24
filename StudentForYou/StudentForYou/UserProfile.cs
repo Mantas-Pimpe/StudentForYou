@@ -152,7 +152,7 @@ namespace StudentForYou
         private void RoundedButton1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Subjects subjects = new Subjects();
+            form1 subjects = new form1();
             subjects.Show();
             
             
