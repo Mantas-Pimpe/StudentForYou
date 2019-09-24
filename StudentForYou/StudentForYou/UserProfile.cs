@@ -36,7 +36,7 @@ namespace StudentForYou
         {
             bool isNameFound = false;
             string line;
-            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\sprus\source\repos\StudentForYou\StudentForYou\StudentForYou\Temporary User Name Database.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader("Temporary User Name Database.txt");
             while ((line = file.ReadLine()) != null)
             {
                 System.Console.WriteLine(line);
