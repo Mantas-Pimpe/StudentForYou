@@ -46,6 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseDetails.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs" />
+    <Compile Include="NewPostForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewPostForm.Designer.cs" />
+    <Compile Include="Subjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Subjects.Designer.cs" />
     <Compile Include="UsernameChangeWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,9 +79,11 @@
     <Compile Include="UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="Form1.resx" />
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewPostForm.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,6 +93,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Subjects.resx" />
     <EmbeddedResource Include="UsernameChangeWindow.resx">
       <DependentUpon>UsernameChangeWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +114,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="allcourses.txt" />
     <Content Include="Temporary User Name Database.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

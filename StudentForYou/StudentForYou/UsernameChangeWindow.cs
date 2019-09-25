@@ -11,8 +11,6 @@ namespace StudentForYou
     {
         private TextBox textBox1;
         private Label label1;
-        private ErrorProvider errorProvider1;
-        private System.ComponentModel.IContainer components;
         private RoundedButton SaveButton;
         public UsernameChangeWindow()
         {
@@ -21,12 +19,9 @@ namespace StudentForYou
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SaveButton = new StudentForYou.RoundedButton();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -48,7 +43,7 @@ namespace StudentForYou
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(114, 58);
+            this.SaveButton.Location = new System.Drawing.Point(111, 58);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(98, 44);
             this.SaveButton.TabIndex = 2;
@@ -56,18 +51,13 @@ namespace StudentForYou
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // UsernameChangeWindow
             // 
-            this.ClientSize = new System.Drawing.Size(221, 113);
+            this.ClientSize = new System.Drawing.Size(221, 103);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Name = "UsernameChangeWindow";
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -79,11 +69,7 @@ namespace StudentForYou
             // Check if the username is avaliable
             // Change it with the old one
             // close this from
-            // username can't have any unallowed symbols like .,/';][<>?
-            if(textBox1.Text == "")
-            {
-                MessageBox.Show("Username can't be empty", "Username Error 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //
             this.Close();
         }
     }

@@ -26,9 +26,9 @@ namespace StudentForYou
         {
             // Username is required to ender it into user profile
             String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username,this);
+            UserProfile Profile = new UserProfile(Username);
             this.Hide();
-            Profile.ShowDialog();
+            Profile.Show();
         }
     }
 }
