@@ -20,7 +20,7 @@ namespace StudentForYou
         {
             InitializeComponent();
             string likes, views, answers, question;
-            string[] lines = File.ReadAllLines(@"C:\Users\Karolis\Desktop\StudentsForYou\StudentForYou\StudentForYou\RecentPosts.txt");
+            string[] lines = File.ReadAllLines("RecentPosts.txt");
             //Console.WriteLine(lines.Length);
             for (int i = 0; i < lines.Length; i++)
             {
