@@ -10,31 +10,43 @@ using System.Windows.Forms;
 
 namespace StudentForYou
 {
-    public partial class CourseDetailsForm : Form
+    public partial class courseDetailsForm : Form
     {
-        public CourseDetailsForm()
+        String filename;
+        String coursetext;
+        public courseDetailsForm(String tempfilename)
         {
+            
             InitializeComponent();
-        }
-
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CourseNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CourseDetailsSaveButton_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
+            this.CourseNameDetailsBox.Text = tempfilename;
+            filename = this.CourseNameDetailsBox.Text + ".txt";
+            if(System.IO.File.Exists(filename))
+            {
+                coursetext=System.IO.File.ReadAllText(filename);
+                this.CourseDescriptionDetailsBox.Text = coursetext;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            coursetext = this.CourseDescriptionDetailsBox.Text;
+            System.IO.File.AppendAllText(filename, coursetext);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void CourseDescriptionDetailsBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CourseNameDetailsBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

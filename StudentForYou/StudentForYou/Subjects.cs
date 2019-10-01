@@ -80,6 +80,21 @@ namespace StudentForYou
         {
 
         }
+
+        private void ShowCourseDetailsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            courseDetailsForm detailsForm = new courseDetailsForm(listView1.SelectedItems[Course.DisplayIndex].Text);
+            
+
+            detailsForm.ShowDialog();
+            this.Show();
+
+            }
+            
+            
+           
+        }
     }
-}
+
 

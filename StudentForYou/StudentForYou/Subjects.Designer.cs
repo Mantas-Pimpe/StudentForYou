@@ -35,6 +35,7 @@
             this.Difficulty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Downloads = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.ShowCourseDetailsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -85,11 +86,23 @@
             this.Downloads.Text = "Downloads";
             this.Downloads.Width = 96;
             // 
+            // ShowCourseDetailsButton
+            // 
+            this.ShowCourseDetailsButton.Location = new System.Drawing.Point(70, 511);
+            this.ShowCourseDetailsButton.Margin = new System.Windows.Forms.Padding(4);
+            this.ShowCourseDetailsButton.Name = "ShowCourseDetailsButton";
+            this.ShowCourseDetailsButton.Size = new System.Drawing.Size(271, 28);
+            this.ShowCourseDetailsButton.TabIndex = 4;
+            this.ShowCourseDetailsButton.Text = "Course Details";
+            this.ShowCourseDetailsButton.UseVisualStyleBackColor = true;
+            this.ShowCourseDetailsButton.Click += new System.EventHandler(this.ShowCourseDetailsButton_Click);
+            // 
             // form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.ShowCourseDetailsButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -107,5 +120,6 @@
         private System.Windows.Forms.ColumnHeader Difficulty;
         private System.Windows.Forms.ColumnHeader Downloads;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
+        private System.Windows.Forms.Button ShowCourseDetailsButton;
     }
 }
