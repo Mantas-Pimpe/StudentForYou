@@ -13,11 +13,12 @@ namespace StudentForYou
 {
     public partial class form1 : Form
     {
+        List<string> CourseList;
         public form1()
         {
             InitializeComponent();
-            List<string> data = File.ReadAllLines("allcourses.txt").ToList();
-            foreach (string d in data)
+            CourseList = File.ReadAllLines("allcourses.txt").ToList();
+            foreach (string d in CourseList)
             {
                 string[] items = d.Split(new char[] { ',' },
                        StringSplitOptions.RemoveEmptyEntries);
@@ -42,10 +43,33 @@ namespace StudentForYou
 
         private void Button1_Click(object sender, EventArgs e)
         {
-           
-            
+            this.Hide();
+            AddSubjectForm AddForm = new AddSubjectForm();
+            AddForm.ShowDialog();
+            if (AddForm.DialogResult==DialogResult.OK)
+                {
+                listView1.Items.Clear();
+                CourseList = File.ReadAllLines("allcourses.txt").ToList();
+                foreach (string d in CourseList)
+                {
+                    string[] items = d.Split(new char[] { ',' },
+                           StringSplitOptions.RemoveEmptyEntries);
+                    listView1.Items.Add(new ListViewItem(items));
+                }
+                this.Show();
+            }
+            else
+            {
               
-        }
+                this.Show();
+            }
+
+            }
+            
+            
+
+
+      
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -58,3 +82,4 @@ namespace StudentForYou
         }
     }
 }
+
