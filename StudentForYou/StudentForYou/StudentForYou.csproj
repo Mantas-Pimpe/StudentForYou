@@ -53,6 +53,12 @@
     <Compile Include="CourseDetailsForm.Designer.cs">
       <DependentUpon>CourseDetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="fileuploadform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fileuploadform.Designer.cs">
+      <DependentUpon>fileuploadform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </Compile>
     <EmbeddedResource Include="CourseDetailsForm.resx">
       <DependentUpon>CourseDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fileuploadform.resx">
+      <DependentUpon>fileuploadform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
