@@ -1,6 +1,6 @@
 ﻿namespace StudentForYou
 {
-    partial class RecentPostsForm
+    partial class Form2
     {
         /// <summary>
         /// Required designer variable.
@@ -28,32 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.newpostbtn = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // newpostbtn
-            // 
-            this.newpostbtn.Location = new System.Drawing.Point(313, 408);
-            this.newpostbtn.Name = "newpostbtn";
-            this.newpostbtn.Size = new System.Drawing.Size(169, 30);
-            this.newpostbtn.TabIndex = 0;
-            this.newpostbtn.Text = "Create new post";
-            this.newpostbtn.UseVisualStyleBackColor = true;
-            this.newpostbtn.Click += new System.EventHandler(this.newpostbtn_Click);
-            // 
-            // RecentPostsForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.newpostbtn);
-            this.Name = "RecentPostsForm";
-            this.Text = "Recent posts";
-            this.ResumeLayout(false);
-
+            this.Text = "Form2";
         }
 
         #endregion
-        private System.Windows.Forms.Button newpostbtn;
     }
 }

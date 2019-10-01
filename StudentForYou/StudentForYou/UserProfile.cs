@@ -34,11 +34,11 @@ namespace StudentForYou
             this.UserInfo = new System.Windows.Forms.TextBox();
             this.UserName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.RecentsPostsbtn = new StudentForYou.RoundedButton();
-            this.roundedButton1 = new StudentForYou.RoundedButton();
             this.usernameChange = new StudentForYou.RoundedButton();
             this.loggingOut = new StudentForYou.RoundedButton();
             this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
+            this.roundedButton1 = new StudentForYou.RoundedButton();
+            this.RecentsPostsbtn = new StudentForYou.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,29 +68,9 @@ namespace StudentForYou
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.Location = new System.Drawing.Point(12, 184);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 39);
+            this.label1.Size = new System.Drawing.Size(57, 20);
             this.label1.TabIndex = 5;
             this.label1.Text = "About ";
-            // 
-            // RecentsPostsbtn
-            // 
-            this.RecentsPostsbtn.Location = new System.Drawing.Point(12, 341);
-            this.RecentsPostsbtn.Name = "RecentsPostsbtn";
-            this.RecentsPostsbtn.Size = new System.Drawing.Size(138, 42);
-            this.RecentsPostsbtn.TabIndex = 10;
-            this.RecentsPostsbtn.Text = "Recent posts";
-            this.RecentsPostsbtn.UseVisualStyleBackColor = true;
-            this.RecentsPostsbtn.Click += new System.EventHandler(this.RecentsPostsbtn_Click);
-            // 
-            // roundedButton1
-            // 
-            this.roundedButton1.Location = new System.Drawing.Point(12, 293);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Size = new System.Drawing.Size(138, 42);
-            this.roundedButton1.TabIndex = 9;
-            this.roundedButton1.Text = "Subjects";
-            this.roundedButton1.UseVisualStyleBackColor = true;
-            this.roundedButton1.Click += new System.EventHandler(this.RoundedButton1_Click);
             // 
             // usernameChange
             // 
@@ -122,9 +102,29 @@ namespace StudentForYou
             this.roundPicturebox1.TabIndex = 6;
             this.roundPicturebox1.TabStop = false;
             // 
+            // roundedButton1
+            // 
+            this.roundedButton1.Location = new System.Drawing.Point(12, 293);
+            this.roundedButton1.Name = "roundedButton1";
+            this.roundedButton1.Size = new System.Drawing.Size(138, 42);
+            this.roundedButton1.TabIndex = 9;
+            this.roundedButton1.Text = "Subjects";
+            this.roundedButton1.UseVisualStyleBackColor = true;
+            this.roundedButton1.Click += new System.EventHandler(this.RoundedButton1_Click);
+            // 
+            // RecentsPostsbtn
+            // 
+            this.RecentsPostsbtn.Location = new System.Drawing.Point(12, 341);
+            this.RecentsPostsbtn.Name = "RecentsPostsbtn";
+            this.RecentsPostsbtn.Size = new System.Drawing.Size(138, 42);
+            this.RecentsPostsbtn.TabIndex = 10;
+            this.RecentsPostsbtn.Text = "Recent posts";
+            this.RecentsPostsbtn.UseVisualStyleBackColor = true;
+            this.RecentsPostsbtn.Click += new System.EventHandler(this.RecentsPostsbtn_Click);
+            // 
             // UserProfile
             // 
-            this.ClientSize = new System.Drawing.Size(768, 512);
+            this.ClientSize = new System.Drawing.Size(284, 480);
             this.Controls.Add(this.RecentsPostsbtn);
             this.Controls.Add(this.roundedButton1);
             this.Controls.Add(this.usernameChange);

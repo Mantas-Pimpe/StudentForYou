@@ -50,15 +50,21 @@
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs" />
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewPostForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewPostForm.Designer.cs" />
+    <Compile Include="NewPostForm.Designer.cs">
+      <DependentUpon>NewPostForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Subjects.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Subjects.Designer.cs" />
+    <Compile Include="Subjects.Designer.cs">
+      <DependentUpon>Subjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="UsernameChangeWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,11 +85,15 @@
     <Compile Include="UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <EmbeddedResource Include="Form1.resx" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewPostForm.resx" />
+    <EmbeddedResource Include="NewPostForm.resx">
+      <DependentUpon>NewPostForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -93,7 +103,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Subjects.resx" />
+    <EmbeddedResource Include="Subjects.resx">
+      <DependentUpon>Subjects.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UsernameChangeWindow.resx">
       <DependentUpon>UsernameChangeWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,8 +126,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="allcourses.txt" />
-    <Content Include="Temporary User Name Database.txt" />
+    <Content Include="icon1.PNG" />
+    <Content Include="RecentPosts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

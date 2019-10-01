@@ -28,7 +28,7 @@ namespace StudentForYou
         {
 
             String text = questiontxt.Text;
-            using (StreamWriter writeText = new StreamWriter("RecentPosts.txt", true))
+            using (StreamWriter writeText = new StreamWriter(@"C:\Users\Karolis\Desktop\StudentsForYou\StudentForYou\StudentForYou\RecentPosts.txt", true))
             {
                 writeText.Write("0" + "," + "0" + "," + "0" + "," + text + Environment.NewLine);
             }
