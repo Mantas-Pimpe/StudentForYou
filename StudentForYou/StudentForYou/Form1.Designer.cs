@@ -33,9 +33,10 @@
             // 
             // newpostbtn
             // 
-            this.newpostbtn.Location = new System.Drawing.Point(313, 408);
+            this.newpostbtn.Location = new System.Drawing.Point(468, 644);
+            this.newpostbtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.newpostbtn.Name = "newpostbtn";
-            this.newpostbtn.Size = new System.Drawing.Size(169, 30);
+            this.newpostbtn.Size = new System.Drawing.Size(306, 36);
             this.newpostbtn.TabIndex = 0;
             this.newpostbtn.Text = "Create new post";
             this.newpostbtn.UseVisualStyleBackColor = true;
@@ -43,10 +44,10 @@
             // 
             // RecentPostsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.ClientSize = new System.Drawing.Size(1248, 712);
             this.Controls.Add(this.newpostbtn);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "RecentPostsForm";
             this.Text = "Recent posts";
             this.ResumeLayout(false);

@@ -33,9 +33,10 @@
             // 
             // UserProfile
             // 
-            this.UserProfile.Location = new System.Drawing.Point(192, 154);
+            this.UserProfile.Location = new System.Drawing.Point(914, 587);
+            this.UserProfile.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.UserProfile.Name = "UserProfile";
-            this.UserProfile.Size = new System.Drawing.Size(99, 23);
+            this.UserProfile.Size = new System.Drawing.Size(264, 55);
             this.UserProfile.TabIndex = 1;
             this.UserProfile.Text = "TestUserProfile";
             this.UserProfile.UseVisualStyleBackColor = true;
@@ -43,11 +44,11 @@
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 189);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.ClientSize = new System.Drawing.Size(1248, 712);
             this.Controls.Add(this.UserProfile);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Login";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);

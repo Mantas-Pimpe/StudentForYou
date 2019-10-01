@@ -40,10 +40,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(875, 511);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.button1.Location = new System.Drawing.Point(894, 582);
+            this.button1.Margin = new System.Windows.Forms.Padding(8);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.Size = new System.Drawing.Size(308, 38);
             this.button1.TabIndex = 1;
             this.button1.Text = "Add Subject";
             this.button1.UseVisualStyleBackColor = true;
@@ -51,25 +52,27 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(841, 479);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.textBox1.Location = new System.Drawing.Point(894, 528);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(8);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(156, 22);
+            this.textBox1.Size = new System.Drawing.Size(308, 38);
             this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // listView1
             // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Course,
             this.Description,
             this.Difficulty,
             this.Downloads});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(47, 49);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4);
+            this.listView1.Location = new System.Drawing.Point(37, 32);
+            this.listView1.Margin = new System.Windows.Forms.Padding(8);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1007, 422);
+            this.listView1.Size = new System.Drawing.Size(1165, 480);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -83,7 +86,7 @@
             // Description
             // 
             this.Description.Text = "Description";
-            this.Description.Width = 446;
+            this.Description.Width = 315;
             // 
             // Difficulty
             // 
@@ -97,15 +100,15 @@
             // 
             // form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.ClientSize = new System.Drawing.Size(1248, 712);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "form1";
             this.Text = "Courses";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
