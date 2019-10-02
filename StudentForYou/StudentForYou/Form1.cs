@@ -71,5 +71,11 @@ namespace StudentForYou
             NewPostForm newForm = new NewPostForm();
             newForm.Show();
         }
+
+        private void coursesbtn_Click(object sender, EventArgs e)
+        {
+            form1 subjects = new form1();
+            subjects.Show();
+        }
     }
 }

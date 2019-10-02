@@ -30,5 +30,12 @@ namespace StudentForYou
             this.Hide();
             Profile.Show();
         }
+
+        private void coursesbtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            form1 courses = new form1();
+            courses.Show();
+        }
     }
 }
