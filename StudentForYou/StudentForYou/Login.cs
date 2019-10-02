@@ -30,5 +30,13 @@ namespace StudentForYou
             this.Hide();
             Profile.Show();
         }
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            String Username = UsernameTextBox.Text;
+            UserProfile Profile = new UserProfile(Username, this);
+            this.Hide();
+            Profile.ShowDialog();
+        }
     }
 }
