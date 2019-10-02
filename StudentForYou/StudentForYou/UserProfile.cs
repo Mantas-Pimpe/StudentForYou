@@ -19,6 +19,7 @@ namespace StudentForYou
         private RoundedButton usernameChange;
         private RoundedButton roundedButton1;
         private RoundedButton RecentsPostsbtn;
+        private RoundedButton Chat;
         private Label label1;
 
         public UserProfile(String username)
@@ -39,6 +40,7 @@ namespace StudentForYou
             this.usernameChange = new StudentForYou.RoundedButton();
             this.loggingOut = new StudentForYou.RoundedButton();
             this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
+            this.Chat = new StudentForYou.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,10 +132,22 @@ namespace StudentForYou
             this.roundPicturebox1.TabIndex = 6;
             this.roundPicturebox1.TabStop = false;
             // 
+            // Chat
+            // 
+            this.Chat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.Chat.Location = new System.Drawing.Point(445, 502);
+            this.Chat.Name = "Chat";
+            this.Chat.Size = new System.Drawing.Size(155, 174);
+            this.Chat.TabIndex = 11;
+            this.Chat.Text = "Chat";
+            this.Chat.UseVisualStyleBackColor = true;
+            this.Chat.Click += new System.EventHandler(this.Chat_Click);
+            // 
             // UserProfile
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.Chat);
             this.Controls.Add(this.RecentsPostsbtn);
             this.Controls.Add(this.roundedButton1);
             this.Controls.Add(this.usernameChange);
@@ -176,14 +190,20 @@ namespace StudentForYou
             this.Hide();
             form1 subjects = new form1();
             subjects.Show();
-            
-            
         }
 
         private void RecentsPostsbtn_Click(object sender, EventArgs e)
         {
+            this.Hide();
             RecentPostsForm rpf = new RecentPostsForm();
             rpf.Show();
+        }
+
+        private void Chat_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            GroupChat subjects = new GroupChat();
+            subjects.Show();
         }
     }
 }

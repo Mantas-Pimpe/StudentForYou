@@ -30,5 +30,11 @@ namespace StudentForYou
             this.Hide();
             Profile.Show();
         }
+
+        private void RecentsPostsbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
