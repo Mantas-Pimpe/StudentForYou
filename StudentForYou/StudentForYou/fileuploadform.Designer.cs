@@ -30,6 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.UploadedFilesListView = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // button1
@@ -52,11 +53,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // UploadedFilesListView
+            // 
+            this.UploadedFilesListView.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.UploadedFilesListView.Location = new System.Drawing.Point(29, 55);
+            this.UploadedFilesListView.Name = "UploadedFilesListView";
+            this.UploadedFilesListView.Size = new System.Drawing.Size(736, 295);
+            this.UploadedFilesListView.TabIndex = 4;
+            this.UploadedFilesListView.UseCompatibleStateImageBehavior = false;
+            this.UploadedFilesListView.SelectedIndexChanged += new System.EventHandler(this.UploadedFilesListView_SelectedIndexChanged);
+            // 
             // fileuploadform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.UploadedFilesListView);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "fileuploadform";
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListView UploadedFilesListView;
     }
 }

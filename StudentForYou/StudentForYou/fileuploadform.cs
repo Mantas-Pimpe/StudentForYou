@@ -13,10 +13,25 @@ namespace StudentForYou
     public partial class fileuploadform : Form
     {
         String directory;
+        List<String> filenames=new List<string>();
         public fileuploadform(String directoryname)
         {
             directory = directoryname;
             InitializeComponent();
+            if(System.IO.Directory.Exists(directory).Equals(true))
+            {
+
+                foreach (string f in System.IO.Directory.GetFiles(directory, "*.txt"))
+                {
+                    filenames.Add(f);
+                }
+                this.addtolistview();
+
+               
+
+
+            }
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,14 +50,34 @@ namespace StudentForYou
 
 
                 System.IO.File.Copy(path,copypath);
+                UploadedFilesListView.Items.Add(new ListViewItem(copypath));
             }
-            this.DialogResult = DialogResult.OK;
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
 
+        }
+
+        public void addtolistview()
+        {
+            foreach (string d in filenames)
+            {
+                UploadedFilesListView.Items.Add(new ListViewItem(d));
+            }
+        }
+
+        private void UploadedFilesListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(this.UploadedFilesListView.SelectedItems.Count>0)
+            {
+                string temppath= UploadedFilesListView.SelectedItems[0].Text;
+            System.Diagnostics.Process.Start(temppath);
+
+            }
+           
         }
     }
 }

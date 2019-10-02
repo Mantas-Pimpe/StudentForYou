@@ -83,12 +83,15 @@ namespace StudentForYou
 
         private void ShowCourseDetailsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            courseDetailsForm detailsForm = new courseDetailsForm(listView1.SelectedItems[Course.DisplayIndex].Text);
-            
+            if (listView1.SelectedItems.Count > 0)
+            {
+                this.Hide();
+                courseDetailsForm detailsForm = new courseDetailsForm(listView1.SelectedItems[Course.DisplayIndex].Text);
+                detailsForm.ShowDialog();
+                this.Show();
 
-            detailsForm.ShowDialog();
-            this.Show();
+            }
+                
 
             }
 
@@ -100,10 +103,20 @@ namespace StudentForYou
 
         private void SubjectDownloadButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            if(listView1.SelectedItems.Count>0)
+            {
+                this.Hide();
             fileuploadform uploadform = new fileuploadform(listView1.SelectedItems[Course.Index].Text);
             uploadform.ShowDialog();
             this.Show();
+
+            }
+            
+        }
+
+        private void GoBackSubjectsButton_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
         }
     }
     }
