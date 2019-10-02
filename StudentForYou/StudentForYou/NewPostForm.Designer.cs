@@ -61,7 +61,6 @@
             this.SaveBtn.Size = new System.Drawing.Size(292, 45);
             this.SaveBtn.TabIndex = 2;
             this.SaveBtn.Text = "Save";
-            this.SaveBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.SaveBtn.UseVisualStyleBackColor = true;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
