@@ -91,10 +91,21 @@ namespace StudentForYou
             this.Show();
 
             }
-            
-            
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+           
            
         }
+
+        private void SubjectDownloadButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            fileuploadform uploadform = new fileuploadform(listView1.SelectedItems[Course.Index].Text);
+            uploadform.ShowDialog();
+            this.Show();
+        }
+    }
     }
 
 

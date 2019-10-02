@@ -36,6 +36,7 @@
             this.Downloads = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.ShowCourseDetailsButton = new System.Windows.Forms.Button();
+            this.SubjectDownloadButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -56,6 +57,7 @@
             this.Description,
             this.Difficulty,
             this.Downloads});
+            this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(47, 49);
             this.listView1.Margin = new System.Windows.Forms.Padding(4);
@@ -65,6 +67,7 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
+            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // Course
             // 
@@ -97,11 +100,22 @@
             this.ShowCourseDetailsButton.UseVisualStyleBackColor = true;
             this.ShowCourseDetailsButton.Click += new System.EventHandler(this.ShowCourseDetailsButton_Click);
             // 
+            // SubjectDownloadButton
+            // 
+            this.SubjectDownloadButton.Location = new System.Drawing.Point(439, 511);
+            this.SubjectDownloadButton.Name = "SubjectDownloadButton";
+            this.SubjectDownloadButton.Size = new System.Drawing.Size(279, 28);
+            this.SubjectDownloadButton.TabIndex = 5;
+            this.SubjectDownloadButton.Text = "Downloads";
+            this.SubjectDownloadButton.UseVisualStyleBackColor = true;
+            this.SubjectDownloadButton.Click += new System.EventHandler(this.SubjectDownloadButton_Click);
+            // 
             // form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.SubjectDownloadButton);
             this.Controls.Add(this.ShowCourseDetailsButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button1);
@@ -121,5 +135,6 @@
         private System.Windows.Forms.ColumnHeader Downloads;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.Button ShowCourseDetailsButton;
+        private System.Windows.Forms.Button SubjectDownloadButton;
     }
 }
