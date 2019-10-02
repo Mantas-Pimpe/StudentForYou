@@ -28,13 +28,18 @@ namespace StudentForYou
         {
 
             String text = questiontxt.Text;
-            using (StreamWriter writeText = new StreamWriter(@"RecentPosts.txt", true))
+            using (StreamWriter writeText = new StreamWriter(@"recentquestions.txt", true))
             {
                 writeText.Write("0" + "," + "0" + "," + "0" + "," + text + Environment.NewLine);
             }
             RecentPostsForm rpf = new RecentPostsForm();
             rpf.Show();
             this.Close();
+        }
+
+        private void questiontxt_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -17,8 +17,8 @@ namespace StudentForYou
         private RoundPicturebox roundPicturebox1;
         private RoundedButton loggingOut;
         private RoundedButton usernameChange;
-        private RoundedButton roundedButton1;
-        private RoundedButton RecentsPostsbtn;
+        private RoundedButton subjectsbtn;
+        private RoundedButton recentpostsbtn;
         private Label label1;
 
         public UserProfile(String username)
@@ -34,8 +34,8 @@ namespace StudentForYou
             this.UserInfo = new System.Windows.Forms.TextBox();
             this.UserName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.RecentsPostsbtn = new StudentForYou.RoundedButton();
-            this.roundedButton1 = new StudentForYou.RoundedButton();
+            this.recentpostsbtn = new StudentForYou.RoundedButton();
+            this.subjectsbtn = new StudentForYou.RoundedButton();
             this.usernameChange = new StudentForYou.RoundedButton();
             this.loggingOut = new StudentForYou.RoundedButton();
             this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
@@ -56,7 +56,7 @@ namespace StudentForYou
             // UserName
             // 
             this.UserName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.UserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.UserName.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserName.Location = new System.Drawing.Point(496, 188);
             this.UserName.Name = "UserName";
             this.UserName.Size = new System.Drawing.Size(316, 73);
@@ -68,38 +68,41 @@ namespace StudentForYou
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(364, 327);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 39);
+            this.label1.Size = new System.Drawing.Size(69, 29);
             this.label1.TabIndex = 5;
             this.label1.Text = "About ";
             // 
-            // RecentsPostsbtn
+            // recentpostsbtn
             // 
-            this.RecentsPostsbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.RecentsPostsbtn.Location = new System.Drawing.Point(237, 502);
-            this.RecentsPostsbtn.Name = "RecentsPostsbtn";
-            this.RecentsPostsbtn.Size = new System.Drawing.Size(155, 174);
-            this.RecentsPostsbtn.TabIndex = 10;
-            this.RecentsPostsbtn.Text = "Recent posts";
-            this.RecentsPostsbtn.UseVisualStyleBackColor = true;
-            this.RecentsPostsbtn.Click += new System.EventHandler(this.RecentsPostsbtn_Click);
+            this.recentpostsbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.recentpostsbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recentpostsbtn.Location = new System.Drawing.Point(237, 502);
+            this.recentpostsbtn.Name = "recentpostsbtn";
+            this.recentpostsbtn.Size = new System.Drawing.Size(155, 174);
+            this.recentpostsbtn.TabIndex = 10;
+            this.recentpostsbtn.Text = "Recent posts";
+            this.recentpostsbtn.UseVisualStyleBackColor = true;
+            this.recentpostsbtn.Click += new System.EventHandler(this.RecentsPostsbtn_Click);
             // 
-            // roundedButton1
+            // subjectsbtn
             // 
-            this.roundedButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.roundedButton1.Location = new System.Drawing.Point(35, 502);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Size = new System.Drawing.Size(155, 174);
-            this.roundedButton1.TabIndex = 9;
-            this.roundedButton1.Text = "Subjects";
-            this.roundedButton1.UseVisualStyleBackColor = true;
-            this.roundedButton1.Click += new System.EventHandler(this.RoundedButton1_Click);
+            this.subjectsbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.subjectsbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subjectsbtn.Location = new System.Drawing.Point(35, 502);
+            this.subjectsbtn.Name = "subjectsbtn";
+            this.subjectsbtn.Size = new System.Drawing.Size(155, 174);
+            this.subjectsbtn.TabIndex = 9;
+            this.subjectsbtn.Text = "Subjects";
+            this.subjectsbtn.UseVisualStyleBackColor = true;
+            this.subjectsbtn.Click += new System.EventHandler(this.RoundedButton1_Click);
             // 
             // usernameChange
             // 
             this.usernameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.usernameChange.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameChange.Location = new System.Drawing.Point(1056, 291);
             this.usernameChange.Name = "usernameChange";
             this.usernameChange.Size = new System.Drawing.Size(155, 174);
@@ -111,6 +114,7 @@ namespace StudentForYou
             // loggingOut
             // 
             this.loggingOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.loggingOut.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loggingOut.Location = new System.Drawing.Point(1056, 502);
             this.loggingOut.Name = "loggingOut";
             this.loggingOut.Size = new System.Drawing.Size(155, 174);
@@ -134,8 +138,8 @@ namespace StudentForYou
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
-            this.Controls.Add(this.RecentsPostsbtn);
-            this.Controls.Add(this.roundedButton1);
+            this.Controls.Add(this.recentpostsbtn);
+            this.Controls.Add(this.subjectsbtn);
             this.Controls.Add(this.usernameChange);
             this.Controls.Add(this.loggingOut);
             this.Controls.Add(this.roundPicturebox1);
@@ -145,6 +149,7 @@ namespace StudentForYou
             this.MaximumSize = new System.Drawing.Size(1920, 1200);
             this.MinimumSize = new System.Drawing.Size(300, 400);
             this.Name = "UserProfile";
+            this.Text = "Profile";
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -166,6 +171,9 @@ namespace StudentForYou
 
         private void LoggingOut_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            Login newlogin = new Login();
+            newlogin.Show();
             //
             // Log out and promt to the login screen again, or just reopen the app
             // 

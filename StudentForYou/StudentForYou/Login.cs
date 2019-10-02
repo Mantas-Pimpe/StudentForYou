@@ -37,5 +37,12 @@ namespace StudentForYou
             form1 courses = new form1();
             courses.Show();
         }
+
+        private void recentquestionsbtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            RecentPostsForm rpF = new RecentPostsForm();
+            rpF.Show();
+        }
     }
 }
