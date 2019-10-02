@@ -36,12 +36,16 @@
             this.Difficulty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Downloads = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.coursesbtn = new System.Windows.Forms.Button();
+            this.recentquestionsbtn = new System.Windows.Forms.Button();
+            this.profilebtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button1.Location = new System.Drawing.Point(894, 582);
+            this.button1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(894, 566);
             this.button1.Margin = new System.Windows.Forms.Padding(8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(308, 38);
@@ -56,7 +60,7 @@
             this.textBox1.Location = new System.Drawing.Point(894, 528);
             this.textBox1.Margin = new System.Windows.Forms.Padding(8);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(308, 38);
+            this.textBox1.Size = new System.Drawing.Size(308, 22);
             this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
@@ -98,10 +102,45 @@
             this.Downloads.Text = "Downloads";
             this.Downloads.Width = 96;
             // 
+            // coursesbtn
+            // 
+            this.coursesbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.coursesbtn.Location = new System.Drawing.Point(37, 627);
+            this.coursesbtn.Name = "coursesbtn";
+            this.coursesbtn.Size = new System.Drawing.Size(200, 73);
+            this.coursesbtn.TabIndex = 4;
+            this.coursesbtn.Text = "Courses";
+            this.coursesbtn.UseVisualStyleBackColor = true;
+            // 
+            // recentquestionsbtn
+            // 
+            this.recentquestionsbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recentquestionsbtn.Location = new System.Drawing.Point(514, 627);
+            this.recentquestionsbtn.Name = "recentquestionsbtn";
+            this.recentquestionsbtn.Size = new System.Drawing.Size(200, 73);
+            this.recentquestionsbtn.TabIndex = 5;
+            this.recentquestionsbtn.Text = "Recent questions";
+            this.recentquestionsbtn.UseVisualStyleBackColor = true;
+            this.recentquestionsbtn.Click += new System.EventHandler(this.recentquestionsbtn_Click);
+            // 
+            // profilebtn
+            // 
+            this.profilebtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.profilebtn.Location = new System.Drawing.Point(1002, 627);
+            this.profilebtn.Name = "profilebtn";
+            this.profilebtn.Size = new System.Drawing.Size(200, 73);
+            this.profilebtn.TabIndex = 6;
+            this.profilebtn.Text = "Profile";
+            this.profilebtn.UseVisualStyleBackColor = true;
+            this.profilebtn.Click += new System.EventHandler(this.profilebtn_Click);
+            // 
             // form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.profilebtn);
+            this.Controls.Add(this.recentquestionsbtn);
+            this.Controls.Add(this.coursesbtn);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
@@ -123,5 +162,8 @@
         private System.Windows.Forms.ColumnHeader Difficulty;
         private System.Windows.Forms.ColumnHeader Downloads;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
+        private System.Windows.Forms.Button coursesbtn;
+        private System.Windows.Forms.Button recentquestionsbtn;
+        private System.Windows.Forms.Button profilebtn;
     }
 }

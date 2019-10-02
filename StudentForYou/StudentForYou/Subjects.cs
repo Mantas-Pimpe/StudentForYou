@@ -61,5 +61,20 @@ namespace StudentForYou
         {
 
         }
+
+        private void recentquestionsbtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            RecentPostsForm rpF = new RecentPostsForm();
+            rpF.Show();
+        }
+
+        private void profilebtn_Click(object sender, EventArgs e)
+        {
+            String Username = "Jeff";
+            UserProfile Profile = new UserProfile(Username);
+            this.Hide();
+            Profile.Show();
+        }
     }
 }

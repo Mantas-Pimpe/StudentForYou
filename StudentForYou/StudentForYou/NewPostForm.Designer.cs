@@ -36,19 +36,20 @@
             // questiontxt
             // 
             this.questiontxt.Location = new System.Drawing.Point(124, 134);
-            this.questiontxt.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.questiontxt.Margin = new System.Windows.Forms.Padding(6);
             this.questiontxt.Name = "questiontxt";
             this.questiontxt.Size = new System.Drawing.Size(1000, 400);
             this.questiontxt.TabIndex = 0;
             this.questiontxt.Text = "";
+            this.questiontxt.TextChanged += new System.EventHandler(this.questiontxt_TextChanged);
             // 
             // questionBox
             // 
             this.questionBox.Location = new System.Drawing.Point(124, 52);
-            this.questionBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.questionBox.Margin = new System.Windows.Forms.Padding(6);
             this.questionBox.Name = "questionBox";
             this.questionBox.ReadOnly = true;
-            this.questionBox.Size = new System.Drawing.Size(1000, 38);
+            this.questionBox.Size = new System.Drawing.Size(1000, 22);
             this.questionBox.TabIndex = 1;
             this.questionBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.questionBox.TextChanged += new System.EventHandler(this.questionBox_TextChanged);
@@ -56,7 +57,7 @@
             // SaveBtn
             // 
             this.SaveBtn.Location = new System.Drawing.Point(832, 570);
-            this.SaveBtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.SaveBtn.Margin = new System.Windows.Forms.Padding(6);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(292, 45);
             this.SaveBtn.TabIndex = 2;
@@ -71,7 +72,7 @@
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.questionBox);
             this.Controls.Add(this.questiontxt);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "NewPostForm";
             this.Text = "NewPostForm";
             this.ResumeLayout(false);

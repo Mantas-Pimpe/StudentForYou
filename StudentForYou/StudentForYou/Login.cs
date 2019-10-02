@@ -31,10 +31,18 @@ namespace StudentForYou
             Profile.Show();
         }
 
-        private void RecentsPostsbtn_Click(object sender, EventArgs e)
+        private void coursesbtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            form1 courses = new form1();
+            courses.Show();
         }
 
+        private void recentquestionsbtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            RecentPostsForm rpF = new RecentPostsForm();
+            rpF.Show();
+        }
     }
 }
