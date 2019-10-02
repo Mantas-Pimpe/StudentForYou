@@ -12,11 +12,11 @@ using System.Net.Sockets;
 
 namespace StudentForYou
 {
-    public partial class GroupChat : Form
+    public partial class Chat : Form
     {
         Socket sck;
         EndPoint epLocal, epRemote;
-        public GroupChat()
+        public Chat()
         {
             InitializeComponent();
             sck = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -105,16 +105,19 @@ namespace StudentForYou
         {
             try
             {
-                // converts from string to byte[]
-                System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
-                byte[] msg = new byte[1500];
-                msg = enc.GetBytes(textMessage.Text);
-                // sending the message
-                sck.Send(msg);
-                // add to listbox
-                listMessage.Items.Add("You: " + textMessage.Text);
-                // clear txtMessage
-                textMessage.Clear();
+                if(textMessage.Text != "")
+                {
+                    // converts from string to byte[]
+                    System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+                    byte[] msg = new byte[1500];
+                    msg = enc.GetBytes(textMessage.Text);
+                    // sending the message
+                    sck.Send(msg);
+                    // add to listbox
+                    listMessage.Items.Add("You: " + textMessage.Text);
+                    // clear txtMessage
+                    textMessage.Clear();
+                }
             }
             catch (Exception ex)
             {

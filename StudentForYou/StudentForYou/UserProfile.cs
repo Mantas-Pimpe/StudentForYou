@@ -20,6 +20,7 @@ namespace StudentForYou
         private RoundedButton roundedButton1;
         private RoundedButton RecentsPostsbtn;
         private RoundedButton Chat;
+        private RoundedButton GroupChat;
         private Label label1;
 
         public UserProfile(String username)
@@ -41,6 +42,7 @@ namespace StudentForYou
             this.loggingOut = new StudentForYou.RoundedButton();
             this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
             this.Chat = new StudentForYou.RoundedButton();
+            this.GroupChat = new StudentForYou.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,10 +145,22 @@ namespace StudentForYou
             this.Chat.UseVisualStyleBackColor = true;
             this.Chat.Click += new System.EventHandler(this.Chat_Click);
             // 
+            // GroupChat
+            // 
+            this.GroupChat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.GroupChat.Location = new System.Drawing.Point(647, 502);
+            this.GroupChat.Name = "GroupChat";
+            this.GroupChat.Size = new System.Drawing.Size(155, 174);
+            this.GroupChat.TabIndex = 12;
+            this.GroupChat.Text = "Group Chat";
+            this.GroupChat.UseVisualStyleBackColor = true;
+            this.GroupChat.Click += new System.EventHandler(this.GroupChat_Click);
+            // 
             // UserProfile
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.GroupChat);
             this.Controls.Add(this.Chat);
             this.Controls.Add(this.RecentsPostsbtn);
             this.Controls.Add(this.roundedButton1);
@@ -202,8 +216,15 @@ namespace StudentForYou
         private void Chat_Click(object sender, EventArgs e)
         {
             this.Hide();
-            GroupChat subjects = new GroupChat();
-            subjects.Show();
+            Chat chat = new Chat();
+            chat.Show();
+        }
+
+        private void GroupChat_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            GroupChat gchat = new GroupChat();
+            gchat.Show();
         }
     }
 }

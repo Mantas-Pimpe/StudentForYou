@@ -1,6 +1,6 @@
 ﻿namespace StudentForYou
 {
-    partial class GroupChat
+    partial class Chat
     {
         /// <summary>
         /// Required designer variable.

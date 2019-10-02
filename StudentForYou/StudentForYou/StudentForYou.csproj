@@ -59,6 +59,12 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
+    <Compile Include="GroupChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GroupChat.Designer.cs">
+      <DependentUpon>GroupChat.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewPostForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GroupChat.resx">
+      <DependentUpon>GroupChat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
