@@ -33,6 +33,7 @@
             this.recentquestionsbtn = new System.Windows.Forms.Button();
             this.profilebtn = new System.Windows.Forms.Button();
             this.coursebtn = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // newpostbtn
@@ -88,11 +89,20 @@
             this.coursebtn.UseVisualStyleBackColor = true;
             this.coursebtn.Click += new System.EventHandler(this.coursebtn_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 12);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1169, 466);
+            this.flowLayoutPanel1.TabIndex = 5;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            // 
             // RecentPostsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.coursebtn);
             this.Controls.Add(this.profilebtn);
             this.Controls.Add(this.recentquestionsbtn);
@@ -110,5 +120,6 @@
         private System.Windows.Forms.Button recentquestionsbtn;
         private System.Windows.Forms.Button profilebtn;
         private System.Windows.Forms.Button coursebtn;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

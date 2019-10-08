@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 
@@ -29,7 +28,8 @@ namespace StudentForYou
                 views = line[1];
                 answers = line[2];
                 question = line[3];
-                AddNewButton(likes, views, answers, question);
+                //AddNewButton(likes, views, answers, question);
+                flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question));
             }
         }
 
@@ -90,6 +90,26 @@ namespace StudentForYou
             UserProfile Profile = new UserProfile(Username);
             this.Hide();
             Profile.Show();
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.WrapContents = false;
+            /*string likes, views, answers, question;
+            string[] lines = File.ReadAllLines(@"..\Debug\recentquestions.txt");
+            //Console.WriteLine(lines.Length);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string[] line = lines[i].Split(',');
+                likes = line[0];
+                views = line[1];
+                answers = line[2];
+                question = line[3];
+                flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question));
+                //AddNewButton(likes, views, answers, question);
+            }*/
         }
     }
 }
