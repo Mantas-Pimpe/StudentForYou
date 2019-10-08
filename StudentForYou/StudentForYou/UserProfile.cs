@@ -190,6 +190,7 @@ namespace StudentForYou
 
         private void RecentsPostsbtn_Click(object sender, EventArgs e)
         {
+            this.Hide();
             RecentPostsForm rpf = new RecentPostsForm();
             rpf.Show();
         }

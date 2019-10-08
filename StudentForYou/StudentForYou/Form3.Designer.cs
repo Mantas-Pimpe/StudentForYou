@@ -42,6 +42,7 @@
             this.textFriendsIp = new System.Windows.Forms.TextBox();
             this.textMessage = new System.Windows.Forms.TextBox();
             this.listMessage = new System.Windows.Forms.ListBox();
+            this.Back = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -174,17 +175,28 @@
             this.listMessage.Size = new System.Drawing.Size(1000, 345);
             this.listMessage.TabIndex = 6;
             // 
-            // GroupChat
+            // Back
+            // 
+            this.Back.Location = new System.Drawing.Point(300, 637);
+            this.Back.Name = "Back";
+            this.Back.Size = new System.Drawing.Size(179, 40);
+            this.Back.TabIndex = 15;
+            this.Back.Text = "Back";
+            this.Back.UseVisualStyleBackColor = true;
+            this.Back.Click += new System.EventHandler(this.Back_Click);
+            // 
+            // Chat
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.Back);
             this.Controls.Add(this.listMessage);
             this.Controls.Add(this.textMessage);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonStart);
-            this.Name = "GroupChat";
+            this.Name = "Chat";
             this.Text = "Group Chat";
             this.Load += new System.EventHandler(this.GroupChat_Load);
             this.groupBox1.ResumeLayout(false);
@@ -211,5 +223,6 @@
         private System.Windows.Forms.TextBox textFriendsIp;
         private System.Windows.Forms.TextBox textMessage;
         private System.Windows.Forms.ListBox listMessage;
+        private System.Windows.Forms.Button Back;
     }
 }

@@ -1,38 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace StudentForYou
+namespace StudentForYouGROUPCHAT
 {
-    public partial class GroupChat : Form
+    public class Program
     {
         System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
         NetworkStream serverStream = default(NetworkStream);
         string readData = null;
-        public GroupChat()
-        {
-            InitializeComponent();
-        }
-
-        private void GroupChat_Load(object sender, EventArgs e)
+        static void Main(string[] args)
         {
 
         }
-
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ButtonStart_Click(object sender, EventArgs e)
+        public void Start()
         {
             readData = "Conected to Chat Server ...";
             msg();
@@ -45,23 +26,19 @@ namespace StudentForYou
 
             Thread ctThread = new Thread(getMessage);
             ctThread.Start();
-            buttonStart.Text = "Connected";
-            buttonStart.Enabled = false;
         }
-
-        private void ButtonSend_Click(object sender, EventArgs e)
+        public void Send()
         {
             byte[] outStream = System.Text.Encoding.ASCII.GetBytes(textMessage.Text + "$");
             serverStream.Write(outStream, 0, outStream.Length);
             serverStream.Flush();
-            textMessage.Clear();
         }
-        private void getMessage()
+        public void getMessage()
         {
             while (true)
             {
                 serverStream = clientSocket.GetStream();
-                int buffSize = 0; 
+                int buffSize = 0;
                 byte[] inStream = new byte[clientSocket.ReceiveBufferSize];
                 buffSize = clientSocket.ReceiveBufferSize;
                 serverStream.Read(inStream, 0, buffSize);
@@ -70,29 +47,12 @@ namespace StudentForYou
                 msg();
             }
         }
-        private void msg()
+        public void msg()
         {
             if (this.InvokeRequired)
                 this.Invoke(new MethodInvoker(msg));
             else
                 listMessage.Text = listMessage.Text + Environment.NewLine + " >> " + readData;
-        }
-
-        private void TextMessage_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Back_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            RecentPostsForm rpf = new RecentPostsForm();
-            rpf.Show();
-        }
-
-        private void ListMessage_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

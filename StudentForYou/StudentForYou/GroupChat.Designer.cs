@@ -28,21 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listMessage = new System.Windows.Forms.ListBox();
             this.textMessage = new System.Windows.Forms.TextBox();
             this.buttonSend = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Back = new System.Windows.Forms.Button();
+            this.listMessage = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // listMessage
-            // 
-            this.listMessage.FormattingEnabled = true;
-            this.listMessage.ItemHeight = 31;
-            this.listMessage.Location = new System.Drawing.Point(123, 236);
-            this.listMessage.Name = "listMessage";
-            this.listMessage.Size = new System.Drawing.Size(1000, 345);
-            this.listMessage.TabIndex = 12;
             // 
             // textMessage
             // 
@@ -80,12 +72,31 @@
             this.textBox1.TabIndex = 13;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
+            // Back
+            // 
+            this.Back.Location = new System.Drawing.Point(123, 640);
+            this.Back.Name = "Back";
+            this.Back.Size = new System.Drawing.Size(179, 40);
+            this.Back.TabIndex = 14;
+            this.Back.Text = "Back";
+            this.Back.UseVisualStyleBackColor = true;
+            this.Back.Click += new System.EventHandler(this.Back_Click);
+            // 
+            // listMessage
+            // 
+            this.listMessage.Location = new System.Drawing.Point(123, 236);
+            this.listMessage.Multiline = true;
+            this.listMessage.Name = "listMessage";
+            this.listMessage.Size = new System.Drawing.Size(1000, 345);
+            this.listMessage.TabIndex = 15;
+            // 
             // GroupChat
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listMessage);
+            this.Controls.Add(this.Back);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textMessage);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.buttonStart);
@@ -98,11 +109,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listMessage;
         private System.Windows.Forms.TextBox textMessage;
         private System.Windows.Forms.Button buttonSend;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button Back;
+        private System.Windows.Forms.TextBox listMessage;
     }
 }

@@ -3,8 +3,9 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Text;
 using System.Collections;
+using System.Net;
 
-namespace StudentForYouSERVER
+namespace ConsoleApplication1
 {
     class Program
     {
@@ -12,23 +13,23 @@ namespace StudentForYouSERVER
 
         static void Main(string[] args)
         {
-            TcpListener serverSocket = new TcpListener(8888);
+            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+            TcpListener serverSocket = new TcpListener(localAddr, 8888);
             TcpClient clientSocket = default(TcpClient);
             int counter = 0;
 
             serverSocket.Start();
-            Console.WriteLine("Chat Server Started ....");
+            Console.WriteLine("Chat Server Started");
             counter = 0;
-            while (counter < 5)
+            while ((true))
             {
                 counter += 1;
                 clientSocket = serverSocket.AcceptTcpClient();
-
-                byte[] bytesFrom = new byte[4096];
+                byte[] bytesFrom = new byte[clientSocket.ReceiveBufferSize];
                 string dataFromClient = null;
 
                 NetworkStream networkStream = clientSocket.GetStream();
-                networkStream.Read(bytesFrom, 0, bytesFrom.Length);
+                networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                 dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
                 dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
 
@@ -90,7 +91,7 @@ namespace StudentForYouSERVER
         private void doChat()
         {
             int requestCount = 0;
-            byte[] bytesFrom = new byte[4096];
+            byte[] bytesFrom = new byte[clientSocket.ReceiveBufferSize];
             string dataFromClient = null;
             Byte[] sendBytes = null;
             string serverResponse = null;
@@ -103,7 +104,7 @@ namespace StudentForYouSERVER
                 {
                     requestCount = requestCount + 1;
                     NetworkStream networkStream = clientSocket.GetStream();
-                    networkStream.Read(bytesFrom, 0, bytesFrom.Length);
+                    networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
                     dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     Console.WriteLine("From client - " + clNo + " : " + dataFromClient);

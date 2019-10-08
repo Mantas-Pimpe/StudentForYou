@@ -91,5 +91,19 @@ namespace StudentForYou
             this.Hide();
             Profile.Show();
         }
+
+        private void Chat_Click(object sender, EventArgs e)
+        {
+            Chat chat = new Chat();
+            this.Hide();
+            chat.Show();
+        }
+
+        private void GroupChat_Click(object sender, EventArgs e)
+        {
+            GroupChat gchat = new GroupChat();
+            this.Hide();
+            gchat.Show();
+        }
     }
 }
