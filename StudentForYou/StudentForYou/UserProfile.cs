@@ -56,7 +56,7 @@ namespace StudentForYou
             // UserName
             // 
             this.UserName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.UserName.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UserName.Location = new System.Drawing.Point(496, 188);
             this.UserName.Name = "UserName";
             this.UserName.Size = new System.Drawing.Size(316, 73);
@@ -68,17 +68,17 @@ namespace StudentForYou
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(364, 327);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 29);
+            this.label1.Size = new System.Drawing.Size(157, 54);
             this.label1.TabIndex = 5;
             this.label1.Text = "About ";
             // 
             // recentpostsbtn
             // 
             this.recentpostsbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.recentpostsbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recentpostsbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentpostsbtn.Location = new System.Drawing.Point(237, 502);
             this.recentpostsbtn.Name = "recentpostsbtn";
             this.recentpostsbtn.Size = new System.Drawing.Size(155, 174);
@@ -90,7 +90,7 @@ namespace StudentForYou
             // subjectsbtn
             // 
             this.subjectsbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.subjectsbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subjectsbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.subjectsbtn.Location = new System.Drawing.Point(35, 502);
             this.subjectsbtn.Name = "subjectsbtn";
             this.subjectsbtn.Size = new System.Drawing.Size(155, 174);
@@ -102,7 +102,7 @@ namespace StudentForYou
             // usernameChange
             // 
             this.usernameChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.usernameChange.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameChange.Location = new System.Drawing.Point(1056, 291);
             this.usernameChange.Name = "usernameChange";
             this.usernameChange.Size = new System.Drawing.Size(155, 174);
@@ -114,7 +114,7 @@ namespace StudentForYou
             // loggingOut
             // 
             this.loggingOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.loggingOut.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loggingOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loggingOut.Location = new System.Drawing.Point(1056, 502);
             this.loggingOut.Name = "loggingOut";
             this.loggingOut.Size = new System.Drawing.Size(155, 174);
@@ -150,6 +150,7 @@ namespace StudentForYou
             this.MinimumSize = new System.Drawing.Size(300, 400);
             this.Name = "UserProfile";
             this.Text = "Profile";
+            this.Load += new System.EventHandler(this.UserProfile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -193,6 +194,11 @@ namespace StudentForYou
             this.Hide();
             RecentPostsForm rpf = new RecentPostsForm();
             rpf.Show();
+        }
+
+        private void UserProfile_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

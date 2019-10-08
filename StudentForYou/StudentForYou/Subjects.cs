@@ -16,7 +16,7 @@ namespace StudentForYou
         public form1()
         {
             InitializeComponent();
-            List<string> data = File.ReadAllLines("allcourses.txt").ToList();
+            List<string> data = File.ReadAllLines(@"Resources\allcourses.txt").ToList();
             foreach (string d in data)
             {
                 string[] items = d.Split(new char[] { ',' },

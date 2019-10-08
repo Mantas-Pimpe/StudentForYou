@@ -41,7 +41,7 @@
             // 
             this.newpostbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newpostbtn.Location = new System.Drawing.Point(515, 567);
-            this.newpostbtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.newpostbtn.Margin = new System.Windows.Forms.Padding(6);
             this.newpostbtn.Name = "newpostbtn";
             this.newpostbtn.Size = new System.Drawing.Size(250, 55);
             this.newpostbtn.TabIndex = 0;
@@ -52,7 +52,7 @@
             // coursesbtn
             // 
             this.coursesbtn.Location = new System.Drawing.Point(-117, 688);
-            this.coursesbtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.coursesbtn.Margin = new System.Windows.Forms.Padding(6);
             this.coursesbtn.Name = "coursesbtn";
             this.coursesbtn.Size = new System.Drawing.Size(0, 0);
             this.coursesbtn.TabIndex = 1;
@@ -64,7 +64,7 @@
             // 
             this.recentquestionsbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.recentquestionsbtn.Location = new System.Drawing.Point(515, 646);
-            this.recentquestionsbtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.recentquestionsbtn.Margin = new System.Windows.Forms.Padding(6);
             this.recentquestionsbtn.Name = "recentquestionsbtn";
             this.recentquestionsbtn.Size = new System.Drawing.Size(250, 55);
             this.recentquestionsbtn.TabIndex = 2;
@@ -75,7 +75,7 @@
             // 
             this.profilebtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.profilebtn.Location = new System.Drawing.Point(963, 646);
-            this.profilebtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.profilebtn.Margin = new System.Windows.Forms.Padding(6);
             this.profilebtn.Name = "profilebtn";
             this.profilebtn.Size = new System.Drawing.Size(270, 55);
             this.profilebtn.TabIndex = 3;
@@ -87,7 +87,7 @@
             // 
             this.coursebtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.coursebtn.Location = new System.Drawing.Point(15, 646);
-            this.coursebtn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.coursebtn.Margin = new System.Windows.Forms.Padding(6);
             this.coursebtn.Name = "coursebtn";
             this.coursebtn.Size = new System.Drawing.Size(270, 51);
             this.coursebtn.TabIndex = 4;
@@ -130,9 +130,10 @@
             this.Controls.Add(this.recentquestionsbtn);
             this.Controls.Add(this.coursesbtn);
             this.Controls.Add(this.newpostbtn);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "RecentPostsForm";
             this.Text = "Recent questions";
+            this.Load += new System.EventHandler(this.RecentPostsForm_Load);
             this.ResumeLayout(false);
 
         }

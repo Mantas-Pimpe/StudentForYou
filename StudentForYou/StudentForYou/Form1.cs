@@ -20,7 +20,7 @@ namespace StudentForYou
         {
             InitializeComponent();
             string likes, views, answers, question;
-            string[] lines = File.ReadAllLines(@"..\Debug\recentquestions.txt");
+            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             //Console.WriteLine(lines.Length);
             for (int i = 0; i < lines.Length; i++)
             {
@@ -104,6 +104,11 @@ namespace StudentForYou
             GroupChat gchat = new GroupChat();
             this.Hide();
             gchat.Show();
+        }
+
+        private void RecentPostsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -145,7 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon1.PNG" />
-    <Content Include="RecentPosts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
