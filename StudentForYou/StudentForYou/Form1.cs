@@ -20,7 +20,6 @@ namespace StudentForYou
             InitializeComponent();
             string likes, views, answers, question;
             string[] lines = File.ReadAllLines(@"..\Debug\recentquestions.txt");
-            //Console.WriteLine(lines.Length);
             for (int i = 0; i < lines.Length; i++)
             {
                 string[] line = lines[i].Split(',');
@@ -28,41 +27,54 @@ namespace StudentForYou
                 views = line[1];
                 answers = line[2];
                 question = line[3];
-                //AddNewButton(likes, views, answers, question);
-                flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question));
+                flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question, i));
+
             }
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
 
-        private void Loadbtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public System.Windows.Forms.Button AddNewButton(string likes, string views, string answers, string question)
+        public System.Windows.Forms.Button AddNewButton(string likes, string views, string answers, string question, int placeToReplace)
         {
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             this.Controls.Add(btn);
             btn.Top = A * 40;
-            btn.Width = 910;
+            btn.Width = 840;
             btn.Height = 40;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Left = 15;
             btn.Text = "Like: " + likes + " Views: " + views + " Answers: " + answers + " ' " + question + " ' ";
-            btn.Click += new EventHandler(btn_Click);
             A += 1;
+            btn.Click += delegate (object sender, EventArgs e)
+            {
+                button_click(sender, e, question);
+                int count = Int32.Parse(views);
+                count++;
+                views = count.ToString();
+                string[] lines = File.ReadAllLines(@"..\Debug\recentquestions.txt");
+                string[] line = lines[placeToReplace].Split(',');
+                line[1] = views;
+                string newLine = line[0] + "," + line[1] + "," + line[2] + "," + line[3];
+                lines[placeToReplace] = newLine;
+                StreamWriter writeText = new StreamWriter(@"recentquestions.txt");
+
+                for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
+                {
+                    if (currentLine == placeToReplace)
+                    {
+                        writeText.WriteLine(lines[placeToReplace]);
+                    }
+                    else
+                    {
+                        writeText.WriteLine(lines[currentLine]);
+                    }
+                }
+                writeText.Close();
+                this.Close();
+            };
             return btn;
         }
 
-        void btn_Click(object sender, EventArgs e)
-        {
-          
-        }
 
         private void newpostbtn_Click(object sender, EventArgs e)
         {
@@ -73,6 +85,7 @@ namespace StudentForYou
 
         private void coursesbtn_Click(object sender, EventArgs e)
         {
+            this.Close();
             form1 subjects = new form1();
             subjects.Show();
         }
@@ -80,7 +93,7 @@ namespace StudentForYou
         private void coursebtn_Click(object sender, EventArgs e)
         {
             form1 courses = new form1();
-            this.Hide();
+            this.Close();
             courses.Show();
         }
 
@@ -88,7 +101,7 @@ namespace StudentForYou
         {
             String Username = "Jeff";
             UserProfile Profile = new UserProfile(Username);
-            this.Hide();
+            this.Close();
             Profile.Show();
         }
 
@@ -97,19 +110,17 @@ namespace StudentForYou
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.WrapContents = false;
-            /*string likes, views, answers, question;
-            string[] lines = File.ReadAllLines(@"..\Debug\recentquestions.txt");
-            //Console.WriteLine(lines.Length);
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string[] line = lines[i].Split(',');
-                likes = line[0];
-                views = line[1];
-                answers = line[2];
-                question = line[3];
-                flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question));
-                //AddNewButton(likes, views, answers, question);
-            }*/
         }
+
+        void button_click (object sender, EventArgs e, string question)
+        {
+            Button btn = sender as Button;
+            SelectedQuestionForm QuestionForm = new SelectedQuestionForm(question);
+            this.Close();
+            QuestionForm.Show();
+        }
+
+
+       
     }
 }

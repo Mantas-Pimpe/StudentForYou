@@ -79,6 +79,7 @@
             this.googlebtn.TabIndex = 3;
             this.googlebtn.Text = "with Google";
             this.googlebtn.UseVisualStyleBackColor = true;
+            this.googlebtn.Click += new System.EventHandler(this.googlebtn_Click);
             // 
             // button1
             // 
@@ -170,7 +171,6 @@
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Login";
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

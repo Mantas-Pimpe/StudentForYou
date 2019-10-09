@@ -39,7 +39,7 @@
             // newpostbtn
             // 
             this.newpostbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newpostbtn.Location = new System.Drawing.Point(520, 484);
+            this.newpostbtn.Location = new System.Drawing.Point(520, 534);
             this.newpostbtn.Name = "newpostbtn";
             this.newpostbtn.Size = new System.Drawing.Size(200, 73);
             this.newpostbtn.TabIndex = 0;
