@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
+using System.Windows.Forms;
 
 namespace StudentForYou
 {
@@ -42,7 +36,7 @@ namespace StudentForYou
             try
             {
                 int size = sck.EndReceiveFrom(aResult, ref epRemote);
-                if (size>0)
+                if (size > 0)
                 {
                     byte[] receivedData = new byte[1464];
                     receivedData = (byte[])aResult.AsyncState;
@@ -53,7 +47,7 @@ namespace StudentForYou
                 byte[] buffer = new byte[1500];
                 sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
@@ -73,7 +67,7 @@ namespace StudentForYou
         private void ButtonStart_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 // binding socket
                 epLocal = new IPEndPoint(IPAddress.Parse(textLocalIp.Text), Convert.ToInt32(textLocalPort.Text));
                 sck.Bind(epLocal);
@@ -105,7 +99,7 @@ namespace StudentForYou
         {
             try
             {
-                if(textMessage.Text != "")
+                if (textMessage.Text != "")
                 {
                     // converts from string to byte[]
                     System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();

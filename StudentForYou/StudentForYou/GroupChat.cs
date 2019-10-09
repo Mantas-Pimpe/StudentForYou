@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace StudentForYou
 {
@@ -61,7 +54,7 @@ namespace StudentForYou
             while (true)
             {
                 serverStream = clientSocket.GetStream();
-                int buffSize = 0; 
+                int buffSize = 0;
                 byte[] inStream = new byte[clientSocket.ReceiveBufferSize];
                 buffSize = clientSocket.ReceiveBufferSize;
                 serverStream.Read(inStream, 0, buffSize);

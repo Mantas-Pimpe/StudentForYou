@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentForYou
@@ -36,7 +29,7 @@ namespace StudentForYou
             previousForm = loginForm;
 
         }
-        private void InitializeComponent( )
+        private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserProfile));
             this.UserInfo = new System.Windows.Forms.TextBox();
@@ -273,7 +266,7 @@ namespace StudentForYou
             //
             // Log out and promt to the login screen again, or just reopen the app
             // 
-            saveUserData(UserName.Text,newUsername);
+            saveUserData(UserName.Text, newUsername);
             Application.Restart();
         }
 
@@ -292,7 +285,7 @@ namespace StudentForYou
         }
         private void UserProfile_FormClosed(object sender, FormClosedEventArgs e)
         {
-            saveUserData(UserName.Text,newUsername);
+            saveUserData(UserName.Text, newUsername);
             previousForm.Show();
         }
 

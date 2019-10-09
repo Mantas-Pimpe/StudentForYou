@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentForYou
@@ -29,7 +22,7 @@ namespace StudentForYou
                 MessageBox.Show("Login is required", "No Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
-                UserProfile Profile = new UserProfile(username,this);
+                UserProfile Profile = new UserProfile(username, this);
                 this.Hide();
                 Profile.Show();
             }

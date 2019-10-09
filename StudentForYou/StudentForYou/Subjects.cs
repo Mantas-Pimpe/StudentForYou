@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentForYou
@@ -42,14 +37,14 @@ namespace StudentForYou
 
         private void Button1_Click(object sender, EventArgs e)
         {
-           
-            
-              
+
+
+
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,7 +67,7 @@ namespace StudentForYou
         private void profilebtn_Click(object sender, EventArgs e)
         {
             String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username,this);
+            UserProfile Profile = new UserProfile(Username, this);
             this.Hide();
             Profile.Show();
         }

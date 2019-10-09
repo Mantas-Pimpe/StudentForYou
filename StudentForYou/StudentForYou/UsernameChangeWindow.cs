@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentForYou
 {
-    class UsernameChangeWindow: Form
+    class UsernameChangeWindow : Form
     {
         private TextBox textBox1;
         private Label label1;

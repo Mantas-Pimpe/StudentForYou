@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data.SqlClient;
 using System.IO;
+using System.Windows.Forms;
 
 namespace StudentForYou
 {
@@ -60,7 +53,7 @@ namespace StudentForYou
 
         void btn_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         private void newpostbtn_Click(object sender, EventArgs e)
@@ -86,7 +79,7 @@ namespace StudentForYou
         private void profilebtn_Click(object sender, EventArgs e)
         {
             String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username,this);
+            UserProfile Profile = new UserProfile(Username, this);
             this.Hide();
             Profile.Show();
         }
