@@ -47,29 +47,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CourseDetails.cs" />
-    <Compile Include="CourseDetailsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CourseDetailsForm.Designer.cs">
-      <DependentUpon>CourseDetailsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="fileuploadform.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="fileuploadform.Designer.cs">
-      <DependentUpon>fileuploadform.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddSubjectBranch.cs">
+    <Compile Include="Form3.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddSubjectBranch.Designer.cs">
-      <DependentUpon>AddSubjectBranch.cs</DependentUpon>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="vuLoginForm.cs" />
+    <Compile Include="vuLoginForm.Designer.cs">
+      <DependentUpon>vuLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GroupChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GroupChat.Designer.cs">
+      <DependentUpon>GroupChat.cs</DependentUpon>
     </Compile>
     <Compile Include="NewPostForm.cs">
       <SubType>Form</SubType>
@@ -103,17 +101,14 @@
     <Compile Include="UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <EmbeddedResource Include="CourseDetailsForm.resx">
-      <DependentUpon>CourseDetailsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="fileuploadform.resx">
-      <DependentUpon>fileuploadform.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddSubjectBranch.resx">
-      <DependentUpon>AddSubjectBranch.cs</DependentUpon>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GroupChat.resx">
+      <DependentUpon>GroupChat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -139,6 +134,9 @@
     <EmbeddedResource Include="UserProfile.resx">
       <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="vuLoginForm.resx">
+      <DependentUpon>vuLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -154,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon1.PNG" />
-    <Content Include="RecentPosts.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

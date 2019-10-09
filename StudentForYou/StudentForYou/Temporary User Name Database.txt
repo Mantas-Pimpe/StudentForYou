@@ -1,3 +1,3 @@
-Simas 1234 C:\Users\Simas\source\repos\StudentForYou\StudentForYou\StudentForYou\Resources\StockImage.png I LIKE TURTLES
-Mantas 4321 C:\Users\Simas\source\repos\StudentForYou\StudentForYou\StudentForYou\Resources\StockImage.png
-Jeff 5555 C:\Users\Simas\source\repos\StudentForYou\StudentForYou\StudentForYou\Resources\StockImage.png mnem 
+Simas 1234 I LIKE TURTLES
+Mantas 4321
+Jeff 5555 C:\Users\Simas\source\repos\StudentForYou\StudentForYou\StudentForYou\bin\Debug\Resources\StockImage.png mnem
