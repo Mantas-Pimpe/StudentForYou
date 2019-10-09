@@ -12,6 +12,7 @@ namespace StudentForYou
 {
     public partial class Login : Form
     {
+        private string username = String.Empty;
         public Login()
         {
             InitializeComponent();
@@ -24,25 +25,23 @@ namespace StudentForYou
 
         private void UserProfile_Click(object sender, EventArgs e)
         {
-            // Username is required to ender it into user profile
-            String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username);
-            this.Hide();
-            Profile.Show();
+            if (String.IsNullOrEmpty(username))
+                MessageBox.Show("Login is required", "No Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                UserProfile Profile = new UserProfile(username,this);
+                this.Hide();
+                Profile.Show();
+            }
+
+
         }
 
-        private void coursesbtn_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            form1 courses = new form1();
-            courses.Show();
-        }
-
-        private void recentquestionsbtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            RecentPostsForm rpF = new RecentPostsForm();
-            rpF.Show();
+            vuLoginForm vuLogin = new vuLoginForm();
+            vuLogin.ShowDialog();
+            username = vuLogin.getLoginUsername();
         }
     }
 }

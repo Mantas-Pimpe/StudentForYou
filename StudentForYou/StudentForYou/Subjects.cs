@@ -72,7 +72,7 @@ namespace StudentForYou
         private void profilebtn_Click(object sender, EventArgs e)
         {
             String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username);
+            UserProfile Profile = new UserProfile(Username,this);
             this.Hide();
             Profile.Show();
         }

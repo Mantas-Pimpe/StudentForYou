@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 
@@ -87,7 +86,7 @@ namespace StudentForYou
         private void profilebtn_Click(object sender, EventArgs e)
         {
             String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username);
+            UserProfile Profile = new UserProfile(Username,this);
             this.Hide();
             Profile.Show();
         }
