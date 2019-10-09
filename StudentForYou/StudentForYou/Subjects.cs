@@ -16,14 +16,17 @@ namespace StudentForYou
         public form1()
         {
             InitializeComponent();
-            List<string> data = File.ReadAllLines(@"Resources\allcourses.txt").ToList();
-            foreach (string d in data)
+            listviewinfosetter setter = new listviewinfosetter();
+            List<string> templist= setter.Readfileinfo();
+           
+           for (int i=0;i<templist.Count;i=i+3)
             {
-                string[] items = d.Split(new char[] { ',' },
-                       StringSplitOptions.RemoveEmptyEntries);
-                listView1.Items.Add(new ListViewItem(items));
+                listView1.Items.Add(new ListViewItem(new[] { templist[i], templist[i+1], templist[i+2] }));
+
             }
-        }
+           
+            }
+        
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -42,7 +45,12 @@ namespace StudentForYou
 
         private void Button1_Click(object sender, EventArgs e)
         {
-           
+            this.Hide();
+        SubjectAdder addstuff = new SubjectAdder();
+            AddSubjectForm subjectform = new AddSubjectForm(addstuff);
+            addstuff.returnallinfo();
+            subjectform.ShowDialog();
+            this.Show();
             
               
         }
@@ -77,4 +85,5 @@ namespace StudentForYou
             Profile.Show();
         }
     }
+
 }

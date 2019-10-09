@@ -46,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSubjectForm.Designer.cs">
+      <DependentUpon>AddSubjectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentForYouSubjects\listviewinfosetter.cs" />
+    <Compile Include="StudentForYouSubjects\AddSubjectInterface.cs" />
     <Compile Include="CourseDetails.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -71,6 +79,7 @@
     <Compile Include="NewPostForm.Designer.cs">
       <DependentUpon>NewPostForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="StudentForYouSubjects\SubjectAdder.cs" />
     <Compile Include="Subjects.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +106,9 @@
     <Compile Include="UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
+    <EmbeddedResource Include="AddSubjectForm.resx">
+      <DependentUpon>AddSubjectForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,5 +158,6 @@
   <ItemGroup>
     <Content Include="icon1.PNG" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
