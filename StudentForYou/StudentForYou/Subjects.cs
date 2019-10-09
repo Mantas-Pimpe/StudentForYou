@@ -13,15 +13,15 @@ namespace StudentForYou
 {
     public partial class form1 : Form
     {
+        listviewinfosetter setter;
         public form1()
         {
             InitializeComponent();
-            listviewinfosetter setter = new listviewinfosetter();
+            setter = new listviewinfosetter();
             List<string> templist= setter.Readfileinfo();
-           
            for (int i=0;i<templist.Count;i=i+3)
             {
-                listView1.Items.Add(new ListViewItem(new[] { templist[i], templist[i+1], templist[i+2] }));
+                listView1.Items.Add(new ListViewItem(new[] { templist[i], templist[i + 1], templist[i + 2], "click" }));
 
             }
            
@@ -48,8 +48,14 @@ namespace StudentForYou
             this.Hide();
         SubjectAdder addstuff = new SubjectAdder();
             AddSubjectForm subjectform = new AddSubjectForm(addstuff);
-            addstuff.returnallinfo();
             subjectform.ShowDialog();
+            //listView1.Clear();
+            List<string> templist = setter.Readfileinfo();
+            for (int i = 0; i < templist.Count; i = i + 3)
+            {
+                listView1.Items.Add(new ListViewItem(new[] { templist[i], templist[i + 1], templist[i + 2] }));
+
+            }
             this.Show();
             
               

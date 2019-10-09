@@ -22,7 +22,11 @@ namespace StudentForYou
 
             
         }
-
+        public void writetofile()
+        {
+            System.IO.File.AppendAllText(@"Resources\allcourses.txt", this.returnallinfo());
+            System.IO.File.AppendAllText(@"Resources\allcourses.txt", System.Environment.NewLine);
+        }
         public string returnallinfo()
         {
             string allinfo;

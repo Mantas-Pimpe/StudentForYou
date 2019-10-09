@@ -38,6 +38,7 @@ namespace StudentForYou
         {
             this.DialogResult = DialogResult.OK;
             nottempinterface.getinfo(CourseNameTextBox.Text, CourseDescriptionTextBox.Text, DifficultyTextBox.Text);
+            nottempinterface.writetofile();
         }
     }
 }

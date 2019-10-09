@@ -9,7 +9,10 @@ namespace StudentForYou
     public interface AddSubjectInterface
     {
         string returnallinfo();
+
+        void writetofile();
          void getinfo(string nameinfo, string courseinfo, string difficultyinfo);
+        
 
 
     }
