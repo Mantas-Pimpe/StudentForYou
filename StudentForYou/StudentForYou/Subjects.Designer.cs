@@ -100,6 +100,7 @@
             this.coursesbtn.TabIndex = 4;
             this.coursesbtn.Text = "Courses";
             this.coursesbtn.UseVisualStyleBackColor = true;
+            this.coursesbtn.Click += new System.EventHandler(this.Coursesbtn_Click);
             // 
             // recentquestionsbtn
             // 

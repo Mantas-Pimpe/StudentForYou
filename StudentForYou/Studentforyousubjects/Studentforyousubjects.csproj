@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="AddSubjectInterface.cs" />
     <Compile Include="CourseDetails.cs" />
+    <Compile Include="DescriptionReader.cs" />
+    <Compile Include="FileUploader.cs" />
     <Compile Include="listviewinfosetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubjectAdder.cs" />

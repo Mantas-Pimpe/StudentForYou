@@ -85,6 +85,12 @@
     <Compile Include="CourseDetailsForm.Designer.cs">
       <DependentUpon>CourseDetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CourseDownloads.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CourseDownloads.Designer.cs">
+      <DependentUpon>CourseDownloads.cs</DependentUpon>
+    </Compile>
     <Compile Include="GroupChat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CourseDetailsForm.resx">
       <DependentUpon>CourseDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CourseDownloads.resx">
+      <DependentUpon>CourseDownloads.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GroupChat.resx">
       <DependentUpon>GroupChat.cs</DependentUpon>

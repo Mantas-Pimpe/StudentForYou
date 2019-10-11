@@ -92,6 +92,18 @@ namespace StudentForYou
             this.Hide();
             Profile.Show();
         }
+
+        private void Coursesbtn_Click(object sender, EventArgs e)
+        {
+            if(listView1.SelectedItems[0].Text!=null)
+            {
+                CourseDetailsForm Detailsform = new CourseDetailsForm(listView1.SelectedItems[0].Text);
+                this.Hide();
+                Detailsform.ShowDialog();
+                this.Show();
+            }
+            
+        }
     }
 
 }
