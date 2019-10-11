@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Studentforyousubjects;
 
 namespace StudentForYou
 {
@@ -18,14 +19,15 @@ namespace StudentForYou
         {
             InitializeComponent();
             setter = new listviewinfosetter();
-            List<string> templist= setter.Readfileinfo();
-           for (int i=0;i<templist.Count;i=i+3)
-            {
-                listView1.Items.Add(new ListViewItem(new[] { templist[i], templist[i + 1], templist[i + 2], "click" }));
-
-            }
            
+            List<Course> templist=  setter.Readfileinfo();
+             foreach(Course item in templist)
+              {
+                var fullcoursedetails = new ListViewItem(new[] { item.Name, item.Description, item.Difficulty });
+                listView1.Items.Add(fullcoursedetails);
             }
+        
+        }
         
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,12 +51,12 @@ namespace StudentForYou
         SubjectAdder addstuff = new SubjectAdder();
             AddSubjectForm subjectform = new AddSubjectForm(addstuff);
             subjectform.ShowDialog();
-            //listView1.Clear();
-            List<string> templist = setter.Readfileinfo();
-            for (int i = 0; i < templist.Count; i = i + 3)
+            listView1.Items.Clear();
+            List<Course> templist = setter.Readfileinfo();
+            foreach (Course item in templist)
             {
-                listView1.Items.Add(new ListViewItem(new[] { templist[i], templist[i + 1], templist[i + 2] }));
-
+                var fullcoursedetails = new ListViewItem(new[] { item.Name, item.Description, item.Difficulty });
+                listView1.Items.Add(fullcoursedetails);
             }
             this.Show();
             
