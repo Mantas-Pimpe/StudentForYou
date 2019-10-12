@@ -56,7 +56,7 @@ namespace StudentForYou
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            CourseDownloads Downloadsform = new CourseDownloads(nameofcourse)
+            CourseDownloads Downloadsform = new CourseDownloads(nameofcourse);
             Downloadsform.ShowDialog();
             this.Show();
         }
