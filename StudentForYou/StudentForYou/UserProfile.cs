@@ -185,6 +185,7 @@ namespace StudentForYou
             this.Hide();
             form1 subjects = new form1();
             subjects.Show();
+           
             
             
         }

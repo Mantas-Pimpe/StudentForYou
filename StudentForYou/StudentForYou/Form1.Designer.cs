@@ -1,4 +1,5 @@
 ﻿namespace StudentForYou
+
 {
     partial class RecentPostsForm
     {

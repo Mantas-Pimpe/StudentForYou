@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou", "StudentFor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForYouSERVER", "StudentForYouSERVER\StudentForYouSERVER.csproj", "{E0193916-311D-4848-BF76-D3761D4E57A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYouGROUPCHAT", "StudentForYouGROUPCHAT\StudentForYouGROUPCHAT.csproj", "{785A1425-C92E-42A1-8021-5BCA5AD0E411}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForYouGROUPCHAT", "StudentForYouGROUPCHAT\StudentForYouGROUPCHAT.csproj", "{785A1425-C92E-42A1-8021-5BCA5AD0E411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYouCHAT", "StudentForYouCHAT\StudentForYouCHAT.csproj", "{168EABBD-1038-438B-AA41-B8DFB949858B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForYouCHAT", "StudentForYouCHAT\StudentForYouCHAT.csproj", "{168EABBD-1038-438B-AA41-B8DFB949858B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Studentforyousubjects", "Studentforyousubjects\Studentforyousubjects.csproj", "{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{168EABBD-1038-438B-AA41-B8DFB949858B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{168EABBD-1038-438B-AA41-B8DFB949858B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{168EABBD-1038-438B-AA41-B8DFB949858B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
