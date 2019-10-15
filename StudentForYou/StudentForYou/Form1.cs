@@ -40,7 +40,7 @@ namespace StudentForYou
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             this.Controls.Add(btn);
             btn.Top = A * 40;
-            btn.Width = 840;
+            btn.Width = 1120;
             btn.Height = 40;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Left = 15;
@@ -52,12 +52,12 @@ namespace StudentForYou
                 int count = Int32.Parse(views);
                 count++;
                 views = count.ToString();
-                string[] lines = File.ReadAllLines(@"..\Debug\recentquestions.txt");
+                string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
                 string[] line = lines[placeToReplace].Split(',');
                 line[1] = views;
                 string newLine = line[0] + "," + line[1] + "," + line[2] + "," + line[3];
                 lines[placeToReplace] = newLine;
-                StreamWriter writeText = new StreamWriter(@"recentquestions.txt");
+                StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
 
                 for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
                 {

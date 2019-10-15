@@ -12,14 +12,14 @@ namespace StudentForYou
 {
     public partial class SelectedQuestionForm : Form
     {
-        private string @string;
-        private object question;
+
 
         public SelectedQuestionForm(String question)
         {
             InitializeComponent();
             AddNewLabel(question);
-            AddNewButton();
+            AddNewButton(450, 530, "Back");
+            AddNewButton(400, 530, "Like");
         }
 
         public System.Windows.Forms.Label AddNewLabel(string question)
@@ -33,15 +33,15 @@ namespace StudentForYou
             return label;
         }
 
-        public System.Windows.Forms.Button AddNewButton()
+        public System.Windows.Forms.Button AddNewButton(int xPos, int yPos, string text)
         {
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             this.Controls.Add(btn);
             btn.Width = 60;
-            btn.Location = new Point(450, 520);
+            btn.Location = new Point(xPos, yPos);
             btn.Height = 40;
             btn.TextAlign = ContentAlignment.MiddleCenter;
-            btn.Text = "Back";
+            btn.Text = text;
             btn.Click += new EventHandler(this.button_click);
             return btn;
         }
