@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StudentForYou.Properties
+namespace Studentforyousubjects.Properties
 {
 
 

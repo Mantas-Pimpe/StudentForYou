@@ -28,7 +28,7 @@ namespace StudentForYou
             // 
             this.textBox1.Location = new System.Drawing.Point(16, 32);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(196, 20);
+            this.textBox1.Size = new System.Drawing.Size(196, 38);
             this.textBox1.TabIndex = 0;
             // 
             // label1
@@ -37,7 +37,7 @@ namespace StudentForYou
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 20);
+            this.label1.Size = new System.Drawing.Size(500, 46);
             this.label1.TabIndex = 1;
             this.label1.Text = "ENTER NEW USERNAME";
             // 
@@ -53,11 +53,12 @@ namespace StudentForYou
             // 
             // UsernameChangeWindow
             // 
-            this.ClientSize = new System.Drawing.Size(221, 103);
+            this.ClientSize = new System.Drawing.Size(292, 103);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Name = "UsernameChangeWindow";
+            this.Load += new System.EventHandler(this.UsernameChangeWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -71,6 +72,11 @@ namespace StudentForYou
             // close this from
             //
             this.Close();
+        }
+
+        private void UsernameChangeWindow_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
