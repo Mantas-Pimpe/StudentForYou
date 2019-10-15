@@ -28,7 +28,7 @@ namespace StudentForYou
         {
 
             String text = questiontxt.Text;
-            using (StreamWriter writeText = new StreamWriter(@"recentquestions.txt", true))
+            using (StreamWriter writeText = new StreamWriter(@"Resources\recentquestions.txt", true))
             {
                 writeText.Write("0" + "," + "0" + "," + "0" + "," + text + Environment.NewLine);
             }
@@ -38,6 +38,11 @@ namespace StudentForYou
         }
 
         private void questiontxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NewPostForm_Load(object sender, EventArgs e)
         {
 
         }

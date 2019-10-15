@@ -8,22 +8,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Studentforyousubjects;
 
 namespace StudentForYou
 {
     public partial class form1 : Form
     {
+        listviewinfosetter setter;
         public form1()
         {
             InitializeComponent();
-            List<string> data = File.ReadAllLines("allcourses.txt").ToList();
-            foreach (string d in data)
-            {
-                string[] items = d.Split(new char[] { ',' },
-                       StringSplitOptions.RemoveEmptyEntries);
-                listView1.Items.Add(new ListViewItem(items));
+            setter = new listviewinfosetter();
+           
+            List<Course> templist=  setter.Readfileinfo();
+             foreach(Course item in templist)
+              {
+                var fullcoursedetails = new ListViewItem(new[] { item.Name, item.Description, item.Difficulty });
+                listView1.Items.Add(fullcoursedetails);
             }
+        
         }
+        
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -42,7 +47,18 @@ namespace StudentForYou
 
         private void Button1_Click(object sender, EventArgs e)
         {
-           
+            this.Hide();
+        SubjectAdder addstuff = new SubjectAdder();
+            AddSubjectForm subjectform = new AddSubjectForm(addstuff);
+            subjectform.ShowDialog();
+            listView1.Items.Clear();
+            List<Course> templist = setter.Readfileinfo();
+            foreach (Course item in templist)
+            {
+                var fullcoursedetails = new ListViewItem(new[] { item.Name, item.Description, item.Difficulty });
+                listView1.Items.Add(fullcoursedetails);
+            }
+            this.Show();
             
               
         }
@@ -76,5 +92,18 @@ namespace StudentForYou
             this.Hide();
             Profile.Show();
         }
+
+        private void Coursesbtn_Click(object sender, EventArgs e)
+        {
+            if(listView1.SelectedItems[0].Text!=null)
+            {
+                CourseDetailsForm Detailsform = new CourseDetailsForm(listView1.SelectedItems[0].Text);
+                this.Hide();
+                Detailsform.ShowDialog();
+                this.Show();
+            }
+            
+        }
     }
+
 }
