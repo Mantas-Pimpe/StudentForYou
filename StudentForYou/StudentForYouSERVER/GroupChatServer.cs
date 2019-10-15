@@ -7,7 +7,7 @@ using System.Net;
 
 namespace ConsoleApplication1
 {
-    class Program
+    class GroupChatServer
     {
         public static Hashtable clientsList = new Hashtable();
 

@@ -2,18 +2,15 @@
 using System.Net.Sockets;
 using System.Threading;
 
-namespace StudentForYouGROUPCHAT
+namespace StudentForYou.GroupChat
 {
-    public class GroupChat
+    class GroupChat
     {
         System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
         NetworkStream serverStream = default(NetworkStream);
         string readData = null;
-        static void Main(string[] args)
-        {
 
-        }
-        public void Start()
+        public Start()
         {
             readData = "Conected to Chat Server ...";
             msg();
