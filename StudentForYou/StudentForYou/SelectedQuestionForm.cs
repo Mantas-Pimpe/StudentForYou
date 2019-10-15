@@ -12,8 +12,7 @@ namespace StudentForYou
 {
     public partial class SelectedQuestionForm : Form
     {
-        private string @string;
-        private object question;
+
 
         public SelectedQuestionForm(String question)
         {
