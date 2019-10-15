@@ -197,9 +197,9 @@
     <Content Include="icon1.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Studentforyousubjects\Studentforyousubjects.csproj">
+    <ProjectReference Include="..\Studentforyousubjects\StudentForYou.Subjects.csproj">
       <Project>{d5ca3b2f-0ee4-400d-a3e7-4bfdbd9c4efb}</Project>
-      <Name>Studentforyousubjects</Name>
+      <Name>StudentForYou.Subjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
