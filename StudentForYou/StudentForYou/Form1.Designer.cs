@@ -34,12 +34,15 @@
             this.recentquestionsbtn = new System.Windows.Forms.Button();
             this.profilebtn = new System.Windows.Forms.Button();
             this.coursebtn = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Chat = new System.Windows.Forms.Button();
             this.GroupChat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // newpostbtn
             // 
+            this.newpostbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newpostbtn.Location = new System.Drawing.Point(520, 534);
             this.newpostbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newpostbtn.Location = new System.Drawing.Point(515, 567);
             this.newpostbtn.Margin = new System.Windows.Forms.Padding(6);
@@ -96,6 +99,13 @@
             this.coursebtn.UseVisualStyleBackColor = true;
             this.coursebtn.Click += new System.EventHandler(this.coursebtn_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 12);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1169, 466);
+            this.flowLayoutPanel1.TabIndex = 5;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // Chat
             // 
             this.Chat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -124,6 +134,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.GroupChat);
             this.Controls.Add(this.Chat);
             this.Controls.Add(this.coursebtn);
@@ -145,6 +156,7 @@
         private System.Windows.Forms.Button recentquestionsbtn;
         private System.Windows.Forms.Button profilebtn;
         private System.Windows.Forms.Button coursebtn;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button Chat;
         private System.Windows.Forms.Button GroupChat;
     }

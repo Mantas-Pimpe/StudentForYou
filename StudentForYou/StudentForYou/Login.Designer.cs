@@ -79,6 +79,7 @@
             this.googlebtn.TabIndex = 3;
             this.googlebtn.Text = "with Google";
             this.googlebtn.UseVisualStyleBackColor = true;
+            this.googlebtn.Click += new System.EventHandler(this.googlebtn_Click);
             // 
             // button1
             // 

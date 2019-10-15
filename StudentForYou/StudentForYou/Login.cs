@@ -17,17 +17,14 @@ namespace StudentForYou
             InitializeComponent();
         }
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void UserProfile_Click(object sender, EventArgs e)
         {
             // Username is required to ender it into user profile
+            this.Hide();
             String Username = "Jeff";
             UserProfile Profile = new UserProfile(Username);
-            this.Hide();
             Profile.Show();
         }
 
@@ -43,6 +40,11 @@ namespace StudentForYou
             this.Hide();
             RecentPostsForm rpF = new RecentPostsForm();
             rpF.Show();
+        }
+
+        private void googlebtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

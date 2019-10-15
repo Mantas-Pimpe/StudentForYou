@@ -103,6 +103,12 @@
     <Compile Include="NewPostForm.Designer.cs">
       <DependentUpon>NewPostForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectedQuestionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectedQuestionForm.Designer.cs">
+      <DependentUpon>SelectedQuestionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Subjects.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SelectedQuestionForm.resx">
+      <DependentUpon>SelectedQuestionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Subjects.resx">
       <DependentUpon>Subjects.cs</DependentUpon>
     </EmbeddedResource>
