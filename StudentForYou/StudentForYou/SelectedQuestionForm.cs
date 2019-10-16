@@ -12,16 +12,14 @@ namespace StudentForYou
 {
     public partial class SelectedQuestionForm : Form
     {
-        private string @string;
-        private object question;
-        private string username = string.Empty;
 
-        public SelectedQuestionForm(string question, string username)
+
+        public SelectedQuestionForm(String question)
         {
             InitializeComponent();
-            this.username = username;
             AddNewLabel(question);
-            AddNewButton();
+            AddNewButton(450, 530, "Back");
+            AddNewButton(400, 530, "Like");
         }
 
         public System.Windows.Forms.Label AddNewLabel(string question)
@@ -35,26 +33,25 @@ namespace StudentForYou
             return label;
         }
 
-        public System.Windows.Forms.Button AddNewButton()
+        public System.Windows.Forms.Button AddNewButton(int xPos, int yPos, string text)
         {
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             this.Controls.Add(btn);
             btn.Width = 60;
-            btn.Location = new Point(450, 520);
+            btn.Location = new Point(xPos, yPos);
             btn.Height = 40;
             btn.TextAlign = ContentAlignment.MiddleCenter;
-            btn.Text = "Back";
+            btn.Text = text;
             btn.Click += new EventHandler(this.button_click);
             return btn;
         }
 
         void button_click (object sender, EventArgs e)
         {
-            var btn = sender as Button;
-            var rpf = new RecentQuestions(username);
-            rpf.Show();
+            Button btn = sender as Button;
+            RecentPostsForm rpf = new RecentPostsForm();
             this.Close();
-
+            rpf.Show();
         }
         private void SelectedQuestionForm_Load(object sender, EventArgs e)
         {
