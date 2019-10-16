@@ -99,12 +99,18 @@ namespace StudentForYou
         {
             if(listView1.SelectedItems[0].Text!=null)
             {
-                CourseDetailsForm Detailsform = new CourseDetailsForm(listView1.SelectedItems[0].Text);
+                var Detailsform = new CourseDetailsForm(listView1.SelectedItems[0].Text);
                 this.Hide();
                 Detailsform.ShowDialog();
                 this.Show();
             }
             
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Application.OpenForms.OfType<Form>().Count() == 1)
+                Application.Exit();
         }
     }
 

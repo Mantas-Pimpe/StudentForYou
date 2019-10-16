@@ -96,7 +96,7 @@ namespace StudentForYou
 
         private void coursebtn_Click(object sender, EventArgs e)
         { 
-            var courses = new RecentQuestions(username);
+            var courses = new form1(username);
             courses.Show();
             this.Close();
         }
@@ -135,10 +135,6 @@ namespace StudentForYou
             var gchat = new GroupChat(this,username);
             this.Hide();
             gchat.Show();
-        }
-
-        private void RecentPostsForm_Load(object sender, EventArgs e)
-        {
         }
 
         private void RecentQuestions_FormClosed(object sender, FormClosedEventArgs e)

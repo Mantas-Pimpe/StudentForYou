@@ -12,7 +12,6 @@ namespace StudentForYou
 {
     public partial class Login : Form
     {
-        private string username = string.Empty;
         public Login()
         {
             InitializeComponent();
@@ -28,10 +27,18 @@ namespace StudentForYou
         {
             var vuLogin  = new vuLoginForm();
             vuLogin.ShowDialog();
-            username = vuLogin.getLoginUsername();
-            var rpf = new RecentQuestions(username);
-            rpf.Show();
-            this.Hide();
+            bool isLoginOk = vuLogin.getLoginStatus();
+            string username = vuLogin.getLoginUsername();
+            if (isLoginOk)
+            {
+                var rpf = new RecentQuestions(username);
+                rpf.Show();
+                this.Hide();
+            }
+            else
+                MessageBox.Show("Please complete your login", "Bad Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
         }
     }
 }
