@@ -1,6 +1,6 @@
 ﻿namespace StudentForYou
 {
-    partial class Chat
+    partial class ChatForm
     {
         /// <summary>
         /// Required designer variable.
@@ -125,6 +125,7 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Client2";
+            this.groupBox2.Enter += new System.EventHandler(this.GroupBox2_Enter);
             // 
             // label3
             // 
@@ -185,7 +186,7 @@
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
-            // Chat
+            // ChatForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
@@ -196,8 +197,8 @@
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonStart);
-            this.Name = "Chat";
-            this.Text = "Group Chat";
+            this.Name = "ChatForm";
+            this.Text = "Chat";
             this.Load += new System.EventHandler(this.GroupChat_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

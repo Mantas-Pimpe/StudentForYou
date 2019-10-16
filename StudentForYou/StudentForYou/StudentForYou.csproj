@@ -201,6 +201,10 @@
       <Project>{d5ca3b2f-0ee4-400d-a3e7-4bfdbd9c4efb}</Project>
       <Name>StudentForYou.Subjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StundentForYou.Chat\StundentForYou.Chat.csproj">
+      <Project>{4dd494d0-2ea7-4c8d-bb8e-188b8dc561c1}</Project>
+      <Name>StundentForYou.Chat</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

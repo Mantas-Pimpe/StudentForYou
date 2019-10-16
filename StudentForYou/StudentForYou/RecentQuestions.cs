@@ -123,7 +123,7 @@ namespace StudentForYou
 
         private void Chat_Click(object sender, EventArgs e)
         {
-            Chat chat = new Chat();
+            ChatForm chat = new ChatForm();
             this.Hide();
             chat.Show();
         }
