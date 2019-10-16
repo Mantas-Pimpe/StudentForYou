@@ -103,6 +103,7 @@
     <Compile Include="NewPostForm.Designer.cs">
       <DependentUpon>NewPostForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestionDetails.cs" />
     <Compile Include="SelectedQuestionForm.cs">
       <SubType>Form</SubType>
     </Compile>

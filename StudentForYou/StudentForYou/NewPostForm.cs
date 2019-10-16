@@ -30,7 +30,7 @@ namespace StudentForYou
             String text = questiontxt.Text;
             using (StreamWriter writeText = new StreamWriter(@"Resources\recentquestions.txt", true))
             {
-                writeText.Write("0" + "," + "0" + "," + "0" + "," + text + Environment.NewLine);
+                writeText.Write("0" + "`" + "0" + "`" + "0" + "`" + text + "`" + " " + Environment.NewLine);
             }
             RecentPostsForm rpf = new RecentPostsForm();
             rpf.Show();

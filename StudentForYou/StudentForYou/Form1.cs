@@ -18,16 +18,18 @@ namespace StudentForYou
         public RecentPostsForm()
         {
             InitializeComponent();
+            List<QuestionDetails> questionList = new List<QuestionDetails>();
             string likes, views, answers, question;
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             //Console.WriteLine(lines.Length);
             for (int i = 0; i < lines.Length; i++)
             {
-                string[] line = lines[i].Split(',');
+                string[] line = lines[i].Split('`');
                 likes = line[0];
                 views = line[1];
                 answers = line[2];
                 question = line[3];
+                questionList.Add(new QuestionDetails(likes, views, answers, question, line[4]));
                 flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question, i));
 
             }
@@ -48,14 +50,14 @@ namespace StudentForYou
             A += 1;
             btn.Click += delegate (object sender, EventArgs e)
             {
-                button_click(sender, e, question);
+                button_click(sender, e, question, likes, views, answers, placeToReplace);
                 int count = Int32.Parse(views);
                 count++;
                 views = count.ToString();
                 string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
-                string[] line = lines[placeToReplace].Split(',');
+                string[] line = lines[placeToReplace].Split('`');
                 line[1] = views;
-                string newLine = line[0] + "," + line[1] + "," + line[2] + "," + line[3];
+                string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4];
                 lines[placeToReplace] = newLine;
                 StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
 
@@ -113,10 +115,10 @@ namespace StudentForYou
             flowLayoutPanel1.WrapContents = false;
         }
 
-        void button_click (object sender, EventArgs e, string question)
+        void button_click (object sender, EventArgs e, string question, string likes, string views, string answers, int placeToReplace)
         {
             Button btn = sender as Button;
-            SelectedQuestionForm QuestionForm = new SelectedQuestionForm(question);
+            SelectedQuestionForm QuestionForm = new SelectedQuestionForm(question, likes, views, answers, placeToReplace);
             this.Close();
             QuestionForm.Show();
         }
