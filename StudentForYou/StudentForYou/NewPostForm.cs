@@ -49,8 +49,17 @@ namespace StudentForYou
 
         }
 
-        private void NewPostForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void NewPostForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if(Application.OpenForms.OfType<Form>().Count() == 1)
+                Application.Exit();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            var rpf = new RecentQuestions(username);
+            rpf.Show();
+            this.Close();
         }
     }
 }

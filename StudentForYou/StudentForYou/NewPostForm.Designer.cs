@@ -31,6 +31,7 @@
             this.questiontxt = new System.Windows.Forms.RichTextBox();
             this.questionBox = new System.Windows.Forms.TextBox();
             this.SaveBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // questiontxt
@@ -65,17 +66,29 @@
             this.SaveBtn.UseVisualStyleBackColor = true;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.button1.Location = new System.Drawing.Point(-1, -1);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(98, 45);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "BACK";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // NewPostForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.questionBox);
             this.Controls.Add(this.questiontxt);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "NewPostForm";
             this.Text = "NewPostForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewPostForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NewPostForm_FormClosed);
             this.Load += new System.EventHandler(this.NewPostForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -87,5 +100,6 @@
         private System.Windows.Forms.RichTextBox questiontxt;
         private System.Windows.Forms.TextBox questionBox;
         private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.Button button1;
     }
 }

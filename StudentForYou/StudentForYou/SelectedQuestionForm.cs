@@ -10,13 +10,15 @@ using System.Windows.Forms;
 
 namespace StudentForYou
 {
+    
     public partial class SelectedQuestionForm : Form
     {
 
-
-        public SelectedQuestionForm(String question)
+        private string username = string.Empty;
+        public SelectedQuestionForm(String question, string username)
         {
             InitializeComponent();
+            this.username = username;
             AddNewLabel(question);
             AddNewButton(450, 530, "Back");
             AddNewButton(400, 530, "Like");
@@ -48,8 +50,8 @@ namespace StudentForYou
 
         void button_click (object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            RecentPostsForm rpf = new RecentPostsForm();
+            var btn = sender as Button;
+            var rpf = new RecentQuestions(username);
             this.Close();
             rpf.Show();
         }
