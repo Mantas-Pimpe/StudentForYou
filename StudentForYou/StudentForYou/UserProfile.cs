@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentForYou
@@ -20,15 +15,20 @@ namespace StudentForYou
         private RoundedButton subjectsbtn;
         private RoundedButton recentpostsbtn;
         private Label label1;
+        private string newUsername;
+        private int currentUserDataLine = 0;
+        private string[] bioArray = new string[100];
+        private string filePath = @"Resources\TempDatabase.txt";
+        private RoundedButton PictureChangeButton;
+        private string pictureFilePath = @"Resources\TempDatabase.txt\StockImage.png";
 
         public UserProfile(String username)
         {
             InitializeComponent();
-            this.label1.Text = this.label1.Text + username;
-            this.UserName.Text = username; 
-        }
+            getUserData(username);
 
-        private void InitializeComponent( )
+        }
+        private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserProfile));
             this.UserInfo = new System.Windows.Forms.TextBox();
@@ -39,6 +39,7 @@ namespace StudentForYou
             this.usernameChange = new StudentForYou.RoundedButton();
             this.loggingOut = new StudentForYou.RoundedButton();
             this.roundPicturebox1 = new StudentForYou.RoundPicturebox();
+            this.PictureChangeButton = new StudentForYou.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,7 +72,7 @@ namespace StudentForYou
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(364, 327);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 54);
+            this.label1.Size = new System.Drawing.Size(81, 29);
             this.label1.TabIndex = 5;
             this.label1.Text = "About ";
             // 
@@ -134,10 +135,23 @@ namespace StudentForYou
             this.roundPicturebox1.TabIndex = 6;
             this.roundPicturebox1.TabStop = false;
             // 
+            // PictureChangeButton
+            // 
+            this.PictureChangeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.PictureChangeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PictureChangeButton.Location = new System.Drawing.Point(895, 291);
+            this.PictureChangeButton.Name = "PictureChangeButton";
+            this.PictureChangeButton.Size = new System.Drawing.Size(155, 174);
+            this.PictureChangeButton.TabIndex = 11;
+            this.PictureChangeButton.Text = "Change Picture";
+            this.PictureChangeButton.UseVisualStyleBackColor = true;
+            this.PictureChangeButton.Click += new System.EventHandler(this.PictureChangeButton_Click);
+            // 
             // UserProfile
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.PictureChangeButton);
             this.Controls.Add(this.recentpostsbtn);
             this.Controls.Add(this.subjectsbtn);
             this.Controls.Add(this.usernameChange);
@@ -150,10 +164,84 @@ namespace StudentForYou
             this.MinimumSize = new System.Drawing.Size(300, 400);
             this.Name = "UserProfile";
             this.Text = "Profile";
-            this.Load += new System.EventHandler(this.UserProfile_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UserProfile_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.roundPicturebox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+        private void getUserData(String username)
+        {
+            bool isNameFound = false;
+            string line;
+            string[] words = null;
+            System.IO.StreamReader file = new System.IO.StreamReader(filePath);
+            while ((line = file.ReadLine()) != null)
+            {
+                words = null;
+                if (line.Contains(username))
+                {
+                    words = line.Split(' ');
+                    if (username == words[0])
+                    {
+                        pictureFilePath = words[2];
+                        for (int i = 3; i < words.Length; i++)
+                        {
+                            bioArray[i - 3] = words[i];
+                        }
+                        isNameFound = true;
+                        break;
+                    }
+                }
+                currentUserDataLine++;
+            }
+            file.Close();
+            if (!isNameFound)
+            {
+                MessageBox.Show("Name not found in database", "Unexpected error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+            string bio = "";
+            int j = 0;
+            while (!string.IsNullOrEmpty(bioArray[j]))
+            {
+                bio = bio + bioArray[j] + " ";
+                j++;
+            }
+            label1.Text = label1.Text + username;
+            UserName.Text = username;
+            newUsername = username;
+            UserInfo.Text = bio;
+            roundPicturebox1.ImageLocation = pictureFilePath;
+        }
+        private void saveUserData(string currentUsername, string newUsername)
+        {
+            string lineToWrite = null;
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                for (int i = 0; i <= currentUserDataLine; i++)
+                    lineToWrite = reader.ReadLine();
+            }
+            string[] lineWords = lineToWrite.Split(' ');
+            lineWords[0] = newUsername;
+            lineWords[2] = pictureFilePath;
+            lineToWrite = null;
+            for (int i = 0; i < lineWords.Length; i++)
+            {
+                if (lineWords.Length - 1 == i)
+                    lineToWrite = lineToWrite + lineWords[i];
+                else
+                    lineToWrite = lineToWrite + lineWords[i] + " ";
+            }
+            string[] lines = File.ReadAllLines(filePath);
+            lines[currentUserDataLine] = lineToWrite;
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                for (int currentLine = 0; currentLine < lines.Length; currentLine++)
+                {
+                    writer.WriteLine(lines[currentLine]);
+                }
+            }
 
         }
 
@@ -162,44 +250,62 @@ namespace StudentForYou
             //
             // Save textbox contents to file/ database
             //
+
         }
 
         private void UsernameChange_Click(object sender, EventArgs e)
         {
-            UsernameChangeWindow UsernameChange = new UsernameChangeWindow();
+            UsernameChangeWindow UsernameChange = new UsernameChangeWindow(filePath, UserName.Text);
             UsernameChange.ShowDialog();
+            newUsername = UsernameChange.getUsername();
         }
 
         private void LoggingOut_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Login newlogin = new Login();
-            newlogin.Show();
             //
             // Log out and promt to the login screen again, or just reopen the app
             // 
+            saveUserData(UserName.Text, newUsername);
+            Application.Restart();
         }
 
         private void RoundedButton1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            form1 subjects = new form1();
+            
+            var subjects = new form1(UserName.Text);
+            this.Close();
             subjects.Show();
-           
-            
-            
         }
 
         private void RecentsPostsbtn_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            RecentPostsForm rpf = new RecentPostsForm();
+            
+            var rpf = new RecentQuestions(UserName.Text);
             rpf.Show();
+            this.Close();
+        }
+        private void UserProfile_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            saveUserData(UserName.Text, newUsername);
+            if (Application.OpenForms.OfType<Form>().Count() == 1)
+                Application.Exit();
         }
 
-        private void UserProfile_Load(object sender, EventArgs e)
+        private void PictureChangeButton_Click(object sender, EventArgs e)
         {
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
 
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    pictureFilePath = openFileDialog.FileName;
+                }
+            }
         }
     }
 }

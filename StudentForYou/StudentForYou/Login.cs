@@ -12,39 +12,26 @@ namespace StudentForYou
 {
     public partial class Login : Form
     {
+        private string username = string.Empty;
         public Login()
         {
             InitializeComponent();
         }
 
-        
-
-        private void UserProfile_Click(object sender, EventArgs e)
-        {
-            // Username is required to ender it into user profile
-            this.Hide();
-            String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username);
-            Profile.Show();
-        }
-
-        private void coursesbtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            form1 courses = new form1();
-            courses.Show();
-        }
-
-        private void recentquestionsbtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            RecentPostsForm rpF = new RecentPostsForm();
-            rpF.Show();
-        }
 
         private void googlebtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            var vuLogin  = new vuLoginForm();
+            vuLogin.ShowDialog();
+            username = vuLogin.getLoginUsername();
+            var rpf = new RecentQuestions(username);
+            rpf.Show();
+            this.Hide();
         }
     }
 }

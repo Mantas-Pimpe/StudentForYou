@@ -49,7 +49,7 @@
             this.questionBox.Margin = new System.Windows.Forms.Padding(6);
             this.questionBox.Name = "questionBox";
             this.questionBox.ReadOnly = true;
-            this.questionBox.Size = new System.Drawing.Size(1000, 38);
+            this.questionBox.Size = new System.Drawing.Size(1000, 22);
             this.questionBox.TabIndex = 1;
             this.questionBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.questionBox.TextChanged += new System.EventHandler(this.questionBox_TextChanged);
@@ -75,6 +75,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "NewPostForm";
             this.Text = "NewPostForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewPostForm_FormClosing);
             this.Load += new System.EventHandler(this.NewPostForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

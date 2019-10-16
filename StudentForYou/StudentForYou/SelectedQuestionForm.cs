@@ -14,10 +14,12 @@ namespace StudentForYou
     {
         private string @string;
         private object question;
+        private string username = string.Empty;
 
-        public SelectedQuestionForm(String question)
+        public SelectedQuestionForm(string question, string username)
         {
             InitializeComponent();
+            this.username = username;
             AddNewLabel(question);
             AddNewButton();
         }
@@ -48,10 +50,11 @@ namespace StudentForYou
 
         void button_click (object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            RecentPostsForm rpf = new RecentPostsForm();
-            this.Close();
+            var btn = sender as Button;
+            var rpf = new RecentQuestions(username);
             rpf.Show();
+            this.Close();
+
         }
         private void SelectedQuestionForm_Load(object sender, EventArgs e)
         {

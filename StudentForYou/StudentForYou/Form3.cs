@@ -16,9 +16,11 @@ namespace StudentForYou
     {
         Socket sck;
         EndPoint epLocal, epRemote;
-        public Chat()
-        {
+        private Form prevForm;
+        public Chat(Form prevForm)
+        {   
             InitializeComponent();
+            this.prevForm = prevForm;
             sck = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             sck.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             textLocalIp.Text = GetLocalIP();
@@ -127,9 +129,8 @@ namespace StudentForYou
 
         private void Back_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            RecentPostsForm rpf = new RecentPostsForm();
-            rpf.Show();
+            prevForm.Show();
+            this.Close();
         }
 
         private void TextFriendsIp_TextChanged(object sender, EventArgs e)

@@ -67,11 +67,11 @@
     <Compile Include="AddSubjectForm.Designer.cs">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="RecentQuestions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="RecentQuestions.Designer.cs">
+      <DependentUpon>RecentQuestions.cs</DependentUpon>
     </Compile>
     <Compile Include="Form3.cs">
       <SubType>Form</SubType>
@@ -135,11 +135,15 @@
     <Compile Include="UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="vuLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="vuLoginForm.Designer.cs" />
     <EmbeddedResource Include="AddSubjectForm.resx">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="RecentQuestions.resx">
+      <DependentUpon>RecentQuestions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
@@ -180,6 +184,7 @@
     <EmbeddedResource Include="UserProfile.resx">
       <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="vuLoginForm.resx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

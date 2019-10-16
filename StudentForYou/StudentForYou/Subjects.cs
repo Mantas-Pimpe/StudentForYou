@@ -15,9 +15,11 @@ namespace StudentForYou
     public partial class form1 : Form
     {
         listviewinfosetter setter;
-        public form1()
+        private string username = string.Empty;
+        public form1(string username)
         {
             InitializeComponent();
+            this.username = username;
             setter = new listviewinfosetter();
            
             List<Course> templist=  setter.Readfileinfo();
@@ -80,17 +82,17 @@ namespace StudentForYou
 
         private void recentquestionsbtn_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            RecentPostsForm rpF = new RecentPostsForm();
+            
+            var rpF = new RecentQuestions(username);
             rpF.Show();
+            this.Close();
         }
 
         private void profilebtn_Click(object sender, EventArgs e)
         {
-            String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username);
-            this.Hide();
+            var Profile = new UserProfile(username);
             Profile.Show();
+            this.Close();
         }
 
         private void Coursesbtn_Click(object sender, EventArgs e)
