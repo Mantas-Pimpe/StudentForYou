@@ -17,9 +17,13 @@ namespace StudentForYou
         System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
         NetworkStream serverStream = default(NetworkStream);
         string readData = null;
-        public GroupChat()
+        private Form prevform;
+        private string username = string.Empty;
+        public GroupChat(Form prevForm, string username)
         {
             InitializeComponent();
+            this.prevform = prevForm;
+            this.username = username;
         }
 
         private void GroupChat_Load(object sender, EventArgs e)
@@ -85,9 +89,9 @@ namespace StudentForYou
 
         private void Back_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            RecentPostsForm rpf = new RecentPostsForm();
-            rpf.Show();
+            
+            prevform.Show();
+            this.Close();
         }
 
         private void ListMessage_SelectedIndexChanged(object sender, EventArgs e)

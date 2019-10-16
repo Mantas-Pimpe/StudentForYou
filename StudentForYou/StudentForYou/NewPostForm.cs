@@ -13,9 +13,11 @@ namespace StudentForYou
 {
     public partial class NewPostForm : Form
     {
-        public NewPostForm()
+        private readonly string username = string.Empty;
+        public NewPostForm(string username)
         {
             InitializeComponent();
+            this.username = username;
             questionBox.Text = "Enter your question";
         }
 
@@ -32,7 +34,7 @@ namespace StudentForYou
             {
                 writeText.Write("0" + "," + "0" + "," + "0" + "," + text + Environment.NewLine);
             }
-            RecentPostsForm rpf = new RecentPostsForm();
+            var rpf = new RecentQuestions(username);
             rpf.Show();
             this.Close();
         }
@@ -45,6 +47,19 @@ namespace StudentForYou
         private void NewPostForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void NewPostForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(Application.OpenForms.OfType<Form>().Count() == 1)
+                Application.Exit();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            var rpf = new RecentQuestions(username);
+            rpf.Show();
+            this.Close();
         }
     }
 }

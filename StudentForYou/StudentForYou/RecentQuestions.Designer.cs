@@ -1,7 +1,7 @@
 ﻿namespace StudentForYou
 
 {
-    partial class RecentPostsForm
+    partial class RecentQuestions
     {
         /// <summary>
         /// Required designer variable.
@@ -41,8 +41,6 @@
             // 
             // newpostbtn
             // 
-            this.newpostbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newpostbtn.Location = new System.Drawing.Point(520, 534);
             this.newpostbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newpostbtn.Location = new System.Drawing.Point(515, 567);
             this.newpostbtn.Margin = new System.Windows.Forms.Padding(6);
@@ -106,6 +104,7 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1169, 466);
             this.flowLayoutPanel1.TabIndex = 5;
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            // 
             // Chat
             // 
             this.Chat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -130,7 +129,7 @@
             this.GroupChat.UseVisualStyleBackColor = true;
             this.GroupChat.Click += new System.EventHandler(this.GroupChat_Click);
             // 
-            // RecentPostsForm
+            // RecentQuestions
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
@@ -143,8 +142,9 @@
             this.Controls.Add(this.coursesbtn);
             this.Controls.Add(this.newpostbtn);
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "RecentPostsForm";
+            this.Name = "RecentQuestions";
             this.Text = "Recent questions";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RecentQuestions_FormClosed);
             this.Load += new System.EventHandler(this.RecentPostsForm_Load);
             this.ResumeLayout(false);
 

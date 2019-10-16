@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            this.profileBtn = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.googlebtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -41,18 +40,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
-            // 
-            // profileBtn
-            // 
-            this.profileBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.profileBtn.Location = new System.Drawing.Point(1080, 638);
-            this.profileBtn.Margin = new System.Windows.Forms.Padding(8);
-            this.profileBtn.Name = "profileBtn";
-            this.profileBtn.Size = new System.Drawing.Size(151, 57);
-            this.profileBtn.TabIndex = 1;
-            this.profileBtn.Text = "Profile";
-            this.profileBtn.UseVisualStyleBackColor = true;
-            this.profileBtn.Click += new System.EventHandler(this.UserProfile_Click);
             // 
             // richTextBox1
             // 
@@ -102,6 +89,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "with VU account";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // pictureBox1
             // 
@@ -147,11 +135,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.googlebtn);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.profileBtn);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Login";
             this.Text = "a";
-            //this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -160,8 +146,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button profileBtn;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button googlebtn;
         private System.Windows.Forms.Button button1;

@@ -12,12 +12,14 @@ using System.IO;
 
 namespace StudentForYou
 {
-    public partial class RecentPostsForm : Form
+    public partial class RecentQuestions : Form
     {
         int A = 1;
-        public RecentPostsForm()
+        private string username = string.Empty;
+        public RecentQuestions(string username)
         {
             InitializeComponent();
+            this.username = username;
             string likes, views, answers, question;
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             //Console.WriteLine(lines.Length);
@@ -40,7 +42,7 @@ namespace StudentForYou
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             this.Controls.Add(btn);
             btn.Top = A * 40;
-            btn.Width = 840;
+            btn.Width = 1120;
             btn.Height = 40;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Left = 15;
@@ -52,12 +54,12 @@ namespace StudentForYou
                 int count = Int32.Parse(views);
                 count++;
                 views = count.ToString();
-                string[] lines = File.ReadAllLines(@"..\Debug\recentquestions.txt");
+                string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
                 string[] line = lines[placeToReplace].Split(',');
                 line[1] = views;
                 string newLine = line[0] + "," + line[1] + "," + line[2] + "," + line[3];
                 lines[placeToReplace] = newLine;
-                StreamWriter writeText = new StreamWriter(@"recentquestions.txt");
+                StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
 
                 for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
                 {
@@ -79,31 +81,31 @@ namespace StudentForYou
 
         private void newpostbtn_Click(object sender, EventArgs e)
         {
-            this.Close();
-            NewPostForm newForm = new NewPostForm();
+            
+            var newForm = new NewPostForm(username);
             newForm.Show();
+            this.Close();
         }
 
         private void coursesbtn_Click(object sender, EventArgs e)
         {
-            this.Close();
-            form1 subjects = new form1();
+            var subjects = new form1(username);
             subjects.Show();
+            this.Close();
         }
 
         private void coursebtn_Click(object sender, EventArgs e)
-        {
-            form1 courses = new form1();
-            this.Close();
+        { 
+            var courses = new RecentQuestions(username);
             courses.Show();
+            this.Close();
         }
 
         private void profilebtn_Click(object sender, EventArgs e)
         {
-            String Username = "Jeff";
-            UserProfile Profile = new UserProfile(Username);
-            this.Close();
+            var Profile = new UserProfile(username);
             Profile.Show();
+            this.Close();
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -115,29 +117,34 @@ namespace StudentForYou
 
         void button_click (object sender, EventArgs e, string question)
         {
-            Button btn = sender as Button;
-            SelectedQuestionForm QuestionForm = new SelectedQuestionForm(question);
+            var btn = sender as Button;
+            var QuestionForm = new SelectedQuestionForm(question,username);
             this.Close();
             QuestionForm.Show();
         }
 
         private void Chat_Click(object sender, EventArgs e)
         {
-            ChatForm chat = new ChatForm();
+            var chat = new Chat(this);
             this.Hide();
             chat.Show();
         }
 
         private void GroupChat_Click(object sender, EventArgs e)
         {
-            GroupChat gchat = new GroupChat();
+            var gchat = new GroupChat(this,username);
             this.Hide();
             gchat.Show();
         }
 
         private void RecentPostsForm_Load(object sender, EventArgs e)
         {
+        }
 
+        private void RecentQuestions_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Application.OpenForms.OfType<Form>().Count() == 1)
+                Application.Exit();
         }
     }
 }

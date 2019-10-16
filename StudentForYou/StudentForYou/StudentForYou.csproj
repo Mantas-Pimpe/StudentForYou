@@ -135,6 +135,10 @@
     <Compile Include="UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="vuLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="vuLoginForm.Designer.cs" />
     <EmbeddedResource Include="AddSubjectForm.resx">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -180,6 +184,7 @@
     <EmbeddedResource Include="UserProfile.resx">
       <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="vuLoginForm.resx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
