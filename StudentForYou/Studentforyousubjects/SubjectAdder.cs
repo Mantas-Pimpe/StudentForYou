@@ -6,32 +6,35 @@ using System.Threading.Tasks;
 
 namespace Studentforyousubjects
 {
-    public class SubjectAdder : AddSubjectInterface
+    public class SubjectAdder : IAddSubjectInterface
     {
-        string subjectname;
-        string coursedescription;
+        string subjectName;
+        string courseDescription;
         string difficulty;
 
-        public void getinfo(string nameinfo,string courseinfo,string difficultyinfo)
+       
+
+
+        public void GetInfo(string NameInfo,string courseInfo,string DifficultyInfo)
         {
             
-            subjectname = nameinfo;
-            coursedescription = courseinfo;
-            difficulty = difficultyinfo;
+            subjectName = NameInfo;
+            courseDescription = courseInfo;
+            difficulty = DifficultyInfo;
 
 
             
         }
-        public void writetofile()
+        public void WriteToFile()
         {
-            System.IO.File.AppendAllText(@"Resources\allcourses.txt", this.returnallinfo());
+            System.IO.File.AppendAllText(@"Resources\allcourses.txt", this.ReturnAllInfo());
             System.IO.File.AppendAllText(@"Resources\allcourses.txt", System.Environment.NewLine);
         }
-        public string returnallinfo()
+        public string ReturnAllInfo()
         {
-            string allinfo;
-            allinfo = subjectname + "," + coursedescription + "," + difficulty;
-            return allinfo;
+            string allInfo;
+            allInfo = subjectName + "," + courseDescription + "," + difficulty;
+            return allInfo;
         }
     }
 }

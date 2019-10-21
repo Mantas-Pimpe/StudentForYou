@@ -14,23 +14,31 @@ namespace StudentForYou
 {
     public partial class form1 : Form
     {
-        listviewinfosetter setter;
+        ListViewInfosetter setter;
+        ButtonAdder adder;
         private string username = string.Empty;
+        int amountofbuttons = 0;
         public form1(string username)
         {
             InitializeComponent();
             this.username = username;
-            setter = new listviewinfosetter();
-           
-            List<Course> templist=  setter.Readfileinfo();
-             foreach(Course item in templist)
-              {
-                var fullcoursedetails = new ListViewItem(new[] { item.Name, item.Description, item.Difficulty });
-                listView1.Items.Add(fullcoursedetails);
+            setter = new ListViewInfosetter();
+            adder = new ButtonAdder();
+
+            List<Course> templist = setter.ReadFileInfo();
+            foreach (Course item in templist)
+            {
+                SubjectsLayoutPanel.Controls.Add(AddButton(item, amountofbuttons));
+                SubjectsLayoutPanel.Controls.Add(adder.AddIconButton(amountofbuttons));
+   
+                amountofbuttons = amountofbuttons + 1;
+
+
+
             }
-        
+
         }
-        
+
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -50,68 +58,110 @@ namespace StudentForYou
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-        SubjectAdder addstuff = new SubjectAdder();
-            AddSubjectForm subjectform = new AddSubjectForm(addstuff);
-            subjectform.ShowDialog();
-            listView1.Items.Clear();
-            List<Course> templist = setter.Readfileinfo();
-            foreach (Course item in templist)
-            {
-                var fullcoursedetails = new ListViewItem(new[] { item.Name, item.Description, item.Difficulty });
-                listView1.Items.Add(fullcoursedetails);
-            }
-            this.Show();
-            
-              
-        }
+            var SubjectAdder = new SubjectAdder();
+            var SubjectForm = new AddSubjectForm(SubjectAdder);
+                var Tempcourse = new Course();
+                if (SubjectForm.ShowDialog() == DialogResult.OK)
+                {
+                Tempcourse.Description = SubjectForm.CourseDescriptionTextBox.Text;
+                Tempcourse.Difficulty = SubjectForm.DifficultyTextBox.Text;
+                Tempcourse.Name = SubjectForm.CourseNameTextBox.Text;
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void recentquestionsbtn_Click(object sender, EventArgs e)
-        {
-            
-            var rpF = new RecentQuestions(username);
-            rpF.Show();
-            this.Close();
-        }
-
-        private void profilebtn_Click(object sender, EventArgs e)
-        {
-            var Profile = new UserProfile(username);
-            Profile.Show();
-            this.Close();
-        }
-
-        private void Coursesbtn_Click(object sender, EventArgs e)
-        {
-            if(listView1.SelectedItems[0].Text!=null)
-            {
-                var Detailsform = new CourseDetailsForm(listView1.SelectedItems[0].Text);
-                this.Hide();
-                Detailsform.ShowDialog();
+                }
+                SubjectsLayoutPanel.Controls.Add(AddButton(Tempcourse, amountofbuttons));
+            SubjectsLayoutPanel.Controls.Add(adder.AddIconButton(amountofbuttons));
+            amountofbuttons = amountofbuttons + 1;
                 this.Show();
+
+
             }
-            
+        
+
+            private void TextBox1_TextChanged(object sender, EventArgs e)
+            {
+
+            }
+
+            private void ListView1_SelectedIndexChanged(object sender, EventArgs e)
+            {
+
+            }
+
+            private void Form1_Load(object sender, EventArgs e)
+            {
+
+            }
+
+            private void recentquestionsbtn_Click(object sender, EventArgs e)
+            {
+
+                var rpF = new RecentQuestions(username);
+                rpF.Show();
+                this.Close();
+            }
+
+            private void profilebtn_Click(object sender, EventArgs e)
+            {
+                var Profile = new UserProfile(username);
+                Profile.Show();
+                this.Close();
+            }
+
+            private void Coursesbtn_Click(object sender, EventArgs e)
+            {
+                /* if(listView1.SelectedItems[0].Text!=null)
+                 {
+                     var Detailsform = new CourseDetailsForm(listView1.SelectedItems[0].Text);
+                     this.Hide();
+                     Detailsform.ShowDialog();
+                     this.Show();
+                 }
+                 */
+
+            }
+
+            private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+            {
+                if (Application.OpenForms.OfType<Form>().Count() == 1)
+                    Application.Exit();
+            }
+
+            private void SubjectsLayoutPanel_Paint(object sender, PaintEventArgs e)
+            {
+                SubjectsLayoutPanel.AutoScroll = true;
+                SubjectsLayoutPanel.FlowDirection = FlowDirection.TopDown;
+                SubjectsLayoutPanel.WrapContents = false;
+
+            }
+        public Button AddButton(Course d, int refbuttonumber)
+        {
+            var buttonNumber = refbuttonumber;
+            var courseName = d.Name;
+            var courseDescription = d.Description;
+            var difficulty = d.Difficulty;
+
+            System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
+            btn.Top = buttonNumber * 40;
+            btn.Width = 800;
+            btn.Height = 40;
+            btn.Left = 15;
+            btn.Text = courseName + "Description :" + courseDescription + "Difficulty" + difficulty;
+            btn.Name = courseName;
+            btn.Click += new EventHandler(Button_Click);
+            return btn;
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+
+        public void Button_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms.OfType<Form>().Count() == 1)
-                Application.Exit();
+            this.Hide();
+            Button button = sender as Button;
+            CourseDetailsForm downloadsForm = new CourseDetailsForm(button.Name);
+            downloadsForm.ShowDialog();
+            this.Show();
+
+
         }
     }
 
-}
+    }

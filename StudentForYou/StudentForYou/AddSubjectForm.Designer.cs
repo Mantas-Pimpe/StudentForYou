@@ -46,6 +46,7 @@
             this.CourseNameTextBox.Name = "CourseNameTextBox";
             this.CourseNameTextBox.Size = new System.Drawing.Size(989, 20);
             this.CourseNameTextBox.TabIndex = 0;
+            this.CourseNameTextBox.TextChanged += new System.EventHandler(this.CourseNameTextBox_TextChanged);
             // 
             // roundPicturebox1
             // 
@@ -62,6 +63,7 @@
             this.CourseDescriptionTextBox.Name = "CourseDescriptionTextBox";
             this.CourseDescriptionTextBox.Size = new System.Drawing.Size(989, 309);
             this.CourseDescriptionTextBox.TabIndex = 2;
+            this.CourseDescriptionTextBox.TextChanged += new System.EventHandler(this.CourseDescriptionTextBox_TextChanged);
             // 
             // DifficultyTextBox
             // 
@@ -142,15 +144,14 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox CourseNameTextBox;
         private RoundPicturebox roundPicturebox1;
-        private System.Windows.Forms.TextBox CourseDescriptionTextBox;
-        private System.Windows.Forms.TextBox DifficultyTextBox;
         private System.Windows.Forms.Label CourseNameLabel;
         private System.Windows.Forms.Label CourseDescriptionLabel;
         private System.Windows.Forms.Label DifficultyLabel;
         private RoundedButton SaveSubjectButton;
         private RoundedButton CancelAddSubjectButton;
+        public System.Windows.Forms.TextBox CourseNameTextBox;
+        public System.Windows.Forms.TextBox CourseDescriptionTextBox;
+        public System.Windows.Forms.TextBox DifficultyTextBox;
     }
 }

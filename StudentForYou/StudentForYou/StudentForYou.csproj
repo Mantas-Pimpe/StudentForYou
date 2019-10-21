@@ -67,6 +67,7 @@
     <Compile Include="AddSubjectForm.Designer.cs">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ButtonAdder.cs" />
     <Compile Include="RecentQuestions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +200,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="chaticon.png" />
     <Content Include="icon1.PNG" />
   </ItemGroup>
   <ItemGroup>
