@@ -33,6 +33,7 @@ namespace StudentForYou
                 flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question, i));
 
             }
+            recentquestionsbtn.Enabled = false;
         }
 
 
@@ -144,6 +145,16 @@ namespace StudentForYou
         }
 
         private void Recentquestionsbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void RecentQuestions_Load(object sender, EventArgs e)
         {
 
         }
