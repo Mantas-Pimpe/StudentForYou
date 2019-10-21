@@ -8,28 +8,28 @@ namespace Studentforyousubjects
 {
     public class DescriptionReader
     {
-        string filepath;
+        string filePath;
        public DescriptionReader(string coursename)
         {
-            filepath="Resources\\";
-                filepath = filepath + coursename;
-            filepath = filepath + ".txt";
+            filePath="Resources\\";
+                filePath = filePath + coursename;
+            filePath = filePath + ".txt";
         }
 
 
-       public string readdescription()
+       public string ReadDescription()
         {
-            if(System.IO.File.Exists(filepath).Equals(false))
+            if(System.IO.File.Exists(filePath).Equals(false))
             {
-                System.IO.File.Create(filepath);
+                System.IO.File.Create(filePath);
             }
-            string text = System.IO.File.ReadAllText(filepath);
+            var text = System.IO.File.ReadAllText(filePath);
             return text;
 
         }
-       public void uploadtofile(string texttoupload)
+       public void UploadToFile(string texttoupload)
         {
-            System.IO.File.AppendAllText(filepath, texttoupload);
+            System.IO.File.AppendAllText(filePath, texttoupload);
         }
     }
 }

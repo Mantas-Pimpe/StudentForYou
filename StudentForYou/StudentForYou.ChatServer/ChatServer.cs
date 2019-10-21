@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Net.Sockets;
 using System.Text;
@@ -71,7 +71,7 @@ namespace StudentForYouChatServer
     }//end Main class
 
 
-    public class handleClinet
+    public class handleClient
     {
         TcpClient clientSocket;
         string clNo;

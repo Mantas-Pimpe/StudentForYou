@@ -1,4 +1,4 @@
-﻿namespace StudentForYou
+namespace StudentForYou
 {
     partial class GroupChatForm
     {

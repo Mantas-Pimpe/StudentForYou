@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Studentforyousubjects
 {
-    public interface AddSubjectInterface
+    public interface IAddSubjectInterface
     {
-        string returnallinfo();
+        string ReturnAllInfo();
 
-        void writetofile();
-         void getinfo(string nameinfo, string courseinfo, string difficultyinfo);
+        void WriteToFile();
+         void GetInfo(string nameInfo, string courseInfo, string difficultyInfo);
         
 
 
