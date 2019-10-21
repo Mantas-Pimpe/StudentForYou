@@ -1,6 +1,6 @@
 ﻿namespace StudentForYou
 {
-    partial class GroupChat
+    partial class GroupChatForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,8 +30,6 @@
         {
             this.textMessage = new System.Windows.Forms.TextBox();
             this.buttonSend = new System.Windows.Forms.Button();
-            this.buttonStart = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.Back = new System.Windows.Forms.Button();
             this.listMessage = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -54,24 +52,6 @@
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.ButtonSend_Click);
             // 
-            // buttonStart
-            // 
-            this.buttonStart.Location = new System.Drawing.Point(944, 118);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(179, 40);
-            this.buttonStart.TabIndex = 8;
-            this.buttonStart.Text = "Start";
-            this.buttonStart.UseVisualStyleBackColor = true;
-            this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(123, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1000, 38);
-            this.textBox1.TabIndex = 13;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
-            // 
             // Back
             // 
             this.Back.Location = new System.Drawing.Point(123, 640);
@@ -84,23 +64,22 @@
             // 
             // listMessage
             // 
-            this.listMessage.Location = new System.Drawing.Point(123, 236);
+            this.listMessage.Location = new System.Drawing.Point(123, 70);
             this.listMessage.Multiline = true;
             this.listMessage.Name = "listMessage";
-            this.listMessage.Size = new System.Drawing.Size(1000, 345);
+            this.listMessage.Size = new System.Drawing.Size(1000, 511);
             this.listMessage.TabIndex = 15;
+            this.listMessage.TextChanged += new System.EventHandler(this.ListMessage_TextChanged);
             // 
-            // GroupChat
+            // GroupChatForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
             this.Controls.Add(this.listMessage);
             this.Controls.Add(this.Back);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textMessage);
             this.Controls.Add(this.buttonSend);
-            this.Controls.Add(this.buttonStart);
-            this.Name = "GroupChat";
+            this.Name = "GroupChatForm";
             this.Text = "GroupChat";
             this.Load += new System.EventHandler(this.GroupChat_Load);
             this.ResumeLayout(false);
@@ -111,8 +90,6 @@
         #endregion
         private System.Windows.Forms.TextBox textMessage;
         private System.Windows.Forms.Button buttonSend;
-        private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button Back;
         private System.Windows.Forms.TextBox listMessage;
     }

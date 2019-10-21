@@ -2,31 +2,39 @@
 using System.Net.Sockets;
 using System.Threading;
 
-namespace StudentForYou.GroupChat
+namespace StudentForYouGroupChat
 {
-    class GroupChat
+    
+    public class GroupChat
     {
-        System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
+        TcpClient clientSocket = new TcpClient();
         NetworkStream serverStream = default(NetworkStream);
         string readData = null;
+        string message;
+        string username;
+        public delegate void MyDel(string message);
+        public event MyDel MyEvent;
+        public GroupChat(string username)
+        {
+            this.username = username;
+        }
 
-        public Start()
+        public void Start()
         {
             readData = "Conected to Chat Server ...";
-            msg();
+            MyEvent(readData);
             clientSocket.Connect("127.0.0.1", 8888);
             serverStream = clientSocket.GetStream();
 
-            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(textBox1.Text + "$");
+            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(username + "$");
             serverStream.Write(outStream, 0, outStream.Length);
             serverStream.Flush();
-
-            Thread ctThread = new Thread(getMessage);
+            var ctThread = new Thread(getMessage);
             ctThread.Start();
         }
-        public void Send()
+        public void Send(string msg)
         {
-            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(textMessage.Text + "$");
+            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(msg + "$");
             serverStream.Write(outStream, 0, outStream.Length);
             serverStream.Flush();
         }
@@ -35,21 +43,14 @@ namespace StudentForYou.GroupChat
             while (true)
             {
                 serverStream = clientSocket.GetStream();
-                int buffSize = 0;
+                var buffSize = 0;
                 byte[] inStream = new byte[clientSocket.ReceiveBufferSize];
                 buffSize = clientSocket.ReceiveBufferSize;
                 serverStream.Read(inStream, 0, buffSize);
-                string returndata = System.Text.Encoding.ASCII.GetString(inStream);
-                readData = "" + returndata;
-                msg();
+                var returnData = System.Text.Encoding.ASCII.GetString(inStream);
+                readData = "" + returnData;
+                MyEvent(Environment.NewLine + " >> " + readData);
             }
-        }
-        public void msg()
-        {
-            if (this.InvokeRequired)
-                this.Invoke(new MethodInvoker(msg));
-            else
-                listMessage.Text = listMessage.Text + Environment.NewLine + " >> " + readData;
         }
     }
 }

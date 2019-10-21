@@ -41,8 +41,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textFriendsIp = new System.Windows.Forms.TextBox();
             this.textMessage = new System.Windows.Forms.TextBox();
-            this.listMessage = new System.Windows.Forms.ListBox();
             this.Back = new System.Windows.Forms.Button();
+            this.listMessage = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -167,15 +167,6 @@
             this.textMessage.Size = new System.Drawing.Size(1000, 38);
             this.textMessage.TabIndex = 2;
             // 
-            // listMessage
-            // 
-            this.listMessage.FormattingEnabled = true;
-            this.listMessage.ItemHeight = 31;
-            this.listMessage.Location = new System.Drawing.Point(110, 233);
-            this.listMessage.Name = "listMessage";
-            this.listMessage.Size = new System.Drawing.Size(1000, 345);
-            this.listMessage.TabIndex = 6;
-            // 
             // Back
             // 
             this.Back.Location = new System.Drawing.Point(300, 637);
@@ -186,12 +177,21 @@
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.Back_Click);
             // 
+            // listMessage
+            // 
+            this.listMessage.Location = new System.Drawing.Point(110, 240);
+            this.listMessage.Multiline = true;
+            this.listMessage.Name = "listMessage";
+            this.listMessage.Size = new System.Drawing.Size(1000, 335);
+            this.listMessage.TabIndex = 16;
+            this.listMessage.TextChanged += new System.EventHandler(this.ListMessage_TextChanged);
+            // 
             // ChatForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
-            this.Controls.Add(this.Back);
             this.Controls.Add(this.listMessage);
+            this.Controls.Add(this.Back);
             this.Controls.Add(this.textMessage);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.buttonSend);
@@ -223,7 +223,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textFriendsIp;
         private System.Windows.Forms.TextBox textMessage;
-        private System.Windows.Forms.ListBox listMessage;
         private System.Windows.Forms.Button Back;
+        private System.Windows.Forms.TextBox listMessage;
     }
 }

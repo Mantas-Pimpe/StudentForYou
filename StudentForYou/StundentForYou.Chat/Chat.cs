@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Diagnostics;
 
-namespace StudentForYouChat
+namespace StundentForYouChat
 {
     public class Chat
     {
         Socket sck;
         EndPoint epLocal, epRemote;
-        string message;
+        public delegate void MyDel(string message);
+        public event MyDel MyEvent;
         public Chat()
         {
             sck = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -29,29 +30,28 @@ namespace StudentForYouChat
             }
             return "127.0.0.1";
         }
-
-        public void MessageCallBack(IAsyncResult aResult)
+        private void MessageCallBack(IAsyncResult aResult)
         {
             try
             {
-                int size = sck.EndReceiveFrom(aResult, ref epRemote);
+                var size = sck.EndReceiveFrom(aResult, ref epRemote);
                 if (size > 0)
                 {
                     byte[] receivedData = new byte[1464];
                     receivedData = (byte[])aResult.AsyncState;
                     ASCIIEncoding eEncoding = new ASCIIEncoding();
-                    string receivedMessage = eEncoding.GetString(receivedData);
+                    var receivedMessage = eEncoding.GetString(receivedData);
                     //listMessage.Items.Add("StuddyBuddy: " + receivedMessage);
-                    //return "StuddyBuddy: " + receivedMessage;
+                    MyEvent("StuddyBuddy: " + receivedMessage);
                 }
                 byte[] buffer = new byte[1500];
                 sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new AsyncCallback(MessageCallBack), buffer);
             }
             catch (Exception e)
             {
-                //MessageBox.Show(e.ToString());
-                //return e.ToString();
+                MyEvent(e.ToString());
             }
+
         }
 
         public void Start(string textLocalIp, string textLocalPort, string textFriendsIp, string textFriendsPort)
@@ -69,43 +69,33 @@ namespace StudentForYouChat
                 sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new
                 AsyncCallback(MessageCallBack), buffer);
                 // release button to send message
-
-                /*buttonSend.Enabled = true;
-                buttonStart.Text = "Connected";
-                buttonStart.Enabled = false;
-                textMessage.Focus();*/
             }
             catch (Exception ex)
-            {
-                //MessageBox.Show(ex.ToString());
-                //return ex.ToString();
+            { 
+                MyEvent(ex.ToString());
             }
         }
-        public string Send(string textMessage)
+
+        public void Send(string message)
         {
             try
             {
-                if (textMessage != "")
-                {
                     // converts from string to byte[]
                     System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
                     byte[] msg = new byte[1500];
-                    msg = enc.GetBytes(textMessage);
+                    msg = enc.GetBytes(message);
                     // sending the message
                     sck.Send(msg);
                     // add to listbox
-                    //listMessage.Items.Add("You: " + textMessage);
-                    return "You: " + textMessage;
-                    // clear txtMessage
-                    //textMessage.Clear();
-                }
+                    //listMessage.Items.Add("You: " + textMessage.Text);
+                    MyEvent("You: " + message);
+                     // clear txtMessage
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.ToString());
-                return ex.ToString();
+                MyEvent(ex.ToString());
             }
-            return null;
         }
+
     }
 }
