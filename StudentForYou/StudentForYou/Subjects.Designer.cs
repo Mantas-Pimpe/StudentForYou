@@ -136,6 +136,7 @@
             this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "form1";
             this.Text = "Courses";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

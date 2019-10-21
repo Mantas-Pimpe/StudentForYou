@@ -145,7 +145,6 @@
             this.Name = "RecentQuestions";
             this.Text = "Recent questions";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RecentQuestions_FormClosed);
-            this.Load += new System.EventHandler(this.RecentPostsForm_Load);
             this.ResumeLayout(false);
 
         }

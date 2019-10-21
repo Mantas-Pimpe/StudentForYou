@@ -7,6 +7,7 @@ namespace StudentForYou
     public partial class vuLoginForm : Form
     {
         private string username = string.Empty;
+        private bool isOK = false;
         public vuLoginForm()
         {
             InitializeComponent();
@@ -17,12 +18,18 @@ namespace StudentForYou
             if (loginCheck(textBox1.Text, textBox2.Text) == true)
             {
                 username = textBox1.Text;
+                isOK = true;
                 this.Close();
             }
             else
             {
                 MessageBox.Show("User not found in database", "UserError", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        internal bool getLoginStatus()
+        {
+            return isOK;
         }
 
         public string getLoginUsername()
@@ -52,6 +59,5 @@ namespace StudentForYou
             file.Close();
             return false;
         }
-
     }
 }

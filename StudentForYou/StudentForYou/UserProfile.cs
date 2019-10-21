@@ -258,6 +258,12 @@ namespace StudentForYou
             UsernameChangeWindow UsernameChange = new UsernameChangeWindow(filePath, UserName.Text);
             UsernameChange.ShowDialog();
             newUsername = UsernameChange.getUsername();
+            if(newUsername!= UserName.Text)
+            {
+                MessageBox.Show("Relog is required", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Restart();
+            }
+                
         }
 
         private void LoggingOut_Click(object sender, EventArgs e)
@@ -273,8 +279,8 @@ namespace StudentForYou
         {
             
             var subjects = new form1(UserName.Text);
-            this.Close();
             subjects.Show();
+            this.Close();
         }
 
         private void RecentsPostsbtn_Click(object sender, EventArgs e)
