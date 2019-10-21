@@ -37,7 +37,7 @@ namespace StudentForYouChatServer
                 broadcast(dataFromClient + " Joined ", dataFromClient, false);
 
                 Console.WriteLine(dataFromClient + " Joined chat room ");
-                var client = new handleClinet();
+                var client = new handleClient();
                 client.startClient(clientSocket, dataFromClient, clientsList);
             }
 
@@ -71,7 +71,7 @@ namespace StudentForYouChatServer
     }//end Main class
 
 
-    public class handleClinet
+    public class handleClient
     {
         TcpClient clientSocket;
         string clNo;
