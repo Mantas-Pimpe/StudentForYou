@@ -14,6 +14,8 @@ namespace StudentForYou
     public partial class AddSubjectForm : Form
     {
         AddSubjectInterface nottempinterface;
+
+       
         public AddSubjectForm(AddSubjectInterface adderinterface)
         {
             InitializeComponent();
@@ -40,6 +42,11 @@ namespace StudentForYou
             this.DialogResult = DialogResult.OK;
             nottempinterface.getinfo(CourseNameTextBox.Text, CourseDescriptionTextBox.Text, DifficultyTextBox.Text);
             nottempinterface.writetofile();
+        }
+
+        private void CourseDescriptionTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

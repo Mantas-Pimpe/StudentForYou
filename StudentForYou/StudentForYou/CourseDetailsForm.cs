@@ -14,15 +14,18 @@ namespace StudentForYou
     public partial class CourseDetailsForm : Form
     {
         DescriptionReader Reader;
-        string nameofcourse;
+       string nameofcourse;
+        string filepath;
+        FileUploader uploader;
         public CourseDetailsForm(string coursename)
         {
             InitializeComponent();
             nameofcourse = coursename;
             Reader = new DescriptionReader(coursename);
             CourseDetailsNameBox.Text = coursename;
-          
             CourseDetailsTextBox.Text = Reader.readdescription();
+            uploader = new FileUploader(coursename);
+            DownloadsListView.Items.AddRange(uploader.UploadFiles());
 
 
         }
@@ -39,7 +42,7 @@ namespace StudentForYou
 
         private void CourseDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            Reader.uploadtofile(Reader.readdescription());
+            Reader.uploadtofile(CourseDetailsTextBox.Text);
             this.DialogResult = DialogResult.OK;
         }
 
@@ -59,6 +62,30 @@ namespace StudentForYou
             CourseDownloads Downloadsform = new CourseDownloads(nameofcourse);
             Downloadsform.ShowDialog();
             this.Show();
+        }
+
+        private void CourseDownloadsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UploadClick(object sender, EventArgs e)
+        {
+            DownloadsListView.Items.Add(uploader.UploadSingleFile());
+        }
+
+        private void DownloadsListView_DoubleClick(object sender, EventArgs e)
+        { 
+
+              if (DownloadsListView.SelectedItems.Count > 0)
+            {
+
+                ListViewItem selected = DownloadsListView.SelectedItems[0];
+                string selectedFilePath = selected.Tag.ToString();
+                System.Diagnostics.Process.Start(selectedFilePath);
+
+            }
+            
         }
     }
 }

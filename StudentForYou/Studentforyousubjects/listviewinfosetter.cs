@@ -24,7 +24,6 @@ namespace StudentForYou
                 tempcourse.Name = allcourseinfo[0];
                 tempcourse.Description = allcourseinfo[1];
                 tempcourse.Difficulty = allcourseinfo[2];
-
                 items.Add(tempcourse);
             }
             
@@ -33,5 +32,6 @@ namespace StudentForYou
     
 
         }
+       
     }
 }

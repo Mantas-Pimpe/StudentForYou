@@ -12,6 +12,9 @@ namespace Studentforyousubjects
         string coursedescription;
         string difficulty;
 
+       
+
+
         public void getinfo(string nameinfo,string courseinfo,string difficultyinfo)
         {
             

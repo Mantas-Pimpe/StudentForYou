@@ -142,5 +142,10 @@ namespace StudentForYou
             if (Application.OpenForms.OfType<Form>().Count() == 1)
                 Application.Exit();
         }
+
+        private void Recentquestionsbtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
