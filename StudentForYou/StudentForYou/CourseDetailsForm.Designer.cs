@@ -32,7 +32,7 @@
             this.CourseDetailsSaveButton = new System.Windows.Forms.Button();
             this.CourseDetailsTextBox = new System.Windows.Forms.TextBox();
             this.CourseDetailsNameBox = new System.Windows.Forms.TextBox();
-            this.DownloadsListView = new System.Windows.Forms.ListView();
+            this.downloadsListView = new System.Windows.Forms.ListView();
             this.UploadFileButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -78,14 +78,14 @@
             // 
             // DownloadsListView
             // 
-            this.DownloadsListView.HideSelection = false;
-            this.DownloadsListView.Location = new System.Drawing.Point(50, 282);
-            this.DownloadsListView.Name = "DownloadsListView";
-            this.DownloadsListView.Size = new System.Drawing.Size(1116, 337);
-            this.DownloadsListView.TabIndex = 6;
-            this.DownloadsListView.UseCompatibleStateImageBehavior = false;
-            this.DownloadsListView.SelectedIndexChanged += new System.EventHandler(this.CourseDownloadsListView_SelectedIndexChanged);
-            this.DownloadsListView.DoubleClick += new System.EventHandler(this.DownloadsListView_DoubleClick);
+            this.downloadsListView.HideSelection = false;
+            this.downloadsListView.Location = new System.Drawing.Point(50, 282);
+            this.downloadsListView.Name = "DownloadsListView";
+            this.downloadsListView.Size = new System.Drawing.Size(1116, 337);
+            this.downloadsListView.TabIndex = 6;
+            this.downloadsListView.UseCompatibleStateImageBehavior = false;
+            this.downloadsListView.SelectedIndexChanged += new System.EventHandler(this.CourseDownloadsListView_SelectedIndexChanged);
+            this.downloadsListView.DoubleClick += new System.EventHandler(this.DownloadsListView_DoubleClick);
             // 
             // UploadFileButton
             // 
@@ -103,7 +103,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 712);
             this.Controls.Add(this.UploadFileButton);
-            this.Controls.Add(this.DownloadsListView);
+            this.Controls.Add(this.downloadsListView);
             this.Controls.Add(this.CourseDetailsNameBox);
             this.Controls.Add(this.CourseDetailsTextBox);
             this.Controls.Add(this.CourseDetailsSaveButton);
@@ -123,6 +123,6 @@
         private System.Windows.Forms.TextBox CourseDetailsTextBox;
         private System.Windows.Forms.TextBox CourseDetailsNameBox;
         private System.Windows.Forms.Button UploadFileButton;
-        public System.Windows.Forms.ListView DownloadsListView;
+        public System.Windows.Forms.ListView downloadsListView;
     }
 }

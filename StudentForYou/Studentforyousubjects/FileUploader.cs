@@ -10,12 +10,12 @@ namespace Studentforyousubjects
 {
     public class FileUploader
     {
-        string filepath;
+        string filePath;
         public FileUploader(string nameofcourse)
         {
-            filepath = "Resources\\";
-            filepath = filepath + nameofcourse + " " + "downloads";
-            Directory.CreateDirectory(filepath);
+            filePath = "Resources\\";
+            filePath = filePath + nameofcourse + " " + "downloads";
+            Directory.CreateDirectory(filePath);
             //filepath = filepath + ".txt";
 
 
@@ -25,13 +25,13 @@ namespace Studentforyousubjects
         }
         public ListViewItem[] UploadFiles()
         {
-            List<ListViewItem> tempitemlist = new List<ListViewItem>();
-            string[] files = Directory.GetFiles(filepath);
+            var tempitemlist = new List<ListViewItem>();
+            string[] files = Directory.GetFiles(filePath);
             foreach (string file in files)
             {
 
-                string fileName = Path.GetFileNameWithoutExtension(file);
-                ListViewItem item = new ListViewItem(fileName);
+                var fileName = Path.GetFileNameWithoutExtension(file);
+                var item = new ListViewItem(fileName);
                 item.Tag = file;
 
                 tempitemlist.Add(item);
@@ -43,20 +43,20 @@ namespace Studentforyousubjects
 
         public ListViewItem UploadSingleFile()
         {
-            string uploadfilepath;
+          
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 //Get the path of specified file
               
-                uploadfilepath = fileDialog.FileName;
-                string nameoffile = Path.GetFileName(uploadfilepath);
-                string uploadedfilepath = filepath + "\\" + nameoffile;
-                File.Copy(uploadfilepath,uploadedfilepath);
+                var uploadFilePath = fileDialog.FileName;
+                var nameOfFile = Path.GetFileName(uploadFilePath);
+                var uploadedFilePath = filePath + "\\" + nameOfFile;
+                File.Copy(uploadFilePath,uploadedFilePath);
                 
-                ListViewItem item = new ListViewItem(nameoffile);
-                item.Tag = uploadedfilepath;
+                ListViewItem item = new ListViewItem(nameOfFile);
+                item.Tag = uploadedFilePath;
                 return item;
             }
             return null;

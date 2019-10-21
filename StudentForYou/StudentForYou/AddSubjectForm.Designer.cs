@@ -46,6 +46,7 @@
             this.CourseNameTextBox.Name = "CourseNameTextBox";
             this.CourseNameTextBox.Size = new System.Drawing.Size(989, 20);
             this.CourseNameTextBox.TabIndex = 0;
+            this.CourseNameTextBox.TextChanged += new System.EventHandler(this.CourseNameTextBox_TextChanged);
             // 
             // roundPicturebox1
             // 

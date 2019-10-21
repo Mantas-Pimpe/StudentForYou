@@ -14,7 +14,7 @@ namespace StudentForYou
 {
     public partial class form1 : Form
     {
-        listviewinfosetter setter;
+        ListViewInfosetter setter;
         ButtonAdder adder;
         private string username = string.Empty;
         int amountofbuttons = 0;
@@ -22,14 +22,14 @@ namespace StudentForYou
         {
             InitializeComponent();
             this.username = username;
-            setter = new listviewinfosetter();
+            setter = new ListViewInfosetter();
             adder = new ButtonAdder();
 
-            List<Course> templist = setter.Readfileinfo();
+            List<Course> templist = setter.ReadFileInfo();
             foreach (Course item in templist)
             {
                 SubjectsLayoutPanel.Controls.Add(AddButton(item, amountofbuttons));
-                SubjectsLayoutPanel.Controls.Add(adder.addiconbutton(amountofbuttons));
+                SubjectsLayoutPanel.Controls.Add(adder.AddIconButton(amountofbuttons));
    
                 amountofbuttons = amountofbuttons + 1;
 
@@ -69,7 +69,7 @@ namespace StudentForYou
 
                 }
                 SubjectsLayoutPanel.Controls.Add(AddButton(Tempcourse, amountofbuttons));
-            SubjectsLayoutPanel.Controls.Add(adder.addiconbutton(amountofbuttons));
+            SubjectsLayoutPanel.Controls.Add(adder.AddIconButton(amountofbuttons));
             amountofbuttons = amountofbuttons + 1;
                 this.Show();
 
@@ -135,18 +135,18 @@ namespace StudentForYou
             }
         public Button AddButton(Course d, int refbuttonumber)
         {
-            var buttonnumber = refbuttonumber;
-            var coursename = d.Name;
-            var coursedescription = d.Description;
+            var buttonNumber = refbuttonumber;
+            var courseName = d.Name;
+            var courseDescription = d.Description;
             var difficulty = d.Difficulty;
 
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
-            btn.Top = buttonnumber * 40;
-            btn.Width = 1120;
+            btn.Top = buttonNumber * 40;
+            btn.Width = 800;
             btn.Height = 40;
             btn.Left = 15;
-            btn.Text = coursename + "Description :" + coursedescription + "Difficulty" + difficulty;
-            btn.Name = coursename;
+            btn.Text = courseName + "Description :" + courseDescription + "Difficulty" + difficulty;
+            btn.Name = courseName;
             btn.Click += new EventHandler(Button_Click);
             return btn;
         }

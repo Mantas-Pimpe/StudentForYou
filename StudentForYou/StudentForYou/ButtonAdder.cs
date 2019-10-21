@@ -18,14 +18,14 @@ namespace Studentforyousubjects
         {
         }
 
-           public Button addiconbutton(int numberofbuttons)
+           public Button AddIconButton(int numberofbuttons)
             {
                 System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
                 btn.Top = numberofbuttons * 40;
-                btn.Width = 32;
-            btn.BackgroundImage = Image.FromFile(@"C:\Users\Burts\Source\Repos\StudentForYou2\StudentForYou\StudentForYou\chaticon.png");
-                btn.Height = 32;
-                btn.Left = 1360;
+                btn.Width = 40;
+            btn.BackgroundImage = Image.FromFile(@"Resources\chaticon.png");
+                btn.Height = 40;
+                btn.Left = 950;
                 return btn;
             }
 

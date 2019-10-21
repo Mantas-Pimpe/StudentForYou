@@ -13,19 +13,19 @@ namespace StudentForYou
 {
     public partial class CourseDetailsForm : Form
     {
-        DescriptionReader Reader;
-       string nameofcourse;
-        string filepath;
+        DescriptionReader reader;
+       string nameOfCourse;
+        string filePath;
         FileUploader uploader;
-        public CourseDetailsForm(string coursename)
+        public CourseDetailsForm(string courseName)
         {
             InitializeComponent();
-            nameofcourse = coursename;
-            Reader = new DescriptionReader(coursename);
-            CourseDetailsNameBox.Text = coursename;
-            CourseDetailsTextBox.Text = Reader.readdescription();
-            uploader = new FileUploader(coursename);
-            DownloadsListView.Items.AddRange(uploader.UploadFiles());
+            nameOfCourse = courseName;
+            reader = new DescriptionReader(courseName);
+            CourseDetailsNameBox.Text = courseName;
+            CourseDetailsTextBox.Text = reader.ReadDescription();
+            uploader = new FileUploader(courseName);
+            downloadsListView.Items.AddRange(uploader.UploadFiles());
 
 
         }
@@ -42,7 +42,7 @@ namespace StudentForYou
 
         private void CourseDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            Reader.uploadtofile(CourseDetailsTextBox.Text);
+            reader.UploadToFile(CourseDetailsTextBox.Text);
             this.DialogResult = DialogResult.OK;
         }
 
@@ -59,8 +59,8 @@ namespace StudentForYou
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            CourseDownloads Downloadsform = new CourseDownloads(nameofcourse);
-            Downloadsform.ShowDialog();
+            CourseDownloads downloadsForm = new CourseDownloads(nameOfCourse);
+            downloadsForm.ShowDialog();
             this.Show();
         }
 
@@ -71,17 +71,17 @@ namespace StudentForYou
 
         private void UploadClick(object sender, EventArgs e)
         {
-            DownloadsListView.Items.Add(uploader.UploadSingleFile());
+            downloadsListView.Items.Add(uploader.UploadSingleFile());
         }
 
         private void DownloadsListView_DoubleClick(object sender, EventArgs e)
         { 
 
-              if (DownloadsListView.SelectedItems.Count > 0)
+              if (downloadsListView.SelectedItems.Count > 0)
             {
 
-                ListViewItem selected = DownloadsListView.SelectedItems[0];
-                string selectedFilePath = selected.Tag.ToString();
+                var selected = downloadsListView.SelectedItems[0];
+                var selectedFilePath = selected.Tag.ToString();
                 System.Diagnostics.Process.Start(selectedFilePath);
 
             }
