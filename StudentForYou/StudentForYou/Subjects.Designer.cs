@@ -39,9 +39,9 @@
             // 
             // SubjectsLayoutPanel
             // 
-            this.SubjectsLayoutPanel.Location = new System.Drawing.Point(12, 12);
+            this.SubjectsLayoutPanel.Location = new System.Drawing.Point(11, 12);
             this.SubjectsLayoutPanel.Name = "SubjectsLayoutPanel";
-            this.SubjectsLayoutPanel.Size = new System.Drawing.Size(1190, 532);
+            this.SubjectsLayoutPanel.Size = new System.Drawing.Size(1218, 532);
             this.SubjectsLayoutPanel.TabIndex = 8;
             this.SubjectsLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SubjectsLayoutPanel_Paint);
             // 
