@@ -9,11 +9,11 @@ namespace StudentForYou
     {
         GroupChat gchat;
         string username;
-        //private Form prevform;
-        public GroupChatForm(/*Form prevForm, */string username)
+        private Form prevform;
+        public GroupChatForm(Form prevForm, string username)
         {
             InitializeComponent();
-            //this.prevform = prevForm;
+            this.prevform = prevForm;
             this.username = username;
             gchat = new GroupChat(this.username);
             gchat.MyEvent += new GroupChat.MyDel(PostMessage);
@@ -45,9 +45,7 @@ namespace StudentForYou
 
         private void Back_Click(object sender, EventArgs e)
         {
-            var rpf = new RecentQuestions(username);
-            rpf.Show();
-            //prevform.Show();
+            prevform.Show();
             this.Close();
         }
 

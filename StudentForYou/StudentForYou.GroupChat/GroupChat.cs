@@ -23,7 +23,7 @@ namespace StudentForYouGroupChat
         {
             readData = "Conected to Chat Server ...";
             MyEvent(readData);
-            clientSocket.Connect("127.0.0.1", 8888);
+            clientSocket.Connect("127.0.0.1", 1);
             serverStream = clientSocket.GetStream();
 
             byte[] outStream = System.Text.Encoding.ASCII.GetBytes(username + "$");

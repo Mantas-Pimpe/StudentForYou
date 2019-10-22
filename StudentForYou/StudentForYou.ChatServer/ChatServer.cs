@@ -14,7 +14,7 @@ namespace StudentForYouChatServer
         public static void Main(string[] args)
         {
             var localAddr = IPAddress.Parse("127.0.0.1");
-            var serverSocket = new TcpListener(localAddr, 8888);
+            var serverSocket = new TcpListener(localAddr, 1);
             var clientSocket = default(TcpClient);
             var counter = 0;
 

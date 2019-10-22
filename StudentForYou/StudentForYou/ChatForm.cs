@@ -9,11 +9,12 @@ namespace StudentForYou
     public partial class ChatForm : Form
     {
         Chat talk;
-
-        public ChatForm()
+        private Form prevform;
+        public ChatForm(Form prevForm)
         {
             InitializeComponent();
             talk = new Chat();
+            this.prevform = prevForm;
             textLocalIp.Text = talk.GetLocalIP();
             textFriendsIp.Text = talk.GetLocalIP();
             talk.MyEvent += new Chat.MyDel(PostMessage);
@@ -61,9 +62,8 @@ namespace StudentForYou
 
         private void Back_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            //RecentPostsForm rpf = new RecentPostsForm();
-            //rpf.Show();
+            prevform.Show();
+            this.Close();
         }
 
         private void TextFriendsIp_TextChanged(object sender, EventArgs e)
