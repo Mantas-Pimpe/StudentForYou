@@ -27,6 +27,7 @@ namespace StudentForYou
                 flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question, i));
 
             }
+            recentquestionsbtn.Enabled = false;
         }
 
 
@@ -140,6 +141,16 @@ namespace StudentForYou
         {
             if (Application.OpenForms.OfType<Form>().Count() == 1)
                 Application.Exit();
+        }
+
+        private void Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void RecentQuestions_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
