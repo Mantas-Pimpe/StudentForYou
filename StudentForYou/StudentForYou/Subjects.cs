@@ -17,21 +17,21 @@ namespace StudentForYou
         ListViewInfosetter setter;
         ButtonAdder adder;
         private string username = string.Empty;
-        int amountofbuttons = 0;
+        int amountOfButtons = 0;
         public form1(string username)
         {
             InitializeComponent();
             this.username = username;
             setter = new ListViewInfosetter();
             adder = new ButtonAdder();
-            coursebtn.Enabled = false;
+            //coursebtn.Enabled = false;
             List<Course> templist = setter.ReadFileInfo();
             foreach (Course item in templist)
             {
-                SubjectsLayoutPanel.Controls.Add(AddButton(item, amountofbuttons));
-                SubjectsLayoutPanel.Controls.Add(adder.AddIconButton(amountofbuttons));
+                SubjectsLayoutPanel.Controls.Add(AddButton(item, amountOfButtons));
+                SubjectsLayoutPanel.Controls.Add(adder.AddIconButton(amountOfButtons));
    
-                amountofbuttons = amountofbuttons + 1;
+                amountOfButtons = amountOfButtons + 1;
 
 
 
@@ -68,9 +68,9 @@ namespace StudentForYou
                 Tempcourse.Name = SubjectForm.CourseNameTextBox.Text;
 
                 }
-                SubjectsLayoutPanel.Controls.Add(AddButton(Tempcourse, amountofbuttons));
-            SubjectsLayoutPanel.Controls.Add(adder.AddIconButton(amountofbuttons));
-            amountofbuttons = amountofbuttons + 1;
+                SubjectsLayoutPanel.Controls.Add(AddButton(Tempcourse, amountOfButtons));
+            SubjectsLayoutPanel.Controls.Add(adder.AddIconButton(amountOfButtons));
+            amountOfButtons = amountOfButtons + 1;
                 this.Show();
 
 
@@ -133,12 +133,14 @@ namespace StudentForYou
             var courseDescription = d.Description;
             var difficulty = d.Difficulty;
 
+
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             btn.Top = buttonNumber * 40;
-            btn.Width = 800;
+            btn.Width = 1120;
             btn.Height = 40;
             btn.Left = 15;
-            btn.Text = courseName + "Description :" + courseDescription + "Difficulty" + difficulty;
+            btn.TextAlign = ContentAlignment.MiddleCenter;
+            btn.Text = courseName;
             btn.Name = courseName;
             btn.Click += new EventHandler(Button_Click);
             return btn;
@@ -173,6 +175,27 @@ namespace StudentForYou
             var Profile = new UserProfile(username);
             Profile.Show();
             this.Close();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            var subjectAdder = new SubjectAdder();
+            var addSubjectForm = new AddSubjectForm(subjectAdder);
+            if(addSubjectForm.ShowDialog() ==DialogResult.OK)
+            {
+                var courseToBeAdded = new Course();
+                courseToBeAdded.Name = addSubjectForm.CourseNameTextBox.Text;
+                courseToBeAdded.Description = addSubjectForm.CourseDescriptionTextBox.Text;
+                courseToBeAdded.Difficulty = addSubjectForm.DifficultyTextBox.Text;
+                amountOfButtons = amountOfButtons + 1;
+                var tempIconButton =adder.AddIconButton(amountOfButtons);
+                var tempCourseButton =AddButton(courseToBeAdded,amountOfButtons);
+                tempIconButton.Top = tempCourseButton.Top;
+                SubjectsLayoutPanel.Controls.Add(tempCourseButton);
+                SubjectsLayoutPanel.Controls.Add(tempIconButton);
+            }
+            this.Show();
         }
     }
 

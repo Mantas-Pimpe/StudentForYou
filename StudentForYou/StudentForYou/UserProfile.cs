@@ -27,7 +27,7 @@ namespace StudentForYou
         public UserProfile(String username)
         {
             InitializeComponent();
-            getUserData(username);
+            GetUserData(username);
             profilebtn.Enabled = false;
         }
         private void InitializeComponent()
@@ -199,7 +199,7 @@ namespace StudentForYou
             this.PerformLayout();
 
         }
-        private void getUserData(String username)
+        private void GetUserData(String username)
         {
             bool isNameFound = false;
             string line;
@@ -243,7 +243,7 @@ namespace StudentForYou
             UserInfo.Text = bio;
             roundPicturebox1.ImageLocation = pictureFilePath;
         }
-        private void saveUserData(string currentUsername, string newUsername)
+        private void SaveUserData(string currentUsername, string newUsername)
         {
             string lineToWrite = null;
             using (StreamReader reader = new StreamReader(filePath))
@@ -300,7 +300,7 @@ namespace StudentForYou
             //
             // Log out and promt to the login screen again, or just reopen the app
             // 
-            saveUserData(UserName.Text, newUsername);
+            SaveUserData(UserName.Text, newUsername);
             Application.Restart();
         }
 
@@ -314,7 +314,7 @@ namespace StudentForYou
         }
         private void UserProfile_FormClosed(object sender, FormClosedEventArgs e)
         {
-            saveUserData(UserName.Text, newUsername);
+            SaveUserData(UserName.Text, newUsername);
             if (Application.OpenForms.OfType<Form>().Count() == 1)
                 Application.Exit();
         }
