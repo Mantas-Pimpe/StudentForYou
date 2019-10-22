@@ -73,7 +73,7 @@
             this.recentquestionsbtn.TabIndex = 2;
             this.recentquestionsbtn.Text = "Recent questions";
             this.recentquestionsbtn.UseVisualStyleBackColor = true;
-            this.recentquestionsbtn.Click += new System.EventHandler(this.Recentquestionsbtn_Click);
+            //this.recentquestionsbtn.Click += new System.EventHandler(this.Recentquestionsbtn_Click);
             // 
             // profilebtn
             // 
