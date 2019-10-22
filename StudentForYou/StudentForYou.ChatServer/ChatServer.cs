@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Net.Sockets;
 using System.Text;
@@ -13,10 +13,10 @@ namespace StudentForYouChatServer
 
         public static void Main(string[] args)
         {
-            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
-            TcpListener serverSocket = new TcpListener(localAddr, 8888);
-            TcpClient clientSocket = default(TcpClient);
-            int counter = 0;
+            var localAddr = IPAddress.Parse("127.0.0.1");
+            var serverSocket = new TcpListener(localAddr, 1);
+            var clientSocket = default(TcpClient);
+            var counter = 0;
 
             serverSocket.Start();
             Console.WriteLine("Chat Server Started");
@@ -26,11 +26,10 @@ namespace StudentForYouChatServer
                 counter += 1;
                 clientSocket = serverSocket.AcceptTcpClient();
                 byte[] bytesFrom = new byte[clientSocket.ReceiveBufferSize];
-                string dataFromClient = null;
 
-                NetworkStream networkStream = clientSocket.GetStream();
+                var networkStream = clientSocket.GetStream();
                 networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                var dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
                 dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
 
                 clientsList.Add(dataFromClient, clientSocket);
@@ -38,7 +37,7 @@ namespace StudentForYouChatServer
                 broadcast(dataFromClient + " Joined ", dataFromClient, false);
 
                 Console.WriteLine(dataFromClient + " Joined chat room ");
-                handleClinet client = new handleClinet();
+                var client = new handleClient();
                 client.startClient(clientSocket, dataFromClient, clientsList);
             }
 
@@ -52,9 +51,8 @@ namespace StudentForYouChatServer
         {
             foreach (DictionaryEntry Item in clientsList)
             {
-                TcpClient broadcastSocket;
-                broadcastSocket = (TcpClient)Item.Value;
-                NetworkStream broadcastStream = broadcastSocket.GetStream();
+                var broadcastSocket = (TcpClient)Item.Value;
+                var broadcastStream = broadcastSocket.GetStream();
                 Byte[] broadcastBytes = null;
 
                 if (flag == true)
@@ -73,7 +71,7 @@ namespace StudentForYouChatServer
     }//end Main class
 
 
-    public class handleClinet
+    public class handleClient
     {
         TcpClient clientSocket;
         string clNo;
@@ -84,31 +82,27 @@ namespace StudentForYouChatServer
             this.clientSocket = inClientSocket;
             this.clNo = clineNo;
             this.clientsList = cList;
-            Thread ctThread = new Thread(doChat);
+            var ctThread = new Thread(doChat);
             ctThread.Start();
         }
 
         private void doChat()
         {
-            int requestCount = 0;
+            var requestCount = 0;
             byte[] bytesFrom = new byte[clientSocket.ReceiveBufferSize];
-            string dataFromClient = null;
             Byte[] sendBytes = null;
-            string serverResponse = null;
-            string rCount = null;
-            requestCount = 0;
 
             while ((true))
             {
                 try
                 {
                     requestCount = requestCount + 1;
-                    NetworkStream networkStream = clientSocket.GetStream();
+                    var networkStream = clientSocket.GetStream();
                     networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                    dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                    var dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     Console.WriteLine("From client - " + clNo + " : " + dataFromClient);
-                    rCount = Convert.ToString(requestCount);
+                    var rCount = Convert.ToString(requestCount);
 
                     ChatServer.broadcast(dataFromClient, clNo, true);
                 }

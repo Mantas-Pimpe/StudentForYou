@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 using System.IO;
 
 namespace StudentForYou
@@ -126,27 +120,27 @@ namespace StudentForYou
 
         private void Chat_Click(object sender, EventArgs e)
         {
-            var chat = new Chat(this);
+            var chat = new ChatForm(this);
             this.Hide();
             chat.Show();
         }
 
         private void GroupChat_Click(object sender, EventArgs e)
         {
-            var gchat = new GroupChat(this,username);
+            var gchat = new GroupChatForm(this, username);
             this.Hide();
             gchat.Show();
+        }
+
+        private void RecentPostsForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void RecentQuestions_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (Application.OpenForms.OfType<Form>().Count() == 1)
                 Application.Exit();
-        }
-
-        private void Recentquestionsbtn_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Panel2_Paint(object sender, PaintEventArgs e)

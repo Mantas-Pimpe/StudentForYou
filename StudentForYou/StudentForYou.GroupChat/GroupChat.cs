@@ -1,31 +1,36 @@
-﻿using System;
+using System;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace StudentForYouGroupChat
 {
+    
     public class GroupChat
     {
-        System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
+        TcpClient clientSocket = new TcpClient();
         NetworkStream serverStream = default(NetworkStream);
         string readData = null;
-        private string username = string.Empty;
+        string message;
+        string username;
+        public delegate void MyDel(string message);
+        public event MyDel MyEvent;
         public GroupChat(string username)
         {
             this.username = username;
         }
+
         public void Start()
         {
             readData = "Conected to Chat Server ...";
-            msg();
-            clientSocket.Connect("127.0.0.1", 8888);
+            MyEvent(readData);
+            clientSocket.Connect("127.0.0.1", 1);
             serverStream = clientSocket.GetStream();
 
             byte[] outStream = System.Text.Encoding.ASCII.GetBytes(username + "$");
             serverStream.Write(outStream, 0, outStream.Length);
             serverStream.Flush();
-
-            /*Thread ctThread = new Thread(getMessage);
-            ctThread.Start();*/
+            var ctThread = new Thread(getMessage);
+            ctThread.Start();
         }
         public void Send(string msg)
         {
@@ -33,24 +38,19 @@ namespace StudentForYouGroupChat
             serverStream.Write(outStream, 0, outStream.Length);
             serverStream.Flush();
         }
-        public string getMessage()
+        public void getMessage()
         {
+            while (true)
+            {
                 serverStream = clientSocket.GetStream();
-                int buffSize = 0;
+                var buffSize = 0;
                 byte[] inStream = new byte[clientSocket.ReceiveBufferSize];
                 buffSize = clientSocket.ReceiveBufferSize;
                 serverStream.Read(inStream, 0, buffSize);
-                string returndata = System.Text.Encoding.ASCII.GetString(inStream);
-                readData = "" + returndata;
-                return msg();
-        }
-        public string msg()
-        {
-            /*if (this.InvokeRequired)
-                this.Invoke(new MethodInvoker(msg));
-            return "error";
-            else*/
-                return Environment.NewLine + " >> " + readData;
+                var returnData = System.Text.Encoding.ASCII.GetString(inStream);
+                readData = "" + returnData;
+                MyEvent(Environment.NewLine + " >> " + readData);
+            }
         }
     }
 }

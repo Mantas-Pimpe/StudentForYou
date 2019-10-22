@@ -1,4 +1,4 @@
-﻿namespace StudentForYou
+namespace StudentForYou
 {
     partial class GroupChatForm
     {
@@ -64,10 +64,10 @@
             // 
             // listMessage
             // 
-            this.listMessage.Location = new System.Drawing.Point(123, 46);
+            this.listMessage.Location = new System.Drawing.Point(123, 70);
             this.listMessage.Multiline = true;
             this.listMessage.Name = "listMessage";
-            this.listMessage.Size = new System.Drawing.Size(1000, 535);
+            this.listMessage.Size = new System.Drawing.Size(1000, 511);
             this.listMessage.TabIndex = 15;
             this.listMessage.TextChanged += new System.EventHandler(this.ListMessage_TextChanged);
             // 
