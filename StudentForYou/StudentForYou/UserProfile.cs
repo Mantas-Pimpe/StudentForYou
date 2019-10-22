@@ -20,7 +20,7 @@ namespace StudentForYou
         private string[] bioArray = new string[100];
         private string filePath = @"Resources\TempDatabase.txt";
         private RoundedButton PictureChangeButton;
-        private string pictureFilePath = @"Resources\TempDatabase.txt\StockImage.png";
+        private string pictureFilePath = @"Resources\StockImage.png";
 
         public UserProfile(String username)
         {
@@ -52,6 +52,7 @@ namespace StudentForYou
             this.UserInfo.Name = "UserInfo";
             this.UserInfo.Size = new System.Drawing.Size(316, 144);
             this.UserInfo.TabIndex = 1;
+            this.UserInfo.TextChanged += new System.EventHandler(this.UserInfo_TextChanged);
             this.UserInfo.Leave += new System.EventHandler(this.UserInfo_Leave);
             // 
             // UserName
@@ -72,7 +73,7 @@ namespace StudentForYou
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(364, 327);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 29);
+            this.label1.Size = new System.Drawing.Size(65, 24);
             this.label1.TabIndex = 5;
             this.label1.Text = "About ";
             // 
@@ -184,7 +185,8 @@ namespace StudentForYou
                     words = line.Split(' ');
                     if (username == words[0])
                     {
-                        pictureFilePath = words[2];
+                        if(words[2] !="noPicture")
+                            pictureFilePath = words[2];
                         for (int i = 3; i < words.Length; i++)
                         {
                             bioArray[i - 3] = words[i];
@@ -312,6 +314,11 @@ namespace StudentForYou
                     pictureFilePath = openFileDialog.FileName;
                 }
             }
+        }
+
+        private void UserInfo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
