@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.IO;
+using StudentForYou.RecentPosts;
+using System.Collections.Generic;
 
 namespace StudentForYou
 {
@@ -10,29 +12,27 @@ namespace StudentForYou
     {
         int A = 1;
         private string username = string.Empty;
+        QuestionDetails details = new QuestionDetails();
         public RecentQuestions(string username)
         {
             InitializeComponent();
             this.username = username;
-            string likes, views, answers, question;
-            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
-            //Console.WriteLine(lines.Length);
-            for (int i = 0; i < lines.Length; i++)
+            List<QuestionDetails> questionList = details.getQuestionDetails();
+            for (int i = 0; i < questionList.Count; i++)
             {
-                string[] line = lines[i].Split(',');
-                likes = line[0];
-                views = line[1];
-                answers = line[2];
-                question = line[3];
-                flowLayoutPanel1.Controls.Add(AddNewButton(likes, views, answers, question, i));
-
+                flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details));
             }
+
+            newpostbtn.Click += delegate (object sender, EventArgs e)
+            {
+                newpostbtn_Click(sender, e, questionList);
+            };
             recentquestionsbtn.Enabled = false;
         }
 
 
 
-        public System.Windows.Forms.Button AddNewButton(string likes, string views, string answers, string question, int placeToReplace)
+        public System.Windows.Forms.Button AddNewButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
         {
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             this.Controls.Add(btn);
@@ -41,43 +41,21 @@ namespace StudentForYou
             btn.Height = 40;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Left = 15;
-            btn.Text = "Like: " + likes + " Views: " + views + " Answers: " + answers + " ' " + question + " ' ";
+            btn.Text = "''" + question + "''";
             A += 1;
             btn.Click += delegate (object sender, EventArgs e)
             {
-                button_click(sender, e, question);
-                int count = Int32.Parse(views);
-                count++;
-                views = count.ToString();
-                string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
-                string[] line = lines[placeToReplace].Split(',');
-                line[1] = views;
-                string newLine = line[0] + "," + line[1] + "," + line[2] + "," + line[3];
-                lines[placeToReplace] = newLine;
-                StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
-
-                for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
-                {
-                    if (currentLine == placeToReplace)
-                    {
-                        writeText.WriteLine(lines[placeToReplace]);
-                    }
-                    else
-                    {
-                        writeText.WriteLine(lines[currentLine]);
-                    }
-                }
-                writeText.Close();
-                this.Close();
+                button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details);
+                details.AddViews(questionList, placeToReplace);
+                //this.Close();
             };
             return btn;
         }
 
 
-        private void newpostbtn_Click(object sender, EventArgs e)
+        private void newpostbtn_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
         {
-            
-            var newForm = new NewPostForm(username);
+            NewPostForm newForm = new NewPostForm(questionList, username);
             newForm.Show();
             this.Close();
         }
@@ -110,12 +88,12 @@ namespace StudentForYou
             flowLayoutPanel1.WrapContents = false;
         }
 
-        void button_click (object sender, EventArgs e, string question)
+        void button_click (object sender, EventArgs e, string question, string likes, string views, string answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
         {
             var btn = sender as Button;
-            var QuestionForm = new SelectedQuestionForm(question,username);
-            this.Close();
+            var QuestionForm = new SelectedQuestionForm(question, likes, views, answers, placeToReplace, questionList, details, username);
             QuestionForm.Show();
+            this.Hide();
         }
 
         private void Chat_Click(object sender, EventArgs e)
