@@ -28,7 +28,7 @@ namespace StudentForYou
 
         private void GroupChat_Load(object sender, EventArgs e)
         {
-
+            textBox1.Text = username;
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
