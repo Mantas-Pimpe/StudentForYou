@@ -31,7 +31,7 @@
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.SubjectsLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.coursebtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.recentquestionsbtn = new System.Windows.Forms.Button();
             this.profilebtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -43,13 +43,14 @@
             this.SubjectsLayoutPanel.Name = "SubjectsLayoutPanel";
             this.SubjectsLayoutPanel.Size = new System.Drawing.Size(1218, 532);
             this.SubjectsLayoutPanel.TabIndex = 8;
+            this.SubjectsLayoutPanel.WrapContents = false;
             this.SubjectsLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SubjectsLayoutPanel_Paint);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.coursebtn);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.recentquestionsbtn);
             this.panel1.Controls.Add(this.profilebtn);
             this.panel1.Location = new System.Drawing.Point(-6, 593);
@@ -57,17 +58,17 @@
             this.panel1.Size = new System.Drawing.Size(1262, 122);
             this.panel1.TabIndex = 13;
             // 
-            // coursebtn
+            // button1
             // 
-            this.coursebtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.coursebtn.Location = new System.Drawing.Point(16, 27);
-            this.coursebtn.Margin = new System.Windows.Forms.Padding(6);
-            this.coursebtn.Name = "coursebtn";
-            this.coursebtn.Size = new System.Drawing.Size(270, 51);
-            this.coursebtn.TabIndex = 4;
-            this.coursebtn.Text = "Courses";
-            this.coursebtn.UseVisualStyleBackColor = true;
-            this.coursebtn.Click += new System.EventHandler(this.Coursebtn_Click);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(89, 26);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(250, 55);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Add subject";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // recentquestionsbtn
             // 
@@ -113,8 +114,8 @@
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.FlowLayoutPanel SubjectsLayoutPanel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button coursebtn;
         private System.Windows.Forms.Button recentquestionsbtn;
         private System.Windows.Forms.Button profilebtn;
+        private System.Windows.Forms.Button button1;
     }
 }

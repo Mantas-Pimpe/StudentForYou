@@ -50,7 +50,7 @@
             this.newpostbtn.TabIndex = 0;
             this.newpostbtn.Text = "Create new post";
             this.newpostbtn.UseVisualStyleBackColor = true;
-            this.newpostbtn.Click += new System.EventHandler(this.newpostbtn_Click);
+            //this.newpostbtn.Click += new System.EventHandler(this.newpostbtn_Click);
             // 
             // coursesbtn
             // 

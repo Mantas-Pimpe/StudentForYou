@@ -17,25 +17,21 @@ namespace StudentForYou
     {
         ListViewInfosetter setter;
         private string username = string.Empty;
-        int amountofbuttons = 0;
+        int amountOfButtons = 0;
         public form1(string username)
         {
             InitializeComponent();
             this.username = username;
             setter = new ListViewInfosetter();
+            
             coursebtn.Enabled = false;
             List<Course> templist = setter.ReadFileInfo();
             foreach (Course item in templist)
             {
                 SubjectsLayoutPanel.Controls.Add(AddButton(item, amountofbuttons));
                 SubjectsLayoutPanel.Controls.Add(AddIconButton(amountofbuttons));
-
                 amountofbuttons = amountofbuttons + 1;
-
-
-
             }
-
         }
 
 
@@ -71,8 +67,6 @@ namespace StudentForYou
             SubjectsLayoutPanel.Controls.Add(AddIconButton(amountofbuttons));
             amountofbuttons = amountofbuttons + 1;
             this.Show();
-
-
         }
 
         public Button AddIconButton(int numberofbuttons)
@@ -156,10 +150,11 @@ namespace StudentForYou
 
             Button btn = new Button();
             btn.Top = buttonNumber * 40;
-            btn.Width = 800;
+            btn.Width = 1120;
             btn.Height = 40;
             btn.Left = 15;
-            btn.Text = courseName + "Description :" + courseDescription + "Difficulty" + difficulty;
+            btn.TextAlign = ContentAlignment.MiddleCenter;
+            btn.Text = courseName;
             btn.Name = courseName;
             btn.Click += new EventHandler(Button_Click);
             return btn;
@@ -191,6 +186,27 @@ namespace StudentForYou
             var Profile = new UserProfile(username);
             Profile.Show();
             this.Close();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            var subjectAdder = new SubjectAdder();
+            var addSubjectForm = new AddSubjectForm(subjectAdder);
+            if(addSubjectForm.ShowDialog() ==DialogResult.OK)
+            {
+                var courseToBeAdded = new Course();
+                courseToBeAdded.Name = addSubjectForm.CourseNameTextBox.Text;
+                courseToBeAdded.Description = addSubjectForm.CourseDescriptionTextBox.Text;
+                courseToBeAdded.Difficulty = addSubjectForm.DifficultyTextBox.Text;
+                amountOfButtons = amountOfButtons + 1;
+                var tempIconButton =adder.AddIconButton(amountOfButtons);
+                var tempCourseButton =AddButton(courseToBeAdded,amountOfButtons);
+                tempIconButton.Top = tempCourseButton.Top;
+                SubjectsLayoutPanel.Controls.Add(tempCourseButton);
+                SubjectsLayoutPanel.Controls.Add(tempIconButton);
+            }
+            this.Show();
         }
     }
 
