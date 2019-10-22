@@ -67,6 +67,8 @@
     <Compile Include="AddSubjectForm.Designer.cs">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ButtonAdder.cs" />
+    <Compile Include="WhiteSpaceRemover.cs" />
     <Compile Include="RecentQuestions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +212,10 @@
     <ProjectReference Include="..\StudentForYou.GroupChat\StudentForYou.GroupChat.csproj">
       <Project>{f704878e-3cc0-495f-ae90-c315c2d78219}</Project>
       <Name>StudentForYou.GroupChat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentForYou.RecentPosts\StudentForYou.RecentPosts.csproj">
+      <Project>{d4193337-7dd7-4389-86c4-21be0f6b5360}</Project>
+      <Name>StudentForYou.RecentPosts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Studentforyousubjects\StudentForYou.Subjects.csproj">
       <Project>{d5ca3b2f-0ee4-400d-a3e7-4bfdbd9c4efb}</Project>
