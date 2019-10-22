@@ -154,11 +154,6 @@ namespace StudentForYou
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            //
-            // Check if the username is avaliable
-            // Change it with the old one
-            // close this from
-            //
             if (IsUsernameTaken(username) == 0)
             {
                 this.newUsername = textBox1.Text;
