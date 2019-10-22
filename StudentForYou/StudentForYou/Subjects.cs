@@ -24,7 +24,7 @@ namespace StudentForYou
             this.username = username;
             setter = new ListViewInfosetter();
             adder = new ButtonAdder();
-
+            coursebtn.Enabled = false;
             List<Course> templist = setter.ReadFileInfo();
             foreach (Course item in templist)
             {
@@ -94,17 +94,10 @@ namespace StudentForYou
 
             private void recentquestionsbtn_Click(object sender, EventArgs e)
             {
-
-                var rpF = new RecentQuestions(username);
-                rpF.Show();
-                this.Close();
             }
 
             private void profilebtn_Click(object sender, EventArgs e)
             {
-                var Profile = new UserProfile(username);
-                Profile.Show();
-                this.Close();
             }
 
             private void Coursesbtn_Click(object sender, EventArgs e)
@@ -161,6 +154,25 @@ namespace StudentForYou
             this.Show();
 
 
+        }
+
+        private void Coursebtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Recentquestionsbtn_Click_1(object sender, EventArgs e)
+        {
+            var rpF = new RecentQuestions(username);
+            rpF.Show();
+            this.Close();
+        }
+
+        private void Profilebtn_Click_1(object sender, EventArgs e)
+        {
+            var Profile = new UserProfile(username);
+            Profile.Show();
+            this.Close();
         }
     }
 
