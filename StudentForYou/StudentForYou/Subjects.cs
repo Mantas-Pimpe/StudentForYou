@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Studentforyousubjects;
+using StudentForYouGroupChat;
 
 namespace StudentForYou
 {
@@ -76,12 +77,13 @@ namespace StudentForYou
 
         public Button AddIconButton(int numberofbuttons)
         {
-            System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
+            Button btn = new Button();
             btn.Top = numberofbuttons * 40;
             btn.Width = 40;
             btn.BackgroundImage = Image.FromFile(@"Resources\chaticon.png");
             btn.Height = 40;
             btn.Left = 950;
+            btn.Name = (numberofbuttons + 1).ToString();
             btn.Click += new EventHandler(IconButton_Click);
             return btn;
         }
@@ -90,7 +92,8 @@ namespace StudentForYou
         {
             this.Hide();
             Button button = sender as Button;
-            GroupChat gchat = new GroupChat(this, username);
+            var proc = System.Diagnostics.Process.Start(@"..\..\..\StudentForYou.ChatServer\bin\Debug\StudentForYou.ChatServer.exe", button.Name);
+            GroupChatForm gchat = new GroupChatForm(this, username, Int32.Parse(button.Name), proc);
             gchat.ShowDialog();
             this.Show();
         }
@@ -151,7 +154,7 @@ namespace StudentForYou
             var courseDescription = d.Description;
             var difficulty = d.Difficulty;
 
-            System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
+            Button btn = new Button();
             btn.Top = buttonNumber * 40;
             btn.Width = 800;
             btn.Height = 40;

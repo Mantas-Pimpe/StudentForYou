@@ -12,10 +12,12 @@ namespace StudentForYouGroupChat
         string readData = null;
         string message;
         string username;
+        int port;
         public delegate void MyDel(string message);
         public event MyDel MyEvent;
-        public GroupChat(string username)
+        public GroupChat(string username, int port)
         {
+            this.port = port;
             this.username = username;
         }
 
@@ -23,7 +25,7 @@ namespace StudentForYouGroupChat
         {
             readData = "Conected to Chat Server ...";
             MyEvent(readData);
-            clientSocket.Connect("127.0.0.1", 1);
+            clientSocket.Connect("127.0.0.1", port);
             serverStream = clientSocket.GetStream();
 
             byte[] outStream = System.Text.Encoding.ASCII.GetBytes(username + "$");
@@ -40,6 +42,7 @@ namespace StudentForYouGroupChat
         }
         public void getMessage()
         {
+
             while (true)
             {
                 serverStream = clientSocket.GetStream();
@@ -52,5 +55,6 @@ namespace StudentForYouGroupChat
                 MyEvent(Environment.NewLine + " >> " + readData);
             }
         }
+
     }
 }
