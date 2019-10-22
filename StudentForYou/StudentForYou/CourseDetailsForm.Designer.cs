@@ -31,8 +31,9 @@
             this.CourseDetailsBackButton = new System.Windows.Forms.Button();
             this.CourseDetailsSaveButton = new System.Windows.Forms.Button();
             this.CourseDetailsTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.CourseDetailsNameBox = new System.Windows.Forms.TextBox();
+            this.downloadsListView = new System.Windows.Forms.ListView();
+            this.UploadFileButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CourseDetailsBackButton
@@ -60,19 +61,9 @@
             this.CourseDetailsTextBox.Location = new System.Drawing.Point(50, 79);
             this.CourseDetailsTextBox.Multiline = true;
             this.CourseDetailsTextBox.Name = "CourseDetailsTextBox";
-            this.CourseDetailsTextBox.Size = new System.Drawing.Size(1124, 554);
+            this.CourseDetailsTextBox.Size = new System.Drawing.Size(1116, 186);
             this.CourseDetailsTextBox.TabIndex = 3;
             this.CourseDetailsTextBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(429, 636);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(332, 64);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Downloads";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // CourseDetailsNameBox
             // 
@@ -85,13 +76,35 @@
             this.CourseDetailsNameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.CourseDetailsNameBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged_1);
             // 
+            // DownloadsListView
+            // 
+            this.downloadsListView.HideSelection = false;
+            this.downloadsListView.Location = new System.Drawing.Point(50, 282);
+            this.downloadsListView.Name = "DownloadsListView";
+            this.downloadsListView.Size = new System.Drawing.Size(1116, 337);
+            this.downloadsListView.TabIndex = 6;
+            this.downloadsListView.UseCompatibleStateImageBehavior = false;
+            this.downloadsListView.SelectedIndexChanged += new System.EventHandler(this.CourseDownloadsListView_SelectedIndexChanged);
+            this.downloadsListView.DoubleClick += new System.EventHandler(this.DownloadsListView_DoubleClick);
+            // 
+            // UploadFileButton
+            // 
+            this.UploadFileButton.Location = new System.Drawing.Point(426, 636);
+            this.UploadFileButton.Name = "UploadFileButton";
+            this.UploadFileButton.Size = new System.Drawing.Size(332, 64);
+            this.UploadFileButton.TabIndex = 7;
+            this.UploadFileButton.Text = "Upload File";
+            this.UploadFileButton.UseVisualStyleBackColor = true;
+            this.UploadFileButton.Click += new System.EventHandler(this.UploadClick);
+            // 
             // CourseDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.UploadFileButton);
+            this.Controls.Add(this.downloadsListView);
             this.Controls.Add(this.CourseDetailsNameBox);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.CourseDetailsTextBox);
             this.Controls.Add(this.CourseDetailsSaveButton);
             this.Controls.Add(this.CourseDetailsBackButton);
@@ -108,7 +121,8 @@
         private System.Windows.Forms.Button CourseDetailsBackButton;
         private System.Windows.Forms.Button CourseDetailsSaveButton;
         private System.Windows.Forms.TextBox CourseDetailsTextBox;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox CourseDetailsNameBox;
+        private System.Windows.Forms.Button UploadFileButton;
+        public System.Windows.Forms.ListView downloadsListView;
     }
 }

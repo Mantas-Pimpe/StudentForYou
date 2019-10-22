@@ -79,6 +79,7 @@
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.AcceptButton = button1;
             // 
             // vuLoginForm
             // 
@@ -94,6 +95,7 @@
             this.Text = "LoginForm";
             this.ResumeLayout(false);
             this.PerformLayout();
+
 
         }
 

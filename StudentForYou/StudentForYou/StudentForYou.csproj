@@ -67,17 +67,18 @@
     <Compile Include="AddSubjectForm.Designer.cs">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ButtonAdder.cs" />
     <Compile Include="RecentQuestions.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RecentQuestions.Designer.cs">
       <DependentUpon>RecentQuestions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="ChatForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="ChatForm.Designer.cs">
+      <DependentUpon>ChatForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CourseDetailsForm.cs">
       <SubType>Form</SubType>
@@ -91,11 +92,11 @@
     <Compile Include="CourseDownloads.Designer.cs">
       <DependentUpon>CourseDownloads.cs</DependentUpon>
     </Compile>
-    <Compile Include="GroupChat.cs">
+    <Compile Include="GroupChatForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GroupChat.Designer.cs">
-      <DependentUpon>GroupChat.cs</DependentUpon>
+    <Compile Include="GroupChatForm.Designer.cs">
+      <DependentUpon>GroupChatForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NewPostForm.cs">
       <SubType>Form</SubType>
@@ -145,8 +146,8 @@
     <EmbeddedResource Include="RecentQuestions.resx">
       <DependentUpon>RecentQuestions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="ChatForm.resx">
+      <DependentUpon>ChatForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CourseDetailsForm.resx">
       <DependentUpon>CourseDetailsForm.cs</DependentUpon>
@@ -154,8 +155,8 @@
     <EmbeddedResource Include="CourseDownloads.resx">
       <DependentUpon>CourseDownloads.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GroupChat.resx">
-      <DependentUpon>GroupChat.cs</DependentUpon>
+    <EmbeddedResource Include="GroupChatForm.resx">
+      <DependentUpon>GroupChatForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -199,12 +200,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="chaticon.png" />
     <Content Include="icon1.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StudentForYou.ChatServer\StudentForYou.ChatServer.csproj">
+      <Project>{90c92375-90f9-4db2-ac1c-7d5ffcc461f8}</Project>
+      <Name>StudentForYou.ChatServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentForYou.GroupChat\StudentForYou.GroupChat.csproj">
+      <Project>{f704878e-3cc0-495f-ae90-c315c2d78219}</Project>
+      <Name>StudentForYou.GroupChat</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Studentforyousubjects\StudentForYou.Subjects.csproj">
       <Project>{d5ca3b2f-0ee4-400d-a3e7-4bfdbd9c4efb}</Project>
       <Name>StudentForYou.Subjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StundentForYou.Chat\StundentForYou.Chat.csproj">
+      <Project>{dbd815bd-32ae-4b17-b1ae-73364088d40d}</Project>
+      <Name>StundentForYou.Chat</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
