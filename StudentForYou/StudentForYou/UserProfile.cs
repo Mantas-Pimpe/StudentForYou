@@ -273,8 +273,9 @@ namespace StudentForYou
         {
             
             var subjects = new form1(UserName.Text);
-            this.Close();
             subjects.Show();
+            this.Close();
+            
         }
 
         private void RecentsPostsbtn_Click(object sender, EventArgs e)
