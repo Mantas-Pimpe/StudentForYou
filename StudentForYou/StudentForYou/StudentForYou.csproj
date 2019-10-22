@@ -67,7 +67,6 @@
     <Compile Include="AddSubjectForm.Designer.cs">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ButtonAdder.cs" />
     <Compile Include="RecentQuestions.cs">
       <SubType>Form</SubType>
     </Compile>
