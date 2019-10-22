@@ -21,11 +21,11 @@ namespace Studentforyousubjects
            public Button AddIconButton(int numberofbuttons)
             {
                 System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
-                btn.Top = numberofbuttons * 40;
-                btn.Width = 40;
+            btn.Top = numberofbuttons * 40;
+            btn.Width = 40;
             btn.BackgroundImage = Image.FromFile(@"Resources\chaticon.png");
                 btn.Height = 40;
-                btn.Left = 950;
+                btn.Left = 1050;
                 return btn;
             }
 
