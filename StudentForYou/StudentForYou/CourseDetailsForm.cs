@@ -42,8 +42,7 @@ namespace StudentForYou
 
         private void CourseDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            reader.UploadToFile(CourseDetailsTextBox.Text);
-            this.DialogResult = DialogResult.OK;
+          
         }
 
         private void TextBox1_TextChanged_1(object sender, EventArgs e)
@@ -53,7 +52,8 @@ namespace StudentForYou
 
         private void CourseDetailsBackButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            reader.UploadToFile(CourseDetailsTextBox.Text);
+            this.DialogResult = DialogResult.OK;
         }
 
         private void Button1_Click(object sender, EventArgs e)

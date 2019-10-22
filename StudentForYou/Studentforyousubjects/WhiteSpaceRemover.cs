@@ -11,8 +11,8 @@ namespace StudentForYou
     {
        public string RemoveMultipleWhiteSpaces(string notCleanText )
         {
-        var cleanedString = Regex.Replace(badString, "\\s+", " ");
-            return cleanedString;
+      var cleanedText = Regex.Replace(notCleanText, "\\s+", " ");
+            return cleanedText;
         }
         
 

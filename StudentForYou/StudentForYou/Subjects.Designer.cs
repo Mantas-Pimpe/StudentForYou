@@ -41,8 +41,9 @@
             // 
             this.SubjectsLayoutPanel.Location = new System.Drawing.Point(12, 12);
             this.SubjectsLayoutPanel.Name = "SubjectsLayoutPanel";
-            this.SubjectsLayoutPanel.Size = new System.Drawing.Size(1169, 466);
+            this.SubjectsLayoutPanel.Size = new System.Drawing.Size(1180, 532);
             this.SubjectsLayoutPanel.TabIndex = 8;
+            this.SubjectsLayoutPanel.WrapContents = false;
             this.SubjectsLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SubjectsLayoutPanel_Paint);
             // 
             // panel1
