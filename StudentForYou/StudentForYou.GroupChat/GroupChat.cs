@@ -42,7 +42,6 @@ namespace StudentForYouGroupChat
         }
         public void getMessage()
         {
-
             while (true)
             {
                 serverStream = clientSocket.GetStream();

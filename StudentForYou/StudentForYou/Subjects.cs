@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Studentforyousubjects;
-using StudentForYouGroupChat;
 
 namespace StudentForYou
 {
@@ -28,9 +22,9 @@ namespace StudentForYou
             List<Course> templist = setter.ReadFileInfo();
             foreach (Course item in templist)
             {
-                SubjectsLayoutPanel.Controls.Add(AddButton(item, amountofbuttons));
-                SubjectsLayoutPanel.Controls.Add(AddIconButton(amountofbuttons));
-                amountofbuttons = amountofbuttons + 1;
+                SubjectsLayoutPanel.Controls.Add(AddButton(item, amountOfButtons));
+                SubjectsLayoutPanel.Controls.Add(AddIconButton(amountOfButtons));
+                amountOfButtons = amountOfButtons + 1;
             }
         }
 
@@ -63,20 +57,21 @@ namespace StudentForYou
                 Tempcourse.Name = SubjectForm.CourseNameTextBox.Text;
 
             }
-            SubjectsLayoutPanel.Controls.Add(AddButton(Tempcourse, amountofbuttons));
-            SubjectsLayoutPanel.Controls.Add(AddIconButton(amountofbuttons));
-            amountofbuttons = amountofbuttons + 1;
+            SubjectsLayoutPanel.Controls.Add(AddButton(Tempcourse, amountOfButtons));
+            SubjectsLayoutPanel.Controls.Add(AddIconButton(amountOfButtons));
+            amountOfButtons = amountOfButtons + 1;
             this.Show();
         }
 
         public Button AddIconButton(int numberofbuttons)
         {
             Button btn = new Button();
+            SubjectsLayoutPanel.SetColumn(btn, 2);
             btn.Top = numberofbuttons * 40;
             btn.Width = 40;
             btn.BackgroundImage = Image.FromFile(@"Resources\chaticon.png");
             btn.Height = 40;
-            btn.Left = 950;
+            btn.Left = 650;
             btn.Name = (numberofbuttons + 1).ToString();
             btn.Click += new EventHandler(IconButton_Click);
             return btn;
@@ -85,11 +80,10 @@ namespace StudentForYou
         public void IconButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Button button = sender as Button;
+            var button = sender as Button;
             var proc = System.Diagnostics.Process.Start(@"..\..\..\StudentForYou.ChatServer\bin\Debug\StudentForYou.ChatServer.exe", button.Name);
-            GroupChatForm gchat = new GroupChatForm(this, username, Int32.Parse(button.Name), proc);
+            var gchat = new GroupChatForm(this, username, Int32.Parse(button.Name), proc);
             gchat.ShowDialog();
-            this.Show();
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
@@ -136,10 +130,12 @@ namespace StudentForYou
 
         private void SubjectsLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
-            SubjectsLayoutPanel.AutoScroll = true;
-            SubjectsLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            SubjectsLayoutPanel.WrapContents = false;
 
+            //SubjectsLayoutPanel.ColumnCount = 2;
+            //SubjectsLayoutPanel.AutoScroll = true;
+            /*SubjectsLayoutPanel.FlowDirection = FlowDirection.TopDown;
+            SubjectsLayoutPanel.WrapContents = false;*/
+            //SubjectsLayoutPanel.AutoSize = false;
         }
         public Button AddButton(Course d, int refbuttonumber)
         {
@@ -149,8 +145,9 @@ namespace StudentForYou
             var difficulty = d.Difficulty;
 
             Button btn = new Button();
+            SubjectsLayoutPanel.SetColumn(btn, 1);
             btn.Top = buttonNumber * 40;
-            btn.Width = 1120;
+            btn.Width = 1140;
             btn.Height = 40;
             btn.Left = 15;
             btn.TextAlign = ContentAlignment.MiddleCenter;
@@ -163,8 +160,8 @@ namespace StudentForYou
         public void Button_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Button button = sender as Button;
-            CourseDetailsForm downloadsForm = new CourseDetailsForm(button.Name);
+            var button = sender as Button;
+            var downloadsForm = new CourseDetailsForm(button.Name);
             downloadsForm.ShowDialog();
             this.Show();
         }
@@ -200,13 +197,18 @@ namespace StudentForYou
                 courseToBeAdded.Description = addSubjectForm.CourseDescriptionTextBox.Text;
                 courseToBeAdded.Difficulty = addSubjectForm.DifficultyTextBox.Text;
                 amountOfButtons = amountOfButtons + 1;
-                var tempIconButton =adder.AddIconButton(amountOfButtons);
+                var tempIconButton = AddIconButton(amountOfButtons);
                 var tempCourseButton =AddButton(courseToBeAdded,amountOfButtons);
                 tempIconButton.Top = tempCourseButton.Top;
                 SubjectsLayoutPanel.Controls.Add(tempCourseButton);
                 SubjectsLayoutPanel.Controls.Add(tempIconButton);
             }
             this.Show();
+        }
+
+        private void Coursebtn_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 
