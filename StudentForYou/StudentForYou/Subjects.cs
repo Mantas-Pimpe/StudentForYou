@@ -48,7 +48,7 @@ namespace StudentForYou
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-        SubjectAdder addstuff = new SubjectAdder();
+            SubjectAdder addstuff = new SubjectAdder();
             AddSubjectForm subjectform = new AddSubjectForm(addstuff);
             subjectform.ShowDialog();
             listView1.Items.Clear();

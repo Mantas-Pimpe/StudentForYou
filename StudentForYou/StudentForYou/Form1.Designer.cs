@@ -37,21 +37,19 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Chat = new System.Windows.Forms.Button();
             this.GroupChat = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // newpostbtn
             // 
-            this.newpostbtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newpostbtn.Location = new System.Drawing.Point(520, 534);
             this.newpostbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newpostbtn.Location = new System.Drawing.Point(515, 567);
+            this.newpostbtn.Location = new System.Drawing.Point(959, 24);
             this.newpostbtn.Margin = new System.Windows.Forms.Padding(6);
             this.newpostbtn.Name = "newpostbtn";
             this.newpostbtn.Size = new System.Drawing.Size(250, 55);
             this.newpostbtn.TabIndex = 0;
             this.newpostbtn.Text = "Create new post";
             this.newpostbtn.UseVisualStyleBackColor = true;
-            this.newpostbtn.Click += new System.EventHandler(this.newpostbtn_Click);
             // 
             // coursesbtn
             // 
@@ -101,11 +99,12 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 12);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 109);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1169, 466);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1169, 409);
             this.flowLayoutPanel1.TabIndex = 5;
             this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            // 
             // Chat
             // 
             this.Chat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -130,10 +129,22 @@
             this.GroupChat.UseVisualStyleBackColor = true;
             this.GroupChat.Click += new System.EventHandler(this.GroupChat_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(468, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(331, 57);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Recent questions";
+            // 
             // RecentPostsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.newpostbtn);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.GroupChat);
             this.Controls.Add(this.Chat);
@@ -141,12 +152,12 @@
             this.Controls.Add(this.profilebtn);
             this.Controls.Add(this.recentquestionsbtn);
             this.Controls.Add(this.coursesbtn);
-            this.Controls.Add(this.newpostbtn);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "RecentPostsForm";
-            this.Text = "Recent questions";
+            this.Text = "Student for You";
             this.Load += new System.EventHandler(this.RecentPostsForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -159,5 +170,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button Chat;
         private System.Windows.Forms.Button GroupChat;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -103,7 +103,6 @@
     <Compile Include="NewPostForm.Designer.cs">
       <DependentUpon>NewPostForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="QuestionDetails.cs" />
     <Compile Include="SelectedQuestionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +197,10 @@
     <Content Include="icon1.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StudentForYouRecentPosts\StudentForYouRecentPosts.csproj">
+      <Project>{268aeb66-1c44-4009-89b4-e1c205b57ddc}</Project>
+      <Name>StudentForYouRecentPosts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Studentforyousubjects\Studentforyousubjects.csproj">
       <Project>{d5ca3b2f-0ee4-400d-a3e7-4bfdbd9c4efb}</Project>
       <Name>Studentforyousubjects</Name>

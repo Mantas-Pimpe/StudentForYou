@@ -15,30 +15,30 @@ namespace StudentForYou
     {
 
 
-        public SelectedQuestionForm(String question, String likes, String views, String answers, int placeToReplace)
+        public SelectedQuestionForm(String question, String likes, String views, String answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
         {
             InitializeComponent();
             AddNewLabel(question);
-            AddNewButton(500, 530);
-            AddLikeButton(870, 5, question, likes, views, answers, placeToReplace);
+            lblInfo.Text = "Likes: " + questionList[placeToReplace].QuestionLikes + " Views: " + questionList[placeToReplace].QuestionViews + " Answers: " + questionList[placeToReplace].QuestionAnswers;
+            AddNewButton(850, 530);
+            AddLikeButton(870, 5, question, likes, views, answers, placeToReplace, questionList, details);
             button1.Click += delegate (Object sender, EventArgs e)
             {
-                button1_Click(sender, e, likes, views, answers, question, placeToReplace);
+                button1_Click(sender, e, likes, views, answers, question, placeToReplace, questionList, details);
             };
-            RefreshTextBox(placeToReplace);
+            RefreshTextBox(placeToReplace, questionList);
         }
 
-        void RefreshTextBox(int placeToReplace)
+        void RefreshTextBox(int placeToReplace, List<QuestionDetails> questionList)
         {
             txtAnswers.Text = "";
             Random rnd = new Random();
-            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
-            string[] line = lines[placeToReplace].Split('`');
-            string[] answer = line[4].Split('^');
-            for (int i = 1; i < answer.Length; i++)
+            string line = questionList[placeToReplace].AnswersForQuestion;
+            string[] splittedAnswers = line.Split('^');
+            for (int i = 1; i < splittedAnswers.Length; i++)
             {
                 int randomNumber = rnd.Next(555, 987587);
-                txtAnswers.AppendText("User" + randomNumber + ": " + answer[i]);
+                txtAnswers.AppendText("User" + randomNumber + ": " + splittedAnswers[i]);
                 txtAnswers.AppendText(Environment.NewLine);
             }
         }
@@ -47,7 +47,7 @@ namespace StudentForYou
         {
             System.Windows.Forms.Label label = new System.Windows.Forms.Label();
             this.Controls.Add(label);
-            label.Size = new System.Drawing.Size(850, 30);
+            label.Size = new System.Drawing.Size(850, 57);
             label.Font = new Font("Arial", 16, FontStyle.Regular);
             label.TextAlign = ContentAlignment.MiddleCenter;
             label.Text = question;
@@ -67,7 +67,7 @@ namespace StudentForYou
             return btn;
         }
 
-        public System.Windows.Forms.Button AddLikeButton(int xPos, int yPos, String question, String likes, String views, String answers, int placeToReplace)
+        public System.Windows.Forms.Button AddLikeButton(int xPos, int yPos, String question, String likes, String views, String answers, int placeToReplace,List<QuestionDetails> questionList, QuestionDetails details)
         {
             System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             this.Controls.Add(btn);
@@ -78,29 +78,7 @@ namespace StudentForYou
             btn.Text = "Like";
             btn.Click += delegate (object sender, EventArgs e)
             {
-                int count = Int32.Parse(likes);
-                count++;
-                likes = count.ToString();
-                string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
-                string[] line = lines[placeToReplace].Split('`');
-                line[0] = likes;
-                string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4];
-                lines[placeToReplace] = newLine;
-                StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
-
-                for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
-                {
-                    if (currentLine == placeToReplace)
-                    {
-                        writeText.WriteLine(lines[placeToReplace]);
-                    }
-                    else
-                    {
-                        writeText.WriteLine(lines[currentLine]);
-                    }
-                }
-                writeText.Close();
-                this.Close();
+                details.AddLike(questionList, placeToReplace);
             };
             btn.Click += new EventHandler(this.button_click);
             return btn;
@@ -128,38 +106,22 @@ namespace StudentForYou
 
         }
 
-        private void button1_Click(object sender, EventArgs e, String likes, String views, String answers, String question, int placeToReplace)
+        private void button1_Click(object sender, EventArgs e, String likes, String views, String answers, String question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
         {
             if (richTextBox1.Text != String.Empty)
             {
-                int count = Int32.Parse(answers);
-                count++;
-                answers = count.ToString();
-                string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
-                string[] line = lines[placeToReplace].Split('`');
-                line[2] = answers;
-                string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`"  + line[4] + "^" + richTextBox1.Text;
-                lines[placeToReplace] = newLine;
-                StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
-
-                for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
-                {
-                    if (currentLine == placeToReplace)
-                    {
-                        writeText.WriteLine(lines[placeToReplace]);
-                    }
-                    else
-                    {
-                        writeText.WriteLine(lines[currentLine]);
-                    }
-                }
-                writeText.Close();
+                details.AddAnswers(questionList, placeToReplace, richTextBox1.Text);
             }
             richTextBox1.Text = "";
-            RefreshTextBox(placeToReplace);
+            RefreshTextBox(placeToReplace, questionList);
         }
 
         private void txtAnswers_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

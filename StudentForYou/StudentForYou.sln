@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForYouCHAT", "Studen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Studentforyousubjects", "Studentforyousubjects\Studentforyousubjects.csproj", "{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYouRecentPosts", "StudentForYouRecentPosts\StudentForYouRecentPosts.csproj", "{268AEB66-1C44-4009-89B4-E1C205B57DDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{268AEB66-1C44-4009-89B4-E1C205B57DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{268AEB66-1C44-4009-89B4-E1C205B57DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{268AEB66-1C44-4009-89B4-E1C205B57DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{268AEB66-1C44-4009-89B4-E1C205B57DDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
