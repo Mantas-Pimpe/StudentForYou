@@ -36,7 +36,6 @@
             this.coursebtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Chat = new System.Windows.Forms.Button();
-            this.GroupChat = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -120,18 +119,6 @@
             this.Chat.UseVisualStyleBackColor = true;
             this.Chat.Click += new System.EventHandler(this.Chat_Click);
             // 
-            // GroupChat
-            // 
-            this.GroupChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupChat.Location = new System.Drawing.Point(15, 514);
-            this.GroupChat.Margin = new System.Windows.Forms.Padding(6);
-            this.GroupChat.Name = "GroupChat";
-            this.GroupChat.Size = new System.Drawing.Size(270, 55);
-            this.GroupChat.TabIndex = 6;
-            this.GroupChat.Text = "Group Chat";
-            this.GroupChat.UseVisualStyleBackColor = true;
-            this.GroupChat.Click += new System.EventHandler(this.GroupChat_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
@@ -150,7 +137,6 @@
             this.ClientSize = new System.Drawing.Size(1248, 712);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.GroupChat);
             this.Controls.Add(this.Chat);
             this.Controls.Add(this.coursesbtn);
             this.Controls.Add(this.newpostbtn);
@@ -172,7 +158,6 @@
         private System.Windows.Forms.Button coursebtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button Chat;
-        private System.Windows.Forms.Button GroupChat;
         private System.Windows.Forms.Panel panel1;
     }
 }

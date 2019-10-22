@@ -8,14 +8,14 @@ namespace StudentForYou
     public partial class GroupChatForm : Form
     {
         GroupChat gchat;
-        string username;
         private Form prevform;
-        public GroupChatForm(Form prevForm, string username)
+        System.Diagnostics.Process proc;
+        public GroupChatForm(Form prevForm, string username, int port, System.Diagnostics.Process proc)
         {
             InitializeComponent();
             this.prevform = prevForm;
-            this.username = username;
-            gchat = new GroupChat(this.username);
+            this.proc = proc;
+            gchat = new GroupChat(username, port);
             gchat.MyEvent += new GroupChat.MyDel(PostMessage);
             gchat.Start();
 
@@ -45,6 +45,8 @@ namespace StudentForYou
 
         private void Back_Click(object sender, EventArgs e)
         {
+           /* proc.CloseMainWindow();
+            proc.Close();*/
             prevform.Show();
             this.Close();
         }

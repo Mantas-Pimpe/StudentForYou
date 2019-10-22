@@ -39,7 +39,15 @@ namespace StudentForYou
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
-            talk.Start(textLocalIp.Text, textLocalPort.Text, textFriendsIp.Text, textFriendsPort.Text);
+            if(string.IsNullOrEmpty(textLocalPort.Text) || string.IsNullOrEmpty(textFriendsPort.Text))
+            {
+                talk.Start(localIp: textLocalIp.Text, friendsIp: textFriendsIp.Text);
+            }
+            else
+            {
+                talk.Start(localIp: textLocalIp.Text, localPort: textLocalPort.Text, friendsIp: textFriendsIp.Text, friendsPort: textFriendsPort.Text);
+            }
+
             buttonSend.Enabled = true;
             buttonStart.Text = "Connected";
             buttonStart.Enabled = false;

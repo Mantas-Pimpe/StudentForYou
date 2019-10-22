@@ -105,9 +105,7 @@ namespace StudentForYou
 
         private void GroupChat_Click(object sender, EventArgs e)
         {
-            var gchat = new GroupChatForm(this, username);
-            this.Hide();
-            gchat.Show();
+
         }
 
         private void RecentPostsForm_Load(object sender, EventArgs e)

@@ -11,36 +11,30 @@ using StudentForYou;
 
 namespace Studentforyousubjects
 {
-   public class ButtonAdder
+    public class ButtonAdder
     {
 
         public ButtonAdder()
         {
         }
 
-           public Button AddIconButton(int numberOfButtons)
-            {
-                System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
-
-            btn.Top = numberOfButtons * 40;
+        /*public Button AddIconButton(int numberofbuttons)
+        {
+            System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
+            btn.Top = numberofbuttons * 40;
             btn.Width = 40;
             btn.BackgroundImage = Image.FromFile(@"Resources\chaticon.png");
-                btn.Height = 40;
-            btn.Location = new Point(1050,numberOfButtons * 40);
-                return btn;
-            }
-
-       
-
+            btn.Height = 40;
+            btn.Left = 950;
+            btn.Click += new EventHandler(form1.Button_Click);
+            return btn;
+        }*/
 
     }
-      
+}
 
 
-    }
 
-
-    
 
 /*System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
             this.Controls.Add(btn);

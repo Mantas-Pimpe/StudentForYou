@@ -14,12 +14,12 @@ namespace StudentForYouChatServer
         public static void Main(string[] args)
         {
             var localAddr = IPAddress.Parse("127.0.0.1");
-            var serverSocket = new TcpListener(localAddr, 1);
+            var serverSocket = new TcpListener(localAddr, Int32.Parse(args[0]));
             var clientSocket = default(TcpClient);
             var counter = 0;
 
             serverSocket.Start();
-            Console.WriteLine("Chat Server Started");
+            Console.WriteLine("Chat Server Started, Port: " + args[0]);
             counter = 0;
             while ((true))
             {
