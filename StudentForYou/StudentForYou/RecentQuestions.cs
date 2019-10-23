@@ -18,6 +18,10 @@ namespace StudentForYou
             InitializeComponent();
             this.username = username;
             List<QuestionDetails> questionList = details.getQuestionDetails();
+            int value = 2;
+            var enumDisplayStatus = (QuestionDetails.Months)value;
+            string stringValue = enumDisplayStatus.ToString();
+            Console.WriteLine(stringValue);
             for (int i = 0; i < questionList.Count; i++)
             {
                 flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details));

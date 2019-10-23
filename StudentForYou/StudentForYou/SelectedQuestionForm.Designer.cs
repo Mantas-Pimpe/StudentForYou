@@ -38,6 +38,8 @@
             // 
             this.txtAnswers.Location = new System.Drawing.Point(24, 109);
             this.txtAnswers.Name = "txtAnswers";
+            this.txtAnswers.ReadOnly = true;
+            this.txtAnswers.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
             this.txtAnswers.Size = new System.Drawing.Size(1196, 370);
             this.txtAnswers.TabIndex = 0;
             this.txtAnswers.Text = "";

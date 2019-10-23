@@ -40,20 +40,14 @@ namespace StudentForYou
             newPost.QuestionAnswers = "0";
             newPost.QuestionLikes = "0";
             newPost.QuestionViews = "0";
+            newPost.CurrentDate = DateTime.Today;
 
             questionList.Add(newPost);
             String text = questiontxt.Text;
             using (StreamWriter writeText = new StreamWriter(@"Resources\recentquestions.txt", true))
             {
-                writeText.Write("0" + "`" + "0" + "`" + "0" + "`" + text + "`" + " " + Environment.NewLine);
+                writeText.Write("0" + "`" + "0" + "`" + "0" + "`" + text + "`" + " " + "`"+ newPost.CurrentDate + Environment.NewLine);
             }
-            /*String text = questiontxt.Text;
-            using (StreamWriter writeText = new StreamWriter(@"Resources\recentquestions.txt", true))
-            {
-                writeText.Write("0" + "," + "0" + "," + "0" + "," + text + Environment.NewLine);
-            }*/
-
-
             var rpf = new RecentQuestions(username);
             rpf.Show();
             this.Close();

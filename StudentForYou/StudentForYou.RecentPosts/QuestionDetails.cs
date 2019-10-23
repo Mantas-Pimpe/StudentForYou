@@ -7,26 +7,23 @@ using System.Threading.Tasks;
 
 namespace StudentForYou.RecentPosts
 {
-    public class QuestionDetails
+    public struct QuestionDetails
     {
         public string QuestionLikes;
         public string QuestionViews;
         public string QuestionAnswers;
         public string Question;
         public string AnswersForQuestion;
+        public DateTime CurrentDate;
 
-        public QuestionDetails()
-        {
-
-        }
-
-        public QuestionDetails(string questionLikes, string questionViews, string questionAnswers, string question, string answerForQuestion)
+        public QuestionDetails(string questionLikes, string questionViews, string questionAnswers, string question, string answerForQuestion, DateTime currentDate)
         {
             QuestionLikes = questionLikes;
             QuestionViews = questionViews;
             QuestionAnswers = questionAnswers;
             Question = question;
             AnswersForQuestion = answerForQuestion;
+            CurrentDate = currentDate;
         }
 
         public List<QuestionDetails> getQuestionDetails()
@@ -41,16 +38,21 @@ namespace StudentForYou.RecentPosts
                 views = line[1];
                 answers = line[2];
                 question = line[3];
-                questionList.Add(new QuestionDetails(likes, views, answers, question, line[4]));
+                DateTime time = Convert.ToDateTime(line[5]);
+                questionList.Add(new QuestionDetails(likes, views, answers, question, line[4], time));
             }
             return questionList;
         }
+
+
         public void AddAnswers(List<QuestionDetails> questionList, int placeToReplace, string newAnswer)
         {
             int count = Int32.Parse(questionList[placeToReplace].QuestionAnswers);
             count++;
-            questionList[placeToReplace].QuestionAnswers = count.ToString();
-            questionList[placeToReplace].AnswersForQuestion += "^" + newAnswer;
+            var temp = questionList[placeToReplace];
+            temp.QuestionAnswers = count.ToString();
+            temp.AnswersForQuestion += "^" + newAnswer;
+            questionList[placeToReplace] = temp;
             String answers = count.ToString();
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             string[] line = lines[placeToReplace].Split('`');
@@ -76,7 +78,9 @@ namespace StudentForYou.RecentPosts
         {
             int count = Int32.Parse(questionList[placeToReplace].QuestionLikes);
             count++;
-            questionList[placeToReplace].QuestionLikes = count.ToString();
+            var temp = questionList[placeToReplace];
+            temp.QuestionLikes = count.ToString();
+            questionList[placeToReplace] = temp;
             String likes = count.ToString();
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             string[] line = lines[placeToReplace].Split('`');
@@ -103,7 +107,9 @@ namespace StudentForYou.RecentPosts
         {
             int count = Int32.Parse(questionList[placeToReplace].QuestionViews);
             count++;
-            questionList[placeToReplace].QuestionViews = count.ToString();
+            var temp = questionList[placeToReplace];
+            temp.QuestionViews = count.ToString();
+            questionList[placeToReplace] = temp;
             String views = count.ToString();
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             string[] line = lines[placeToReplace].Split('`');
@@ -125,5 +131,21 @@ namespace StudentForYou.RecentPosts
             }
             writeText.Close();
         }
+
+        public enum Months
+        {
+            January = 1,
+            February,
+            March,
+            April,
+            May,
+            June,
+            July,
+            August,
+            September,
+            October,
+            November,
+            December
+        };
     }
 }
