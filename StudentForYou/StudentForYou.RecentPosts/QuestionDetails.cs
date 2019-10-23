@@ -1,9 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentForYou.RecentPosts
 {
@@ -20,44 +17,44 @@ namespace StudentForYou.RecentPosts
 
         }
 
-        public QuestionDetails(string questionLikes, string questionViews, string questionAnswers, string question, string answerForQuestion)
+        public QuestionDetails(string QuestionLikes, string QuestionViews, string QuestionAnswers, string Question, string answerForQuestion)
         {
-            QuestionLikes = questionLikes;
-            QuestionViews = questionViews;
-            QuestionAnswers = questionAnswers;
-            Question = question;
-            AnswersForQuestion = answerForQuestion;
+            this.QuestionLikes = QuestionLikes;
+            this.QuestionViews = QuestionViews;
+            this.QuestionAnswers = QuestionAnswers;
+            this.Question = Question;
+            this.AnswersForQuestion = answerForQuestion;
         }
 
         public List<QuestionDetails> getQuestionDetails()
         {
-            string likes, views, answers, question;
-            List<QuestionDetails> questionList = new List<QuestionDetails>();
-            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
+            string likes, views, answers, Question;
+            List<QuestionDetails> QuestionList = new List<QuestionDetails>();
+            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentQuestions.txt");
             for (int i = 0; i < lines.Length; i++)
             {
                 string[] line = lines[i].Split('`');
                 likes = line[0];
                 views = line[1];
                 answers = line[2];
-                question = line[3];
-                questionList.Add(new QuestionDetails(likes, views, answers, question, line[4]));
+                Question = line[3];
+                QuestionList.Add(new QuestionDetails(likes, views, answers, Question, line[4]));
             }
-            return questionList;
+            return QuestionList;
         }
-        public void AddAnswers(List<QuestionDetails> questionList, int placeToReplace, string newAnswer)
+        public void AddAnswers(List<QuestionDetails> QuestionList, int placeToReplace, string newAnswer)
         {
-            int count = Int32.Parse(questionList[placeToReplace].QuestionAnswers);
+            int count = Int32.Parse(QuestionList[placeToReplace].QuestionAnswers);
             count++;
-            questionList[placeToReplace].QuestionAnswers = count.ToString();
-            questionList[placeToReplace].AnswersForQuestion += "^" + newAnswer;
-            String answers = count.ToString();
-            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
+            QuestionList[placeToReplace].QuestionAnswers = count.ToString();
+            QuestionList[placeToReplace].AnswersForQuestion += "^" + newAnswer;
+            var answers = count.ToString();
+            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentQuestions.txt");
             string[] line = lines[placeToReplace].Split('`');
             line[2] = answers;
             string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "^" + newAnswer;
             lines[placeToReplace] = newLine;
-            StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
+            var writeText = new StreamWriter(@"..\Debug\Resources\recentQuestions.txt");
 
             for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
             {
@@ -72,18 +69,18 @@ namespace StudentForYou.RecentPosts
             }
             writeText.Close();
         }
-        public void AddLike(List<QuestionDetails> questionList, int placeToReplace)
+        public void AddLike(List<QuestionDetails> QuestionList, int placeToReplace)
         {
-            int count = Int32.Parse(questionList[placeToReplace].QuestionLikes);
+            int count = Int32.Parse(QuestionList[placeToReplace].QuestionLikes);
             count++;
-            questionList[placeToReplace].QuestionLikes = count.ToString();
-            String likes = count.ToString();
-            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
+            QuestionList[placeToReplace].QuestionLikes = count.ToString();
+            var likes = count.ToString();
+            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentQuestions.txt");
             string[] line = lines[placeToReplace].Split('`');
             line[0] = likes;
-            string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4];
+            var newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4];
             lines[placeToReplace] = newLine;
-            StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
+            var writeText = new StreamWriter(@"..\Debug\Resources\recentQuestions.txt");
 
             for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
             {
@@ -99,18 +96,18 @@ namespace StudentForYou.RecentPosts
             writeText.Close();
         }
 
-        public void AddViews(List<QuestionDetails> questionList, int placeToReplace)
+        public void AddViews(List<QuestionDetails> QuestionList, int placeToReplace)
         {
-            int count = Int32.Parse(questionList[placeToReplace].QuestionViews);
+            int count = Int32.Parse(QuestionList[placeToReplace].QuestionViews);
             count++;
-            questionList[placeToReplace].QuestionViews = count.ToString();
-            String views = count.ToString();
-            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
+            QuestionList[placeToReplace].QuestionViews = count.ToString();
+            var views = count.ToString();
+            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentQuestions.txt");
             string[] line = lines[placeToReplace].Split('`');
             line[1] = views;
-            string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4];
+            var newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4];
             lines[placeToReplace] = newLine;
-            StreamWriter writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
+            var writeText = new StreamWriter(@"..\Debug\Resources\recentQuestions.txt");
 
             for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
             {

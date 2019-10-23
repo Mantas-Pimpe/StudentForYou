@@ -39,7 +39,7 @@ namespace StundentForYouChat
                 {
                     byte[] receivedData = new byte[1464];
                     receivedData = (byte[])aResult.AsyncState;
-                    ASCIIEncoding eEncoding = new ASCIIEncoding();
+                    var eEncoding = new ASCIIEncoding();
                     var receivedMessage = eEncoding.GetString(receivedData);
                     MyEvent("StuddyBuddy: " + receivedMessage);
                 }

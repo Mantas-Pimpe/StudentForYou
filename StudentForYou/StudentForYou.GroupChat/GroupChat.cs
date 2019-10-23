@@ -9,12 +9,14 @@ namespace StudentForYouGroupChat
     {
         TcpClient clientSocket = new TcpClient();
         NetworkStream serverStream = default(NetworkStream);
+
         string readData = null;
-        string message;
         string username;
         int port;
+
         public delegate void MyDel(string message);
         public event MyDel MyEvent;
+
         public GroupChat(string username, int port)
         {
             this.port = port;

@@ -17,11 +17,7 @@ namespace Studentforyousubjects
             filePath = filePath + nameofcourse + " " + "downloads";
             Directory.CreateDirectory(filePath);
             //filepath = filepath + ".txt";
-
-
             // FolderBrowserDialog folderPicker = new FolderBrowserDialog();
-
-
         }
         public ListViewItem[] UploadFiles()
         {
@@ -44,7 +40,7 @@ namespace Studentforyousubjects
         public ListViewItem UploadSingleFile()
         {
           
-            OpenFileDialog fileDialog = new OpenFileDialog();
+            var fileDialog = new OpenFileDialog();
             fileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -55,7 +51,7 @@ namespace Studentforyousubjects
                 var uploadedFilePath = filePath + "\\" + nameOfFile;
                 File.Copy(uploadFilePath,uploadedFilePath);
                 
-                ListViewItem item = new ListViewItem(nameOfFile);
+                var item = new ListViewItem(nameOfFile);
                 item.Tag = uploadedFilePath;
                 return item;
             }
