@@ -17,13 +17,18 @@ namespace StudentForYou
     {
 
         private string username = string.Empty;
-        public SelectedQuestionForm(String question, String likes, String views, String answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, string username)
+        public SelectedQuestionForm(String question, String likes, String views, String answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, string username, DateTime postDate)
         {
             InitializeComponent();
             this.username = username;
             AddNewLabel(question);
             AddNewButton(850, 530);
             AddLikeButton(870, 5, question, likes, views, answers, placeToReplace, questionList, details);
+            lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
+            int value = postDate.Month;
+            var enumDisplayStatus = (QuestionDetails.Months)value;
+            string stringValue = enumDisplayStatus.ToString();
+            lblDate.Text = postDate.Year + " " + stringValue + " " + postDate.Day;
             button1.Click += delegate (Object sender, EventArgs e)
             {
                 button1_Click(sender, e, likes, views, answers, question, placeToReplace, questionList, details);
