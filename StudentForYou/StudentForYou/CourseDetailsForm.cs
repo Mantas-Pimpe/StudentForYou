@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Studentforyousubjects;
+using System.Diagnostics;
 
 namespace StudentForYou
 {
     public partial class CourseDetailsForm : Form
     {
         DescriptionReader reader;
-       string nameOfCourse;
-        string filePath;
+        string nameOfCourse;
         FileUploader uploader;
         public CourseDetailsForm(string courseName)
         {
@@ -26,8 +19,6 @@ namespace StudentForYou
             CourseDetailsTextBox.Text = reader.ReadDescription();
             uploader = new FileUploader(courseName);
             downloadsListView.Items.AddRange(uploader.UploadFiles());
-
-
         }
 
         private void CourseDetailsForm_Load(object sender, EventArgs e)
@@ -42,8 +33,7 @@ namespace StudentForYou
 
         private void CourseDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            reader.UploadToFile(CourseDetailsTextBox.Text);
-            this.DialogResult = DialogResult.OK;
+          
         }
 
         private void TextBox1_TextChanged_1(object sender, EventArgs e)
@@ -53,13 +43,15 @@ namespace StudentForYou
 
         private void CourseDetailsBackButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            reader.UploadToFile(CourseDetailsTextBox.Text);
+            this.DialogResult = DialogResult.OK;
+            
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            CourseDownloads downloadsForm = new CourseDownloads(nameOfCourse);
+            var downloadsForm = new CourseDownloads(nameOfCourse);
             downloadsForm.ShowDialog();
             this.Show();
         }
@@ -82,7 +74,7 @@ namespace StudentForYou
 
                 var selected = downloadsListView.SelectedItems[0];
                 var selectedFilePath = selected.Tag.ToString();
-                System.Diagnostics.Process.Start(selectedFilePath);
+                Process.Start(selectedFilePath);
 
             }
             

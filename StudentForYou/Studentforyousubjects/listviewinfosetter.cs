@@ -18,7 +18,7 @@ namespace StudentForYou
             foreach (string d in data)
             {
                 string[] allcourseinfo=new string[2];
-                Course tempCourse = new Course();
+                var tempCourse = new Course();
                 allcourseinfo=d.Split(new char[] { ',' });
                 //StringSplitOptions.RemoveEmptyEntries;
                 tempCourse.Name = allcourseinfo[0];

@@ -39,9 +39,8 @@ namespace StundentForYouChat
                 {
                     byte[] receivedData = new byte[1464];
                     receivedData = (byte[])aResult.AsyncState;
-                    ASCIIEncoding eEncoding = new ASCIIEncoding();
+                    var eEncoding = new ASCIIEncoding();
                     var receivedMessage = eEncoding.GetString(receivedData);
-                    //listMessage.Items.Add("StuddyBuddy: " + receivedMessage);
                     MyEvent("StuddyBuddy: " + receivedMessage);
                 }
                 byte[] buffer = new byte[1500];
@@ -54,24 +53,23 @@ namespace StundentForYouChat
 
         }
 
-        public void Start(string textLocalIp, string textLocalPort, string textFriendsIp, string textFriendsPort)
+        public void Start(string friendsIp, string localIp, string friendsPort = "1", string localPort = "1")
         {
             try
             {
                 // binding socket
-                epLocal = new IPEndPoint(IPAddress.Parse(textLocalIp), Convert.ToInt32(textLocalPort));
+                epLocal = new IPEndPoint(IPAddress.Parse(localIp), Convert.ToInt32(localPort));
                 sck.Bind(epLocal);
                 // connect to remote IP and port
-                epRemote = new IPEndPoint(IPAddress.Parse(textFriendsIp), Convert.ToInt32(textFriendsPort));
+                epRemote = new IPEndPoint(IPAddress.Parse(friendsIp), Convert.ToInt32(friendsPort));
                 sck.Connect(epRemote);
                 // starts to listen to an specific port
                 byte[] buffer = new byte[1500];
                 sck.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epRemote, new
                 AsyncCallback(MessageCallBack), buffer);
-                // release button to send message
             }
             catch (Exception ex)
-            { 
+            {
                 MyEvent(ex.ToString());
             }
         }
@@ -80,16 +78,12 @@ namespace StundentForYouChat
         {
             try
             {
-                    // converts from string to byte[]
-                    System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
-                    byte[] msg = new byte[1500];
-                    msg = enc.GetBytes(message);
-                    // sending the message
-                    sck.Send(msg);
-                    // add to listbox
-                    //listMessage.Items.Add("You: " + textMessage.Text);
-                    MyEvent("You: " + message);
-                     // clear txtMessage
+                ASCIIEncoding enc = new ASCIIEncoding();
+                byte[] msg = new byte[1500];
+                msg = enc.GetBytes(message);
+                // sending the message
+                sck.Send(msg);
+                MyEvent("You: " + message);
             }
             catch (Exception ex)
             {

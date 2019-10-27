@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.IO;
 using StudentForYou.RecentPosts;
 using System.Collections.Generic;
 
@@ -26,6 +25,9 @@ namespace StudentForYou
             for (int i = 0; i < questionList.Count; i++)
             {
                 flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details));
+                flowLayoutPanel1.Controls.Add(AddNewLikesButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details));
+                flowLayoutPanel1.Controls.Add(AddNewViewsButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details));
+                flowLayoutPanel1.Controls.Add(AddNewAnswersButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details));
             }
 
             newpostbtn.Click += delegate (object sender, EventArgs e)
@@ -37,16 +39,17 @@ namespace StudentForYou
 
 
 
-        public System.Windows.Forms.Button AddNewButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
+        public Button AddNewButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
         {
-            System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
+            var btn = new Button();
             this.Controls.Add(btn);
-            btn.Top = A * 40;
-            btn.Width = 1120;
+            flowLayoutPanel1.SetColumn(btn, 1);
+            //btn.Top = A * 40;
+            btn.Width = 1000;
             btn.Height = 40;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Left = 15;
-            btn.Text = "''" + question + "''";
+            btn.Text = question;
             A += 1;
             btn.Click += delegate (object sender, EventArgs e)
             {
@@ -56,19 +59,53 @@ namespace StudentForYou
             };
             return btn;
         }
-
+        public Button AddNewLikesButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
+        {
+            var btn = new Button();
+            flowLayoutPanel1.SetColumn(btn, 2);
+            btn.Text = "Likes: " + likes;
+            btn.Height = 40;
+            btn.Click += delegate (object sender, EventArgs e)
+            {
+                button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details);
+                details.AddViews(questionList, placeToReplace);
+                //this.Close();
+            };
+            return btn;
+        }
+        public Button AddNewViewsButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
+        {
+            var btn = new Button();
+            flowLayoutPanel1.SetColumn(btn, 3);
+            btn.Text = "Views: " + views;
+            btn.Height = 40;
+            btn.Click += delegate (object sender, EventArgs e)
+            {
+                button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details);
+                details.AddViews(questionList, placeToReplace);
+                //this.Close();
+            };
+            return btn;
+        }
+        public Button AddNewAnswersButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
+        {
+            var btn = new Button();
+            flowLayoutPanel1.SetColumn(btn, 4);
+            btn.Text = "Answers: " + answers;
+            btn.Height = 40;
+            btn.Click += delegate (object sender, EventArgs e)
+            {
+                button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details);
+                details.AddViews(questionList, placeToReplace);
+                //this.Close();
+            };
+            return btn;
+        }
 
         private void newpostbtn_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
         {
-            NewPostForm newForm = new NewPostForm(questionList, username);
+            var newForm = new NewPostForm(questionList, username);
             newForm.Show();
-            this.Close();
-        }
-
-        private void coursesbtn_Click(object sender, EventArgs e)
-        {
-            var subjects = new form1(username);
-            subjects.Show();
             this.Close();
         }
 
@@ -88,9 +125,9 @@ namespace StudentForYou
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-            flowLayoutPanel1.AutoScroll = true;
+            /*flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.WrapContents = false;
+            flowLayoutPanel1.WrapContents = false;*/
         }
 
         void button_click (object sender, EventArgs e, string question, string likes, string views, string answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
@@ -110,9 +147,7 @@ namespace StudentForYou
 
         private void GroupChat_Click(object sender, EventArgs e)
         {
-            var gchat = new GroupChatForm(this, username);
-            this.Hide();
-            gchat.Show();
+
         }
 
         private void RecentPostsForm_Load(object sender, EventArgs e)

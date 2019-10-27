@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace Studentforyousubjects
 {
@@ -12,24 +8,26 @@ namespace Studentforyousubjects
        public DescriptionReader(string coursename)
         {
             filePath="Resources\\";
-                filePath = filePath + coursename;
+            filePath = filePath + coursename;
             filePath = filePath + ".txt";
         }
 
 
        public string ReadDescription()
         {
-            if(System.IO.File.Exists(filePath).Equals(false))
+            if(File.Exists(filePath).Equals(false))
             {
-                System.IO.File.Create(filePath);
+                File.Create(filePath);
             }
-            var text = System.IO.File.ReadAllText(filePath);
+            var text = File.ReadAllText(filePath);
+            var whiteSpaceRemover = new StudentForYou.WhiteSpaceRemover();
+            text = whiteSpaceRemover.RemoveMultipleWhiteSpaces(text);
             return text;
 
         }
        public void UploadToFile(string texttoupload)
         {
-            System.IO.File.AppendAllText(filePath, texttoupload);
+            File.AppendAllText(filePath, texttoupload);
         }
     }
 }

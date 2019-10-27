@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using System;
 
 namespace Studentforyousubjects
 {
@@ -12,23 +9,16 @@ namespace Studentforyousubjects
         string courseDescription;
         string difficulty;
 
-       
-
-
         public void GetInfo(string NameInfo,string courseInfo,string DifficultyInfo)
-        {
-            
+        {    
             subjectName = NameInfo;
             courseDescription = courseInfo;
             difficulty = DifficultyInfo;
-
-
-            
         }
         public void WriteToFile()
         {
-            System.IO.File.AppendAllText(@"Resources\allcourses.txt", this.ReturnAllInfo());
-            System.IO.File.AppendAllText(@"Resources\allcourses.txt", System.Environment.NewLine);
+            File.AppendAllText(@"Resources\allcourses.txt", this.ReturnAllInfo());
+            File.AppendAllText(@"Resources\allcourses.txt", Environment.NewLine);
         }
         public string ReturnAllInfo()
         {
