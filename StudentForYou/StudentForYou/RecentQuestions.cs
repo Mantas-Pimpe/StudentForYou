@@ -18,6 +18,7 @@ namespace StudentForYou
             InitializeComponent();
             this.username = username;
             List<QuestionDetails> questionList = details.getQuestionDetails();
+            
             int value = 2;
             var enumDisplayStatus = (QuestionDetails.Months)value;
             string stringValue = enumDisplayStatus.ToString();
