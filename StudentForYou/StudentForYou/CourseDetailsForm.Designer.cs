@@ -35,6 +35,9 @@
             this.UploadFileButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.CourseDetailsReviewsTextBox = new System.Windows.Forms.RichTextBox();
+            this.CourseReviewsLabel = new System.Windows.Forms.Label();
+            this.CourseDetailsPostReviewButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CourseDetailsBackButton
@@ -50,11 +53,11 @@
             // 
             // CourseDetailsTextBox
             // 
-            this.CourseDetailsTextBox.Location = new System.Drawing.Point(38, 168);
+            this.CourseDetailsTextBox.Location = new System.Drawing.Point(38, 119);
             this.CourseDetailsTextBox.Margin = new System.Windows.Forms.Padding(8);
             this.CourseDetailsTextBox.Multiline = true;
             this.CourseDetailsTextBox.Name = "CourseDetailsTextBox";
-            this.CourseDetailsTextBox.Size = new System.Drawing.Size(1165, 192);
+            this.CourseDetailsTextBox.Size = new System.Drawing.Size(1165, 132);
             this.CourseDetailsTextBox.TabIndex = 3;
             this.CourseDetailsTextBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
@@ -65,7 +68,7 @@
             this.CourseDetailsNameBox.Margin = new System.Windows.Forms.Padding(8);
             this.CourseDetailsNameBox.Name = "CourseDetailsNameBox";
             this.CourseDetailsNameBox.ReadOnly = true;
-            this.CourseDetailsNameBox.Size = new System.Drawing.Size(1165, 102);
+            this.CourseDetailsNameBox.Size = new System.Drawing.Size(1165, 55);
             this.CourseDetailsNameBox.TabIndex = 5;
             this.CourseDetailsNameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.CourseDetailsNameBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged_1);
@@ -73,10 +76,10 @@
             // downloadsListView
             // 
             this.downloadsListView.HideSelection = false;
-            this.downloadsListView.Location = new System.Drawing.Point(38, 421);
+            this.downloadsListView.Location = new System.Drawing.Point(38, 507);
             this.downloadsListView.Margin = new System.Windows.Forms.Padding(8);
             this.downloadsListView.Name = "downloadsListView";
-            this.downloadsListView.Size = new System.Drawing.Size(1165, 212);
+            this.downloadsListView.Size = new System.Drawing.Size(1165, 120);
             this.downloadsListView.TabIndex = 6;
             this.downloadsListView.UseCompatibleStateImageBehavior = false;
             this.downloadsListView.SelectedIndexChanged += new System.EventHandler(this.CourseDownloadsListView_SelectedIndexChanged);
@@ -96,25 +99,57 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(579, 381);
+            this.label1.Location = new System.Drawing.Point(549, 482);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(206, 32);
+            this.label1.Size = new System.Drawing.Size(102, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Uploaded Files";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(579, 128);
+            this.label2.Location = new System.Drawing.Point(551, 94);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(201, 32);
+            this.label2.Size = new System.Drawing.Size(100, 17);
             this.label2.TabIndex = 9;
             this.label2.Text = "Course Details";
+            // 
+            // CourseDetailsReviewsTextBox
+            // 
+            this.CourseDetailsReviewsTextBox.Location = new System.Drawing.Point(38, 305);
+            this.CourseDetailsReviewsTextBox.Name = "CourseDetailsReviewsTextBox";
+            this.CourseDetailsReviewsTextBox.ReadOnly = true;
+            this.CourseDetailsReviewsTextBox.Size = new System.Drawing.Size(1165, 151);
+            this.CourseDetailsReviewsTextBox.TabIndex = 10;
+            this.CourseDetailsReviewsTextBox.Text = "";
+            // 
+            // CourseReviewsLabel
+            // 
+            this.CourseReviewsLabel.AutoSize = true;
+            this.CourseReviewsLabel.Location = new System.Drawing.Point(551, 272);
+            this.CourseReviewsLabel.Name = "CourseReviewsLabel";
+            this.CourseReviewsLabel.Size = new System.Drawing.Size(109, 17);
+            this.CourseReviewsLabel.TabIndex = 11;
+            this.CourseReviewsLabel.Text = "Course Reviews";
+            // 
+            // CourseDetailsPostReviewButton
+            // 
+            this.CourseDetailsPostReviewButton.Location = new System.Drawing.Point(1076, 453);
+            this.CourseDetailsPostReviewButton.Margin = new System.Windows.Forms.Padding(8);
+            this.CourseDetailsPostReviewButton.Name = "CourseDetailsPostReviewButton";
+            this.CourseDetailsPostReviewButton.Size = new System.Drawing.Size(127, 38);
+            this.CourseDetailsPostReviewButton.TabIndex = 12;
+            this.CourseDetailsPostReviewButton.Text = "Write Review";
+            this.CourseDetailsPostReviewButton.UseVisualStyleBackColor = true;
+            this.CourseDetailsPostReviewButton.Click += new System.EventHandler(this.CourseDetailsPostReviewButton_Click);
             // 
             // CourseDetailsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.CourseDetailsPostReviewButton);
+            this.Controls.Add(this.CourseReviewsLabel);
+            this.Controls.Add(this.CourseDetailsReviewsTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.UploadFileButton);
@@ -140,5 +175,8 @@
         public System.Windows.Forms.ListView downloadsListView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox CourseDetailsReviewsTextBox;
+        private System.Windows.Forms.Label CourseReviewsLabel;
+        private System.Windows.Forms.Button CourseDetailsPostReviewButton;
     }
 }

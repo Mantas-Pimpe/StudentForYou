@@ -106,7 +106,6 @@ namespace StudentForYou
         {
 
         }
-
         private void btnDislike_Click(object sender, EventArgs e, List<QuestionDetails> questionList, int placeToReplace, QuestionDetails details, String likes, String views, String answers)
         {
             details.AddDislike(questionList, placeToReplace, ref likes);
@@ -120,6 +119,8 @@ namespace StudentForYou
         }
 
         private void lblQuestion_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+
         {
 
         }

@@ -161,7 +161,7 @@ namespace StudentForYou
         {
             this.Hide();
             var button = sender as Button;
-            var downloadsForm = new CourseDetailsForm(button.Name);
+            var downloadsForm = new CourseDetailsForm(button.Name,username);
             downloadsForm.ShowDialog();
             this.Show();
         }

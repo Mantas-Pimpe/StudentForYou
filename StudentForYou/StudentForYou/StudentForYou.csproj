@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddReviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddReviewForm.Designer.cs">
+      <DependentUpon>AddReviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddSubjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="vuLoginForm.Designer.cs" />
+    <EmbeddedResource Include="AddReviewForm.resx">
+      <DependentUpon>AddReviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddSubjectForm.resx">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -212,6 +221,10 @@
     <ProjectReference Include="..\StudentForYou.GroupChat\StudentForYou.GroupChat.csproj">
       <Project>{f704878e-3cc0-495f-ae90-c315c2d78219}</Project>
       <Name>StudentForYou.GroupChat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentForYou.Profile\StudentForYou.Profile.csproj">
+      <Project>{cf999838-619f-4b94-863d-e81f9b2fb200}</Project>
+      <Name>StudentForYou.Profile</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentForYou.RecentPosts\StudentForYou.RecentPosts.csproj">
       <Project>{d4193337-7dd7-4389-86c4-21be0f6b5360}</Project>
