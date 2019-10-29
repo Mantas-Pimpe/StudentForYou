@@ -9,14 +9,24 @@ namespace StudentForYou
     {
         DescriptionReader reader;
         string nameOfCourse;
+        string username = String.Empty;
         FileUploader uploader;
-        public CourseDetailsForm(string courseName)
+        public CourseDetailsForm(string courseName,string passedUsername)
         {
             InitializeComponent();
+            username = passedUsername;
             nameOfCourse = courseName;
             reader = new DescriptionReader(courseName);
             CourseDetailsNameBox.Text = courseName;
             CourseDetailsTextBox.Text = reader.ReadDescription();
+            var tempReviewInfo = reader.ReadReviews();
+            
+            foreach (string review in tempReviewInfo)
+            {
+                CourseDetailsReviewsTextBox.AppendText(review);
+                CourseDetailsReviewsTextBox.AppendText(System.Environment.NewLine);
+            }
+
             uploader = new FileUploader(courseName);
             downloadsListView.Items.AddRange(uploader.UploadFiles());
         }
@@ -78,6 +88,23 @@ namespace StudentForYou
 
             }
             
+        }
+
+        private void CourseDetailsPostReviewButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var postReviewForm = new AddReviewForm(username);
+            postReviewForm.ShowDialog();
+           if(postReviewForm.DialogResult==DialogResult.OK)
+            {
+                reader.UploadReviews(postReviewForm.reviewText);
+                CourseDetailsReviewsTextBox.AppendText(postReviewForm.reviewText);
+
+              
+            }
+            this.Show();
+
+           
         }
     }
 }
