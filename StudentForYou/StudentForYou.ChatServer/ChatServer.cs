@@ -14,12 +14,12 @@ namespace StudentForYouChatServer
         public static void Main(string[] args)
         {
             var localAddr = IPAddress.Parse("127.0.0.1");
-            var serverSocket = new TcpListener(localAddr, 1);
+            var serverSocket = new TcpListener(localAddr, Int32.Parse(args[0]));
             var clientSocket = default(TcpClient);
             var counter = 0;
 
             serverSocket.Start();
-            Console.WriteLine("Chat Server Started");
+            Console.WriteLine("Chat Server Started, Port: " + args[0]);
             counter = 0;
             while ((true))
             {
@@ -29,7 +29,7 @@ namespace StudentForYouChatServer
 
                 var networkStream = clientSocket.GetStream();
                 networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                var dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                var dataFromClient = Encoding.ASCII.GetString(bytesFrom);
                 dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
 
                 clientsList.Add(dataFromClient, clientSocket);
@@ -40,7 +40,9 @@ namespace StudentForYouChatServer
                 var client = new handleClient();
                 client.startClient(clientSocket, dataFromClient, clientsList);
             }
-
+            /*
+             * IF we wanted to limit the amount of people in a server we could set the counter in while
+            */
             clientSocket.Close();
             serverSocket.Stop();
             Console.WriteLine("exit");
@@ -67,8 +69,8 @@ namespace StudentForYouChatServer
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
                 broadcastStream.Flush();
             }
-        }  //end broadcast function
-    }//end Main class
+        }  
+    }
 
 
     public class handleClient
@@ -99,7 +101,7 @@ namespace StudentForYouChatServer
                     requestCount = requestCount + 1;
                     var networkStream = clientSocket.GetStream();
                     networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                    var dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                    var dataFromClient = Encoding.ASCII.GetString(bytesFrom);
                     dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
                     Console.WriteLine("From client - " + clNo + " : " + dataFromClient);
                     var rCount = Convert.ToString(requestCount);
@@ -110,7 +112,7 @@ namespace StudentForYouChatServer
                 {
                     Console.WriteLine(ex.ToString());
                 }
-            }//end while
-        }//end doChat
-    } //end class handleClinet
-}//end namespace
+            }
+        }
+    }
+}
