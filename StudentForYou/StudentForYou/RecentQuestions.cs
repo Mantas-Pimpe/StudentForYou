@@ -283,9 +283,9 @@ namespace StudentForYou
 
         private void txtSearch_TextChanged(object sender, EventArgs e, QuestionDetails details, List<QuestionDetails> questionList)
         {
-            List <QuestionDetails> tempList = details.SearchQuestion(questionList, txtSearch.Text);
+            List<QuestionDetails> tempList = details.SearchQuestion(questionList, txtSearch.Text);
             WriteToFlowLayoutPanel(tempList);
-
+        }
         private void recentquestionsbtn_Click(object sender, EventArgs e)
         {
 

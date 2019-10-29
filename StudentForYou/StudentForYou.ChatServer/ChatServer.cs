@@ -92,7 +92,6 @@ namespace StudentForYouChatServer
         {
             var requestCount = 0;
             byte[] bytesFrom = new byte[clientSocket.ReceiveBufferSize];
-            Byte[] sendBytes = null;
 
             while ((true))
             {

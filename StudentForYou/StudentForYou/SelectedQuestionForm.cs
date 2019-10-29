@@ -22,7 +22,7 @@ namespace StudentForYou
             InitializeComponent();
             this.username = username;
             AddNewLabel(question);
-            AddNewButton(850, 530);
+            AddNewButton(1173, 632);
             lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
             var value = postDate.Month;
             var enumDisplayStatus = (QuestionDetails.Months)value;
@@ -119,6 +119,9 @@ namespace StudentForYou
         }
 
         private void lblQuestion_Click(object sender, EventArgs e)
+        {
+
+        }
         private void button1_Click(object sender, EventArgs e)
 
         {
