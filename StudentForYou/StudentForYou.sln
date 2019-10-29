@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.ChatServer", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.RecentPosts", "StudentForYou.RecentPosts\StudentForYou.RecentPosts.csproj", "{D4193337-7DD7-4389-86C4-21BE0F6B5360}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Profile", "StudentForYou.Profile\StudentForYou.Profile.csproj", "{CF999838-619F-4B94-863D-E81F9B2FB200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF999838-619F-4B94-863D-E81F9B2FB200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF999838-619F-4B94-863D-E81F9B2FB200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF999838-619F-4B94-863D-E81F9B2FB200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF999838-619F-4B94-863D-E81F9B2FB200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

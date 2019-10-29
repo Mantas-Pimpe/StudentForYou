@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Windows.Forms;
+using StudentForYouProfile;
 
 namespace StudentForYou
 {
 
     public partial class vuLoginForm : Form
     {
-        private string username = string.Empty;
-        private bool isOK = false;
+        public string username { get; set; }
+        public bool isOK { get; set; }
+        UserLogin newLogin = new UserLogin();
         public vuLoginForm()
         {
             InitializeComponent();
+            isOK = false;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (loginCheck(textBox1.Text, textBox2.Text) == true)
+            if (newLogin.loginCheck(textBox1.Text, textBox2.Text) == true)
             {
                 username = textBox1.Text;
                 isOK = true;
@@ -27,37 +30,5 @@ namespace StudentForYou
             }
         }
 
-        internal bool getLoginStatus()
-        {
-            return isOK;
-        }
-
-        public string getLoginUsername()
-        {
-            return username;
-        }
-
-        private bool loginCheck(string username, string password)
-        {
-            var filePath = @"Resources\TempDatabase.txt";
-            string line;
-            var file = new System.IO.StreamReader(filePath);
-            while ((line = file.ReadLine()) != null)
-            {
-                if (line.Contains(username))
-                {
-                    
-                    var words = line.Split(' ');
-                    if (username == words[0] && password == words[1])
-                    {
-                        file.Close();
-                        return true;
-                    }
-                    words = null;
-                }
-            }
-            file.Close();
-            return false;
-        }
     }
 }

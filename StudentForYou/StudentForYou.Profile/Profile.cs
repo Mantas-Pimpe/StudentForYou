@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
-namespace StudentForYoProfile
+namespace StudentForYouProfile
 {
     public class Profile
     {
@@ -40,7 +40,6 @@ namespace StudentForYoProfile
         public Tuple<string, string, int, string> GetUserData(string username, string pictureFilePath,
             int currentUserDataLine)
         {
-            var isNameFound = false;
             string line;
             var file = new StreamReader(filePath);
             while ((line = file.ReadLine()) != null)
@@ -96,7 +95,7 @@ namespace StudentForYoProfile
             //        PictureFilePath = 
             //    });
             
-            return Tuple.Create(username, userBios[index].bio , currentUserDataLine, pictureFilePath);
+            return Tuple.Create(username, userBios[index].bio , currentUserDataLine, userList[currentUserDataLine].pictureFilePath);
         }
 
         public string PictureChange()
@@ -154,7 +153,7 @@ namespace StudentForYoProfile
             }
             var bioToWrite = '"'+bio+'"';
             var bioLines = File.ReadAllLines(bioFilePath);
-            bioLines[currentUserDataLine] = userBios[currentUserDataLine].name + " " + bioToWrite;
+            bioLines[currentUserDataLine] = newUsername + " " + bioToWrite;
             using (var writer = new StreamWriter(bioFilePath))
             {
                 foreach (var t in bioLines)
