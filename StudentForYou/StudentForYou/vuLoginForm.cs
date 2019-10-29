@@ -30,5 +30,13 @@ namespace StudentForYou
             }
         }
 
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            var newAccount = new CreateAccountForm();
+            newAccount.ShowDialog();
+
+        }
+
+
     }
 }

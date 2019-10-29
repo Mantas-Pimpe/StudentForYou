@@ -54,17 +54,12 @@ namespace StudentForYouProfile
             var j = 0;
             while ((line = bioFile.ReadLine()) != null)
             {
+                var bioWords = line.Split(' ');
                 var bio = new char[100];
                 var charCounter = 0;
                 var bioCounter = 0;
                 var i = 0;
-                var bioName = new char[20];
-                //reading username
-                while (line[i] != ' ')
-                {
-                    bioName[i] = line[i];
-                    i++;
-                }
+                var bioName = bioWords[0];
                 //reading bio
                 foreach (var ch in line)
                 {
@@ -75,26 +70,13 @@ namespace StudentForYouProfile
                         bio[bioCounter] = ch;
                         bioCounter++;
                     }
-
-
-
                 }
-                userBios.Add(new UserBio(new string(bioName),new string(bio)));
+                userBios.Add(new UserBio(bioName,new string(bio)));
                 j++;
             }
             bioFile.Close();
-            var index = userBios.FindIndex(x => x.name.Contains(username));
+            var index = userBios.FindIndex(x => x.name.Equals(username));
             currentUserDataLine = index;
-            //var groupJoin = userList.GroupJoin(userBios,  //inner sequence
-            //    std => std.name, //outerKeySelector 
-            //    s => s.name,     //innerKeySelector
-            //    (std, studentsGroup) => new // resultSelector 
-            //    {
-            //        Students = studentsGroup,
-            //        StandarFulldName = std.name
-            //        PictureFilePath = 
-            //    });
-            
             return Tuple.Create(username, userBios[index].bio , currentUserDataLine, userList[currentUserDataLine].pictureFilePath);
         }
 

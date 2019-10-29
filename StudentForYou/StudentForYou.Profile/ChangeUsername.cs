@@ -51,5 +51,17 @@ namespace StudentForYouProfile
 
         }
 
+        public void CreateNewUser(string username, string password)
+        {
+            const string userFilePath = @"Resources\TempDatabase.txt";
+            const string bioFilePath = @"Resources\BioDatabase.txt";
+            var readUserList = new List<string>(File.ReadAllLines(userFilePath));
+            readUserList.Add(username + " " + password + " " + "noPicture");
+            File.WriteAllLines(userFilePath, readUserList);
+            var readBio = new List<string>(File.ReadAllLines(bioFilePath));
+            readBio.Add(username + " " + '"' + '"');
+            File.WriteAllLines(bioFilePath, readBio);
+        }
+
     }
 }
