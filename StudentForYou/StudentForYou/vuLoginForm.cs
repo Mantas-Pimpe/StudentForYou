@@ -41,7 +41,7 @@ namespace StudentForYou
         {
             var filePath = @"Resources\TempDatabase.txt";
             string line;
-            System.IO.StreamReader file = new System.IO.StreamReader(filePath);
+            var file = new System.IO.StreamReader(filePath);
             while ((line = file.ReadLine()) != null)
             {
                 if (line.Contains(username))

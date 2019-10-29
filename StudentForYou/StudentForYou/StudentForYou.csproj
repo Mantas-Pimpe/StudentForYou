@@ -202,6 +202,10 @@
     <Content Include="icon1.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StudentForYou.Profile\StudentForYou.Profile.csproj">
+      <Project>{cf999838-619f-4b94-863d-e81f9b2fb200}</Project>
+      <Name>StudentForYou.Profile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Studentforyousubjects\StudentForYou.Subjects.csproj">
       <Project>{d5ca3b2f-0ee4-400d-a3e7-4bfdbd9c4efb}</Project>
       <Name>StudentForYou.Subjects</Name>

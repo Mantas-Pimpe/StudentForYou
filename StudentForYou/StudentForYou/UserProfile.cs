@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using StudentForYoProfile;
 
 namespace StudentForYou
 {
@@ -16,16 +17,26 @@ namespace StudentForYou
         private RoundedButton recentpostsbtn;
         private Label label1;
         private string newUsername;
-        private int currentUserDataLine = 0;
-        private string[] bioArray = new string[100];
-        private string filePath = @"Resources\TempDatabase.txt";
+        private readonly int currentUserDataLine = 0;
+        private const string filePath = @"Resources\TempDatabase.txt";
         private RoundedButton PictureChangeButton;
         private string pictureFilePath = @"Resources\StockImage.png";
+        private const string bioFilePath = @"Resources\BioDatabase.txt";
+        private Profile logicProfile = new Profile();
 
-        public UserProfile(String username)
+        public UserProfile(string username)
         {
             InitializeComponent();
-            getUserData(username);
+            var (item1, bio, item3, item4) = logicProfile.GetUserData(username,pictureFilePath,currentUserDataLine) ?? throw new ArgumentNullException("logicProfile.getUserData(username,filePath,pictureFilePath,currentUserDataLine)");
+            username = item1;
+            currentUserDataLine = item3;
+            pictureFilePath = item4;
+
+            label1.Text += username;
+            UserName.Text = username;
+            newUsername = username;
+            UserInfo.Text = bio;
+            roundPicturebox1.ImageLocation = pictureFilePath;
 
         }
         private void InitializeComponent()
@@ -52,8 +63,6 @@ namespace StudentForYou
             this.UserInfo.Name = "UserInfo";
             this.UserInfo.Size = new System.Drawing.Size(316, 144);
             this.UserInfo.TabIndex = 1;
-            this.UserInfo.TextChanged += new System.EventHandler(this.UserInfo_TextChanged);
-            this.UserInfo.Leave += new System.EventHandler(this.UserInfo_Leave);
             // 
             // UserName
             // 
@@ -73,7 +82,7 @@ namespace StudentForYou
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(364, 327);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 24);
+            this.label1.Size = new System.Drawing.Size(81, 29);
             this.label1.TabIndex = 5;
             this.label1.Text = "About ";
             // 
@@ -171,109 +180,22 @@ namespace StudentForYou
             this.PerformLayout();
 
         }
-        private void getUserData(String username)
-        {
-            bool isNameFound = false;
-            string line;
-            string[] words = null;
-            System.IO.StreamReader file = new System.IO.StreamReader(filePath);
-            while ((line = file.ReadLine()) != null)
-            {
-                words = null;
-                if (line.Contains(username))
-                {
-                    words = line.Split(' ');
-                    if (username == words[0])
-                    {
-                        if(words[2] !="noPicture")
-                            pictureFilePath = words[2];
-                        for (int i = 3; i < words.Length; i++)
-                        {
-                            bioArray[i - 3] = words[i];
-                        }
-                        isNameFound = true;
-                        break;
-                    }
-                }
-                currentUserDataLine++;
-            }
-            file.Close();
-            if (!isNameFound)
-            {
-                MessageBox.Show("Name not found in database", "Unexpected error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
-            string bio = "";
-            int j = 0;
-            while (!string.IsNullOrEmpty(bioArray[j]))
-            {
-                bio = bio + bioArray[j] + " ";
-                j++;
-            }
-            label1.Text = label1.Text + username;
-            UserName.Text = username;
-            newUsername = username;
-            UserInfo.Text = bio;
-            roundPicturebox1.ImageLocation = pictureFilePath;
-        }
-        private void saveUserData(string currentUsername, string newUsername)
-        {
-            string lineToWrite = null;
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                for (int i = 0; i <= currentUserDataLine; i++)
-                    lineToWrite = reader.ReadLine();
-            }
-            string[] lineWords = lineToWrite.Split(' ');
-            lineWords[0] = newUsername;
-            lineWords[2] = pictureFilePath;
-            lineToWrite = null;
-            for (int i = 0; i < lineWords.Length; i++)
-            {
-                if (lineWords.Length - 1 == i)
-                    lineToWrite = lineToWrite + lineWords[i];
-                else
-                    lineToWrite = lineToWrite + lineWords[i] + " ";
-            }
-            string[] lines = File.ReadAllLines(filePath);
-            lines[currentUserDataLine] = lineToWrite;
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                for (int currentLine = 0; currentLine < lines.Length; currentLine++)
-                {
-                    writer.WriteLine(lines[currentLine]);
-                }
-            }
-
-        }
-
-        private void UserInfo_Leave(object sender, EventArgs e)
-        {
-            //
-            // Save textbox contents to file/ database
-            //
-
-        }
 
         private void UsernameChange_Click(object sender, EventArgs e)
         {
-            UsernameChangeWindow UsernameChange = new UsernameChangeWindow(filePath, UserName.Text);
-            UsernameChange.ShowDialog();
-            newUsername = UsernameChange.getUsername();
-            if(newUsername!= UserName.Text)
-            {
-                MessageBox.Show("Relog is required", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.Restart();
-            }
-                
+            var usernameChange = new UsernameChangeWindow(filePath, UserName.Text);
+            usernameChange.ShowDialog();
+            newUsername = usernameChange.getUsername();
+            if (newUsername == UserName.Text)
+                return;
+            MessageBox.Show("Relog is required", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Application.Restart();
+
         }
 
         private void LoggingOut_Click(object sender, EventArgs e)
         {
-            //
-            // Log out and promt to the login screen again, or just reopen the app
-            // 
-            saveUserData(UserName.Text, newUsername);
+            logicProfile.SaveUserData(newUsername,pictureFilePath,currentUserDataLine,UserInfo.Text);
             Application.Restart();
         }
 
@@ -294,31 +216,14 @@ namespace StudentForYou
         }
         private void UserProfile_FormClosed(object sender, FormClosedEventArgs e)
         {
-            saveUserData(UserName.Text, newUsername);
+            logicProfile.SaveUserData(newUsername, pictureFilePath, currentUserDataLine, UserInfo.Text);
             if (Application.OpenForms.OfType<Form>().Count() == 1)
                 Application.Exit();
         }
 
         private void PictureChangeButton_Click(object sender, EventArgs e)
         {
-            using (var openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    //Get the path of specified file
-                    pictureFilePath = openFileDialog.FileName;
-                }
-            }
-        }
-
-        private void UserInfo_TextChanged(object sender, EventArgs e)
-        {
-
+            pictureFilePath = logicProfile.PictureChange();
         }
     }
 }
