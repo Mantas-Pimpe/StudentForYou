@@ -57,14 +57,13 @@
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(832, 570);
+            this.SaveBtn.Location = new System.Drawing.Point(832, 574);
             this.SaveBtn.Margin = new System.Windows.Forms.Padding(6);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(292, 45);
             this.SaveBtn.TabIndex = 2;
             this.SaveBtn.Text = "Save";
             this.SaveBtn.UseVisualStyleBackColor = true;
-            //this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // button1
             // 

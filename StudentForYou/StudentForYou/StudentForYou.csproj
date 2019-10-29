@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddReviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddReviewForm.Designer.cs">
+      <DependentUpon>AddReviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddSubjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="vuLoginForm.Designer.cs" />
+    <EmbeddedResource Include="AddReviewForm.resx">
+      <DependentUpon>AddReviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddSubjectForm.resx">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </EmbeddedResource>
