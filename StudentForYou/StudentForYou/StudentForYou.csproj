@@ -222,6 +222,10 @@
       <Project>{f704878e-3cc0-495f-ae90-c315c2d78219}</Project>
       <Name>StudentForYou.GroupChat</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StudentForYou.Profile\StudentForYou.Profile.csproj">
+      <Project>{cf999838-619f-4b94-863d-e81f9b2fb200}</Project>
+      <Name>StudentForYou.Profile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StudentForYou.RecentPosts\StudentForYou.RecentPosts.csproj">
       <Project>{d4193337-7dd7-4389-86c4-21be0f6b5360}</Project>
       <Name>StudentForYou.RecentPosts</Name>

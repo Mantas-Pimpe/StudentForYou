@@ -27,11 +27,9 @@ namespace StudentForYou
         {
             var vuLogin  = new vuLoginForm();
             vuLogin.ShowDialog();
-            bool isLoginOk = vuLogin.getLoginStatus();
-            string username = vuLogin.getLoginUsername();
-            if (isLoginOk)
+            if (vuLogin.isOK)
             {
-                var rpf = new RecentQuestions(username);
+                var rpf = new RecentQuestions(vuLogin.username);
                 rpf.Show();
                 this.Hide();
             }
