@@ -285,6 +285,10 @@ namespace StudentForYou
         {
             List <QuestionDetails> tempList = details.SearchQuestion(questionList, txtSearch.Text);
             WriteToFlowLayoutPanel(tempList);
+
+        private void recentquestionsbtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

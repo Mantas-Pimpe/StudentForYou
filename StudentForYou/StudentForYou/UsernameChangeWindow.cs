@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using StudentForYouProfile;
 
 namespace StudentForYou
 {
@@ -10,16 +11,13 @@ namespace StudentForYou
         private TextBox textBox1;
         private Label label1;
         private RoundedButton SaveButton;
-        private int maximumUsernameLength = 15;
-        private int minimumUsernameLength = 3;
-        private string filePath;
         private string username;
         private Label label2;
-        private string newUsername;
-        public UsernameChangeWindow(string filePath, string username)
+        public string newUsername { get; set; }
+        private ChangeUsername usernameChange = new ChangeUsername();
+        public UsernameChangeWindow(string username)
         {
             InitializeComponent();
-            this.filePath = filePath;
             this.username = username;
             newUsername = username;
 
@@ -84,43 +82,10 @@ namespace StudentForYou
             this.PerformLayout();
 
         }
-        private int IsUsernameTaken(string username)
-        {
-            // return 0 if everything checks out
-            // return 1 if username is taken
-            // return 2 if username is too long
-            // return 3 if username is too short
-            // return 4 if username contains spaces
-            if (username.Length > maximumUsernameLength)
-            {
-                return 2;
-            }
-            else if (username.Length < minimumUsernameLength)
-            {
-                return 3;
-            }
-            else if (username.Contains(' ') == true)
-            {
-                return 4;
-            }
-            string[] lines = File.ReadLines(filePath).ToArray();
-            string[] words = null;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                words = lines[i].Split(' ');
-                if (words[0] == textBox1.Text)
-                {
-                    return 1;
-                }
-                words = null;
-            }
-            return 0;
-
-        }
         private void ChangeInfomationLabel()
         {
 
-            switch (IsUsernameTaken(textBox1.Text))
+            switch (usernameChange.IsUsernameTaken(textBox1.Text))
             {
 
                 case 0:
@@ -154,7 +119,8 @@ namespace StudentForYou
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (IsUsernameTaken(username) == 0)
+
+            if (usernameChange.IsUsernameTaken(textBox1.Text) == 0)
             {
                 this.newUsername = textBox1.Text;
                 this.Close();
@@ -169,10 +135,6 @@ namespace StudentForYou
         private void UsernameChangeWindow_Load(object sender, EventArgs e)
         {
 
-        }
-        public string getUsername()
-        {
-            return newUsername;
         }
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
