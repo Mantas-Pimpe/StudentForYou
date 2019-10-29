@@ -32,13 +32,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.btnDislike = new System.Windows.Forms.Button();
+            this.btnLike = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtAnswers
             // 
-            this.txtAnswers.Location = new System.Drawing.Point(24, 109);
+            this.txtAnswers.Location = new System.Drawing.Point(24, 143);
             this.txtAnswers.Name = "txtAnswers";
-            this.txtAnswers.Size = new System.Drawing.Size(1196, 370);
+            this.txtAnswers.ReadOnly = true;
+            this.txtAnswers.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
+            this.txtAnswers.Size = new System.Drawing.Size(1196, 336);
             this.txtAnswers.TabIndex = 0;
             this.txtAnswers.Text = "";
             this.txtAnswers.TextChanged += new System.EventHandler(this.txtAnswers_TextChanged);
@@ -72,11 +78,55 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(24, 120);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(48, 22);
+            this.lblInfo.TabIndex = 4;
+            this.lblInfo.Text = "label2";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(1105, 120);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(48, 22);
+            this.lblDate.TabIndex = 5;
+            this.lblDate.Text = "label2";
+            // 
+            // btnDislike
+            // 
+            this.btnDislike.Font = new System.Drawing.Font("Arial Narrow", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDislike.Location = new System.Drawing.Point(1164, 22);
+            this.btnDislike.Name = "btnDislike";
+            this.btnDislike.Size = new System.Drawing.Size(72, 40);
+            this.btnDislike.TabIndex = 6;
+            this.btnDislike.Text = "Dislike";
+            this.btnDislike.UseVisualStyleBackColor = true;
+            // 
+            // btnLike
+            // 
+            this.btnLike.Font = new System.Drawing.Font("Arial Narrow", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLike.Location = new System.Drawing.Point(1081, 22);
+            this.btnLike.Name = "btnLike";
+            this.btnLike.Size = new System.Drawing.Size(72, 40);
+            this.btnLike.TabIndex = 7;
+            this.btnLike.Text = "Like";
+            this.btnLike.UseVisualStyleBackColor = true;
+            // 
             // SelectedQuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.btnLike);
+            this.Controls.Add(this.btnDislike);
+            this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
@@ -95,5 +145,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Button btnDislike;
+        private System.Windows.Forms.Button btnLike;
     }
 }
