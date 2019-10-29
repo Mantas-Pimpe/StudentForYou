@@ -13,16 +13,19 @@ namespace StudentForYou
 {
     public partial class CourseDetailsForm : Form
     {
-        DescriptionReader Reader;
-        string nameofcourse;
-        public CourseDetailsForm(string coursename)
+        DescriptionReader reader;
+       string nameOfCourse;
+        string filePath;
+        FileUploader uploader;
+        public CourseDetailsForm(string courseName)
         {
             InitializeComponent();
-            nameofcourse = coursename;
-            Reader = new DescriptionReader(coursename);
-            CourseDetailsNameBox.Text = coursename;
-          
-            CourseDetailsTextBox.Text = Reader.readdescription();
+            nameOfCourse = courseName;
+            reader = new DescriptionReader(courseName);
+            CourseDetailsNameBox.Text = courseName;
+            CourseDetailsTextBox.Text = reader.ReadDescription();
+            uploader = new FileUploader(courseName);
+            downloadsListView.Items.AddRange(uploader.UploadFiles());
 
 
         }
@@ -39,7 +42,7 @@ namespace StudentForYou
 
         private void CourseDetailsSaveButton_Click(object sender, EventArgs e)
         {
-            Reader.uploadtofile(Reader.readdescription());
+            reader.UploadToFile(CourseDetailsTextBox.Text);
             this.DialogResult = DialogResult.OK;
         }
 
@@ -56,9 +59,33 @@ namespace StudentForYou
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            CourseDownloads Downloadsform = new CourseDownloads(nameofcourse);
-            Downloadsform.ShowDialog();
+            CourseDownloads downloadsForm = new CourseDownloads(nameOfCourse);
+            downloadsForm.ShowDialog();
             this.Show();
+        }
+
+        private void CourseDownloadsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UploadClick(object sender, EventArgs e)
+        {
+            downloadsListView.Items.Add(uploader.UploadSingleFile());
+        }
+
+        private void DownloadsListView_DoubleClick(object sender, EventArgs e)
+        { 
+
+              if (downloadsListView.SelectedItems.Count > 0)
+            {
+
+                var selected = downloadsListView.SelectedItems[0];
+                var selectedFilePath = selected.Tag.ToString();
+                System.Diagnostics.Process.Start(selectedFilePath);
+
+            }
+            
         }
     }
 }
