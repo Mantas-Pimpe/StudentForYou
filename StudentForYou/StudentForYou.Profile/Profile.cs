@@ -40,7 +40,7 @@ namespace StudentForYouProfile
         public Tuple<string, string, int, string> GetUserData(string username, string pictureFilePath,
             int currentUserDataLine)
         {
-            string line;
+            var line = string.Empty;
             var file = new StreamReader(filePath);
             while ((line = file.ReadLine()) != null)
             {
@@ -120,7 +120,7 @@ namespace StudentForYouProfile
 
         public void SaveUserData(string newUsername, string pictureFilePath, int currentUserDataLine, string bio)
         {
-            string lineToWrite = null;
+            var lineToWrite = string.Empty;
             using (var reader = new StreamReader(filePath))
             {
                 for (var i = 0; i <= currentUserDataLine; i++)
