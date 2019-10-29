@@ -13,18 +13,18 @@ namespace StudentForYou.RecentPosts
     {
         public int CompareTo(QuestionDetails other)
         {
-            if (this.Question == other.Question)
+            if (this.question == other.question)
             {
-                return this.QuestionViews.CompareTo(other.QuestionViews);
+                return this.questionViews.CompareTo(other.questionViews);
             }
-            return other.Question.CompareTo(this.Question);
+            return other.question.CompareTo(this.question);
         }
         public class SortAnswersAscending : IComparer<QuestionDetails>
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                var xAnswers = Int32.Parse(x.QuestionAnswers);
-                var yAnswers = Int32.Parse(y.QuestionAnswers);
+                var xAnswers = Int32.Parse(x.questionAnswers);
+                var yAnswers = Int32.Parse(y.questionAnswers);
                 if (xAnswers > yAnswers)
                 {
                     return 1;
@@ -44,8 +44,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                var xAnswers = Int32.Parse(x.QuestionAnswers);
-                var yAnswers = Int32.Parse(y.QuestionAnswers);
+                var xAnswers = Int32.Parse(x.questionAnswers);
+                var yAnswers = Int32.Parse(y.questionAnswers);
                 if (xAnswers < yAnswers)
                 {
                     return 1;
@@ -65,8 +65,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                var xLikes = Int32.Parse(x.QuestionLikes);
-                var yLikes = Int32.Parse(y.QuestionLikes);
+                var xLikes = Int32.Parse(x.questionLikes);
+                var yLikes = Int32.Parse(y.questionLikes);
                 if (xLikes > yLikes)
                 {
                     return 1;
@@ -86,8 +86,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                var xLikes = Int32.Parse(x.QuestionLikes);
-                var yLikes = Int32.Parse(y.QuestionLikes);
+                var xLikes = Int32.Parse(x.questionLikes);
+                var yLikes = Int32.Parse(y.questionLikes);
                 if (xLikes < yLikes)
                 {
                     return 1;
@@ -107,8 +107,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                var xViews = Int32.Parse(x.QuestionViews);
-                var yViews = Int32.Parse(y.QuestionViews);
+                var xViews = Int32.Parse(x.questionViews);
+                var yViews = Int32.Parse(y.questionViews);
                 if (xViews > yViews)
                 {
                     return 1;
@@ -125,8 +125,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                var xViews = Int32.Parse(x.QuestionViews);
-                var yViews = Int32.Parse(y.QuestionViews);
+                var xViews = Int32.Parse(x.questionViews);
+                var yViews = Int32.Parse(y.questionViews);
                 if (xViews < yViews)
                 {
                     return 1;
@@ -139,21 +139,21 @@ namespace StudentForYou.RecentPosts
             }
         }
 
-        public string QuestionLikes;
-        public string QuestionViews;
-        public string QuestionAnswers;
-        public string Question;
-        public string AnswersForQuestion;
-        public DateTime CurrentDate;
+        public string questionLikes;
+        public string questionViews;
+        public string questionAnswers;
+        public string question;
+        public string answersForQuestion;
+        public DateTime currentDate;
 
         public QuestionDetails(string questionLikes, string questionViews, string questionAnswers, string question, string answerForQuestion, DateTime currentDate)
         {
-            QuestionLikes = questionLikes;
-            QuestionViews = questionViews;
-            QuestionAnswers = questionAnswers;
-            Question = question;
-            AnswersForQuestion = answerForQuestion;
-            CurrentDate = currentDate;
+            this.questionLikes = questionLikes;
+            this.questionViews = questionViews;
+            this.questionAnswers = questionAnswers;
+            this.question = question;
+            this.answersForQuestion = answerForQuestion;
+            this.currentDate = currentDate;
         }
 
 
@@ -179,10 +179,10 @@ namespace StudentForYou.RecentPosts
         public void AddAnswers(List<QuestionDetails> questionList, int placeToReplace, string newAnswer, ref string answerCount)
         {
             QuestionDetails temp = questionList[placeToReplace];
-            var count = Int32.Parse(temp.QuestionAnswers);
+            var count = Int32.Parse(temp.questionAnswers);
             count++;
-            temp.QuestionAnswers = count.ToString();
-            temp.AnswersForQuestion += "^" + newAnswer;
+            temp.questionAnswers = count.ToString();
+            temp.answersForQuestion += "^" + newAnswer;
             questionList[placeToReplace] = temp;
             var answers = count.ToString();
             answerCount = answers;
@@ -210,9 +210,9 @@ namespace StudentForYou.RecentPosts
         public void AddLike(List<QuestionDetails> questionList, int placeToReplace, ref string newLikes)
         {
             QuestionDetails temp = questionList[placeToReplace];
-            var count = Int32.Parse(temp.QuestionLikes);
+            var count = Int32.Parse(temp.questionLikes);
             count++;
-            temp.QuestionLikes = count.ToString();
+            temp.questionLikes = count.ToString();
             questionList[placeToReplace] = temp;
             var likes = count.ToString();
             newLikes = likes;
@@ -240,9 +240,9 @@ namespace StudentForYou.RecentPosts
         public void AddViews(List<QuestionDetails> questionList, int placeToReplace)
         {
             QuestionDetails temp = questionList[placeToReplace];
-            var count = Int32.Parse(temp.QuestionViews);
+            var count = Int32.Parse(temp.questionViews);
             count++;
-            temp.QuestionViews = count.ToString();
+            temp.questionViews = count.ToString();
             questionList[placeToReplace] = temp;
             var views = count.ToString();
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
@@ -285,9 +285,9 @@ namespace StudentForYou.RecentPosts
         public void AddDislike(List<QuestionDetails> questionList, int placeToReplace, ref string newLikes)
         {
             QuestionDetails temp = questionList[placeToReplace];
-            var count = Int32.Parse(temp.QuestionLikes);
+            var count = Int32.Parse(temp.questionLikes);
             count--;
-            temp.QuestionLikes = count.ToString();
+            temp.questionLikes = count.ToString();
             questionList[placeToReplace] = temp;
             var likes = count.ToString();
             newLikes = likes;
@@ -317,7 +317,7 @@ namespace StudentForYou.RecentPosts
             List<QuestionDetails> tempList = new List<QuestionDetails>(); 
             foreach (var s in questionList)
             {
-                if (System.Text.RegularExpressions.Regex.IsMatch(s.Question, questionKey, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                if (System.Text.RegularExpressions.Regex.IsMatch(s.question, questionKey, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
                 {
                     tempList.Add(s);
                 }

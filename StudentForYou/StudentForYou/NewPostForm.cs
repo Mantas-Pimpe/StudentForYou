@@ -35,18 +35,18 @@ namespace StudentForYou
         private void SaveBtn_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
         {
             var newPost = new QuestionDetails();
-            newPost.Question = questiontxt.Text;
-            newPost.AnswersForQuestion = " ";
-            newPost.QuestionAnswers = "0";
-            newPost.QuestionLikes = "0";
-            newPost.QuestionViews = "0";
-            newPost.CurrentDate = DateTime.Today;
+            newPost.question = questiontxt.Text;
+            newPost.answersForQuestion = " ";
+            newPost.questionAnswers = "0";
+            newPost.questionLikes = "0";
+            newPost.questionViews = "0";
+            newPost.currentDate = DateTime.Today;
 
             questionList.Add(newPost);
             var text = questiontxt.Text;
             using (StreamWriter writeText = new StreamWriter(@"Resources\recentquestions.txt", true))
             {
-                writeText.Write("0" + "`" + "0" + "`" + "0" + "`" + text + "`" + " " + "`"+ newPost.CurrentDate + Environment.NewLine);
+                writeText.Write("0" + "`" + "0" + "`" + "0" + "`" + text + "`" + " " + "`"+ newPost.currentDate + Environment.NewLine);
             }
             var rpf = new RecentQuestions(username);
             rpf.Show();

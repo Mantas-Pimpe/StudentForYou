@@ -46,7 +46,7 @@ namespace StudentForYou
         void RefreshTextBox(int placeToReplace, List<QuestionDetails> questionList)
         {
             txtAnswers.Text = "";
-            var line = questionList[placeToReplace].AnswersForQuestion;
+            var line = questionList[placeToReplace].answersForQuestion;
             string[] splittedAnswers = line.Split('^');
             for (int i = 1; i < splittedAnswers.Length; i++)
             {

@@ -220,10 +220,10 @@ namespace StudentForYou
             flowLayoutPanel1.Controls.Clear();
             for (int i = 0; i < questionList.Count; i++)
             {
-                flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
-                flowLayoutPanel1.Controls.Add(AddNewLikesButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
-                flowLayoutPanel1.Controls.Add(AddNewViewsButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
-                flowLayoutPanel1.Controls.Add(AddNewAnswersButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
+                flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
+                flowLayoutPanel1.Controls.Add(AddNewLikesButton(questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
+                flowLayoutPanel1.Controls.Add(AddNewViewsButton(questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
+                flowLayoutPanel1.Controls.Add(AddNewAnswersButton(questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
             }
         }
         private void button1_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
