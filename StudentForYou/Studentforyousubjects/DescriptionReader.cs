@@ -6,11 +6,11 @@ namespace Studentforyousubjects
     {
         string filePath;
         string reviewsFilePath;
-       public DescriptionReader(string coursename)
+       public DescriptionReader(string courseName)
         {
             filePath="Resources\\";
-            reviewsFilePath = filePath + coursename + " " + "reviews.txt";
-            filePath = filePath + coursename;
+            reviewsFilePath = filePath + courseName + " " + "reviews.txt";
+            filePath = filePath + courseName;
             filePath = filePath + ".txt";
             
         }
@@ -44,14 +44,14 @@ namespace Studentforyousubjects
             return text;
 
         }
-       public void UploadToFile(string texttoupload)
+       public void UploadToFile(string textToUpload)
         {
-            File.WriteAllText(filePath, texttoupload);
+            File.WriteAllText(filePath, textToUpload);
         }
 
-        public void UploadReviews(string texttoupload)
+        public void UploadReviews(string textToUpload)
         {
-            File.AppendAllText(reviewsFilePath, texttoupload);
+            File.AppendAllText(reviewsFilePath, textToUpload);
         }
     }
 }

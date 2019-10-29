@@ -27,7 +27,6 @@ namespace StudentForYou
                 CourseDetailsReviewsTextBox.AppendText(System.Environment.NewLine);
             }
 
-           // CourseDetailsReviewsTextBox.Text = 
             uploader = new FileUploader(courseName);
             downloadsListView.Items.AddRange(uploader.UploadFiles());
         }
