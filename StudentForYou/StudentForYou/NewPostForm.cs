@@ -34,7 +34,7 @@ namespace StudentForYou
 
         private void SaveBtn_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
         {
-            QuestionDetails newPost = new QuestionDetails();
+            var newPost = new QuestionDetails();
             newPost.Question = questiontxt.Text;
             newPost.AnswersForQuestion = " ";
             newPost.QuestionAnswers = "0";
@@ -43,7 +43,7 @@ namespace StudentForYou
             newPost.CurrentDate = DateTime.Today;
 
             questionList.Add(newPost);
-            String text = questiontxt.Text;
+            var text = questiontxt.Text;
             using (StreamWriter writeText = new StreamWriter(@"Resources\recentquestions.txt", true))
             {
                 writeText.Write("0" + "`" + "0" + "`" + "0" + "`" + text + "`" + " " + "`"+ newPost.CurrentDate + Environment.NewLine);

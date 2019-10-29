@@ -23,29 +23,34 @@ namespace StudentForYou
             this.username = username;
             AddNewLabel(question);
             AddNewButton(850, 530);
-            AddLikeButton(870, 5, question, likes, views, answers, placeToReplace, questionList, details);
             lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
-            int value = postDate.Month;
+            var value = postDate.Month;
             var enumDisplayStatus = (QuestionDetails.Months)value;
-            string stringValue = enumDisplayStatus.ToString();
+            var stringValue = enumDisplayStatus.ToString();
             lblDate.Text = postDate.Year + " " + stringValue + " " + postDate.Day;
+            RefreshTextBox(placeToReplace, questionList);
             button1.Click += delegate (Object sender, EventArgs e)
             {
                 button1_Click(sender, e, likes, views, answers, question, placeToReplace, questionList, details);
             };
-            RefreshTextBox(placeToReplace, questionList);
+            btnDislike.Click += delegate (Object sender, EventArgs e)
+            {
+                btnDislike_Click(sender, e, questionList, placeToReplace, details, likes, views, answers);
+            };
+            btnLike.Click += delegate (Object sender, EventArgs e)
+            {
+                btnLike_Click(sender, e, questionList, placeToReplace, details, likes, views, answers);
+            };
         }
 
         void RefreshTextBox(int placeToReplace, List<QuestionDetails> questionList)
         {
             txtAnswers.Text = "";
-            Random rnd = new Random();
-            string line = questionList[placeToReplace].AnswersForQuestion;
+            var line = questionList[placeToReplace].AnswersForQuestion;
             string[] splittedAnswers = line.Split('^');
             for (int i = 1; i < splittedAnswers.Length; i++)
             {
-                int randomNumber = rnd.Next(555, 987587);
-                txtAnswers.AppendText("User" + randomNumber + ": " + splittedAnswers[i]);
+                txtAnswers.AppendText(splittedAnswers[i]);
                 txtAnswers.AppendText(Environment.NewLine);
             }
         }
@@ -54,28 +59,11 @@ namespace StudentForYou
         {
             System.Windows.Forms.Label label = new System.Windows.Forms.Label();
             this.Controls.Add(label);
-            label.Size = new System.Drawing.Size(870, 30);
+            label.Size = new System.Drawing.Size(750, 50);
             label.Font = new Font("Arial", 16, FontStyle.Regular);
             label.TextAlign = ContentAlignment.MiddleCenter;
             label.Text = question;
             return label;
-        }
-
-        public System.Windows.Forms.Button AddLikeButton(int xPos, int yPos, String question, String likes, String views, String answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
-        {
-            System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
-            this.Controls.Add(btn);
-            btn.Width = 60;
-            btn.Location = new Point(xPos, yPos);
-            btn.Height = 40;
-            btn.TextAlign = ContentAlignment.MiddleCenter;
-            btn.Text = "Like";
-            btn.Click += delegate (object sender, EventArgs e)
-            {
-                details.AddLike(questionList, placeToReplace);
-            };
-            btn.Click += new EventHandler(this.button_click);
-            return btn;
         }
 
         public System.Windows.Forms.Button AddNewButton(int xPos, int yPos)
@@ -107,13 +95,31 @@ namespace StudentForYou
         {
             if (richTextBox1.Text != String.Empty)
             {
-                details.AddAnswers(questionList, placeToReplace, richTextBox1.Text);
+                details.AddAnswers(questionList, placeToReplace, username + " : " + richTextBox1.Text, ref answers);
+                lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
             }
-            richTextBox1.Text = "";
+            richTextBox1.Clear();
             RefreshTextBox(placeToReplace, questionList);
         }
 
         private void txtAnswers_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDislike_Click(object sender, EventArgs e, List<QuestionDetails> questionList, int placeToReplace, QuestionDetails details, String likes, String views, String answers)
+        {
+            details.AddDislike(questionList, placeToReplace, ref likes);
+            lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
+        }
+
+        private void btnLike_Click(object sender, EventArgs e, List<QuestionDetails> questionList, int placeToReplace, QuestionDetails details, String likes, String views, String answers)
+        {
+            details.AddLike(questionList, placeToReplace, ref likes);
+            lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
+        }
+
+        private void lblQuestion_Click(object sender, EventArgs e)
         {
 
         }

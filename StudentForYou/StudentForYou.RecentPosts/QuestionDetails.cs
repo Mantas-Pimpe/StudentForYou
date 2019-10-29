@@ -9,14 +9,22 @@ using System.Collections;
 
 namespace StudentForYou.RecentPosts
 {
-    public struct QuestionDetails
+    public struct QuestionDetails : IComparable<QuestionDetails>
     {
+        public int CompareTo(QuestionDetails other)
+        {
+            if (this.Question == other.Question)
+            {
+                return this.QuestionViews.CompareTo(other.QuestionViews);
+            }
+            return other.Question.CompareTo(this.Question);
+        }
         public class SortAnswersAscending : IComparer<QuestionDetails>
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                int xAnswers = Int32.Parse(x.QuestionAnswers);
-                int yAnswers = Int32.Parse(y.QuestionAnswers);
+                var xAnswers = Int32.Parse(x.QuestionAnswers);
+                var yAnswers = Int32.Parse(y.QuestionAnswers);
                 if (xAnswers > yAnswers)
                 {
                     return 1;
@@ -36,8 +44,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                int xAnswers = Int32.Parse(x.QuestionAnswers);
-                int yAnswers = Int32.Parse(y.QuestionAnswers);
+                var xAnswers = Int32.Parse(x.QuestionAnswers);
+                var yAnswers = Int32.Parse(y.QuestionAnswers);
                 if (xAnswers < yAnswers)
                 {
                     return 1;
@@ -57,8 +65,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                int xLikes = Int32.Parse(x.QuestionLikes);
-                int yLikes = Int32.Parse(y.QuestionLikes);
+                var xLikes = Int32.Parse(x.QuestionLikes);
+                var yLikes = Int32.Parse(y.QuestionLikes);
                 if (xLikes > yLikes)
                 {
                     return 1;
@@ -78,8 +86,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                int xLikes = Int32.Parse(x.QuestionLikes);
-                int yLikes = Int32.Parse(y.QuestionLikes);
+                var xLikes = Int32.Parse(x.QuestionLikes);
+                var yLikes = Int32.Parse(y.QuestionLikes);
                 if (xLikes < yLikes)
                 {
                     return 1;
@@ -99,8 +107,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                int xViews = Int32.Parse(x.QuestionViews);
-                int yViews = Int32.Parse(y.QuestionViews);
+                var xViews = Int32.Parse(x.QuestionViews);
+                var yViews = Int32.Parse(y.QuestionViews);
                 if (xViews > yViews)
                 {
                     return 1;
@@ -117,8 +125,8 @@ namespace StudentForYou.RecentPosts
         {
             public int Compare(QuestionDetails x, QuestionDetails y)
             {
-                int xViews = Int32.Parse(x.QuestionViews);
-                int yViews = Int32.Parse(y.QuestionViews);
+                var xViews = Int32.Parse(x.QuestionViews);
+                var yViews = Int32.Parse(y.QuestionViews);
                 if (xViews < yViews)
                 {
                     return 1;
@@ -128,51 +136,6 @@ namespace StudentForYou.RecentPosts
                     return -1;
                 }
                 else return 0;
-            }
-        }
-        private class sortViewAscendingHelper: IComparer
-        {
-            int IComparer.Compare(object x, object y)
-            {
-                QuestionDetails q1 = (QuestionDetails)x;
-                QuestionDetails q2 = (QuestionDetails)y;
-                int q1Views = Int32.Parse(q1.QuestionViews);
-                int q2Views = Int32.Parse(q2.QuestionViews);
-                if (q1Views > q2Views)
-                {
-                    return 1;
-                }
-                if (q1Views < q2Views)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
-
-        private class sortViewDescendingHelper: IComparer
-        {
-            int IComparer.Compare(object x, object y)
-            {
-                QuestionDetails q1 = (QuestionDetails)x;
-                QuestionDetails q2 = (QuestionDetails)y;
-                int q1Views = Int32.Parse(q1.QuestionViews);
-                int q2Views = Int32.Parse(q2.QuestionViews);
-                if (q1Views < q2Views)
-                {
-                    return 1;
-                }
-                if (q1Views > q2Views)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
             }
         }
 
@@ -210,23 +173,26 @@ namespace StudentForYou.RecentPosts
                 currentDate = Convert.ToDateTime(line[5]);
                 questionList.Add(new QuestionDetails(likes, views, answers, question, line[4], currentDate));
             }
+            questionList.Sort();
             return questionList;
         }
-        public void AddAnswers(List<QuestionDetails> questionList, int placeToReplace, string newAnswer)
+        public void AddAnswers(List<QuestionDetails> questionList, int placeToReplace, string newAnswer, ref string answerCount)
         {
             QuestionDetails temp = questionList[placeToReplace];
-            int count = Int32.Parse(temp.QuestionAnswers);
+            var count = Int32.Parse(temp.QuestionAnswers);
             count++;
             temp.QuestionAnswers = count.ToString();
             temp.AnswersForQuestion += "^" + newAnswer;
             questionList[placeToReplace] = temp;
-            String answers = count.ToString();
+            var answers = count.ToString();
+            answerCount = answers;
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             string[] line = lines[placeToReplace].Split('`');
             line[2] = answers;
-            string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "^" + newAnswer + "`" + line[5];
+            var newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "^" + newAnswer + "`" + line[5];
+            Console.WriteLine(newLine);
             lines[placeToReplace] = newLine;
-            var writeText = new StreamWriter(@"..\Debug\Resources\recentQuestions.txt");
+            var writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
 
             for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
             {
@@ -241,18 +207,19 @@ namespace StudentForYou.RecentPosts
             }
             writeText.Close();
         }
-        public void AddLike(List<QuestionDetails> questionList, int placeToReplace)
+        public void AddLike(List<QuestionDetails> questionList, int placeToReplace, ref string newLikes)
         {
             QuestionDetails temp = questionList[placeToReplace];
-            int count = Int32.Parse(temp.QuestionLikes);
+            var count = Int32.Parse(temp.QuestionLikes);
             count++;
             temp.QuestionLikes = count.ToString();
             questionList[placeToReplace] = temp;
-            String likes = count.ToString();
+            var likes = count.ToString();
+            newLikes = likes;
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             string[] line = lines[placeToReplace].Split('`');
             line[0] = likes;
-            string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "`" + line[5];
+            var newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "`" + line[5];
             lines[placeToReplace] = newLine;
             var writeText = new StreamWriter(@"..\Debug\Resources\recentQuestions.txt");
 
@@ -273,15 +240,15 @@ namespace StudentForYou.RecentPosts
         public void AddViews(List<QuestionDetails> questionList, int placeToReplace)
         {
             QuestionDetails temp = questionList[placeToReplace];
-            int count = Int32.Parse(temp.QuestionViews);
+            var count = Int32.Parse(temp.QuestionViews);
             count++;
             temp.QuestionViews = count.ToString();
             questionList[placeToReplace] = temp;
-            String views = count.ToString();
+            var views = count.ToString();
             string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
             string[] line = lines[placeToReplace].Split('`');
             line[1] = views;
-            string newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "`" + line[5];
+            var newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "`" + line[5];
             lines[placeToReplace] = newLine;
             var writeText = new StreamWriter(@"..\Debug\Resources\recentQuestions.txt");
 
@@ -314,6 +281,49 @@ namespace StudentForYou.RecentPosts
             November,
             December
         };
+
+        public void AddDislike(List<QuestionDetails> questionList, int placeToReplace, ref string newLikes)
+        {
+            QuestionDetails temp = questionList[placeToReplace];
+            var count = Int32.Parse(temp.QuestionLikes);
+            count--;
+            temp.QuestionLikes = count.ToString();
+            questionList[placeToReplace] = temp;
+            var likes = count.ToString();
+            newLikes = likes;
+            string[] lines = File.ReadAllLines(@"..\Debug\Resources\recentquestions.txt");
+            string[] line = lines[placeToReplace].Split('`');
+            line[0] = likes;
+            var newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "`" + line[5];
+            lines[placeToReplace] = newLine;
+            var writeText = new StreamWriter(@"..\Debug\Resources\recentQuestions.txt");
+
+            for (int currentLine = 0; currentLine < lines.Length; ++currentLine)
+            {
+                if (currentLine == placeToReplace)
+                {
+                    writeText.WriteLine(lines[placeToReplace]);
+                }
+                else
+                {
+                    writeText.WriteLine(lines[currentLine]);
+                }
+            }
+            writeText.Close();
+        }
+
+        public List<QuestionDetails> SearchQuestion (List<QuestionDetails> questionList, string questionKey)
+        {
+            List<QuestionDetails> tempList = new List<QuestionDetails>(); 
+            foreach (var s in questionList)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(s.Question, questionKey, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                {
+                    tempList.Add(s);
+                }
+            }
+            return tempList;
+        }
 
     }
 }

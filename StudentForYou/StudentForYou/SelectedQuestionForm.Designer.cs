@@ -34,6 +34,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
+            this.btnDislike = new System.Windows.Forms.Button();
+            this.btnLike = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtAnswers
@@ -95,11 +97,33 @@
             this.lblDate.TabIndex = 5;
             this.lblDate.Text = "label2";
             // 
+            // btnDislike
+            // 
+            this.btnDislike.Font = new System.Drawing.Font("Arial Narrow", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDislike.Location = new System.Drawing.Point(1164, 22);
+            this.btnDislike.Name = "btnDislike";
+            this.btnDislike.Size = new System.Drawing.Size(72, 40);
+            this.btnDislike.TabIndex = 6;
+            this.btnDislike.Text = "Dislike";
+            this.btnDislike.UseVisualStyleBackColor = true;
+            // 
+            // btnLike
+            // 
+            this.btnLike.Font = new System.Drawing.Font("Arial Narrow", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLike.Location = new System.Drawing.Point(1081, 22);
+            this.btnLike.Name = "btnLike";
+            this.btnLike.Size = new System.Drawing.Size(72, 40);
+            this.btnLike.TabIndex = 7;
+            this.btnLike.Text = "Like";
+            this.btnLike.UseVisualStyleBackColor = true;
+            // 
             // SelectedQuestionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.btnLike);
+            this.Controls.Add(this.btnDislike);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.button1);
@@ -122,5 +146,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Button btnDislike;
+        private System.Windows.Forms.Button btnLike;
     }
 }

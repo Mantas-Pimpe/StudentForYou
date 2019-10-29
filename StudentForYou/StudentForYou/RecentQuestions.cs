@@ -17,17 +17,32 @@ namespace StudentForYou
             InitializeComponent();
             this.username = username;
             List<QuestionDetails> questionList = details.getQuestionDetails();
-            for (int i = 0; i < questionList.Count; i++)
-            {
-                flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
-                flowLayoutPanel1.Controls.Add(AddNewLikesButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
-                flowLayoutPanel1.Controls.Add(AddNewViewsButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
-                flowLayoutPanel1.Controls.Add(AddNewAnswersButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
-            }
-
+            WriteToFlowLayoutPanel(questionList);
+            button1.Text = "Likes  " + char.ConvertFromUtf32(0x2191);
+            button2.Text = "Views  " + char.ConvertFromUtf32(0x2191);
+            button3.Text = "Answers  " + char.ConvertFromUtf32(0x2191);
             newpostbtn.Click += delegate (object sender, EventArgs e)
             {
                 newpostbtn_Click(sender, e, questionList);
+            };
+
+            button1.Click += delegate (object sender, EventArgs e)
+            {
+                button1_Click(sender, e, questionList);
+            };
+
+            button2.Click += delegate (object sender, EventArgs e)
+            {
+                button2_Click(sender, e, questionList);
+            };
+
+            button3.Click += delegate (object sender, EventArgs e)
+            {
+                button3_Click(sender, e, questionList);
+            };
+            txtSearch.TextChanged += delegate (object sender, EventArgs e)
+            {
+                txtSearch_TextChanged(sender, e, details , questionList);
             };
             recentquestionsbtn.Enabled = false;
         }
@@ -45,6 +60,16 @@ namespace StudentForYou
             btn.Left = 15;
             btn.Text = question;
             A += 1;
+            var answ = Int32.Parse(answers);
+            var likeColor = Int32.Parse(likes);
+            if (likeColor.IsLessThan(0))
+            {
+                btn.BackColor = Color.Tomato;
+            }
+            else if (answ.IsGreaterThan(0))
+            {
+                btn.BackColor = Color.LightGreen;
+            }
             btn.Click += delegate (object sender, EventArgs e)
             {
                 button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
@@ -58,11 +83,22 @@ namespace StudentForYou
             flowLayoutPanel1.SetColumn(btn, 2);
             btn.Text = "Likes: " + likes;
             btn.Height = 40;
+            var answ = Int32.Parse(answers);
+            var likeColor = Int32.Parse(likes);
+            if (likeColor.IsLessThan(0))
+            {
+                btn.BackColor = Color.Tomato;
+            }
+            else if (answ.IsGreaterThan(0))
+            {
+                btn.BackColor = Color.LightGreen;
+            }
             btn.Click += delegate (object sender, EventArgs e)
             {
                 button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
                 details.AddViews(questionList, placeToReplace);
             };
+
             return btn;
         }
         public Button AddNewViewsButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
@@ -71,6 +107,16 @@ namespace StudentForYou
             flowLayoutPanel1.SetColumn(btn, 3);
             btn.Text = "Views: " + views;
             btn.Height = 40;
+            var answ = Int32.Parse(answers);
+            var likeColor = Int32.Parse(likes);
+            if (likeColor.IsLessThan(0))
+            {
+                btn.BackColor = Color.Tomato;
+            }
+            else if (answ.IsGreaterThan(0))
+            {
+                btn.BackColor = Color.LightGreen;
+            }
             btn.Click += delegate (object sender, EventArgs e)
             {
                 button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
@@ -83,6 +129,16 @@ namespace StudentForYou
             var btn = new Button();
             flowLayoutPanel1.SetColumn(btn, 4);
             btn.Text = "Answers: " + answers;
+            var answ = Int32.Parse(answers);
+            var likeColor = Int32.Parse(likes);
+            if (likeColor.IsLessThan(0))
+            {
+                btn.BackColor = Color.Tomato;
+            }
+            else if (answ.IsGreaterThan(0))
+            {
+                btn.BackColor = Color.LightGreen;
+            }
             btn.Height = 40;
             btn.Click += delegate (object sender, EventArgs e)
             {
@@ -157,6 +213,78 @@ namespace StudentForYou
         private void RecentQuestions_Load(object sender, EventArgs e)
         {
 
+        }
+
+        void WriteToFlowLayoutPanel (List<QuestionDetails> questionList)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            for (int i = 0; i < questionList.Count; i++)
+            {
+                flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
+                flowLayoutPanel1.Controls.Add(AddNewLikesButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
+                flowLayoutPanel1.Controls.Add(AddNewViewsButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
+                flowLayoutPanel1.Controls.Add(AddNewAnswersButton(questionList[i].QuestionLikes, questionList[i].QuestionViews, questionList[i].QuestionAnswers, questionList[i].Question, i, questionList, details, questionList[i].CurrentDate));
+            }
+        }
+        private void button1_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
+        {
+            if (button1.Text == "Likes  " + char.ConvertFromUtf32(0x2191))
+            {
+                var sLA = new QuestionDetails.SortLikesAscending();
+                questionList.Sort(sLA);
+                WriteToFlowLayoutPanel(questionList);
+                button1.Text = "Likes " + char.ConvertFromUtf32(0x2193);
+            }
+            else
+            {
+                button1.Text = "Likes  " + char.ConvertFromUtf32(0x2191);
+                var sLD = new QuestionDetails.SortLikesDescending();
+                questionList.Sort(sLD);
+                WriteToFlowLayoutPanel(questionList);
+
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e,List<QuestionDetails> questionList)
+        {
+            if (button2.Text == "Views  " + char.ConvertFromUtf32(0x2191))
+            {
+                var sLA = new QuestionDetails.SortViewAscending();
+                questionList.Sort(sLA);
+                WriteToFlowLayoutPanel(questionList);
+                button2.Text = "Views  " + char.ConvertFromUtf32(0x2193);
+            }
+            else
+            {
+                button2.Text = "Views  " + char.ConvertFromUtf32(0x2191);
+                var sLD = new QuestionDetails.SortViewDescending();
+                questionList.Sort(sLD);
+                WriteToFlowLayoutPanel(questionList);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
+        {
+            if (button3.Text == "Answers  " + char.ConvertFromUtf32(0x2191))
+            {
+                var sLA = new QuestionDetails.SortAnswersAscending();
+                questionList.Sort(sLA);
+                WriteToFlowLayoutPanel(questionList);
+                button3.Text = "Answers  " + char.ConvertFromUtf32(0x2193);
+            }
+            else
+            {
+                button3.Text = "Answers  " + char.ConvertFromUtf32(0x2191);
+                var sLD = new QuestionDetails.SortAnswersDescending();
+                questionList.Sort(sLD);
+                WriteToFlowLayoutPanel(questionList);
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e, QuestionDetails details, List<QuestionDetails> questionList)
+        {
+            List <QuestionDetails> tempList = details.SearchQuestion(questionList, txtSearch.Text);
+            WriteToFlowLayoutPanel(tempList);
         }
     }
 }
