@@ -23,6 +23,7 @@ namespace StudentForYou
             foreach (Course item in templist)
             {
                 SubjectsLayoutPanel.Controls.Add(AddButton(item, amountOfButtons));
+                SubjectsLayoutPanel.Controls.Add(AddDifficultyButton(item, amountOfButtons));
                 SubjectsLayoutPanel.Controls.Add(AddIconButton(amountOfButtons));
                 amountOfButtons = amountOfButtons + 1;
             }
@@ -58,6 +59,7 @@ namespace StudentForYou
 
             }
             SubjectsLayoutPanel.Controls.Add(AddButton(Tempcourse, amountOfButtons));
+            SubjectsLayoutPanel.Controls.Add(AddDifficultyButton(Tempcourse, amountOfButtons));
             SubjectsLayoutPanel.Controls.Add(AddIconButton(amountOfButtons));
             amountOfButtons = amountOfButtons + 1;
             this.Show();
@@ -65,8 +67,8 @@ namespace StudentForYou
 
         public Button AddIconButton(int numberofbuttons)
         {
-            Button btn = new Button();
-            SubjectsLayoutPanel.SetColumn(btn, 2);
+            var btn = new Button();
+            SubjectsLayoutPanel.SetColumn(btn, 3);
             btn.Top = numberofbuttons * 40;
             btn.Width = 40;
             btn.BackgroundImage = Image.FromFile(@"Resources\chaticon.png");
@@ -107,18 +109,11 @@ namespace StudentForYou
 
         private void profilebtn_Click(object sender, EventArgs e)
         {
+
         }
 
         private void Coursesbtn_Click(object sender, EventArgs e)
         {
-            /* if(listView1.SelectedItems[0].Text!=null)
-             {
-                 var Detailsform = new CourseDetailsForm(listView1.SelectedItems[0].Text);
-                 this.Hide();
-                 Detailsform.ShowDialog();
-                 this.Show();
-             }
-             */
 
         }
 
@@ -131,11 +126,6 @@ namespace StudentForYou
         private void SubjectsLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
 
-            //SubjectsLayoutPanel.ColumnCount = 2;
-            //SubjectsLayoutPanel.AutoScroll = true;
-            /*SubjectsLayoutPanel.FlowDirection = FlowDirection.TopDown;
-            SubjectsLayoutPanel.WrapContents = false;*/
-            //SubjectsLayoutPanel.AutoSize = false;
         }
         public Button AddButton(Course d, int refbuttonumber)
         {
@@ -145,14 +135,33 @@ namespace StudentForYou
             var difficulty = d.Difficulty;
             var reader = new DescriptionReader(courseName);
             reader.UploadToFile(courseDescription);
-            Button btn = new Button();
+            var btn = new Button();
             SubjectsLayoutPanel.SetColumn(btn, 1);
             btn.Top = buttonNumber * 40;
-            btn.Width = 1140;
+            btn.Width = 1050;
             btn.Height = 40;
             btn.Left = 15;
             btn.TextAlign = ContentAlignment.MiddleCenter;
-            btn.Text = courseName + " Course difficulty: " + difficulty;
+            btn.Text = courseName;
+            btn.Name = courseName;
+            btn.Click += new EventHandler(Button_Click);
+            return btn;
+        }
+        public Button AddDifficultyButton(Course d, int refbuttonumber)
+        {
+            var buttonNumber = refbuttonumber;
+            var courseName = d.Name;
+            var courseDescription = d.Description;
+            var difficulty = d.Difficulty;
+            var reader = new DescriptionReader(courseName);
+            reader.UploadToFile(courseDescription);
+            var btn = new Button();
+            SubjectsLayoutPanel.SetColumn(btn, 2);
+            btn.Top = buttonNumber * 40;
+            btn.Width = 100;
+            btn.Height = 40;
+            btn.TextAlign = ContentAlignment.MiddleCenter;
+            btn.Text = "Difficulty: " + difficulty;
             btn.Name = courseName;
             btn.Click += new EventHandler(Button_Click);
             return btn;

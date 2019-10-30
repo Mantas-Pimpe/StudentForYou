@@ -68,7 +68,8 @@
             this.groupBox1.Size = new System.Drawing.Size(501, 185);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Client1";
+            this.groupBox1.Text = "You";
+            this.groupBox1.Enter += new System.EventHandler(this.GroupBox1_Enter);
             // 
             // label2
             // 
@@ -124,7 +125,7 @@
             this.groupBox2.Size = new System.Drawing.Size(501, 185);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Client2";
+            this.groupBox2.Text = "Your StuddyBuddy";
             this.groupBox2.Enter += new System.EventHandler(this.GroupBox2_Enter);
             // 
             // label3
@@ -198,7 +199,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonStart);
             this.Name = "ChatForm";
-            this.Text = "Chat";
+            this.Text = "StudentForYou";
             this.Load += new System.EventHandler(this.GroupChat_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

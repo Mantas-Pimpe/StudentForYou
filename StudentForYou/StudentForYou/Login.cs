@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentForYou
@@ -36,6 +29,11 @@ namespace StudentForYou
             else
                 MessageBox.Show("Please complete your login", "Bad Login", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
 
         }
     }

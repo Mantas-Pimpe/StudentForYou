@@ -1,12 +1,7 @@
 ﻿using StudentForYou.RecentPosts;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -55,20 +50,20 @@ namespace StudentForYou
             }
         }
 
-        public System.Windows.Forms.Label AddNewLabel(string question)
+        public Label AddNewLabel(string question)
         {
-            System.Windows.Forms.Label label = new System.Windows.Forms.Label();
+            Label label = new Label();
             this.Controls.Add(label);
-            label.Size = new System.Drawing.Size(750, 50);
+            label.Size = new Size(750, 50);
             label.Font = new Font("Arial", 16, FontStyle.Regular);
             label.TextAlign = ContentAlignment.MiddleCenter;
             label.Text = question;
             return label;
         }
 
-        public System.Windows.Forms.Button AddNewButton(int xPos, int yPos)
+        public Button AddNewButton(int xPos, int yPos)
         {
-            System.Windows.Forms.Button btn = new System.Windows.Forms.Button();
+            Button btn = new Button();
             this.Controls.Add(btn);
             btn.Width = 60;
             btn.Text = "Back";

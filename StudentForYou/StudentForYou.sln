@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Subjects", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.GroupChat", "StudentForYou.GroupChat\StudentForYou.GroupChat.csproj", "{F704878E-3CC0-495F-AE90-C315C2D78219}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StundentForYou.Chat", "StundentForYou.Chat\StundentForYou.Chat.csproj", "{DBD815BD-32AE-4B17-B1AE-73364088D40D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Chat", "StundentForYou.Chat\StudentForYou.Chat.csproj", "{DBD815BD-32AE-4B17-B1AE-73364088D40D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.ChatServer", "StudentForYou.ChatServer\StudentForYou.ChatServer.csproj", "{90C92375-90F9-4DB2-AC1C-7D5FFCC461F8}"
 EndProject

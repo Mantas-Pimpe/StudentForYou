@@ -58,7 +58,7 @@ namespace StudentForYouProfile
                 var bio = new char[100];
                 var charCounter = 0;
                 var bioCounter = 0;
-                var i = 0;
+                //var i = 0;
                 var bioName = bioWords[0];
                 //reading bio
                 foreach (var ch in line)
@@ -71,13 +71,13 @@ namespace StudentForYouProfile
                         bioCounter++;
                     }
                 }
-                userBios.Add(new UserBio(bioName,new string(bio)));
+                userBios.Add(new UserBio(bioName, new string(bio)));
                 j++;
             }
             bioFile.Close();
             var index = userBios.FindIndex(x => x.name.Equals(username));
             currentUserDataLine = index;
-            return Tuple.Create(username, userBios[index].bio , currentUserDataLine, userList[currentUserDataLine].pictureFilePath);
+            return Tuple.Create(username, userBios[index].bio, currentUserDataLine, userList[currentUserDataLine].pictureFilePath);
         }
 
         public string PictureChange()
@@ -133,7 +133,7 @@ namespace StudentForYouProfile
                     writer.WriteLine(t);
                 }
             }
-            var bioToWrite = '"'+bio+'"';
+            var bioToWrite = '"' + bio + '"';
             var bioLines = File.ReadAllLines(bioFilePath);
             bioLines[currentUserDataLine] = newUsername + " " + bioToWrite;
             using (var writer = new StreamWriter(bioFilePath))

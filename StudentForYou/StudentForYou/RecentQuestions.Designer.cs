@@ -114,7 +114,7 @@
             this.Chat.Name = "Chat";
             this.Chat.Size = new System.Drawing.Size(270, 55);
             this.Chat.TabIndex = 5;
-            this.Chat.Text = "Chat";
+            this.Chat.Text = "Get a tutor";
             this.Chat.UseVisualStyleBackColor = true;
             this.Chat.Click += new System.EventHandler(this.Chat_Click);
             // 
@@ -136,7 +136,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.label1.Location = new System.Drawing.Point(518, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(287, 39);
+            this.label1.Size = new System.Drawing.Size(564, 76);
             this.label1.TabIndex = 15;
             this.label1.Text = "Recent Questions";
             // 
@@ -175,11 +175,10 @@
             this.txtSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.txtSearch.Location = new System.Drawing.Point(16, 110);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(957, 22);
+            this.txtSearch.Size = new System.Drawing.Size(957, 38);
             this.txtSearch.TabIndex = 19;
             this.txtSearch.Text = "Search";
             this.txtSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            //this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // RecentQuestions
             // 
@@ -196,7 +195,7 @@
             this.Controls.Add(this.newpostbtn);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "RecentQuestions";
-            this.Text = "Recent questions";
+            this.Text = "StudentForYou";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RecentQuestions_FormClosed);
             this.Load += new System.EventHandler(this.RecentQuestions_Load);
             this.panel1.ResumeLayout(false);

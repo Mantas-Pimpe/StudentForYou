@@ -2,9 +2,8 @@
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using System.Diagnostics;
 
-namespace StundentForYouChat
+namespace StudentForYouChat
 {
     public class Chat
     {
@@ -78,7 +77,7 @@ namespace StundentForYouChat
         {
             try
             {
-                ASCIIEncoding enc = new ASCIIEncoding();
+                var enc = new ASCIIEncoding();
                 byte[] msg = new byte[1500];
                 msg = enc.GetBytes(message);
                 // sending the message

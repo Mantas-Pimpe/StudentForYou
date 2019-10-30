@@ -9,8 +9,8 @@ namespace Studentforyousubjects
         string courseDescription;
         string difficulty;
 
-        public void GetInfo(string NameInfo,string courseInfo,string DifficultyInfo)
-        {    
+        public void GetInfo(string NameInfo, string courseInfo, string DifficultyInfo)
+        {
             subjectName = NameInfo;
             courseDescription = courseInfo;
             difficulty = DifficultyInfo;

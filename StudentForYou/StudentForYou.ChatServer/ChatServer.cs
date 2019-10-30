@@ -43,10 +43,11 @@ namespace StudentForYouChatServer
             /*
              * IF we wanted to limit the amount of people in a server we could set the counter in while
             */
-            clientSocket.Close();
+
+            /*clientSocket.Close();
             serverSocket.Stop();
             Console.WriteLine("exit");
-            Console.ReadLine();
+            Console.ReadLine();*/
         }
 
         public static void broadcast(string msg, string uName, bool flag)
@@ -69,7 +70,7 @@ namespace StudentForYouChatServer
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
                 broadcastStream.Flush();
             }
-        }  
+        }
     }
 
 

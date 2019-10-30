@@ -1,12 +1,4 @@
-﻿using Studentforyousubjects;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace StudentForYou
@@ -34,7 +26,11 @@ namespace StudentForYou
                 reviewText = username + ": " + PostReviewTextBox.Text+ System.Environment.NewLine;
                 this.DialogResult = DialogResult.OK;
             }
-            
+
+        private void AddReviewForm_Load(object sender, EventArgs e)
+        {
+
         }
+    }
     }
 

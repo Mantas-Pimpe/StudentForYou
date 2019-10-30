@@ -6,21 +6,21 @@ namespace Studentforyousubjects
     {
         string filePath;
         string reviewsFilePath;
-       public DescriptionReader(string courseName)
+        public DescriptionReader(string courseName)
         {
-            filePath="Resources\\";
+            filePath = "Resources\\";
             reviewsFilePath = filePath + courseName + " " + "reviews.txt";
             filePath = filePath + courseName;
             filePath = filePath + ".txt";
-            
+
         }
 
 
-       public string ReadDescription()
+        public string ReadDescription()
         {
-            if(File.Exists(filePath).Equals(false))
+            if (File.Exists(filePath).Equals(false))
             {
-               var myFile = File.Create(filePath);
+                var myFile = File.Create(filePath);
                 myFile.Close();
 
             }
@@ -40,11 +40,11 @@ namespace Studentforyousubjects
             }
             var text = File.ReadAllLines(reviewsFilePath);
             var whiteSpaceRemover = new StudentForYou.WhiteSpaceRemover();
-          //  text = whiteSpaceRemover.RemoveMultipleWhiteSpaces(text);
+            //  text = whiteSpaceRemover.RemoveMultipleWhiteSpaces(text);
             return text;
 
         }
-       public void UploadToFile(string textToUpload)
+        public void UploadToFile(string textToUpload)
         {
             File.WriteAllText(filePath, textToUpload);
         }

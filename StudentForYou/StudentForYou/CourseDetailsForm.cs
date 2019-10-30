@@ -103,8 +103,11 @@ namespace StudentForYou
               
             }
             this.Show();
+        }
 
-           
+        private void DifficultyLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

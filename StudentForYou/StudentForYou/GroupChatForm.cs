@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 using StudentForYouGroupChat;
-using System.Threading;
+using System.Diagnostics;
 
 namespace StudentForYou
 {
@@ -9,8 +9,8 @@ namespace StudentForYou
     {
         GroupChat gchat;
         private Form prevform;
-        System.Diagnostics.Process proc;
-        public GroupChatForm(Form prevForm, string username, int port, System.Diagnostics.Process proc)
+        Process proc; //If we wanted to close the server, we could use this.
+        public GroupChatForm(Form prevForm, string username, int port, Process proc)
         {
             InitializeComponent();
             this.prevform = prevForm;
@@ -45,8 +45,6 @@ namespace StudentForYou
 
         private void Back_Click(object sender, EventArgs e)
         {
-           /* proc.CloseMainWindow();
-            proc.Close();*/
             prevform.Show();
             this.Close();
         }

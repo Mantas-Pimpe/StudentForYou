@@ -1,11 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-
 
 namespace StudentForYou.RecentPosts
 {
@@ -312,9 +307,9 @@ namespace StudentForYou.RecentPosts
             writeText.Close();
         }
 
-        public List<QuestionDetails> SearchQuestion (List<QuestionDetails> questionList, string questionKey)
+        public List<QuestionDetails> SearchQuestion(List<QuestionDetails> questionList, string questionKey)
         {
-            List<QuestionDetails> tempList = new List<QuestionDetails>(); 
+            List<QuestionDetails> tempList = new List<QuestionDetails>();
             foreach (var s in questionList)
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(s.question, questionKey, System.Text.RegularExpressions.RegexOptions.IgnoreCase))

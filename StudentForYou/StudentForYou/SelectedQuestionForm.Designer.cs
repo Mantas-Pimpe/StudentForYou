@@ -41,7 +41,7 @@
             // txtAnswers
             // 
             this.txtAnswers.Location = new System.Drawing.Point(15, 277);
-            this.txtAnswers.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtAnswers.Margin = new System.Windows.Forms.Padding(6);
             this.txtAnswers.Name = "txtAnswers";
             this.txtAnswers.ReadOnly = true;
             this.txtAnswers.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Horizontal;
@@ -64,7 +64,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(15, 585);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(1218, 35);
             this.richTextBox1.TabIndex = 2;
@@ -74,7 +74,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.button1.Location = new System.Drawing.Point(397, 632);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(440, 40);
             this.button1.TabIndex = 3;
@@ -108,7 +108,7 @@
             // 
             this.btnDislike.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDislike.Location = new System.Drawing.Point(1089, 32);
-            this.btnDislike.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnDislike.Margin = new System.Windows.Forms.Padding(6);
             this.btnDislike.Name = "btnDislike";
             this.btnDislike.Size = new System.Drawing.Size(144, 48);
             this.btnDislike.TabIndex = 6;
@@ -119,7 +119,7 @@
             // 
             this.btnLike.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLike.Location = new System.Drawing.Point(933, 32);
-            this.btnLike.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLike.Margin = new System.Windows.Forms.Padding(6);
             this.btnLike.Name = "btnLike";
             this.btnLike.Size = new System.Drawing.Size(144, 48);
             this.btnLike.TabIndex = 7;
@@ -138,9 +138,9 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtAnswers);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SelectedQuestionForm";
-            this.Text = "SelectedQuestionForm";
+            this.Text = "StudentForYou";
             this.Load += new System.EventHandler(this.SelectedQuestionForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

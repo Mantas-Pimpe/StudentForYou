@@ -44,8 +44,9 @@ namespace StudentForYou
             // 
             this.SubjectsLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SubjectsLayoutPanel.AutoScroll = true;
-            this.SubjectsLayoutPanel.ColumnCount = 2;
+            this.SubjectsLayoutPanel.ColumnCount = 3;
             this.SubjectsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.SubjectsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.SubjectsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.SubjectsLayoutPanel.Location = new System.Drawing.Point(11, 85);
             this.SubjectsLayoutPanel.Name = "SubjectsLayoutPanel";
@@ -133,7 +134,7 @@ namespace StudentForYou
             this.Controls.Add(this.SubjectsLayoutPanel);
             this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "form1";
-            this.Text = "Courses";
+            this.Text = "StudentForYou";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);

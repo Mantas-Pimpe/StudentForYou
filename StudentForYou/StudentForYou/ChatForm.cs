@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Net;
-using System.Net.Sockets;
-using StundentForYouChat;
+using StudentForYouChat;
 
 namespace StudentForYou
 {
@@ -84,6 +82,11 @@ namespace StudentForYou
         }
 
         private void ListMessage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GroupBox1_Enter(object sender, EventArgs e)
         {
 
         }

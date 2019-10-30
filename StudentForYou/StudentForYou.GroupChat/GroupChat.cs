@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace StudentForYouGroupChat
 {
-    
+
     public class GroupChat
     {
         TcpClient clientSocket = new TcpClient();

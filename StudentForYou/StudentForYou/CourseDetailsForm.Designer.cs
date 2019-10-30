@@ -38,7 +38,6 @@
             this.CourseDetailsReviewsTextBox = new System.Windows.Forms.RichTextBox();
             this.CourseReviewsLabel = new System.Windows.Forms.Label();
             this.CourseDetailsPostReviewButton = new System.Windows.Forms.Button();
-            this.DifficultyLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CourseDetailsBackButton
@@ -69,7 +68,7 @@
             this.CourseDetailsNameBox.Margin = new System.Windows.Forms.Padding(8);
             this.CourseDetailsNameBox.Name = "CourseDetailsNameBox";
             this.CourseDetailsNameBox.ReadOnly = true;
-            this.CourseDetailsNameBox.Size = new System.Drawing.Size(1165, 45);
+            this.CourseDetailsNameBox.Size = new System.Drawing.Size(1165, 102);
             this.CourseDetailsNameBox.TabIndex = 5;
             this.CourseDetailsNameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.CourseDetailsNameBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged_1);
@@ -103,7 +102,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
             this.label1.Location = new System.Drawing.Point(511, 474);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(156, 25);
+            this.label1.Size = new System.Drawing.Size(362, 59);
             this.label1.TabIndex = 8;
             this.label1.Text = "Uploaded Files";
             // 
@@ -113,7 +112,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
             this.label2.Location = new System.Drawing.Point(511, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(153, 25);
+            this.label2.Size = new System.Drawing.Size(358, 59);
             this.label2.TabIndex = 9;
             this.label2.Text = "Course Details";
             // 
@@ -132,7 +131,7 @@
             this.CourseReviewsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
             this.CourseReviewsLabel.Location = new System.Drawing.Point(511, 277);
             this.CourseReviewsLabel.Name = "CourseReviewsLabel";
-            this.CourseReviewsLabel.Size = new System.Drawing.Size(168, 25);
+            this.CourseReviewsLabel.Size = new System.Drawing.Size(396, 59);
             this.CourseReviewsLabel.TabIndex = 11;
             this.CourseReviewsLabel.Text = "Course Reviews";
             // 
@@ -147,21 +146,10 @@
             this.CourseDetailsPostReviewButton.UseVisualStyleBackColor = true;
             this.CourseDetailsPostReviewButton.Click += new System.EventHandler(this.CourseDetailsPostReviewButton_Click);
             // 
-            // DifficultyLabel
-            // 
-            this.DifficultyLabel.AutoSize = true;
-            this.DifficultyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.DifficultyLabel.Location = new System.Drawing.Point(1038, 70);
-            this.DifficultyLabel.Name = "DifficultyLabel";
-            this.DifficultyLabel.Size = new System.Drawing.Size(94, 25);
-            this.DifficultyLabel.TabIndex = 14;
-            this.DifficultyLabel.Text = "Difficulty";
-            // 
             // CourseDetailsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
-            this.Controls.Add(this.DifficultyLabel);
             this.Controls.Add(this.CourseDetailsPostReviewButton);
             this.Controls.Add(this.CourseReviewsLabel);
             this.Controls.Add(this.CourseDetailsReviewsTextBox);
@@ -174,7 +162,7 @@
             this.Controls.Add(this.CourseDetailsBackButton);
             this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "CourseDetailsForm";
-            this.Text = "Course Details";
+            this.Text = "StudentForYou";
             this.Load += new System.EventHandler(this.CourseDetailsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -193,6 +181,5 @@
         private System.Windows.Forms.RichTextBox CourseDetailsReviewsTextBox;
         private System.Windows.Forms.Label CourseReviewsLabel;
         private System.Windows.Forms.Button CourseDetailsPostReviewButton;
-        private System.Windows.Forms.Label DifficultyLabel;
     }
 }

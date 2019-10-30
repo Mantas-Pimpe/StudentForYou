@@ -73,14 +73,12 @@
     <Compile Include="AddSubjectForm.Designer.cs">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ButtonAdder.cs" />
     <Compile Include="CreateAccountForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CreateAccountForm.Designer.cs">
       <DependentUpon>CreateAccountForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WhiteSpaceRemover.cs" />
     <Compile Include="RecentQuestions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,9 +241,9 @@
       <Project>{d5ca3b2f-0ee4-400d-a3e7-4bfdbd9c4efb}</Project>
       <Name>StudentForYou.Subjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StundentForYou.Chat\StundentForYou.Chat.csproj">
+    <ProjectReference Include="..\StundentForYou.Chat\StudentForYou.Chat.csproj">
       <Project>{dbd815bd-32ae-4b17-b1ae-73364088d40d}</Project>
-      <Name>StundentForYou.Chat</Name>
+      <Name>StudentForYou.Chat</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

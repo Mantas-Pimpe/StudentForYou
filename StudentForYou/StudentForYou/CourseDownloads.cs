@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Studentforyousubjects;
 
@@ -14,7 +6,6 @@ namespace StudentForYou
 {
     public partial class CourseDownloads : Form
     {
-        string filepath;
         FileUploader uploader;
         public CourseDownloads(string coursename)
         {
@@ -50,8 +41,8 @@ namespace StudentForYou
             if (CourseDownloadsListView.SelectedItems.Count > 0)
             {
 
-                ListViewItem selected = CourseDownloadsListView.SelectedItems[0];
-                string selectedFilePath = selected.Tag.ToString();
+                var selected = CourseDownloadsListView.SelectedItems[0];
+                var selectedFilePath = selected.Tag.ToString();
                 System.Diagnostics.Process.Start(selectedFilePath);
 
             }

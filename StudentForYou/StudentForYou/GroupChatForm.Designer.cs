@@ -80,7 +80,7 @@ namespace StudentForYou
             this.Controls.Add(this.textMessage);
             this.Controls.Add(this.buttonSend);
             this.Name = "GroupChatForm";
-            this.Text = "GroupChat";
+            this.Text = "StudentForYou";
             this.Load += new System.EventHandler(this.GroupChat_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
