@@ -143,7 +143,8 @@ namespace StudentForYou
             var courseName = d.Name;
             var courseDescription = d.Description;
             var difficulty = d.Difficulty;
-
+            var reader = new DescriptionReader(courseName);
+            reader.UploadToFile(courseDescription);
             Button btn = new Button();
             SubjectsLayoutPanel.SetColumn(btn, 1);
             btn.Top = buttonNumber * 40;
@@ -151,7 +152,7 @@ namespace StudentForYou
             btn.Height = 40;
             btn.Left = 15;
             btn.TextAlign = ContentAlignment.MiddleCenter;
-            btn.Text = courseName + "difficulty: " + difficulty;
+            btn.Text = courseName + " Course difficulty: " + difficulty;
             btn.Name = courseName;
             btn.Click += new EventHandler(Button_Click);
             return btn;

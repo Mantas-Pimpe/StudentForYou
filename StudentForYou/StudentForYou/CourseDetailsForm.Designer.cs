@@ -38,7 +38,6 @@
             this.CourseDetailsReviewsTextBox = new System.Windows.Forms.RichTextBox();
             this.CourseReviewsLabel = new System.Windows.Forms.Label();
             this.CourseDetailsPostReviewButton = new System.Windows.Forms.Button();
-            this.DifficultyTextBox = new System.Windows.Forms.TextBox();
             this.DifficultyLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -148,17 +147,6 @@
             this.CourseDetailsPostReviewButton.UseVisualStyleBackColor = true;
             this.CourseDetailsPostReviewButton.Click += new System.EventHandler(this.CourseDetailsPostReviewButton_Click);
             // 
-            // DifficultyTextBox
-            // 
-            this.DifficultyTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
-            this.DifficultyTextBox.Location = new System.Drawing.Point(1143, 62);
-            this.DifficultyTextBox.Margin = new System.Windows.Forms.Padding(8);
-            this.DifficultyTextBox.Name = "DifficultyTextBox";
-            this.DifficultyTextBox.ReadOnly = true;
-            this.DifficultyTextBox.Size = new System.Drawing.Size(60, 45);
-            this.DifficultyTextBox.TabIndex = 13;
-            this.DifficultyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // DifficultyLabel
             // 
             this.DifficultyLabel.AutoSize = true;
@@ -174,7 +162,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
             this.Controls.Add(this.DifficultyLabel);
-            this.Controls.Add(this.DifficultyTextBox);
             this.Controls.Add(this.CourseDetailsPostReviewButton);
             this.Controls.Add(this.CourseReviewsLabel);
             this.Controls.Add(this.CourseDetailsReviewsTextBox);
@@ -206,7 +193,6 @@
         private System.Windows.Forms.RichTextBox CourseDetailsReviewsTextBox;
         private System.Windows.Forms.Label CourseReviewsLabel;
         private System.Windows.Forms.Button CourseDetailsPostReviewButton;
-        private System.Windows.Forms.TextBox DifficultyTextBox;
         private System.Windows.Forms.Label DifficultyLabel;
     }
 }
