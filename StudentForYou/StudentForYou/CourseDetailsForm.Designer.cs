@@ -38,6 +38,8 @@
             this.CourseDetailsReviewsTextBox = new System.Windows.Forms.RichTextBox();
             this.CourseReviewsLabel = new System.Windows.Forms.Label();
             this.CourseDetailsPostReviewButton = new System.Windows.Forms.Button();
+            this.DifficultyTextBox = new System.Windows.Forms.TextBox();
+            this.DifficultyLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CourseDetailsBackButton
@@ -68,7 +70,7 @@
             this.CourseDetailsNameBox.Margin = new System.Windows.Forms.Padding(8);
             this.CourseDetailsNameBox.Name = "CourseDetailsNameBox";
             this.CourseDetailsNameBox.ReadOnly = true;
-            this.CourseDetailsNameBox.Size = new System.Drawing.Size(1165, 55);
+            this.CourseDetailsNameBox.Size = new System.Drawing.Size(1165, 45);
             this.CourseDetailsNameBox.TabIndex = 5;
             this.CourseDetailsNameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.CourseDetailsNameBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged_1);
@@ -99,18 +101,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(549, 482);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.label1.Location = new System.Drawing.Point(511, 474);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 17);
+            this.label1.Size = new System.Drawing.Size(156, 25);
             this.label1.TabIndex = 8;
             this.label1.Text = "Uploaded Files";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(551, 94);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.label2.Location = new System.Drawing.Point(511, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 17);
+            this.label2.Size = new System.Drawing.Size(153, 25);
             this.label2.TabIndex = 9;
             this.label2.Text = "Course Details";
             // 
@@ -126,9 +130,10 @@
             // CourseReviewsLabel
             // 
             this.CourseReviewsLabel.AutoSize = true;
-            this.CourseReviewsLabel.Location = new System.Drawing.Point(551, 272);
+            this.CourseReviewsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.CourseReviewsLabel.Location = new System.Drawing.Point(511, 277);
             this.CourseReviewsLabel.Name = "CourseReviewsLabel";
-            this.CourseReviewsLabel.Size = new System.Drawing.Size(109, 17);
+            this.CourseReviewsLabel.Size = new System.Drawing.Size(168, 25);
             this.CourseReviewsLabel.TabIndex = 11;
             this.CourseReviewsLabel.Text = "Course Reviews";
             // 
@@ -143,10 +148,33 @@
             this.CourseDetailsPostReviewButton.UseVisualStyleBackColor = true;
             this.CourseDetailsPostReviewButton.Click += new System.EventHandler(this.CourseDetailsPostReviewButton_Click);
             // 
+            // DifficultyTextBox
+            // 
+            this.DifficultyTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(186)));
+            this.DifficultyTextBox.Location = new System.Drawing.Point(1143, 62);
+            this.DifficultyTextBox.Margin = new System.Windows.Forms.Padding(8);
+            this.DifficultyTextBox.Name = "DifficultyTextBox";
+            this.DifficultyTextBox.ReadOnly = true;
+            this.DifficultyTextBox.Size = new System.Drawing.Size(60, 45);
+            this.DifficultyTextBox.TabIndex = 13;
+            this.DifficultyTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // DifficultyLabel
+            // 
+            this.DifficultyLabel.AutoSize = true;
+            this.DifficultyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.DifficultyLabel.Location = new System.Drawing.Point(1038, 70);
+            this.DifficultyLabel.Name = "DifficultyLabel";
+            this.DifficultyLabel.Size = new System.Drawing.Size(94, 25);
+            this.DifficultyLabel.TabIndex = 14;
+            this.DifficultyLabel.Text = "Difficulty";
+            // 
             // CourseDetailsForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(1248, 712);
+            this.Controls.Add(this.DifficultyLabel);
+            this.Controls.Add(this.DifficultyTextBox);
             this.Controls.Add(this.CourseDetailsPostReviewButton);
             this.Controls.Add(this.CourseReviewsLabel);
             this.Controls.Add(this.CourseDetailsReviewsTextBox);
@@ -178,5 +206,7 @@
         private System.Windows.Forms.RichTextBox CourseDetailsReviewsTextBox;
         private System.Windows.Forms.Label CourseReviewsLabel;
         private System.Windows.Forms.Button CourseDetailsPostReviewButton;
+        private System.Windows.Forms.TextBox DifficultyTextBox;
+        private System.Windows.Forms.Label DifficultyLabel;
     }
 }

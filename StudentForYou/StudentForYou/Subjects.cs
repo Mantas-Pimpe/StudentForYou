@@ -151,7 +151,7 @@ namespace StudentForYou
             btn.Height = 40;
             btn.Left = 15;
             btn.TextAlign = ContentAlignment.MiddleCenter;
-            btn.Text = courseName;
+            btn.Text = courseName + "difficulty: " + difficulty;
             btn.Name = courseName;
             btn.Click += new EventHandler(Button_Click);
             return btn;
