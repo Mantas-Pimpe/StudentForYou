@@ -94,7 +94,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Name = "vuLoginForm";
-            this.Text = "LoginForm";
+            this.Text = "StudentForYou";
             this.ResumeLayout(false);
             this.PerformLayout();
             // 
