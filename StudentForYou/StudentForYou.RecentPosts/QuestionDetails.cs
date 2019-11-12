@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
 namespace StudentForYou.RecentPosts
 {
@@ -133,7 +133,6 @@ namespace StudentForYou.RecentPosts
                 else return 0;
             }
         }
-
         public string questionLikes;
         public string questionViews;
         public string questionAnswers;
@@ -168,10 +167,10 @@ namespace StudentForYou.RecentPosts
                 currentDate = Convert.ToDateTime(line[5]);
                 questionList.Add(new QuestionDetails(likes, views, answers, question, line[4], currentDate));
             }
-            questionList.Sort();
+            //questionList.Sort();
             return questionList;
         }
-        public void AddAnswers(List<QuestionDetails> questionList, int placeToReplace, string newAnswer, ref string answerCount)
+        public void AddAnswers(List<QuestionDetails> questionList, ref int placeToReplace, string newAnswer, ref string answerCount)
         {
             QuestionDetails temp = questionList[placeToReplace];
             var count = Int32.Parse(temp.questionAnswers);
@@ -185,7 +184,6 @@ namespace StudentForYou.RecentPosts
             string[] line = lines[placeToReplace].Split('`');
             line[2] = answers;
             var newLine = line[0] + "`" + line[1] + "`" + line[2] + "`" + line[3] + "`" + line[4] + "^" + newAnswer + "`" + line[5];
-            Console.WriteLine(newLine);
             lines[placeToReplace] = newLine;
             var writeText = new StreamWriter(@"..\Debug\Resources\recentquestions.txt");
 
@@ -202,7 +200,7 @@ namespace StudentForYou.RecentPosts
             }
             writeText.Close();
         }
-        public void AddLike(List<QuestionDetails> questionList, int placeToReplace, ref string newLikes)
+        public void AddLike(List<QuestionDetails> questionList, ref int placeToReplace, ref string newLikes)
         {
             QuestionDetails temp = questionList[placeToReplace];
             var count = Int32.Parse(temp.questionLikes);
@@ -232,7 +230,7 @@ namespace StudentForYou.RecentPosts
             writeText.Close();
         }
 
-        public void AddViews(List<QuestionDetails> questionList, int placeToReplace)
+        public void AddViews(List<QuestionDetails> questionList, ref int placeToReplace)
         {
             QuestionDetails temp = questionList[placeToReplace];
             var count = Int32.Parse(temp.questionViews);
@@ -277,7 +275,7 @@ namespace StudentForYou.RecentPosts
             December
         };
 
-        public void AddDislike(List<QuestionDetails> questionList, int placeToReplace, ref string newLikes)
+        public void AddDislike(List<QuestionDetails> questionList, ref int placeToReplace, ref string newLikes)
         {
             QuestionDetails temp = questionList[placeToReplace];
             var count = Int32.Parse(temp.questionLikes);

@@ -90,7 +90,7 @@ namespace StudentForYou
         {
             if (richTextBox1.Text != String.Empty)
             {
-                details.AddAnswers(questionList, placeToReplace, username + " : " + richTextBox1.Text, ref answers);
+                details.AddAnswers(questionList, ref placeToReplace, username + " : " + richTextBox1.Text, ref answers);
                 lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
             }
             richTextBox1.Clear();
@@ -103,13 +103,13 @@ namespace StudentForYou
         }
         private void btnDislike_Click(object sender, EventArgs e, List<QuestionDetails> questionList, int placeToReplace, QuestionDetails details, String likes, String views, String answers)
         {
-            details.AddDislike(questionList, placeToReplace, ref likes);
+            details.AddDislike(questionList,ref placeToReplace, ref likes);
             lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
         }
 
         private void btnLike_Click(object sender, EventArgs e, List<QuestionDetails> questionList, int placeToReplace, QuestionDetails details, String likes, String views, String answers)
         {
-            details.AddLike(questionList, placeToReplace, ref likes);
+            details.AddLike(questionList,ref placeToReplace, ref likes);
             lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
         }
 

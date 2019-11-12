@@ -17,7 +17,9 @@ namespace StudentForYou
             InitializeComponent();
             this.username = username;
             List<QuestionDetails> questionList = details.getQuestionDetails();
-            WriteToFlowLayoutPanel(questionList);
+            List<QuestionDetails> tempList = questionList;
+            tempList.Sort();
+            WriteToFlowLayoutPanel(tempList);
             button1.Text = "Likes  " + char.ConvertFromUtf32(0x2191);
             button2.Text = "Views  " + char.ConvertFromUtf32(0x2191);
             button3.Text = "Answers  " + char.ConvertFromUtf32(0x2191);
@@ -28,21 +30,21 @@ namespace StudentForYou
 
             button1.Click += delegate (object sender, EventArgs e)
             {
-                button1_Click(sender, e, questionList);
+                button1_Click(sender, e, tempList);
             };
 
             button2.Click += delegate (object sender, EventArgs e)
             {
-                button2_Click(sender, e, questionList);
+                button2_Click(sender, e, tempList);
             };
 
             button3.Click += delegate (object sender, EventArgs e)
             {
-                button3_Click(sender, e, questionList);
+                button3_Click(sender, e, tempList);
             };
             txtSearch.TextChanged += delegate (object sender, EventArgs e)
             {
-                txtSearch_TextChanged(sender, e, details , questionList);
+                txtSearch_TextChanged(sender, e, details , tempList);
             };
             recentquestionsbtn.Enabled = false;
         }
@@ -73,7 +75,7 @@ namespace StudentForYou
             btn.Click += delegate (object sender, EventArgs e)
             {
                 button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
-                details.AddViews(questionList, placeToReplace);
+                details.AddViews(questionList,ref placeToReplace);
             };
             return btn;
         }
@@ -96,7 +98,7 @@ namespace StudentForYou
             btn.Click += delegate (object sender, EventArgs e)
             {
                 button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
-                details.AddViews(questionList, placeToReplace);
+                details.AddViews(questionList,ref placeToReplace);
             };
 
             return btn;
@@ -120,7 +122,7 @@ namespace StudentForYou
             btn.Click += delegate (object sender, EventArgs e)
             {
                 button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
-                details.AddViews(questionList, placeToReplace);
+                details.AddViews(questionList, ref placeToReplace);
             };
             return btn;
         }
@@ -143,7 +145,7 @@ namespace StudentForYou
             btn.Click += delegate (object sender, EventArgs e)
             {
                 button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
-                details.AddViews(questionList, placeToReplace);
+                details.AddViews(questionList,ref placeToReplace);
             };
             return btn;
         }

@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.RecentPosts",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Profile", "StudentForYou.Profile\StudentForYou.Profile.csproj", "{CF999838-619F-4B94-863D-E81F9B2FB200}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StudentForYouWebAPI", "StudentForYouWebAPI", "{F4978EB9-C36C-4383-876C-5B7E8727C620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{D05172B0-6086-4DB5-A3FB-585DD68E75DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,9 +55,16 @@ Global
 		{CF999838-619F-4B94-863D-E81F9B2FB200}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF999838-619F-4B94-863D-E81F9B2FB200}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF999838-619F-4B94-863D-E81F9B2FB200}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D05172B0-6086-4DB5-A3FB-585DD68E75DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D05172B0-6086-4DB5-A3FB-585DD68E75DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D05172B0-6086-4DB5-A3FB-585DD68E75DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D05172B0-6086-4DB5-A3FB-585DD68E75DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D05172B0-6086-4DB5-A3FB-585DD68E75DC} = {F4978EB9-C36C-4383-876C-5B7E8727C620}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D373209D-5802-4CB5-A9B4-3E82F0A9F42D}
