@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
+using StudentForYou.DB;
 
 namespace StudentForYouProfile
 {
     public class ChangeUsername
     {
-        private const string filePath = @"Resources\TempDatabase.txt";
         private const int maximumUsernameLength = 15;
         private const int minimumUsernameLength = 3;
-
+        ProfileDB db = new ProfileDB();
         public int IsUsernameTaken(string username)
         {
             // return 0 if everything checks out
@@ -30,17 +30,9 @@ namespace StudentForYouProfile
                 return 4;
             }
 
-            string[] lines = File.ReadLines(filePath).ToArray();
-            string[] words = null;
-            for (int i = 0; i < lines.Length; i++)
+            if (db.CheckIfUsernameTaken(username))
             {
-                words = lines[i].Split(' ');
-                if (words[0] == username)
-                {
-                    return 1;
-                }
-
-                words = null;
+                return 1;
             }
 
             return 0;
@@ -49,14 +41,7 @@ namespace StudentForYouProfile
 
         public void CreateNewUser(string username, string password)
         {
-            const string userFilePath = @"Resources\TempDatabase.txt";
-            const string bioFilePath = @"Resources\BioDatabase.txt";
-            var readUserList = new List<string>(File.ReadAllLines(userFilePath));
-            readUserList.Add(username + " " + password + " " + "noPicture");
-            File.WriteAllLines(userFilePath, readUserList);
-            var readBio = new List<string>(File.ReadAllLines(bioFilePath));
-            readBio.Add(username + " " + '"' + '"');
-            File.WriteAllLines(bioFilePath, readBio);
+            db.InsertIntoUsers(username, DateTime.Now, password);
         }
 
     }

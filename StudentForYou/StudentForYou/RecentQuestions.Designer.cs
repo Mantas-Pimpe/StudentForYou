@@ -54,6 +54,7 @@
             this.newpostbtn.TabIndex = 0;
             this.newpostbtn.Text = "Ask a Question";
             this.newpostbtn.UseVisualStyleBackColor = true;
+            this.newpostbtn.Click += new System.EventHandler(this.Newpostbtn_Click);
             // 
             // recentquestionsbtn
             // 
@@ -129,6 +130,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1250, 122);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
             // label1
             // 

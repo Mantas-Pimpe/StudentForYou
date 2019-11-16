@@ -4,23 +4,29 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Studentforyousubjects;
+using StudentForYou.DB;
 
 namespace StudentForYou
 {
     public partial class form1 : Form
     {
-        ListViewInfosetter setter;
-        private string username = string.Empty;
+        int userID;
         int amountOfButtons = 0;
-        public form1(string username)
+        CoursesDB db = new CoursesDB();
+        public form1(int userID)
         {
             InitializeComponent();
-            this.username = username;
-            setter = new ListViewInfosetter();
-            
+            this.userID = userID;
             coursebtn.Enabled = false;
-            List<Course> templist = setter.ReadFileInfo();
-            foreach (Course item in templist)
+            DisplayList();
+
+        }
+
+        private void DisplayList()
+        {
+            SubjectsLayoutPanel.Controls.Clear();
+            List<Course> list = db.GetCourses();
+            foreach (Course item in list)
             {
                 SubjectsLayoutPanel.Controls.Add(AddButton(item, amountOfButtons));
                 SubjectsLayoutPanel.Controls.Add(AddDifficultyButton(item, amountOfButtons));
@@ -28,7 +34,6 @@ namespace StudentForYou
                 amountOfButtons = amountOfButtons + 1;
             }
         }
-
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -48,20 +53,12 @@ namespace StudentForYou
         private void Button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var SubjectAdder = new SubjectAdder();
-            var SubjectForm = new AddSubjectForm(SubjectAdder);
-            var Tempcourse = new Course();
-            if (SubjectForm.ShowDialog() == DialogResult.OK)
+            var subjectAdder = new SubjectAdder();
+            var subjectForm = new AddSubjectForm(subjectAdder);
+            if (subjectForm.ShowDialog() == DialogResult.OK)
             {
-                Tempcourse.Description = SubjectForm.CourseDescriptionTextBox.Text;
-                Tempcourse.Difficulty = SubjectForm.DifficultyTextBox.Text;
-                Tempcourse.Name = SubjectForm.CourseNameTextBox.Text;
-
+                DisplayList();
             }
-            SubjectsLayoutPanel.Controls.Add(AddButton(Tempcourse, amountOfButtons));
-            SubjectsLayoutPanel.Controls.Add(AddDifficultyButton(Tempcourse, amountOfButtons));
-            SubjectsLayoutPanel.Controls.Add(AddIconButton(amountOfButtons));
-            amountOfButtons = amountOfButtons + 1;
             this.Show();
         }
 
@@ -84,7 +81,7 @@ namespace StudentForYou
             this.Hide();
             var button = sender as Button;
             var proc = System.Diagnostics.Process.Start(@"..\..\..\StudentForYou.ChatServer\bin\Debug\StudentForYou.ChatServer.exe", button.Name);
-            var gchat = new GroupChatForm(this, username, Int32.Parse(button.Name), proc);
+            var gchat = new GroupChatForm(this, userID, Int32.Parse(button.Name), proc);
             gchat.ShowDialog();
         }
 
@@ -127,14 +124,12 @@ namespace StudentForYou
         {
 
         }
-        public Button AddButton(Course d, int refbuttonumber)
+        public Button AddButton(Course d, int refButtonNumber)
         {
-            var buttonNumber = refbuttonumber;
-            var courseName = d.Name;
-            var courseDescription = d.Description;
-            var difficulty = d.Difficulty;
-            var reader = new DescriptionReader(courseName);
-            reader.UploadToFile(courseDescription);
+            var buttonNumber = refButtonNumber;
+            var courseName = d.name;
+            var courseDescription = d.description;
+            var difficulty = d.difficulty;
             var btn = new Button();
             SubjectsLayoutPanel.SetColumn(btn, 1);
             btn.Top = buttonNumber * 40;
@@ -144,17 +139,18 @@ namespace StudentForYou
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Text = courseName;
             btn.Name = courseName;
-            btn.Click += new EventHandler(Button_Click);
+            btn.Click += delegate (object sender, EventArgs e)
+            {
+                Button_Click(sender, e, d.courseID);
+            };
             return btn;
         }
         public Button AddDifficultyButton(Course d, int refbuttonumber)
         {
             var buttonNumber = refbuttonumber;
-            var courseName = d.Name;
-            var courseDescription = d.Description;
-            var difficulty = d.Difficulty;
-            var reader = new DescriptionReader(courseName);
-            reader.UploadToFile(courseDescription);
+            var courseName = d.name;
+            var courseDescription = d.description;
+            var difficulty = d.difficulty;
             var btn = new Button();
             SubjectsLayoutPanel.SetColumn(btn, 2);
             btn.Top = buttonNumber * 40;
@@ -163,15 +159,17 @@ namespace StudentForYou
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Text = "Difficulty: " + difficulty;
             btn.Name = courseName;
-            btn.Click += new EventHandler(Button_Click);
+            btn.Click += delegate (object sender, EventArgs e)
+            {
+                Button_Click(sender, e, d.courseID);
+            };
             return btn;
         }
 
-        public void Button_Click(object sender, EventArgs e)
+        public void Button_Click(object sender, EventArgs e, int courseID)
         {
             this.Hide();
-            var button = sender as Button;
-            var downloadsForm = new CourseDetailsForm(button.Name,username);
+            var downloadsForm = new CourseDetailsForm(courseID, userID);
             downloadsForm.ShowDialog();
             this.Show();
         }
@@ -183,14 +181,14 @@ namespace StudentForYou
 
         private void Recentquestionsbtn_Click_1(object sender, EventArgs e)
         {
-            var rpF = new RecentQuestions(username);
+            var rpF = new RecentQuestions(userID);
             rpF.Show();
             this.Close();
         }
 
         private void Profilebtn_Click_1(object sender, EventArgs e)
         {
-            var Profile = new UserProfile(username);
+            var Profile = new UserProfile(userID);
             Profile.Show();
             this.Close();
         }
@@ -199,19 +197,10 @@ namespace StudentForYou
         {
             this.Hide();
             var subjectAdder = new SubjectAdder();
-            var addSubjectForm = new AddSubjectForm(subjectAdder);
-            if(addSubjectForm.ShowDialog() ==DialogResult.OK)
+            var subjectForm = new AddSubjectForm(subjectAdder);
+            if (subjectForm.ShowDialog() == DialogResult.OK)
             {
-                var courseToBeAdded = new Course();
-                courseToBeAdded.Name = addSubjectForm.CourseNameTextBox.Text;
-                courseToBeAdded.Description = addSubjectForm.CourseDescriptionTextBox.Text;
-                courseToBeAdded.Difficulty = addSubjectForm.DifficultyTextBox.Text;
-                amountOfButtons = amountOfButtons + 1;
-                var tempIconButton = AddIconButton(amountOfButtons);
-                var tempCourseButton =AddButton(courseToBeAdded,amountOfButtons);
-                tempIconButton.Top = tempCourseButton.Top;
-                SubjectsLayoutPanel.Controls.Add(tempCourseButton);
-                SubjectsLayoutPanel.Controls.Add(tempIconButton);
+                DisplayList();
             }
             this.Show();
         }

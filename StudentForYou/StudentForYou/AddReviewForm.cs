@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Windows.Forms;
+using StudentForYou.DB;
 
 namespace StudentForYou
 {
     public partial class AddReviewForm : Form
     {
-        string username = String.Empty;
+        int userID;
+        int courseID;
         public string reviewText { get; set; }
-        public AddReviewForm(string passedUsername)
+
+        ProfileDB profileDB = new ProfileDB();
+        CoursesDB coursesDB = new CoursesDB();
+        public AddReviewForm(int userID, int courseID)
         {
             InitializeComponent();
             this.Name = "Add review";
-            username = passedUsername;
+            this.userID = userID;
+            this.courseID = courseID;
         }
 
         private void CancelReviewButton_Click(object sender, EventArgs e)
@@ -22,8 +28,7 @@ namespace StudentForYou
         private void PostReviewButton_Click(object sender, EventArgs e)
         {
             if (PostReviewTextBox.Text != String.Empty)
-                
-                reviewText = username + ": " + PostReviewTextBox.Text+ System.Environment.NewLine;
+                coursesDB.InsertIntoReviews(courseID, userID, PostReviewTextBox.Text, DateTime.Now);
                 this.DialogResult = DialogResult.OK;
             }
 

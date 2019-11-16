@@ -6,14 +6,14 @@ namespace Studentforyousubjects
     {
         string filePath;
         string reviewsFilePath;
-        public DescriptionReader(string courseName)
+        /*public DescriptionReader(string courseName)
         {
             filePath = "Resources\\";
             reviewsFilePath = filePath + courseName + " " + "reviews.txt";
             filePath = filePath + courseName;
             filePath = filePath + ".txt";
 
-        }
+        }*/
 
 
         public string ReadDescription()

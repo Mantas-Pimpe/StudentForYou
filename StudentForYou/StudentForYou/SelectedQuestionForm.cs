@@ -3,19 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
+using StudentForYou.DB;
 
 namespace StudentForYou
 {
     
     public partial class SelectedQuestionForm : Form
     {
-
-        private string username = string.Empty;
-        public SelectedQuestionForm(String question, String likes, String views, String answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, string username, DateTime postDate)
+        int questionID, id;
+        QuestionsDB questionsDB = new QuestionsDB();
+        ProfileDB profileDB = new ProfileDB();
+        public SelectedQuestionForm(int id, int questionID, String question, String likes, String views, String answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
         {
             InitializeComponent();
-            this.username = username;
+            this.id = id;
+            this.questionID = questionID;
             AddNewLabel(question);
             AddNewButton(1173, 632);
             lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
@@ -30,23 +32,21 @@ namespace StudentForYou
             };
             btnDislike.Click += delegate (Object sender, EventArgs e)
             {
-                btnDislike_Click(sender, e, questionList, placeToReplace, details, likes, views, answers);
+                btnDislike_Click(sender, e);
             };
             btnLike.Click += delegate (Object sender, EventArgs e)
             {
-                btnLike_Click(sender, e, questionList, placeToReplace, details, likes, views, answers);
+                btnLike_Click(sender, e);
             };
         }
 
         void RefreshTextBox(int placeToReplace, List<QuestionDetails> questionList)
         {
             txtAnswers.Text = "";
-            var line = questionList[placeToReplace].answersForQuestion;
-            string[] splittedAnswers = line.Split('^');
-            for (int i = 1; i < splittedAnswers.Length; i++)
+            List<Comment> list = questionsDB.GetComments(questionID);
+            for (int i = 0; i < list.Count; i++)
             {
-                txtAnswers.AppendText(splittedAnswers[i]);
-                txtAnswers.AppendText(Environment.NewLine);
+                txtAnswers.Text = txtAnswers.Text + list[i].commentDate + "      " + profileDB.GetUser(list[i].userID).username + ": " + list[i].commentText + Environment.NewLine;
             }
         }
 
@@ -77,7 +77,7 @@ namespace StudentForYou
         void button_click (object sender, EventArgs e)
         {
             var btn = sender as Button;
-            var rpf = new RecentQuestions(username);
+            var rpf = new RecentQuestions(id);
             this.Close();
             rpf.Show();
         }
@@ -90,8 +90,7 @@ namespace StudentForYou
         {
             if (richTextBox1.Text != String.Empty)
             {
-                details.AddAnswers(questionList, placeToReplace, username + " : " + richTextBox1.Text, ref answers);
-                lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
+                questionsDB.InsertIntoComments(qns_id: questionID, com_text: richTextBox1.Text, com_creation_date: DateTime.Now, id);
             }
             richTextBox1.Clear();
             RefreshTextBox(placeToReplace, questionList);
@@ -101,16 +100,14 @@ namespace StudentForYou
         {
 
         }
-        private void btnDislike_Click(object sender, EventArgs e, List<QuestionDetails> questionList, int placeToReplace, QuestionDetails details, String likes, String views, String answers)
+        private void btnDislike_Click(object sender, EventArgs e)
         {
-            details.AddDislike(questionList, placeToReplace, ref likes);
-            lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
+            questionsDB.AddDislike(id);
         }
 
-        private void btnLike_Click(object sender, EventArgs e, List<QuestionDetails> questionList, int placeToReplace, QuestionDetails details, String likes, String views, String answers)
+        private void btnLike_Click(object sender, EventArgs e)
         {
-            details.AddLike(questionList, placeToReplace, ref likes);
-            lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
+            questionsDB.AddLike(id);
         }
 
         private void lblQuestion_Click(object sender, EventArgs e)

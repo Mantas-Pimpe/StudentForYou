@@ -2,35 +2,40 @@
 using System.Windows.Forms;
 using Studentforyousubjects;
 using System.Diagnostics;
+using StudentForYou.DB;
 
 namespace StudentForYou
 {
     public partial class CourseDetailsForm : Form
     {
-        DescriptionReader reader;
-        string nameOfCourse;
-        string username = String.Empty;
-        FileUploader uploader;
-        public CourseDetailsForm(string courseName,string passedUsername)
+        ProfileDB profileDB = new ProfileDB();
+        CoursesDB coursesDB = new CoursesDB();
+        Course course;
+        int userID, courseID;
+        public CourseDetailsForm(int courseID, int userID)
         {
             InitializeComponent();
-            username = passedUsername;
-            nameOfCourse = courseName;
-            reader = new DescriptionReader(courseName);
-            CourseDetailsNameBox.Text = courseName;
-            CourseDetailsTextBox.Text = reader.ReadDescription();
-            var tempReviewInfo = reader.ReadReviews();
-            
-            foreach (string review in tempReviewInfo)
-            {
-                CourseDetailsReviewsTextBox.AppendText(review);
-                CourseDetailsReviewsTextBox.AppendText(System.Environment.NewLine);
-            }
+            this.courseID = courseID;
+            this.userID = userID;
+            course = coursesDB.GetCourse(courseID);
+            CourseDetailsNameBox.Text = course.name;
+            CourseDetailsTextBox.Text = course.description;
+            DisplayCourseDetails();
 
-            uploader = new FileUploader(courseName);
-            downloadsListView.Items.AddRange(uploader.UploadFiles());
+            /*uploader = new FileUploader(courseName);
+            downloadsListView.Items.AddRange(uploader.UploadFiles());*/
         }
+        public void DisplayCourseDetails()
+        {
+            CourseDetailsReviewsTextBox.Clear();
+            var tempReviewInfo = coursesDB.GetReviews(courseID);
 
+            foreach (Review item in tempReviewInfo)
+            {
+                CourseDetailsReviewsTextBox.AppendText(profileDB.GetUser(userID).username + ": " + item.text);
+                CourseDetailsReviewsTextBox.AppendText(Environment.NewLine);
+            }
+        }
         private void CourseDetailsForm_Load(object sender, EventArgs e)
         {
 
@@ -53,17 +58,14 @@ namespace StudentForYou
 
         private void CourseDetailsBackButton_Click(object sender, EventArgs e)
         {
-            reader.UploadToFile(CourseDetailsTextBox.Text);
+            /*reader.UploadToFile(CourseDetailsTextBox.Text);*/
             this.DialogResult = DialogResult.OK;
             
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            var downloadsForm = new CourseDownloads(nameOfCourse);
-            downloadsForm.ShowDialog();
-            this.Show();
+
         }
 
         private void CourseDownloadsListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,13 +75,13 @@ namespace StudentForYou
 
         private void UploadClick(object sender, EventArgs e)
         {
-            downloadsListView.Items.Add(uploader.UploadSingleFile());
+            //downloadsListView.Items.Add(uploader.UploadSingleFile());
         }
 
         private void DownloadsListView_DoubleClick(object sender, EventArgs e)
         { 
 
-              if (downloadsListView.SelectedItems.Count > 0)
+            /*  if (downloadsListView.SelectedItems.Count > 0)
             {
 
                 var selected = downloadsListView.SelectedItems[0];
@@ -87,22 +89,21 @@ namespace StudentForYou
                 Process.Start(selectedFilePath);
 
             }
-            
+            */
         }
 
         private void CourseDetailsPostReviewButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var postReviewForm = new AddReviewForm(username);
+            var postReviewForm = new AddReviewForm(userID, courseID);
             postReviewForm.ShowDialog();
-           if(postReviewForm.DialogResult==DialogResult.OK)
-            {
-                reader.UploadReviews(postReviewForm.reviewText);
-                CourseDetailsReviewsTextBox.AppendText(postReviewForm.reviewText);
-
-              
-            }
+            DisplayCourseDetails();
             this.Show();
+        }
+
+        private void CourseDetailsReviewsTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void DifficultyLabel_Click(object sender, EventArgs e)

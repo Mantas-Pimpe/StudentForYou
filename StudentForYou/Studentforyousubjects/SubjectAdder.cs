@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System;
+using StudentForYou.DB;
 
 namespace Studentforyousubjects
 {
@@ -7,24 +8,18 @@ namespace Studentforyousubjects
     {
         string subjectName;
         string courseDescription;
-        string difficulty;
+        int difficulty;
+        CoursesDB db = new CoursesDB();
 
-        public void GetInfo(string NameInfo, string courseInfo, string DifficultyInfo)
+        public void GetInfo(string nameInfo, string courseInfo, int difficultyInfo)
         {
-            subjectName = NameInfo;
+            subjectName = nameInfo;
             courseDescription = courseInfo;
-            difficulty = DifficultyInfo;
+            difficulty = difficultyInfo;
         }
-        public void WriteToFile()
+        public void WriteToDB()
         {
-            File.AppendAllText(@"Resources\allcourses.txt", this.ReturnAllInfo());
-            File.AppendAllText(@"Resources\allcourses.txt", Environment.NewLine);
-        }
-        public string ReturnAllInfo()
-        {
-            string allInfo;
-            allInfo = subjectName + "," + courseDescription + "," + difficulty;
-            return allInfo;
+            db.InsertIntoCourses(subjectName, difficulty, courseDescription, DateTime.Now);
         }
     }
 }

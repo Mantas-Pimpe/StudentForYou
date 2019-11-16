@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using StudentForYouGroupChat;
 using System.Diagnostics;
+using StudentForYou.DB;
 
 namespace StudentForYou
 {
@@ -10,12 +11,13 @@ namespace StudentForYou
         GroupChat gchat;
         private Form prevform;
         Process proc; //If we wanted to close the server, we could use this.
-        public GroupChatForm(Form prevForm, string username, int port, Process proc)
+        ProfileDB db = new ProfileDB();
+        public GroupChatForm(Form prevForm, int id, int port, Process proc)
         {
             InitializeComponent();
             this.prevform = prevForm;
             this.proc = proc;
-            gchat = new GroupChat(username, port);
+            gchat = new GroupChat(db.GetUser(id).username, port);
             gchat.MyEvent += new GroupChat.MyDel(PostMessage);
             gchat.Start();
 

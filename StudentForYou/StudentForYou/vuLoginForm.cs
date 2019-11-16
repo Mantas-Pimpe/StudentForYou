@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using StudentForYouProfile;
+using StudentForYou.DB;
 
 namespace StudentForYou
 {
@@ -8,8 +8,10 @@ namespace StudentForYou
     public partial class vuLoginForm : Form
     {
         public string username { get; set; }
+        public int id { get; set; }
         public bool isOK { get; set; }
-        UserLogin newLogin = new UserLogin();
+
+        ProfileDB db = new ProfileDB();
         public vuLoginForm()
         {
             InitializeComponent();
@@ -18,9 +20,10 @@ namespace StudentForYou
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (newLogin.loginCheck(textBox1.Text, textBox2.Text) == true)
+            if (db.GetUserLoginID(textBox1.Text, textBox2.Text) != null) 
             {
                 username = textBox1.Text;
+                id = db.GetUserLoginID(textBox1.Text, textBox2.Text) ?? default(int); 
                 isOK = true;
                 this.Close();
             }

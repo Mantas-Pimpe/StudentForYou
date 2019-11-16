@@ -4,19 +4,21 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using StudentForYou.RecentPosts;
+using StudentForYou.DB;
 
 namespace StudentForYou
 {
     public partial class RecentQuestions : Form
     {
         int A = 1;
-        private string username = string.Empty;
+        int id;
         QuestionDetails details = new QuestionDetails();
-        public RecentQuestions(string username)
+        QuestionsDB db = new QuestionsDB();
+        public RecentQuestions(int id)
         {
             InitializeComponent();
-            this.username = username;
-            List<QuestionDetails> questionList = details.getQuestionDetails();
+            this.id = id;
+            List<QuestionDetails> questionList = db.GetQuestions();
             WriteToFlowLayoutPanel(questionList);
             button1.Text = "Likes  " + char.ConvertFromUtf32(0x2191);
             button2.Text = "Views  " + char.ConvertFromUtf32(0x2191);
@@ -49,7 +51,7 @@ namespace StudentForYou
 
 
 
-        public Button AddNewButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
+        public Button AddNewButton(int id, string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
         {
             var btn = new Button();
             this.Controls.Add(btn);
@@ -72,12 +74,12 @@ namespace StudentForYou
             }
             btn.Click += delegate (object sender, EventArgs e)
             {
-                button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
-                details.AddViews(questionList, placeToReplace);
+                button_click(id, sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
+                db.AddView(id);
             };
             return btn;
         }
-        public Button AddNewLikesButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
+        public Button AddNewLikesButton(int id, string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
         {
             var btn = new Button();
             flowLayoutPanel1.SetColumn(btn, 2);
@@ -95,13 +97,13 @@ namespace StudentForYou
             }
             btn.Click += delegate (object sender, EventArgs e)
             {
-                button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
-                details.AddViews(questionList, placeToReplace);
+                button_click(id, sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
+                db.AddView(id);
             };
 
             return btn;
         }
-        public Button AddNewViewsButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
+        public Button AddNewViewsButton(int id, string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
         {
             var btn = new Button();
             flowLayoutPanel1.SetColumn(btn, 3);
@@ -119,12 +121,12 @@ namespace StudentForYou
             }
             btn.Click += delegate (object sender, EventArgs e)
             {
-                button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
-                details.AddViews(questionList, placeToReplace);
+                button_click(id, sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
+                db.AddView(id);
             };
             return btn;
         }
-        public Button AddNewAnswersButton(string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
+        public Button AddNewAnswersButton(int id, string likes, string views, string answers, string question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
         {
             var btn = new Button();
             flowLayoutPanel1.SetColumn(btn, 4);
@@ -142,29 +144,29 @@ namespace StudentForYou
             btn.Height = 40;
             btn.Click += delegate (object sender, EventArgs e)
             {
-                button_click(sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
-                details.AddViews(questionList, placeToReplace);
+                button_click(id, sender, e, question, likes, views, answers, placeToReplace, questionList, details, postDate);
+                db.AddView(id);
             };
             return btn;
         }
 
         private void newpostbtn_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
         {
-            var newForm = new NewPostForm(questionList, username);
+            var newForm = new NewPostForm(questionList, id);
             newForm.Show();
             this.Close();
         }
 
         private void coursebtn_Click(object sender, EventArgs e)
         { 
-            var courses = new form1(username);
+            var courses = new form1(id);
             courses.Show();
             this.Close();
         }
 
         private void profilebtn_Click(object sender, EventArgs e)
         {
-            var Profile = new UserProfile(username);
+            var Profile = new UserProfile(id);
             Profile.Show();
             this.Close();
         }
@@ -174,10 +176,10 @@ namespace StudentForYou
 
         }
 
-        void button_click (object sender, EventArgs e, string question, string likes, string views, string answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
+        void button_click (int questionID, object sender, EventArgs e, string question, string likes, string views, string answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
         {
             var btn = sender as Button;
-            var QuestionForm = new SelectedQuestionForm(question, likes, views, answers, placeToReplace, questionList, details, username, postDate);
+            var QuestionForm = new SelectedQuestionForm(id, questionID, question, likes, views, answers, placeToReplace, questionList, details, postDate);
             QuestionForm.Show();
             this.Hide();
         }
@@ -220,10 +222,10 @@ namespace StudentForYou
             flowLayoutPanel1.Controls.Clear();
             for (int i = 0; i < questionList.Count; i++)
             {
-                flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
-                flowLayoutPanel1.Controls.Add(AddNewLikesButton(questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
-                flowLayoutPanel1.Controls.Add(AddNewViewsButton(questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
-                flowLayoutPanel1.Controls.Add(AddNewAnswersButton(questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
+                flowLayoutPanel1.Controls.Add(AddNewButton(questionList[i].questionID, questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
+                flowLayoutPanel1.Controls.Add(AddNewLikesButton(questionList[i].questionID, questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
+                flowLayoutPanel1.Controls.Add(AddNewViewsButton(questionList[i].questionID, questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
+                flowLayoutPanel1.Controls.Add(AddNewAnswersButton(questionList[i].questionID, questionList[i].questionLikes, questionList[i].questionViews, questionList[i].questionAnswers, questionList[i].question, i, questionList, details, questionList[i].currentDate));
             }
         }
         private void button1_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
@@ -287,6 +289,16 @@ namespace StudentForYou
             WriteToFlowLayoutPanel(tempList);
         }
         private void recentquestionsbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Newpostbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

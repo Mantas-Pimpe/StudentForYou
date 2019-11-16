@@ -6,12 +6,11 @@ namespace StudentForYou
 {
     public partial class AddSubjectForm : Form
     {
-        IAddSubjectInterface notTempinterface;
-       
+        IAddSubjectInterface notTempInterface;
         public AddSubjectForm(IAddSubjectInterface adderInterface)
         {
             InitializeComponent();
-            notTempinterface = adderInterface;
+            notTempInterface = adderInterface;
         }
 
         private void AddSubjectForm_Load(object sender, EventArgs e)
@@ -32,8 +31,8 @@ namespace StudentForYou
         private void SaveSubjectButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            notTempinterface.GetInfo(CourseNameTextBox.Text, CourseDescriptionTextBox.Text, DifficultyTextBox.Text);
-            notTempinterface.WriteToFile();
+            notTempInterface.GetInfo(CourseNameTextBox.Text, CourseDescriptionTextBox.Text, Int32.Parse(DifficultyTextBox.Text));
+            notTempInterface.WriteToDB();
         }
 
         private void CourseDescriptionTextBox_TextChanged(object sender, EventArgs e)

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Windows.Forms;
 using StudentForYouProfile;
+using StudentForYou.DB;
 
 namespace StudentForYou
 {
@@ -14,28 +15,28 @@ namespace StudentForYou
         private RoundedButton usernameChange;
         private Label label1;
         private string newUsername;
-        private int currentUserDataLine = 0;
         private RoundedButton PictureChangeButton;
         private Panel panel1;
         private Button coursebtn;
         private Button recentquestionsbtn;
         private Button profilebtn;
-        private string pictureFilePath = @"Resources\StockImage.png";
-        private Profile profileLogic = new Profile(); 
-
-        public UserProfile(string username)
+        //private string pictureFilePath = @"Resources\StockImage.png";
+        public ProfileDB db = new ProfileDB();
+        User userData;
+        int id;
+        public UserProfile(int id)
         {
             InitializeComponent();
-            var userData = profileLogic.GetUserData(username, pictureFilePath, currentUserDataLine);
-            label1.Text = label1.Text + userData.Item1;
-            UserName.Text = userData.Item1;
-            UserInfo.Text = userData.Item2;
-            newUsername = username;
-            currentUserDataLine = userData.Item3;
-            pictureFilePath = userData.Item4;
-            roundPicturebox1.ImageLocation = userData.Item4;
+            userData = db.GetUser(id);
+            this.id = id;
+            label1.Text = label1.Text + userData.username;
+            UserName.Text = userData.username;
+            UserInfo.Text = userData.bio;
+            newUsername = userData.username;
+            //roundPicturebox1.ImageLocation = userData.Item4;
             profilebtn.Enabled = false;
         }
+
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserProfile));
@@ -229,19 +230,19 @@ namespace StudentForYou
 
         private void LoggingOut_Click(object sender, EventArgs e)
         {
-            profileLogic.SaveUserData(newUsername, pictureFilePath,currentUserDataLine,UserInfo.Text);
+            db.UpdateUser(new User(userData.id, newUsername, UserInfo.Text, userData.creationDate));
             Application.Restart();
         }
         private void UserProfile_FormClosed(object sender, FormClosedEventArgs e)
         {
-            profileLogic.SaveUserData(newUsername, pictureFilePath, currentUserDataLine, UserInfo.Text);
+            db.UpdateUser(new User(userData.id, newUsername, UserInfo.Text, userData.creationDate));
             if (Application.OpenForms.OfType<Form>().Count() == 1)
                 Application.Exit();
         }
 
         private void PictureChangeButton_Click(object sender, EventArgs e)
         {
-            var newPictureFilePath = profileLogic.PictureChange();
+            /*var newPictureFilePath = profileLogic.PictureChange();
             if (newPictureFilePath.Equals("noPicture"))
                 roundPicturebox1.ImageLocation = pictureFilePath;
             else
@@ -249,20 +250,20 @@ namespace StudentForYou
                 pictureFilePath = newPictureFilePath;
                 roundPicturebox1.ImageLocation = pictureFilePath;
                 
-            }
+            }*/
                 
         }
 
         private void Coursebtn_Click(object sender, EventArgs e)
         {
-            var subjects = new form1(UserName.Text);
+            var subjects = new form1(id);
             subjects.Show();
             this.Close();
         }
 
         private void Recentquestionsbtn_Click(object sender, EventArgs e)
         {
-            var rpf = new RecentQuestions(UserName.Text);
+            var rpf = new RecentQuestions(id);
             rpf.Show();
             this.Close();
         }

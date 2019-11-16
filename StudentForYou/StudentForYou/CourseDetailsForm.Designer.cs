@@ -124,6 +124,7 @@
             this.CourseDetailsReviewsTextBox.Size = new System.Drawing.Size(1165, 151);
             this.CourseDetailsReviewsTextBox.TabIndex = 10;
             this.CourseDetailsReviewsTextBox.Text = "";
+            this.CourseDetailsReviewsTextBox.TextChanged += new System.EventHandler(this.CourseDetailsReviewsTextBox_TextChanged);
             // 
             // CourseReviewsLabel
             // 
