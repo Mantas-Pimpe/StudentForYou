@@ -4,22 +4,22 @@ using System.Collections.Generic;
 
 namespace StudentForYou.RecentPosts
 {
-    public struct QuestionDetails : IComparable<QuestionDetails>
+    public struct Question : IComparable<Question>
     {
-        public int CompareTo(QuestionDetails other)
+        public int CompareTo(Question other)
         {
-            if (this.question == other.question)
+            if (this.questionText == other.questionText)
             {
                 return this.questionViews.CompareTo(other.questionViews);
             }
-            return other.question.CompareTo(this.question);
+            return other.questionText.CompareTo(this.questionText);
         }
-        public class SortAnswersAscending : IComparer<QuestionDetails>
+        public class SortAnswersAscending : IComparer<Question>
         {
-            public int Compare(QuestionDetails x, QuestionDetails y)
+            public int Compare(Question x, Question y)
             {
-                var xAnswers = Int32.Parse(x.questionAnswers);
-                var yAnswers = Int32.Parse(y.questionAnswers);
+                var xAnswers = x.questionAnswers;
+                var yAnswers = y.questionAnswers;
                 if (xAnswers > yAnswers)
                 {
                     return 1;
@@ -35,12 +35,12 @@ namespace StudentForYou.RecentPosts
             }
         }
 
-        public class SortAnswersDescending : IComparer<QuestionDetails>
+        public class SortAnswersDescending : IComparer<Question>
         {
-            public int Compare(QuestionDetails x, QuestionDetails y)
+            public int Compare(Question x, Question y)
             {
-                var xAnswers = Int32.Parse(x.questionAnswers);
-                var yAnswers = Int32.Parse(y.questionAnswers);
+                var xAnswers = x.questionAnswers;
+                var yAnswers = y.questionAnswers;
                 if (xAnswers < yAnswers)
                 {
                     return 1;
@@ -56,12 +56,12 @@ namespace StudentForYou.RecentPosts
             }
         }
 
-        public class SortLikesAscending : IComparer<QuestionDetails>
+        public class SortLikesAscending : IComparer<Question>
         {
-            public int Compare(QuestionDetails x, QuestionDetails y)
+            public int Compare(Question x, Question y)
             {
-                var xLikes = Int32.Parse(x.questionLikes);
-                var yLikes = Int32.Parse(y.questionLikes);
+                var xLikes = x.questionLikes;
+                var yLikes = y.questionLikes;
                 if (xLikes > yLikes)
                 {
                     return 1;
@@ -77,12 +77,12 @@ namespace StudentForYou.RecentPosts
             }
         }
 
-        public class SortLikesDescending : IComparer<QuestionDetails>
+        public class SortLikesDescending : IComparer<Question>
         {
-            public int Compare(QuestionDetails x, QuestionDetails y)
+            public int Compare(Question x, Question y)
             {
-                var xLikes = Int32.Parse(x.questionLikes);
-                var yLikes = Int32.Parse(y.questionLikes);
+                var xLikes = x.questionLikes;
+                var yLikes = y.questionLikes;
                 if (xLikes < yLikes)
                 {
                     return 1;
@@ -98,12 +98,12 @@ namespace StudentForYou.RecentPosts
             }
         }
 
-        public class SortViewAscending : IComparer<QuestionDetails>
+        public class SortViewAscending : IComparer<Question>
         {
-            public int Compare(QuestionDetails x, QuestionDetails y)
+            public int Compare(Question x, Question y)
             {
-                var xViews = Int32.Parse(x.questionViews);
-                var yViews = Int32.Parse(y.questionViews);
+                var xViews = x.questionViews;
+                var yViews = y.questionViews;
                 if (xViews > yViews)
                 {
                     return 1;
@@ -116,12 +116,12 @@ namespace StudentForYou.RecentPosts
             }
         }
 
-        public class SortViewDescending : IComparer<QuestionDetails>
+        public class SortViewDescending : IComparer<Question>
         {
-            public int Compare(QuestionDetails x, QuestionDetails y)
+            public int Compare(Question x, Question y)
             {
-                var xViews = Int32.Parse(x.questionViews);
-                var yViews = Int32.Parse(y.questionViews);
+                var xViews = x.questionViews;
+                var yViews = y.questionViews;
                 if (xViews < yViews)
                 {
                     return 1;
@@ -135,22 +135,23 @@ namespace StudentForYou.RecentPosts
         }
 
         public int questionID;
-        public string questionLikes;
-        public string questionViews;
-        public string questionAnswers;
-        public string question;
-        public string answersForQuestion;
-        public DateTime currentDate;
+        public int questionLikes;
+        public int questionViews;
+        public int questionAnswers;
+        public string questionText;
+        public string questionName;
+        public DateTime questionCreationDate;
 
-        public QuestionDetails(int questionID, string questionLikes, string questionViews, string questionAnswers, string question, string answerForQuestion, DateTime currentDate)
+        public Question(int questionID, int questionLikes, int questionViews, int questionAnswers, string questionText, string questionName, DateTime questionCreationDate)
         {
             this.questionID = questionID;
             this.questionLikes = questionLikes;
             this.questionViews = questionViews;
             this.questionAnswers = questionAnswers;
-            this.question = question;
-            this.answersForQuestion = answerForQuestion;
-            this.currentDate = currentDate;
+            this.questionText = questionText;
+            this.questionName = questionName;
+            this.questionName = questionName;
+            this.questionCreationDate = questionCreationDate;
         }
 
         public enum Months
@@ -169,12 +170,12 @@ namespace StudentForYou.RecentPosts
             December
         };
 
-        public List<QuestionDetails> SearchQuestion(List<QuestionDetails> questionList, string questionKey)
+        public List<Question> SearchQuestion(List<Question> questionList, string questionKey)
         {
-            List<QuestionDetails> tempList = new List<QuestionDetails>();
+            List<Question> tempList = new List<Question>();
             foreach (var s in questionList)
             {
-                if (Regex.IsMatch(s.question, questionKey, RegexOptions.IgnoreCase))
+                if (Regex.IsMatch(s.questionName, questionKey, RegexOptions.IgnoreCase))
                 {
                     tempList.Add(s);
                 }

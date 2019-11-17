@@ -22,7 +22,7 @@ namespace StudentForYou
             vuLogin.ShowDialog();
             if (vuLogin.isOK)
             {
-                var rpf = new RecentQuestions(vuLogin.id);
+                var rpf = new RecentQuestions(vuLogin.user);
                 rpf.Show();
                 this.Hide();
             }

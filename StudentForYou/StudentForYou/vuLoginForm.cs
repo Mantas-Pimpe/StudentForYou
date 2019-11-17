@@ -12,6 +12,7 @@ namespace StudentForYou
         public bool isOK { get; set; }
 
         ProfileDB db = new ProfileDB();
+        public User user;
         public vuLoginForm()
         {
             InitializeComponent();
@@ -23,7 +24,8 @@ namespace StudentForYou
             if (db.GetUserLoginID(textBox1.Text, textBox2.Text) != null) 
             {
                 username = textBox1.Text;
-                id = db.GetUserLoginID(textBox1.Text, textBox2.Text) ?? default(int); 
+                id = db.GetUserLoginID(textBox1.Text, textBox2.Text) ?? default(int);
+                user = db.GetUser(id);
                 isOK = true;
                 this.Close();
             }

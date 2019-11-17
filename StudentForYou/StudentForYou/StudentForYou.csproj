@@ -116,12 +116,6 @@
     <Compile Include="CourseDetailsForm.Designer.cs">
       <DependentUpon>CourseDetailsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CourseDownloads.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CourseDownloads.Designer.cs">
-      <DependentUpon>CourseDownloads.cs</DependentUpon>
-    </Compile>
     <Compile Include="GroupChatForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,9 +182,6 @@
     <EmbeddedResource Include="CourseDetailsForm.resx">
       <DependentUpon>CourseDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CourseDownloads.resx">
-      <DependentUpon>CourseDownloads.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GroupChatForm.resx">
       <DependentUpon>GroupChatForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -241,10 +232,6 @@
     <Content Include="icon1.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StudentForYou.ChatServer\StudentForYou.ChatServer.csproj">
-      <Project>{90c92375-90f9-4db2-ac1c-7d5ffcc461f8}</Project>
-      <Name>StudentForYou.ChatServer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StudentForYou.DB\StudentForYou.DB.csproj">
       <Project>{14ef7e94-a570-4f5f-ae15-1dd078dd19b6}</Project>
       <Name>StudentForYou.DB</Name>

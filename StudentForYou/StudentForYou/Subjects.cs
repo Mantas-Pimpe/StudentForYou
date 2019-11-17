@@ -10,13 +10,13 @@ namespace StudentForYou
 {
     public partial class form1 : Form
     {
-        int userID;
+        User user;
         int amountOfButtons = 0;
         CoursesDB db = new CoursesDB();
-        public form1(int userID)
+        public form1(User user)
         {
             InitializeComponent();
-            this.userID = userID;
+            this.user = user;
             coursebtn.Enabled = false;
             DisplayList();
 
@@ -30,7 +30,7 @@ namespace StudentForYou
             {
                 SubjectsLayoutPanel.Controls.Add(AddButton(item, amountOfButtons));
                 SubjectsLayoutPanel.Controls.Add(AddDifficultyButton(item, amountOfButtons));
-                SubjectsLayoutPanel.Controls.Add(AddIconButton(amountOfButtons));
+                SubjectsLayoutPanel.Controls.Add(AddIconButton(item, amountOfButtons));
                 amountOfButtons = amountOfButtons + 1;
             }
         }
@@ -62,7 +62,7 @@ namespace StudentForYou
             this.Show();
         }
 
-        public Button AddIconButton(int numberofbuttons)
+        public Button AddIconButton(Course course, int numberofbuttons)
         {
             var btn = new Button();
             SubjectsLayoutPanel.SetColumn(btn, 3);
@@ -72,16 +72,18 @@ namespace StudentForYou
             btn.Height = 40;
             btn.Left = 650;
             btn.Name = (numberofbuttons + 1).ToString();
-            btn.Click += new EventHandler(IconButton_Click);
+            btn.Click += delegate (object sender, EventArgs e)
+            {
+                IconButton_Click(sender, e, course);
+            };
             return btn;
         }
 
-        public void IconButton_Click(object sender, EventArgs e)
+        public void IconButton_Click(object sender, EventArgs e, Course course)
         {
             this.Hide();
             var button = sender as Button;
-            var proc = System.Diagnostics.Process.Start(@"..\..\..\StudentForYou.ChatServer\bin\Debug\StudentForYou.ChatServer.exe", button.Name);
-            var gchat = new GroupChatForm(this, userID, Int32.Parse(button.Name), proc);
+            var gchat = new GroupChatForm(this, user, course);
             gchat.ShowDialog();
         }
 
@@ -141,7 +143,7 @@ namespace StudentForYou
             btn.Name = courseName;
             btn.Click += delegate (object sender, EventArgs e)
             {
-                Button_Click(sender, e, d.courseID);
+                Button_Click(sender, e, d);
             };
             return btn;
         }
@@ -161,15 +163,15 @@ namespace StudentForYou
             btn.Name = courseName;
             btn.Click += delegate (object sender, EventArgs e)
             {
-                Button_Click(sender, e, d.courseID);
+                Button_Click(sender, e, d);
             };
             return btn;
         }
 
-        public void Button_Click(object sender, EventArgs e, int courseID)
+        public void Button_Click(object sender, EventArgs e, Course course)
         {
             this.Hide();
-            var downloadsForm = new CourseDetailsForm(courseID, userID);
+            var downloadsForm = new CourseDetailsForm(course, user);
             downloadsForm.ShowDialog();
             this.Show();
         }
@@ -181,14 +183,14 @@ namespace StudentForYou
 
         private void Recentquestionsbtn_Click_1(object sender, EventArgs e)
         {
-            var rpF = new RecentQuestions(userID);
+            var rpF = new RecentQuestions(user);
             rpF.Show();
             this.Close();
         }
 
         private void Profilebtn_Click_1(object sender, EventArgs e)
         {
-            var Profile = new UserProfile(userID);
+            var Profile = new UserProfile(user);
             Profile.Show();
             this.Close();
         }

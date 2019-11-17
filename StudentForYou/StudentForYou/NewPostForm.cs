@@ -10,11 +10,11 @@ namespace StudentForYou
 {
     public partial class NewPostForm : Form
     {
-        int id;
-        public NewPostForm(List<QuestionDetails> questionList, int id)
+        User user;
+        public NewPostForm(List<Question> questionList, User user)
         {
             InitializeComponent();
-            this.id = id;
+            this.user = user;
             questionBox.Text = "Enter your question";
             SaveBtn.Click += delegate (Object sender, EventArgs e)
             {
@@ -27,12 +27,12 @@ namespace StudentForYou
 
         }
 
-        private void SaveBtn_Click(object sender, EventArgs e, List<QuestionDetails> questionList)
+        private void SaveBtn_Click(object sender, EventArgs e, List<Question> questionList)
         {
             var db = new QuestionsDB();
-            db.InsertIntoQuestions(qns_name: questiontxt.Text, qns_text: questiontxt.Text, qns_creation_date: DateTime.Now, id);
+            db.InsertIntoQuestions(qns_name: questiontxt.Text, qns_text: questiontxt.Text, qns_creation_date: DateTime.Now, qns_user_id: user.userID);
 
-            var rpf = new RecentQuestions(id);
+            var rpf = new RecentQuestions(user);
             rpf.Show();
             this.Close();
         }
@@ -55,7 +55,7 @@ namespace StudentForYou
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            var rpf = new RecentQuestions(id);
+            var rpf = new RecentQuestions(user);
             rpf.Show();
             this.Close();
         }

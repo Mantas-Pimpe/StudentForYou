@@ -8,38 +8,45 @@ namespace StudentForYou
 {
     public partial class GroupChatForm : Form
     {
-        GroupChat gchat;
+        GroupChatDB chatDB;
         private Form prevform;
-        Process proc; //If we wanted to close the server, we could use this.
-        ProfileDB db = new ProfileDB();
-        public GroupChatForm(Form prevForm, int id, int port, Process proc)
+        User user;
+        Course course;
+        public GroupChatForm(Form prevForm, User user, Course course)
         {
             InitializeComponent();
             this.prevform = prevForm;
-            this.proc = proc;
-            gchat = new GroupChat(db.GetUser(id).username, port);
-            gchat.MyEvent += new GroupChat.MyDel(PostMessage);
-            gchat.Start();
-
+            chatDB = new GroupChatDB();
+            this.user = user;
+            this.course = course;
+            DisplayMessages();
         }
 
         public void PostMessage(string message)
         {
-            if (listMessage.InvokeRequired)
-                listMessage.Invoke(new MethodInvoker(delegate { listMessage.Text = listMessage.Text + message; }));
-            else
-                listMessage.Text = listMessage.Text + message;
+            
         }
         private void GroupChat_Load(object sender, EventArgs e)
         {
+
         }
 
         private void ButtonSend_Click(object sender, EventArgs e)
         {
-            gchat.Send(textMessage.Text);
+            chatDB.InsertIntoGroupChat(user, course, textMessage.Text, DateTime.Now);
             textMessage.Clear();
+            DisplayMessages();
         }
 
+        private void DisplayMessages()
+        {
+            listMessage.Text = "Welcome to the " + course.name + " chat room!" + Environment.NewLine;
+            var tmpList = chatDB.GetGroupMessages(course);
+            foreach (GroupMessage item in tmpList)
+            {
+                listMessage.Text = listMessage.Text + item.messageTime + "  " + item.messageSender.username + ": " + item.messageText + Environment.NewLine;
+            }
+        }
         private void TextMessage_TextChanged(object sender, EventArgs e)
         {
 

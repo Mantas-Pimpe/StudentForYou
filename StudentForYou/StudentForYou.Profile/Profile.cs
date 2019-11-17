@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-using StudentForYou.DB;
-using static StudentForYou.DB.DataBase;
+﻿using System.Windows.Forms;
 
 namespace StudentForYouProfile
 {
     public class Profile
     {
-
-
-        /*public User? GetUser(string username)
-        {
-            return GetUser(string user_username)
-        }*/
-
-        /*public string PictureChange()
+        public string PictureChange()
         {
             using (var openFileDialog = new OpenFileDialog())
             {
@@ -33,13 +21,8 @@ namespace StudentForYouProfile
 
             }
 
-            return "noPicture";
-        }*/
-
-        /*public void SaveUserData(string newUsername, string pictureFilePath, int currentUserDataLine, string bio)
-        {
-            db.UpdateUser(user);
-        }*/
+            return "Resources/personIcon.jpg";
+        }
 
     }
 }

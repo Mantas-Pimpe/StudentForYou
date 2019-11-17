@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.GroupChat", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Chat", "StundentForYou.Chat\StudentForYou.Chat.csproj", "{DBD815BD-32AE-4B17-B1AE-73364088D40D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.ChatServer", "StudentForYou.ChatServer\StudentForYou.ChatServer.csproj", "{90C92375-90F9-4DB2-AC1C-7D5FFCC461F8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.RecentPosts", "StudentForYou.RecentPosts\StudentForYou.RecentPosts.csproj", "{D4193337-7DD7-4389-86C4-21BE0F6B5360}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Profile", "StudentForYou.Profile\StudentForYou.Profile.csproj", "{CF999838-619F-4B94-863D-E81F9B2FB200}"
@@ -41,10 +39,6 @@ Global
 		{DBD815BD-32AE-4B17-B1AE-73364088D40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBD815BD-32AE-4B17-B1AE-73364088D40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBD815BD-32AE-4B17-B1AE-73364088D40D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90C92375-90F9-4DB2-AC1C-7D5FFCC461F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90C92375-90F9-4DB2-AC1C-7D5FFCC461F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90C92375-90F9-4DB2-AC1C-7D5FFCC461F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90C92375-90F9-4DB2-AC1C-7D5FFCC461F8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using Studentforyousubjects;
-using System.Diagnostics;
 using StudentForYou.DB;
 
 namespace StudentForYou
@@ -11,29 +10,34 @@ namespace StudentForYou
         ProfileDB profileDB = new ProfileDB();
         CoursesDB coursesDB = new CoursesDB();
         Course course;
-        int userID, courseID;
-        public CourseDetailsForm(int courseID, int userID)
+        User user;
+        public CourseDetailsForm(Course course, User user)
         {
             InitializeComponent();
-            this.courseID = courseID;
-            this.userID = userID;
-            course = coursesDB.GetCourse(courseID);
+            this.course = course;
+            this.user = user;
             CourseDetailsNameBox.Text = course.name;
             CourseDetailsTextBox.Text = course.description;
             DisplayCourseDetails();
-
-            /*uploader = new FileUploader(courseName);
-            downloadsListView.Items.AddRange(uploader.UploadFiles());*/
         }
         public void DisplayCourseDetails()
         {
             CourseDetailsReviewsTextBox.Clear();
-            var tempReviewInfo = coursesDB.GetReviews(courseID);
+            var tempReviewInfo = coursesDB.GetReviews(course.courseID);
 
             foreach (Review item in tempReviewInfo)
             {
-                CourseDetailsReviewsTextBox.AppendText(profileDB.GetUser(userID).username + ": " + item.text);
+                CourseDetailsReviewsTextBox.AppendText(profileDB.GetUser(user.userID).username + ": " + item.text);
                 CourseDetailsReviewsTextBox.AppendText(Environment.NewLine);
+            }
+
+            downloadsListView.Clear();
+            var tempDownloadsList = coursesDB.GetFiles(course.courseID);
+            foreach (FileCourse item in tempDownloadsList)
+            {
+                var tmp = new ListViewItem(item.fileName);
+                tmp.Tag = item.file;
+                downloadsListView.Items.Add(tmp);
             }
         }
         private void CourseDetailsForm_Load(object sender, EventArgs e)
@@ -58,9 +62,7 @@ namespace StudentForYou
 
         private void CourseDetailsBackButton_Click(object sender, EventArgs e)
         {
-            /*reader.UploadToFile(CourseDetailsTextBox.Text);*/
             this.DialogResult = DialogResult.OK;
-            
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -75,7 +77,9 @@ namespace StudentForYou
 
         private void UploadClick(object sender, EventArgs e)
         {
-            //downloadsListView.Items.Add(uploader.UploadSingleFile());
+            var uploader = new FileUploader();
+            coursesDB.UploadFile(user, course, uploader.UploadSingleFile(), DateTime.Now);
+            DisplayCourseDetails();
         }
 
         private void DownloadsListView_DoubleClick(object sender, EventArgs e)
@@ -95,7 +99,7 @@ namespace StudentForYou
         private void CourseDetailsPostReviewButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var postReviewForm = new AddReviewForm(userID, courseID);
+            var postReviewForm = new AddReviewForm(user, course);
             postReviewForm.ShowDialog();
             DisplayCourseDetails();
             this.Show();

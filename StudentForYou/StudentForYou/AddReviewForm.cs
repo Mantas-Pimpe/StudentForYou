@@ -6,18 +6,17 @@ namespace StudentForYou
 {
     public partial class AddReviewForm : Form
     {
-        int userID;
-        int courseID;
+        User user;
+        Course course;
         public string reviewText { get; set; }
 
-        ProfileDB profileDB = new ProfileDB();
         CoursesDB coursesDB = new CoursesDB();
-        public AddReviewForm(int userID, int courseID)
+        public AddReviewForm(User user, Course course)
         {
             InitializeComponent();
             this.Name = "Add review";
-            this.userID = userID;
-            this.courseID = courseID;
+            this.user = user;
+            this.course = course;
         }
 
         private void CancelReviewButton_Click(object sender, EventArgs e)
@@ -28,7 +27,7 @@ namespace StudentForYou
         private void PostReviewButton_Click(object sender, EventArgs e)
         {
             if (PostReviewTextBox.Text != String.Empty)
-                coursesDB.InsertIntoReviews(courseID, userID, PostReviewTextBox.Text, DateTime.Now);
+                coursesDB.InsertIntoReviews(course.courseID, user.userID, PostReviewTextBox.Text, DateTime.Now);
                 this.DialogResult = DialogResult.OK;
             }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using MySql.Data.MySqlClient;
 
 namespace StudentForYou.DB
@@ -111,6 +112,55 @@ namespace StudentForYou.DB
             return list;
         }
 
-
+        public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
+        {
+            var qry = "INSERT INTO courses_files(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";
+            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@file", File.ReadAllBytes(filePath));
+                    cmd.Parameters.AddWithValue("@file_name", filePath.Trim());
+                    cmd.Parameters.AddWithValue("@file_cou_id", course.courseID);
+                    cmd.Parameters.AddWithValue("@file_user_id", user.userID);
+                    cmd.Parameters.AddWithValue("@file_creation_date", creationDate);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+        public List<FileCourse> GetFiles(int courseID)
+        {
+            var list = new List<FileCourse>();
+            using (var con = new MySqlConnection(GetConnectionString()))
+            {
+                con.Open();
+                var qry = "select file_id, file, file_name, file_cou_id, file_user_id, file_creation_date from courses_files where file_cou_id = @file_cou_id";
+                using (var cmd = new MySqlCommand(qry, con))
+                {
+                    cmd.Parameters.AddWithValue("@file_cou_id", courseID);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            const int CHUNK_SIZE = 2 * 1024;//??????
+                            byte[] buffer = new byte[CHUNK_SIZE];
+                            long bytesRead;
+                            long fieldOffset = 0;
+                            var stream = new MemoryStream();
+                            while ((bytesRead = reader.GetBytes(1, fieldOffset, buffer, 0, buffer.Length)) == buffer.Length)
+                            {
+                                stream.Write(buffer, 0, (int)bytesRead);
+                                fieldOffset += bytesRead;
+                            }
+                            list.Add(new FileCourse(reader.GetInt32(0), reader.GetString(2), stream, reader.GetDateTime(5)));
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return list;
+        }
     }
 }

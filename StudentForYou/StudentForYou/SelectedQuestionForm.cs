@@ -10,25 +10,26 @@ namespace StudentForYou
     
     public partial class SelectedQuestionForm : Form
     {
-        int questionID, id;
+        User user;
+        Question question;
         QuestionsDB questionsDB = new QuestionsDB();
         ProfileDB profileDB = new ProfileDB();
-        public SelectedQuestionForm(int id, int questionID, String question, String likes, String views, String answers, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details, DateTime postDate)
+        public SelectedQuestionForm(Question question, User user)
         {
             InitializeComponent();
-            this.id = id;
-            this.questionID = questionID;
-            AddNewLabel(question);
+            this.user = user;
+            this.question = question;
+            AddNewLabel(question.questionName);
             AddNewButton(1173, 632);
-            lblInfo.Text = "Likes: " + likes + " views: " + views + " answers: " + answers;
-            var value = postDate.Month;
-            var enumDisplayStatus = (QuestionDetails.Months)value;
+            lblInfo.Text = "Likes: " + question.questionLikes + " views: " + question.questionViews + " answers: " + question.questionAnswers;
+            var value = question.questionCreationDate.Month;
+            var enumDisplayStatus = (Question.Months)value;
             var stringValue = enumDisplayStatus.ToString();
-            lblDate.Text = postDate.Year + " " + stringValue + " " + postDate.Day;
-            RefreshTextBox(placeToReplace, questionList);
+            lblDate.Text = question.questionCreationDate.Year + " " + stringValue + " " + question.questionCreationDate.Day;
+            RefreshTextBox();
             button1.Click += delegate (Object sender, EventArgs e)
             {
-                button1_Click(sender, e, likes, views, answers, question, placeToReplace, questionList, details);
+                button1_Click(sender, e);
             };
             btnDislike.Click += delegate (Object sender, EventArgs e)
             {
@@ -40,10 +41,10 @@ namespace StudentForYou
             };
         }
 
-        void RefreshTextBox(int placeToReplace, List<QuestionDetails> questionList)
+        void RefreshTextBox()
         {
             txtAnswers.Text = "";
-            List<Comment> list = questionsDB.GetComments(questionID);
+            List<Comment> list = questionsDB.GetComments(question);
             for (int i = 0; i < list.Count; i++)
             {
                 txtAnswers.Text = txtAnswers.Text + list[i].commentDate + "      " + profileDB.GetUser(list[i].userID).username + ": " + list[i].commentText + Environment.NewLine;
@@ -77,7 +78,7 @@ namespace StudentForYou
         void button_click (object sender, EventArgs e)
         {
             var btn = sender as Button;
-            var rpf = new RecentQuestions(id);
+            var rpf = new RecentQuestions(user);
             this.Close();
             rpf.Show();
         }
@@ -86,14 +87,14 @@ namespace StudentForYou
 
         }
 
-        private void button1_Click(object sender, EventArgs e, String likes, String views, String answers, String question, int placeToReplace, List<QuestionDetails> questionList, QuestionDetails details)
+        private void button1_Click(object sender, EventArgs e)
         {
             if (richTextBox1.Text != String.Empty)
             {
-                questionsDB.InsertIntoComments(qns_id: questionID, com_text: richTextBox1.Text, com_creation_date: DateTime.Now, id);
+                questionsDB.InsertIntoComments(question, richTextBox1.Text, DateTime.Now, user);
             }
             richTextBox1.Clear();
-            RefreshTextBox(placeToReplace, questionList);
+            RefreshTextBox();
         }
 
         private void txtAnswers_TextChanged(object sender, EventArgs e)
@@ -102,20 +103,15 @@ namespace StudentForYou
         }
         private void btnDislike_Click(object sender, EventArgs e)
         {
-            questionsDB.AddDislike(id);
+            questionsDB.AddDislike(question);
         }
 
         private void btnLike_Click(object sender, EventArgs e)
         {
-            questionsDB.AddLike(id);
+            questionsDB.AddLike(question);
         }
 
         private void lblQuestion_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void button1_Click(object sender, EventArgs e)
-
         {
 
         }
