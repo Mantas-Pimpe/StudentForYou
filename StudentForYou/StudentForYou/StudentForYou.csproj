@@ -236,10 +236,6 @@
       <Project>{14ef7e94-a570-4f5f-ae15-1dd078dd19b6}</Project>
       <Name>StudentForYou.DB</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StudentForYou.GroupChat\StudentForYou.GroupChat.csproj">
-      <Project>{f704878e-3cc0-495f-ae90-c315c2d78219}</Project>
-      <Name>StudentForYou.GroupChat</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StudentForYou.Profile\StudentForYou.Profile.csproj">
       <Project>{cf999838-619f-4b94-863d-e81f9b2fb200}</Project>
       <Name>StudentForYou.Profile</Name>
