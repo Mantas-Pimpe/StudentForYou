@@ -1,11 +1,9 @@
 
 import Index from "./views/Index.jsx";
 import Profile from "./views/examples/Profile.jsx";
-import Maps from "./views/examples/Maps.jsx";
 import Register from "./views/examples/Register.jsx";
 import Login from "./views/examples/Login.jsx";
-import Tables from "./views/examples/Tables.jsx";
-import Icons from "./views/examples/Icons.jsx";
+import Courses from "./views/Courses.jsx";
 
 var routes = [
     {
@@ -16,10 +14,10 @@ var routes = [
         layout: "/admin"
     },
     {
-        path: "/tables",
+        path: "/courses",
         name: "Courses",
         icon: "ni ni-books text-gray-dark",
-        component: Tables,
+        component: Courses,
         layout: "/admin"
     },
     {
@@ -27,13 +25,6 @@ var routes = [
         name: "User Profile",
         icon: "ni ni-single-02 text-gray-dark",
         component: Profile,
-        layout: "/admin"
-    },
-    {
-        path: "/icons",
-        name: "Icons",
-        icon: "ni ni-planet text-gray-dark",
-        component: Icons,
         layout: "/admin"
     },
     {

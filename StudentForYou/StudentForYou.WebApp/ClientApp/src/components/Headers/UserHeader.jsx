@@ -9,7 +9,7 @@ class UserHeader extends React.Component {
     return (
       <>
         <div
-          className="header bg-gradient-gray-dark pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+          className="header bg-gradient-default pb-8 pt-5 pt-lg-8 d-flex align-items-center"
           style={{
             minHeight: "600px",
             backgroundSize: "cover",

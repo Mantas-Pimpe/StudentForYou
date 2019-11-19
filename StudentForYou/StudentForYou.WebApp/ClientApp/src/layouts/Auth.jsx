@@ -12,10 +12,10 @@ import routes from "../routes.js";
 
 class Auth extends React.Component {
   componentDidMount() {
-    document.body.classList.add("bg-default");
+    document.body.classList.add("bg-primary");
   }
   componentWillUnmount() {
-    document.body.classList.remove("bg-default");
+      document.body.classList.remove("bg-primary");
   }
   getRoutes = routes => {
     return routes.map((prop, key) => {
@@ -37,14 +37,14 @@ class Auth extends React.Component {
       <>
         <div className="main-content">
           <AuthNavbar />
-          <div className="header bg-gradient-info py-7 py-lg-8">
+          <div className="header bg-gradient-default py-7 py-lg-8">
             <Container>
               <div className="header-body text-center mb-7">
                 <Row className="justify-content-center">
                   <Col lg="5" md="6">
                     <h1 className="text-white">Welcome!</h1>
                     <p className="text-lead text-light">
-                      Login into the Student For You system!
+                      Join the system designed to help you learn!
                     </p>
                   </Col>
                 </Row>
@@ -60,7 +60,7 @@ class Auth extends React.Component {
                 y="0"
               >
                 <polygon
-                  className="fill-default"
+                  className="fill-primary"
                   points="2560 0 2560 100 0 100"
                 />
               </svg>
