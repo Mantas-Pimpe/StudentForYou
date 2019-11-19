@@ -1,26 +1,16 @@
 ﻿
 import React from "react";
-import Icons from "./Icons.jsx";
 // reactstrap components
 import {
-  Button,
-  Badge,
-  Card,
-  CardHeader,
-  CardFooter,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Progress,
-  Table,
-  Container,
-  Row,
-  UncontrolledTooltip
+    Button,
+    Card,
+    CardHeader,
+    Container,
+    Row,
+    FormGroup,
+    Form,
+    Input,
+    Col
 } from "reactstrap";
 // core components
 import { Link } from 'react-router-dom';
@@ -38,94 +28,68 @@ class CoursesAdd extends React.Component {
                                 <CardHeader className="border-0">
                                     <Row className="align-items-center">
                                         <div className="col">
-                                            <h3 className="mb-0">Course List</h3>
+                                            <h3 className="mb-0">Add a new Course</h3>
                                         </div>
                                         <div className="col text-right">
-                                            <Link to="/admin/courses/add-course">
-                                                <Button color="primary" size="sm">Add a course </Button>
+                                            <Link to="/admin/courses">
+                                                <Button color="primary" size="sm">Cancel</Button>
                                             </Link>
                                         </div>
                                     </Row>
                                 </CardHeader>
-                                <Table className="align-items-center table-flush" responsive>
-                                    <thead className="thead-light">
-                                        <tr>
-                                            <th scope="col" width="60%" >Course</th>
-                                            <th scope="col" width="20%" className="text-center">Difficulty</th>
-                                            <th scope="col" width="20%" className="text-center">Course Chat</th>
-                                            <th scope="col" />
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">
-                                                <Media className="align-items-center">
-                                                    <Media>
-                                                        <span className="mb-0 text-sm">
-                                                            Kompiuterių architektūra
-                                                        </span>
-                                                    </Media>
-                                                </Media>
-                                            </th>
-                                            <td align="center">5/10</td>
-                                            <td align="center">
-                                                <Button
-                                                    color="primary"
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}
-                                                    size="sm"><i class="fa fa-comments"></i>
-                                                </Button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                                <CardFooter className="py-4">
-                                    <nav aria-label="...">
-                                        <Pagination
-                                            className="pagination justify-content-end mb-0"
-                                            listClassName="justify-content-end mb-0">
-                                            <PaginationItem className="disabled">
-                                                <PaginationLink
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}
-                                                    tabIndex="-1">
-                                                    <i className="fas fa-angle-left" />
-                                                    <span className="sr-only">Previous</span>
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                            <PaginationItem className="active">
-                                                <PaginationLink
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}>
-                                                    1
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                            <PaginationItem>
-                                                <PaginationLink
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}
-                                                >
-                                                    2 <span className="sr-only">(current)</span>
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                            <PaginationItem>
-                                                <PaginationLink
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}>
-                                                    3
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                            <PaginationItem>
-                                                <PaginationLink
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}>
-                                                    <i className="fas fa-angle-right" />
-                                                    <span className="sr-only">Next</span>
-                                                </PaginationLink>
-                                            </PaginationItem>
-                                        </Pagination>
-                                    </nav>
-                                </CardFooter>
+                                <Form>
+                                    <hr className="my-4" />
+                                    <div className="pl-lg-4 pr-lg-4">
+                                        <Row>
+                                            <Col md="8">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                        htmlFor="input-question-name">Question name
+                                                </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        id="input-question-name"
+                                                        placeholder="A short name that would descripbe your question"
+                                                        type="text" required/>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md="4">
+                                                <FormGroup>
+                                                    <label
+                                                        className="form-control-label"
+                                                        htmlFor="input-question-difficulty">
+                                                        Difficulty
+                                                </label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        id="input-question-difficulty"
+                                                        placeholder="Question Difficulty ?/10"
+                                                        type="number" min="0" max="10"
+                                                        required/>
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col md="12">
+                                                <FormGroup>
+                                                    <label className="form-control-label">Course description</label>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Describe the course, the things you learn, topics..."
+                                                        rows="8"
+                                                        type="textarea"
+                                                        required />
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <div className="col text-right pb-4">
+                                                <Button color="primary" size="sm" type="submit">Save</Button>
+                                            </div>
+                                        </Row>
+                                    </div>
+                                </Form>
                             </Card>
                         </div>
                     </Row>
