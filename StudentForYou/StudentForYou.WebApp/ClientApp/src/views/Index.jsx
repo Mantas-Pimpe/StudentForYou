@@ -62,11 +62,6 @@ class Index extends React.Component {
         <Header />
         {/* Page content */}
         <Container className="mt--7" fluid>
-          <Row>
-            <Col className="mb-5 mb-xl-0" xl="8">
-              
-            </Col>
-          </Row>
           <Row className="mt-5">
             <Col className="mb-5 mb-xl-0" xl="12">
               <Card className="shadow">
@@ -77,7 +72,7 @@ class Index extends React.Component {
                     </div>
                     <div className="col text-right">
                       <Button
-                        color="danger"
+                        color="primary"
                         href="#pablo"
                         onClick={e => e.preventDefault()}
                         size="sm">
