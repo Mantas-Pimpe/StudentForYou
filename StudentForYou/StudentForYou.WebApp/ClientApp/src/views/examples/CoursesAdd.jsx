@@ -23,6 +23,7 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 // core components
+import { Link } from 'react-router-dom';
 
 class CoursesAdd extends React.Component {
     render() {
@@ -131,6 +132,6 @@ class CoursesAdd extends React.Component {
                 </Container>
             </>
         );
+    }
 }
-
 export default CoursesAdd;
