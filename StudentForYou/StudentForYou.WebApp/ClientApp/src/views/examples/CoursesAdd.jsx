@@ -49,7 +49,7 @@ class CoursesAdd extends React.Component {
                                                     <Input
                                                         className="form-control-alternative"
                                                         id="input-question-name"
-                                                        placeholder="A short name that would descripbe your question"
+                                                        placeholder="A short name that would describe your question"
                                                         type="text" required/>
                                                 </FormGroup>
                                             </Col>
