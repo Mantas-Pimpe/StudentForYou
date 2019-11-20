@@ -44,7 +44,7 @@ class Profile extends React.Component {
                   <div className="d-flex justify-content-between">
                     <Button
                       className="mr-4"
-                      color="info"
+                      color="primary"
                       href="#pablo"
                       onClick={e => e.preventDefault()}
                       size="sm"
@@ -53,7 +53,7 @@ class Profile extends React.Component {
                     </Button>
                     <Button
                       className="float-right"
-                      color="default"
+                      color="primary"
                       href="#pablo"
                       onClick={e => e.preventDefault()}
                       size="sm"
@@ -68,15 +68,15 @@ class Profile extends React.Component {
                       <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                         <div>
                           <span className="heading">22</span>
-                          <span className="description">Friends</span>
+                          <span className="description">Questions asked</span>
                         </div>
                         <div>
                           <span className="heading">10</span>
-                          <span className="description">Photos</span>
+                          <span className="description">Questions answered</span>
                         </div>
                         <div>
                           <span className="heading">89</span>
-                          <span className="description">Comments</span>
+                          <span className="description">People tutored</span>
                         </div>
                       </div>
                     </div>
@@ -104,9 +104,6 @@ class Profile extends React.Component {
                       Nick Murphy — writes, performs and records all of his own
                       music.
                     </p>
-                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                      Show more
-                    </a>
                   </div>
                 </CardBody>
               </Card>
@@ -115,19 +112,28 @@ class Profile extends React.Component {
               <Card className="bg-secondary shadow">
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
-                    <Col xs="8">
+                    <Col xs="7">
                       <h3 className="mb-0">My account</h3>
                     </Col>
-                    <Col className="text-right" xs="4">
+                    <Col className="text-right" xs="3">
+                      <Button
+                        color="primary"
+                        href="#pablo"
+                        onClick={e => e.preventDefault()}
+                        size="sm">
+                        Upload profile picture
+                      </Button>
+                    </Col>
+                    <Col className="text-right" xs="2">
                       <Button
                         color="primary"
                         href="#pablo"
                         onClick={e => e.preventDefault()}
                         size="sm"
                       >
-                        Settings
+                        Save changes
                       </Button>
-                    </Col>
+                    </Col>  
                   </Row>
                 </CardHeader>
                 <CardBody>
@@ -147,7 +153,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="lucky.jesse"
                               id="input-username"
                               placeholder="Username"
                               type="text"
@@ -165,7 +170,7 @@ class Profile extends React.Component {
                             <Input
                               className="form-control-alternative"
                               id="input-email"
-                              placeholder="jesse@example.com"
+                              placeholder="email@example.com"
                               type="email"
                             />
                           </FormGroup>
@@ -182,7 +187,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Lucky"
                               id="input-first-name"
                               placeholder="First name"
                               type="text"
@@ -199,7 +203,6 @@ class Profile extends React.Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Jesse"
                               id="input-last-name"
                               placeholder="Last name"
                               type="text"
@@ -216,10 +219,8 @@ class Profile extends React.Component {
                         <label>About Me</label>
                         <Input
                           className="form-control-alternative"
-                          placeholder="A few words about you ..."
+                          placeholder="A few words about yourself ..."
                           rows="4"
-                          defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                          Open Source."
                           type="textarea"
                         />
                       </FormGroup>

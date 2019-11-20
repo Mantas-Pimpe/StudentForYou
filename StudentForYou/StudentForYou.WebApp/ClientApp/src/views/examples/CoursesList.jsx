@@ -56,19 +56,17 @@ class CoursesList extends React.Component {
                                                 <Media className="align-items-center">
                                                     <Media>
                                                         <span className="mb-0 text-sm">
-                                                            Kompiuterių architektūra
+                                                            <Link to="/admin/courses/course-id">Kompiuterių architektūra</Link>
                                                         </span>
                                                     </Media>
                                                 </Media>
                                             </th>
                                             <td align="center">5/10</td>
                                             <td align="center">
-                                                <Button
+                                                <Link to="/admin/courses/chat-id"><Button
                                                     color="primary"
-                                                    href="#pablo"
-                                                    onClick={e => e.preventDefault()}
                                                     size="sm"><i class="fa fa-comments"></i>
-                                                </Button>
+                                                </Button></Link>
                                             </td>
                                         </tr>
                                     </tbody>

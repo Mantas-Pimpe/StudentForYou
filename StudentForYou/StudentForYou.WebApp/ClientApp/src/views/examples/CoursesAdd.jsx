@@ -24,8 +24,8 @@ class CoursesAdd extends React.Component {
                     {/* Table */}
                     <Row >
                         <div className="col">
-                            <Card className="shadow">
-                                <CardHeader className="border-0">
+                            <Card className="bg-secondary shadow">
+                                <CardHeader className="bg-white border-0">
                                     <Row className="align-items-center">
                                         <div className="col">
                                             <h3 className="mb-0">Add a new Course</h3>
@@ -37,8 +37,7 @@ class CoursesAdd extends React.Component {
                                         </div>
                                     </Row>
                                 </CardHeader>
-                                <Form>
-                                    <hr className="my-4" />
+                                <Form className="pt-4">
                                     <div className="pl-lg-4 pr-lg-4">
                                         <Row>
                                             <Col md="8">
@@ -50,7 +49,7 @@ class CoursesAdd extends React.Component {
                                                     <Input
                                                         className="form-control-alternative"
                                                         id="input-question-name"
-                                                        placeholder="A short name that would descripbe your question"
+                                                        placeholder="A short name that would describe your question"
                                                         type="text" required/>
                                                 </FormGroup>
                                             </Col>
