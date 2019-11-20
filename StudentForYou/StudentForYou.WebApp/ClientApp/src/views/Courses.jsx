@@ -6,9 +6,7 @@ import CoursesAdd from "./examples/CoursesAdd.jsx";
 import CoursesDetails from "./examples/CoursesDetails.jsx";
 import CoursesChat from "./examples/CoursesChat.jsx";
 import CoursesList from "./examples/CoursesList.jsx";
-import {
-    BrowserRouter as Router, Route,
-    useParams} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class Courses extends React.Component {
     render() {
