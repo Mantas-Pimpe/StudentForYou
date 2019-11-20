@@ -1,25 +1,22 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-//import registerServiceWorker from './registerServiceWorker';
 
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-const rootElement = document.getElementById('root');
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+
+import "./assets/vendor/nucleo/css/nucleo.css";
+import "./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/scss/argon-dashboard-react.scss";
+
+import AdminLayout from "./layouts/Admin.jsx";
+import AuthLayout from "./layouts/Auth.jsx";
 
 ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
-    <App />
+  <BrowserRouter>
+    <Switch>
+      <Route path="/admin" render={props => <AdminLayout {...props} />} />
+      <Route path="/auth" render={props => <AuthLayout {...props} />} />
+      <Redirect from="/" to="/admin/index" />
+    </Switch>
   </BrowserRouter>,
-  rootElement);
-
-// Uncomment the line above that imports the registerServiceWorker function
-// and the line below to register the generated service worker.
-// By default create-react-app includes a service worker to improve the
-// performance of the application by caching static assets. This service
-// worker can interfere with the Identity UI, so it is
-// disabled by default when Identity is being used.
-//
-//registerServiceWorker();
-
+  document.getElementById("root")
+);
