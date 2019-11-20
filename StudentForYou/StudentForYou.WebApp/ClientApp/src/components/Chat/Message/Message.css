@@ -6,7 +6,7 @@
 .message .timestamp {
   display: flex;
   justify-content: center;
-  color: #999;
+  color: #19274E;
   font-weight: 600;
   font-size: 12px;
   margin: 10px 0px;
@@ -55,7 +55,7 @@
 }
 
 .message.mine .bubble-container .bubble {
-  background: #007aff;
+  background: #19274E;
   color: white;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
