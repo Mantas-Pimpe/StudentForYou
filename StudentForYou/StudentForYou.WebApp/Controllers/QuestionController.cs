@@ -33,6 +33,75 @@ namespace StudentForYou.WebApp.Controllers
             return questionList;
         }
 
+        [HttpPut]
+        public void AddView (Question question)
+        {
+            var qry = "UPDATE questions SET qns_views = qns_views + 1 WHERE qns_id = @qns_id";
+            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@qns_id", question.questionID);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
+        [HttpPut]
+        public void AddLike(Question question)
+        {
+            var qry = "UPDATE questions SET qns_likes = qns_likes + 1 WHERE qns_id = @qns_id";
+            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@qns_id", question.questionID);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
+        [HttpPut]
+        public void AddDislike(Question question)
+        {
+            var qry = "UPDATE questions SET qns_likes = qns_likes - 1 WHERE qns_id = @qns_id";
+            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@qns_id", question.questionID);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
+        [HttpPut]
+        public void AddQuestion(Question question)
+        {
+            var qry = "UPDATE questions SET qns_comments = qns_comments + 1 WHERE qns_id = @qns_id";
+            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@qns_id", question.questionID);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
+        [HttpPut]
+        public void InsertIntoComments
+        {
+
+        }
         // GET: api/Question/5
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
