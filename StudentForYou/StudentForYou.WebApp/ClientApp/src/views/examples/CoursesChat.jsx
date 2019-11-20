@@ -1,6 +1,5 @@
 ﻿
 import React from "react";
-import Icons from "./Icons.jsx";
 // reactstrap components
 import {
     Button,
@@ -15,11 +14,12 @@ import {
     Col
 } from "reactstrap";
 // core components
-import Header from "../../components/Headers/Header.jsx";
+import Messenger from "../../components/Chat/Messenger/index.js";
 class CoursesChat extends React.Component {
     render() {
         return (
             <div>
+                <Messenger />
             </div>
         );
     }
