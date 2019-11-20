@@ -1,8 +1,5 @@
-﻿using StudentForYou.WebApp.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+using StudentForYou.WebApp.Controllers;
 
 namespace StudentForYou.WebApp.Models
 {
@@ -15,10 +12,10 @@ namespace StudentForYou.WebApp.Models
 
         public Message(int messageID, string messageText, int senderID, DateTime messageTime)
         {
-            var tmpDB = new ProfileDB();
+            //var tmpDB = new ProfileController();
             this.messageID = messageID;
             this.messageText = messageText;
-            messageSender = tmpDB.GetUser(senderID);
+            //messageSender = tmpDB.GetUser(senderID);
             this.messageTime = messageTime;
         }
     }
