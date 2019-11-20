@@ -1,0 +1,37 @@
+.compose {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #eeeef1;
+    position: sticky;
+    width: 100%;
+    bottom: 0px;
+}
+
+@supports (backdrop-filter: blur(20px)) {
+  .compose {
+    border: none;
+    background-color: rgb(23, 40, 77);
+    backdrop-filter: blur(20px);
+  }
+}
+
+.compose-input {
+  flex: 1;
+  border: none;
+  font-size: 14px;
+  color: black;
+  height: 40px;
+  background: none;
+}
+
+
+
+.compose .toolbar-button {
+  color: #bbbbbf;
+  margin-left: 15px;
+}
+
+.compose .toolbar-button:hover {
+  color: #99999c;
+}
