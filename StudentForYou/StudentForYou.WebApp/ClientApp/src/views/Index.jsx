@@ -29,7 +29,7 @@ import {
   chartExample1,
   chartExample2
 } from "../variables/charts.jsx";
-
+import { Link } from 'react-router-dom';
 import Header from "../components/Headers/Header.jsx";
 
 class Index extends React.Component {
@@ -71,13 +71,9 @@ class Index extends React.Component {
                       <h3 className="mb-0">Recent Questions</h3>
                     </div>
                     <div className="col text-right">
-                      <Button
-                        color="primary"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                        size="sm">
-                      Ask a question
-                      </Button>
+                      <Link to="/admin/index/add-question">
+                        <Button color="primary" size="sm">Ask a question </Button>
+                      </Link>
                     </div>
                   </Row>
                 </CardHeader>
