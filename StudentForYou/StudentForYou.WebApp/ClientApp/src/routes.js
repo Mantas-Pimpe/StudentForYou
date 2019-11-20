@@ -4,13 +4,14 @@ import Profile from "./views/examples/Profile.jsx";
 import Register from "./views/examples/Register.jsx";
 import Login from "./views/examples/Login.jsx";
 import Courses from "./views/Courses.jsx";
+import Questions from "./views/Questions.jsx";
 
 var routes = [
     {
         path: "/index",
         name: "Recent Questions",
         icon: "ni ni-bullet-list-67 text-gray-dark",
-        component: Index,
+        component: Questions,
         layout: "/admin"
     },
     {

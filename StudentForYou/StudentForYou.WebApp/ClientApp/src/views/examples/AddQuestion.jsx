@@ -28,7 +28,7 @@ class AddQuestion extends React.Component {
                                 <CardHeader className="border-0">
                                     <Row className="align-items-center">
                                         <div className="col">
-                                            <h3 className="mb-0">Add a new Course</h3>
+                                            <h3 className="mb-0">Add a new Question</h3>
                                         </div>
                                         <div className="col text-right">
                                             <Link to="/admin/index">
@@ -46,37 +46,22 @@ class AddQuestion extends React.Component {
                                                     <label
                                                         className="form-control-label"
                                                         htmlFor="input-question-name">Question name
-                                                </label>
+                                                    </label>
                                                     <Input
                                                         className="form-control-alternative"
                                                         id="input-question-name"
-                                                        placeholder="A short name that would descripbe your question"
+                                                        placeholder="A short name that would describe your question"
                                                         type="text" required />
-                                                </FormGroup>
-                                            </Col>
-                                            <Col md="4">
-                                                <FormGroup>
-                                                    <label
-                                                        className="form-control-label"
-                                                        htmlFor="input-question-difficulty">
-                                                        Difficulty
-                                                </label>
-                                                    <Input
-                                                        className="form-control-alternative"
-                                                        id="input-question-difficulty"
-                                                        placeholder="Question Difficulty ?/10"
-                                                        type="number" min="0" max="10"
-                                                        required />
                                                 </FormGroup>
                                             </Col>
                                         </Row>
                                         <Row>
                                             <Col md="12">
                                                 <FormGroup>
-                                                    <label className="form-control-label">Course description</label>
+                                                    <label className="form-control-label">Question description</label>
                                                     <Input
                                                         className="form-control-alternative"
-                                                        placeholder="Describe the course, the things you learn, topics..."
+                                                        placeholder="Describe your question"
                                                         rows="8"
                                                         type="textarea"
                                                         required />

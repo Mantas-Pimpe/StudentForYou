@@ -30,7 +30,7 @@ import {
   chartExample2
 } from "../variables/charts.jsx";
 import { Link } from 'react-router-dom';
-import Header from "../components/Headers/Header.jsx";
+//import Header from "../components/Headers/Header.jsx";
 
 class Index extends React.Component {
   state = {
@@ -59,7 +59,6 @@ class Index extends React.Component {
   render() {
     return (
       <>
-        <Header />
         {/* Page content */}
         <Container className="mt--7" fluid>
           <Row className="mt-5">
