@@ -18,8 +18,8 @@ class Courses extends React.Component {
                         <div>
                             {/* Page content */}
                             <Route path="/admin/courses" exact component={CoursesList} />
-                            <Route path="/admin/courses/course-id" component={CoursesDetails} />
-                            <Route path="/admin/courses/chat-id" component={CoursesChat} />
+                            <Route path="/admin/courses/course-:courseID" component={CoursesDetails} />
+                            <Route path="/admin/courses/chat-:courseID" component={CoursesChat} />
                             <Route path="/admin/courses/add-course" component={CoursesAdd} />
                         </div>
                     </Router>

@@ -8,16 +8,10 @@ namespace StudentForYou.WebApp.Models
 {
     public class FileCourse
     {
-        public int fileID;
-        public string fileName;
-        public MemoryStream file;
-        public DateTime fileCreationDate;
-        public FileCourse(int fileID, string fileName, MemoryStream file, DateTime fileCreationDate)
-        {
-            this.fileID = fileID;
-            this.fileName = fileName;
-            this.file = file;
-            this.fileCreationDate = fileCreationDate;
-        }
+        public int FileID { get; set; }
+        public string FileName { get; set; }
+        public MemoryStream File { get; set; }
+        public DateTime FileCreationDate { get; set; }
+
     }
 }

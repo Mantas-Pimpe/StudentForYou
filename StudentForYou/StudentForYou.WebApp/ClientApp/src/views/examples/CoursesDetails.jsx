@@ -1,6 +1,5 @@
 ﻿
 import React from "react";
-import Icons from "./Icons.jsx";
 // reactstrap components
 import {
     Button,
@@ -15,9 +14,32 @@ import {
     Col
 } from "reactstrap";
 // core components
-import Header from "../../components/Headers/Header.jsx";
+
 class CoursesDetails extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    state = {
+        loading: true,
+        course: null
+    };
+
+    async componentDidMount() {
+        const { match: { params } } = this.props;
+        const url = "https://localhost:44341/api/course/" + params.courseID +"/GetCourse";
+        const response = await fetch(url);
+        const data = await response.json();
+        this.setState({ course: data, loading: false });
+    }
     render() {
+        if (!this.state.course) {
+            /*If course is null*/
+            return <div></div>;
+        }
+        if (this.state.loading) {
+            /*While info is loading from DB*/
+            return <div></div>;
+        }
         return (
             <div>
                 <Container className="mt--7 pl-lg-4 pr-lg-4" fluid>
@@ -28,7 +50,7 @@ class CoursesDetails extends React.Component {
                                     <CardHeader className="bg-white border-0">
                                         <Row className="align-items-center">
                                             <Col xs="7">
-                                                <h3 className="mb-0">Course XXX Details</h3>
+                                                <h3 className="mb-0">Course {this.state.course.courseName} Details</h3>
                                             </Col>
                                             <Col className="text-right" xs="3">
                                             </Col>
@@ -53,12 +75,13 @@ class CoursesDetails extends React.Component {
                                                     <FormGroup>
                                                         <label
                                                             className="form-control-label"
-                                                            htmlFor="input-question-name">Question name
+                                                            htmlFor="input-question-name">Course title
                                                 </label>
                                                         <Input
                                                             className="form-control-alternative"
                                                             id="input-question-name"
-                                                            placeholder="A short name that would describe your question"
+                                                            placeholder="The title of the course"
+                                                            value={this.state.course.courseName}
                                                             type="text" required />
                                                     </FormGroup>
                                                 </Col>
@@ -72,7 +95,8 @@ class CoursesDetails extends React.Component {
                                                         <Input
                                                             className="form-control-alternative"
                                                             id="input-question-difficulty"
-                                                            placeholder="Question Difficulty ?/10"
+                                                            placeholder="Course Difficulty ?/10"
+                                                            value={this.state.course.courseDifficulty}
                                                             type="number" min="0" max="10"
                                                             required />
                                                     </FormGroup>
@@ -90,6 +114,7 @@ class CoursesDetails extends React.Component {
                                                         className="form-control-alternative"
                                                         placeholder="Describe the course, the things you learn, topics..."
                                                         rows="8"
+                                                        value={this.state.course.courseDescription}
                                                         type="textarea"
                                                         required />
                                                 </FormGroup>

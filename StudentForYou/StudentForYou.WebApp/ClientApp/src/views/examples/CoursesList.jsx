@@ -20,6 +20,23 @@ import {
 import { Link } from 'react-router-dom';
 
 class CoursesList extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            'items': []
+        }
+    }
+    GetCourses() {
+        const url = "https://localhost:44341/api/course/GetCourses";
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'items': results }));
+    }
+    componentDidMount() {
+        this.GetCourses();
+    }
+
+    
     render() {
         return (
             <>
@@ -51,24 +68,28 @@ class CoursesList extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">
-                                                <Media className="align-items-center">
-                                                    <Media>
-                                                        <span className="mb-0 text-sm">
-                                                            <Link to="/admin/courses/course-id">Kompiuterių architektūra</Link>
-                                                        </span>
-                                                    </Media>
-                                                </Media>
-                                            </th>
-                                            <td align="center">5/10</td>
-                                            <td align="center">
-                                                <Link to="/admin/courses/chat-id"><Button
-                                                    color="primary"
-                                                    size="sm"><i class="fa fa-comments"></i>
-                                                </Button></Link>
-                                            </td>
-                                        </tr>
+                                        {this.state.items.map(function (item, index) {
+                                            return (
+                                                <tr>
+                                                    <th scope="row">
+                                                        <Media className="align-items-center">
+                                                            <Media>
+                                                                <span className="mb-0 text-sm">
+                                                                    <Link to={`/admin/courses/course-${item.courseID}`}>{item.courseName}</Link>
+                                                                </span>
+                                                            </Media>
+                                                        </Media>
+                                                    </th>
+                                                    <td align="center">{item.courseDifficulty}/10</td>
+                                                    <td align="center">
+                                                        <Link to={`/admin/courses/chat-${item.courseID}`}><Button
+                                                            color="primary"
+                                                            size="sm"><i class="fa fa-comments"></i>
+                                                        </Button></Link>
+                                                    </td>
+                                                </tr>)
+                                        }
+                                        )}
                                     </tbody>
                                 </Table>
                                 <CardFooter className="py-4">

@@ -21,7 +21,7 @@ namespace StudentForYou.WebApp.Controllers
             return 1;
         }
 
-        [HttpGet]
+        [HttpGet("Get")]
         public List<Question> Get()
         {
             var questionList = new List<Question>();
