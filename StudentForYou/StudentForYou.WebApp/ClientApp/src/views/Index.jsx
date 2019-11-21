@@ -8,6 +8,7 @@ import Chart from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 // reactstrap components
 import {
+  Media,
   Button,
   Card,
   CardHeader,
@@ -88,7 +89,15 @@ class Index extends React.Component {
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">/argon/</th>
+                                        <th scope="row">
+                                            <Media className="align-items-center">
+                                                <Media>
+                                                    <span className="mb-0 text-sm">
+                                                        <Link to="/admin/Index/question">/argon/</Link>
+                                                    </span>
+                                                </Media>
+                                            </Media>
+                                        </th>
                       <td>4,569</td>
                       <td>340</td>
                       <td>

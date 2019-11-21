@@ -12,7 +12,7 @@ namespace StudentForYou.WebApp.Controllers
     {
         // GET: api/Question
         [HttpGet]
-        public List<Question> GetQuestions()
+        public List<Question> Get()
         {
             var questionList = new List<Question>();
             using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
@@ -23,11 +23,18 @@ namespace StudentForYou.WebApp.Controllers
                 using (var cmd = new MySqlCommand(qry, con))
                 {
                     using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
+                    { 
                         while (reader.Read())
                         {
-                            questionList.Add(new Question(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2),
-                                reader.GetInt32(3), reader.GetString(4), reader.GetString(5), reader.GetDateTime(6)));
+                            var tmp = new Question();
+                            tmp.QuestionID = reader.GetInt32(0);
+                            tmp.QuestionLikes = reader.GetInt32(1);
+                            tmp.QuestionViews = reader.GetInt32(2);
+                            tmp.QuestionAnswers = reader.GetInt32(3);
+                            tmp.QuestionText = reader.GetString(4);
+                            tmp.QuestionName = reader.GetString(5);
+                            tmp.QuestionCreationDate = reader.GetDateTime(6);
+                            questionList.Add(tmp);
                         }
                     }
                 }
@@ -38,10 +45,9 @@ namespace StudentForYou.WebApp.Controllers
             return questionList;
         }
 
-        [HttpGet("api/Question/{question_id}/getComments")]
+        [HttpGet("getComments/{question_id}")]
         public List<Comment> GetComments(int question_id)
         {
-            // cia irgi reikia id
             var list = new List<Comment>();
             using (var con = new MySqlConnection(GetConnectionString()))
             {
@@ -54,8 +60,13 @@ namespace StudentForYou.WebApp.Controllers
                     {
                         while (reader.Read())
                         {
-                            list.Add(new Comment(reader.GetInt32(0), reader.GetInt32(4), reader.GetInt32(1),
-                                reader.GetString(2), reader.GetDateTime(3)));
+                            var tmp = new Comment();
+                            tmp.CommentID = reader.GetInt32(0);
+                            tmp.QuestionID = reader.GetInt32(1);
+                            tmp.CommentText = reader.GetString(2);
+                            tmp.CommentDate = reader.GetDateTime(3);
+                            tmp.UserID = reader.GetInt32(4);
+                            list.Add(tmp);
                         }
                     }
                 }
@@ -66,8 +77,7 @@ namespace StudentForYou.WebApp.Controllers
             return list;
         }
 
-        // PUT: api/Question/5
-        [HttpPut("api/Question/{qns_uses_id}/{qns_name}/{qns_text}/{qns_creation_date}/{qns_views}/{qns_likes}/{qns_comments}/newquestion")]
+        [HttpPut("newquestion/{qns_uses_id}/{qns_name}/{qns_text}/{qns_creation_date}/{qns_views}/{qns_likes}/{qns_comments}")]
         public void PutIntoQuestions(int qns_user_id, string qns_name, string qns_text,
              DateTime qns_creation_date, int qns_views = 0, int qns_likes = 0, int qns_comments = 0)
         {
@@ -91,7 +101,7 @@ namespace StudentForYou.WebApp.Controllers
             }
         }
 
-        [HttpPut("api/Question/{id}/addView")]
+        [HttpPut("addView/{question_id}")]
         public void AddView(int question_id)
         {
             const string qry = "UPDATE questions SET qns_views = qns_views + 1 WHERE qns_id = @qns_id";
@@ -107,7 +117,7 @@ namespace StudentForYou.WebApp.Controllers
             }
         }
 
-        [HttpPut("api/Question/{id}/addLike")]
+        [HttpPut("addLike/{question_id}")]
         public void AddLike(int question_id)
         {
             var qry = "UPDATE questions SET qns_likes = qns_likes + 1 WHERE qns_id = @qns_id";
@@ -123,10 +133,9 @@ namespace StudentForYou.WebApp.Controllers
             }
         }
 
-        [HttpPut("api/Question/{id}/addDislike")]
+        [HttpPut("addDislike/{question_id}")]
         public void AddDislike(int question_id)
         {
-            // cia irgi reikia id
             var qry = "UPDATE questions SET qns_likes = qns_likes - 1 WHERE qns_id = @qns_id";
             using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
             {
