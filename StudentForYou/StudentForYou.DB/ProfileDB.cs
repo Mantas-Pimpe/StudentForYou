@@ -7,6 +7,11 @@ namespace StudentForYou.DB
 {
     public class ProfileDB : DataBase
     {
+
+        public ProfileDB()
+        {
+
+        }
         public void InsertIntoUsers(string user_username, DateTime user_creation_date, string user_password)
         {
             var qry = "INSERT INTO users(user_username, user_bio ,user_creation_date, user_password, user_image) VALUES (@user_username, 'User has not set his bio yet.', @user_creation_date, @user_password, @user_image)";
@@ -14,21 +19,20 @@ namespace StudentForYou.DB
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@user_username", user_username.Trim());
                     cmd.Parameters.AddWithValue("@user_creation_date", user_creation_date);
                     cmd.Parameters.AddWithValue("@user_image", File.ReadAllBytes("Resources/personIcon.jpg"));
                     cmd.Parameters.AddWithValue("@user_password", user_password.Trim());
                     cmd.ExecuteNonQuery();
+                    conManager.CloseConnection(con);
                 }
             }
         }
 
         public int? GetUserLoginID(string user_username, string user_password)
         {
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
-                con.Open();
                 var qry = "select user.user_id from users user where user.user_username = @user_username and user.user_password = @user_password";
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
@@ -41,7 +45,7 @@ namespace StudentForYou.DB
                             if (!reader.IsDBNull(0))
                             {
                                 var id = reader.GetInt32(0);
-                                con.Close();
+                                conManager.CloseConnection(con);
                                 return id;
                             }
                         }
@@ -53,9 +57,8 @@ namespace StudentForYou.DB
 
         public Boolean CheckIfUsernameTaken(string username)
         {
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
-                con.Open();
                 var qry = "select user.user_username from users user";
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
@@ -65,20 +68,22 @@ namespace StudentForYou.DB
                         {
                             if (username == reader.GetString(0))
                             {
+                                conManager.CloseConnection(con);
                                 return true;
                             }
                         }
                     }
                 }
+                conManager.CloseConnection(con);
             }
+            
             return false;
         }
 
         public User GetUser(int user_id)
         {
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
-                con.Open();
                 var qry = "select user.user_id, user.user_username, user.user_bio, user.user_creation_date, user.user_image from users user where user.user_id = @user_id";
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
@@ -100,7 +105,7 @@ namespace StudentForYou.DB
                                     fieldOffset += bytesRead;
                                 }
                                 User tmp = new User(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3), new Bitmap(stream));
-                                con.Close();
+                                conManager.CloseConnection(con);
                                 return tmp;
                             }
                         }
@@ -113,16 +118,15 @@ namespace StudentForYou.DB
         public void UpdateUser(User user)
         {
             var qry = "UPDATE users SET user_username = @user_username, user_bio = @user_bio "/*user_img = @user_img,*/ + " WHERE user_id = @user_id";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@user_id", user.userID);
                     cmd.Parameters.AddWithValue("@user_username", user.username);
                     cmd.Parameters.AddWithValue("@user_bio", user.userBio);
                     cmd.ExecuteNonQuery();
-                    con.Close();
+                    conManager.CloseConnection(con);
                 }
             }
         }
@@ -130,15 +134,14 @@ namespace StudentForYou.DB
         public void InsertImage(User user, string filePath) 
         {
             var qry = "UPDATE users SET user_image = @user_image WHERE user_id = @user_id";
-            using (var con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@user_id", user.userID);
                     cmd.Parameters.AddWithValue("@user_image", File.ReadAllBytes(filePath));
                     cmd.ExecuteNonQuery();
-                    con.Close();
+                    conManager.CloseConnection(con);
                 }
             }
         }

@@ -7,29 +7,37 @@ namespace StudentForYou.DB
 {
     public class GroupChatDB : DataBase
     {
+        ConnectionManager conManager;
+        Lazy<MySqlConnection> lazyConnection;
+        public GroupChatDB()
+        {
+            conManager = new ConnectionManager();
+            Lazy<MySqlConnection> lazyConnection;
+            lazyConnection = new Lazy<MySqlConnection>(() => new MySqlConnection(GetConnectionString()));
+        }
         public void InsertIntoGroupChat(User user, Course course, string text, DateTime creationDate)
         {
             var qry = "INSERT INTO chat_group(chg_user_id, chg_course_id, chg_text, chg_creation_date) VALUES (@chg_user_id, @chg_course_id, @chg_text, @chg_creation_date)";
-            using (var con = new MySqlConnection(GetConnectionString()))
+
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            { 
+            using (var cmd = new MySqlCommand(qry, con))
             {
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@chg_user_id", user.userID);
-                    cmd.Parameters.AddWithValue("@chg_course_id", course.courseID);
-                    cmd.Parameters.AddWithValue("@chg_text", text.Trim());
-                    cmd.Parameters.AddWithValue("@chg_creation_date", creationDate);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
+
+                cmd.Parameters.AddWithValue("@chg_user_id", user.userID);
+                cmd.Parameters.AddWithValue("@chg_course_id", course.courseID);
+                cmd.Parameters.AddWithValue("@chg_text", text.Trim());
+                cmd.Parameters.AddWithValue("@chg_creation_date", creationDate);
+                cmd.ExecuteNonQuery();
+                conManager.CloseConnection(con);
+            }
             }
         }
         public List<GroupMessage> GetGroupMessages(Course course)
         {
             List<GroupMessage> list = new List<GroupMessage>();
-            using (var con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
-                con.Open();
                 var qry = "select chg_id, chg_user_id, chg_course_id, chg_text, chg_creation_date from chat_group where chg_course_id = @chg_course_id order by chg_creation_date";
                 using (var cmd = new MySqlCommand(qry, con))
                 {
@@ -42,7 +50,7 @@ namespace StudentForYou.DB
                         }
                     }
                 }
-                con.Close();
+                conManager.CloseConnection(con);
             }
             return list;
         }

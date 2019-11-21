@@ -100,6 +100,15 @@ namespace StudentForYou.DB
 
     public class DataBase
     {
+       public Lazy<MySqlConnection> lazyConnection;
+     public   ConnectionManager conManager;
+        public DataBase()
+        {
+            lazyConnection = new Lazy<MySqlConnection>(() => new MySqlConnection(GetConnectionString()));
+            conManager = new ConnectionManager();
+        }
+       
+
         public string GetConnectionString()
         {
             MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
