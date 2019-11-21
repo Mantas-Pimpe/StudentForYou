@@ -4,7 +4,8 @@ a {
 }
 
 code {
-  color: #E01A76;
+  background-color:rgb(123,0,63);
+  color:blue;
 }
 
 .btn-primary {
