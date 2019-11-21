@@ -41,6 +41,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StudentForYou.DB\StudentForYou.DB.csproj" />
+=======
+    <None Remove="ClientApp\src\views\NewQuestion.jsx" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
