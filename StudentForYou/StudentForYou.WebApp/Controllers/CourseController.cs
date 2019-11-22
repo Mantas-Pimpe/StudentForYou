@@ -13,6 +13,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
+            
             var list = new List<Course>();
             using (var con = new MySqlConnection(GetConnectionString()))
             {
@@ -43,6 +44,7 @@ namespace StudentForYou.WebApp.Controllers
                 }
                 con.Close();
             }
+            ReplaceList(list);
             return list;
         }
 
@@ -153,6 +155,24 @@ namespace StudentForYou.WebApp.Controllers
                     con.Close();
                 }
             }
+        }
+
+        static List<T> ReplaceList<T>(List<T> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                for (int j = 0; j < list.Count; j++)
+                {
+                    if (j != i)
+                    {
+                        if (list[i].Equals(list[j]))
+                        {
+                            list.Remove(list[j]);
+                        }
+                    }
+                }
+            }
+            return list;
         }
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
         //{
