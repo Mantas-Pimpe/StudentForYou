@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
@@ -141,9 +140,9 @@ namespace StudentForYou.WebApp.Controllers
         public void PostReview([FromBody] Review review)
         {
             var qry = "INSERT INTO courses_reviews(cor_cou_id, cor_user_id, cor_text, cor_creation_date) VALUES (@cor_cou_id, @cor_user_id, @cor_text, @cor_creation_date)";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@cor_cou_id", review.CourseID);

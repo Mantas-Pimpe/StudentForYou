@@ -7,21 +7,31 @@ namespace StudentForYou.DB
 {
     public class QuestionsDB : DataBase
     {
-        public void InsertIntoQuestions(string qns_name, string qns_text, DateTime qns_creation_date, int qns_user_id, int qns_views = 0, int qns_likes = 0, int qns_comments = 0)
+        public delegate void Del(Question question);
+        public event Del InsertedComment;
+        public event Del InsertedQuestion;
+        public event Del InsertedLike;
+        public QuestionsDB()
         {
+            InsertedComment += new Del(AddLike);
+        }
+
+        public void InsertIntoQuestions(Question question)
+        {
+            InsertedQuestion(question);
             var qry = "INSERT INTO questions(qns_name, qns_text, qns_creation_date, qns_user_id, qns_views, qns_likes, qns_comments) VALUES (@qns_name, @qns_text, @qns_creation_date, @qns_user_id, @qns_views, @qns_likes, @qns_comments)";
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
-                    cmd.Parameters.AddWithValue("@qns_name", qns_name.Trim());
-                    cmd.Parameters.AddWithValue("@qns_text", qns_text.Trim());
-                    cmd.Parameters.AddWithValue("@qns_creation_date", qns_creation_date);
-                    cmd.Parameters.AddWithValue("@qns_user_id", qns_user_id);
-                    cmd.Parameters.AddWithValue("@qns_views", qns_views);
-                    cmd.Parameters.AddWithValue("@qns_likes", qns_likes);
-                    cmd.Parameters.AddWithValue("@qns_comments", qns_comments);
+                    cmd.Parameters.AddWithValue("@qns_name", question.questionName.Trim());
+                    cmd.Parameters.AddWithValue("@qns_text", question.questionName.Trim());
+                    cmd.Parameters.AddWithValue("@qns_creation_date", question.questionCreationDate);
+                    cmd.Parameters.AddWithValue("@qns_user_id", question.questionAuthorID);
+                    cmd.Parameters.AddWithValue("@qns_views", question.questionViews);
+                    cmd.Parameters.AddWithValue("@qns_likes", question.questionLikes);
+                    cmd.Parameters.AddWithValue("@qns_comments", question.questionAnswers);
                     cmd.ExecuteNonQuery();
                     conManager.CloseConnection(con);
                 }
@@ -31,13 +41,13 @@ namespace StudentForYou.DB
         public List<Question> GetQuestions()
         {
             List<Question> questionList = new List<Question>();
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
                 con.Open();
                 var qry = "select qns.qns_id, qns.qns_likes, qns.qns_views, qns.qns_comments, qns.qns_text, qns.qns_name, qns.qns_creation_date from questions qns";
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -53,9 +63,9 @@ namespace StudentForYou.DB
         public void AddView(Question question)
         {
             var qry = "UPDATE questions SET qns_views = qns_views + 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
@@ -67,10 +77,11 @@ namespace StudentForYou.DB
 
         public void AddLike(Question question)
         {
+            InsertedLike(question);
             var qry = "UPDATE questions SET qns_likes = qns_likes + 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
@@ -83,9 +94,9 @@ namespace StudentForYou.DB
         public void AddDislike(Question question)
         {
             var qry = "UPDATE questions SET qns_likes = qns_likes - 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
@@ -98,9 +109,9 @@ namespace StudentForYou.DB
         public void AddComment(Question question)
         {
             var qry = "UPDATE questions SET qns_comments = qns_comments + 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
@@ -112,11 +123,11 @@ namespace StudentForYou.DB
 
         public void InsertIntoComments(Question question, string comText, DateTime comCreationDate, User user)
         {
-            AddComment(question);
+            InsertedComment(question);
             var qry = "INSERT INTO comments(com_user_id, com_text, com_creation_date, com_qns_id) VALUES (@com_user_id, @com_text, @com_creation_date, @com_qns_id)";
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     cmd.Parameters.AddWithValue("@com_user_id", user.userID);
                     cmd.Parameters.AddWithValue("@com_text", comText.Trim());
@@ -130,13 +141,13 @@ namespace StudentForYou.DB
         public List<Comment> GetComments(Question question)
         {
             List<Comment> list = new List<Comment>();
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
                 var qry = "select com.com_id, com.com_user_id, com.com_text, com.com_creation_date, com.com_qns_id from comments com where com.com_qns_id = @qns_id";
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
