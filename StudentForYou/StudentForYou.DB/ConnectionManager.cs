@@ -6,15 +6,44 @@ namespace StudentForYou.DB
     public class ConnectionManager
     {
 
-       public MySqlConnection OpenConnection(Lazy<MySqlConnection> lazyConnection)
+        public MySqlConnection OpenConnection(Lazy<MySqlConnection> lazyConnection)
         {
+
+
             MySqlConnection con = lazyConnection.Value;
-            con.Open();
+            try
+            {
+
+                con.Open();
+            }
+            catch (MySqlException ex)
+            {
+                string s = "MySqlException: " + ex.ToString();
+                Console.WriteLine(s);
+            }
+            finally
+            {
+               
+            }
             return con;
         }
+           
+        
        public MySqlConnection CloseConnection(MySqlConnection con)
         {
-            con.Close();
+            try
+            {
+                con.Close();
+            }
+            catch (MySqlException ex)
+            {
+                string s = "MySqlException: " + ex.ToString();
+                Console.WriteLine(s);
+            }
+            finally
+            {
+
+            }
             return con;
         }
 
