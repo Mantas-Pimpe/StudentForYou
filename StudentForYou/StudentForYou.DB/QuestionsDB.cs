@@ -10,7 +10,7 @@ namespace StudentForYou.DB
         public void InsertIntoQuestions(string qns_name, string qns_text, DateTime qns_creation_date, int qns_user_id, int qns_views = 0, int qns_likes = 0, int qns_comments = 0)
         {
             var qry = "INSERT INTO questions(qns_name, qns_text, qns_creation_date, qns_user_id, qns_views, qns_likes, qns_comments) VALUES (@qns_name, @qns_text, @qns_creation_date, @qns_user_id, @qns_views, @qns_likes, @qns_comments)";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
@@ -23,7 +23,7 @@ namespace StudentForYou.DB
                     cmd.Parameters.AddWithValue("@qns_likes", qns_likes);
                     cmd.Parameters.AddWithValue("@qns_comments", qns_comments);
                     cmd.ExecuteNonQuery();
-                    con.Close();
+                    conManager.CloseConnection(con);
                 }
             }
         }
@@ -31,7 +31,7 @@ namespace StudentForYou.DB
         public List<Question> GetQuestions()
         {
             List<Question> questionList = new List<Question>();
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 con.Open();
                 var qry = "select qns.qns_id, qns.qns_likes, qns.qns_views, qns.qns_comments, qns.qns_text, qns.qns_name, qns.qns_creation_date from questions qns";
@@ -45,7 +45,7 @@ namespace StudentForYou.DB
                         }
                     }
                 }
-                con.Close();
+                conManager.CloseConnection(con);
             }
             return questionList;
         }
@@ -53,7 +53,7 @@ namespace StudentForYou.DB
         public void AddView(Question question)
         {
             var qry = "UPDATE questions SET qns_views = qns_views + 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
@@ -68,14 +68,14 @@ namespace StudentForYou.DB
         public void AddLike(Question question)
         {
             var qry = "UPDATE questions SET qns_likes = qns_likes + 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
                     cmd.ExecuteNonQuery();
-                    con.Close();
+                    conManager.CloseConnection(con);
                 }
             }
         }
@@ -83,14 +83,14 @@ namespace StudentForYou.DB
         public void AddDislike(Question question)
         {
             var qry = "UPDATE questions SET qns_likes = qns_likes - 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
                     cmd.ExecuteNonQuery();
-                    con.Close();
+                    conManager.CloseConnection(con);
                 }
             }
         }
@@ -98,14 +98,14 @@ namespace StudentForYou.DB
         public void AddComment(Question question)
         {
             var qry = "UPDATE questions SET qns_comments = qns_comments + 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
                     cmd.ExecuteNonQuery();
-                    con.Close();
+                    conManager.CloseConnection(con);
                 }
             }
         }
@@ -114,25 +114,24 @@ namespace StudentForYou.DB
         {
             AddComment(question);
             var qry = "INSERT INTO comments(com_user_id, com_text, com_creation_date, com_qns_id) VALUES (@com_user_id, @com_text, @com_creation_date, @com_qns_id)";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@com_user_id", user.userID);
                     cmd.Parameters.AddWithValue("@com_text", comText.Trim());
                     cmd.Parameters.AddWithValue("@com_creation_date", comCreationDate);
                     cmd.Parameters.AddWithValue("@com_qns_id", question.questionID);
                     cmd.ExecuteNonQuery();
+                    conManager.CloseConnection(con);
                 }
             }
         }
         public List<Comment> GetComments(Question question)
         {
             List<Comment> list = new List<Comment>();
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
             {
-                con.Open();
                 var qry = "select com.com_id, com.com_user_id, com.com_text, com.com_creation_date, com.com_qns_id from comments com where com.com_qns_id = @qns_id";
                 using (MySqlCommand cmd = new MySqlCommand(qry, con))
                 {
@@ -145,7 +144,7 @@ namespace StudentForYou.DB
                         }
                     }
                 }
-                con.Close();
+                conManager.CloseConnection(con);
             }
             return list;
         }
