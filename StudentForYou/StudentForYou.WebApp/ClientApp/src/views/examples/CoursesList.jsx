@@ -68,7 +68,7 @@ class CoursesList extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.items.map(function (item, index) {
+                                        {this.state.items.map(function (item) {
                                             return (
                                                 <tr>
                                                     <th scope="row">

@@ -7,19 +7,12 @@ namespace StudentForYou.WebApp.Models
 {
     public class User
     {
-        public int userID;
-        public string username;
-        public string userBio;
-        public DateTime userCreationDate;
-        //public Image userImage;
-
-        public User(int id, string username, string bio, DateTime creationDate/*, Image image*/)
-        {
-            userID = id;
-            this.username = username;
-            userBio = bio;
-            userCreationDate = creationDate;
-            //userImage = image;
-        }
+    
+        public int UserID { get; set; }
+        public string UserName { get; set; }
+        public string UserPassword { get; set; }
+        public string UserBio { get; set; }
+        public DateTime UserCreationDate { get; set; }
+        //public Image userImage{ get; set; };
     }
 }

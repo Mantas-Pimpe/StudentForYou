@@ -33,9 +33,12 @@ import { Link } from 'react-router-dom';
 //import Header from "../components/Headers/Header.jsx";
 
 class Index extends React.Component {
+    constructor(props) {
+        super(props);
+    }
   state = {
     activeNav: 1,
-    chartExample1Data: "data1"
+    chartExample1Data: "data1",
   };
   toggleNavs = (e, index) => {
     e.preventDefault();

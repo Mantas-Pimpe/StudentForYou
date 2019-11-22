@@ -18,7 +18,16 @@ import {
 } from "reactstrap";
 
 class Login extends React.Component {
-  render() {
+
+    handleSubmit = event => {
+        event.preventDefault();
+        let user = {
+            username: this.username.value,
+            password: this.password.value
+        }
+    };
+
+    render() {
     return (
       <>
         <Col lg="5" md="7">
@@ -62,15 +71,15 @@ class Login extends React.Component {
               <div className="text-center text-muted mb-4">
                 <small>Or sign in with credentials</small>
               </div>
-              <Form role="form">
+                <Form onSubmit={this.handleSubmit}>
                 <FormGroup className="mb-3">
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i className="ni ni-email-83" />
+                        <i className="ni ni-circle-08" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Email" type="email" />
+                    <input placeholder="username" type="text" name="username" ref={(input) => this.username = input}/>
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -80,7 +89,7 @@ class Login extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input placeholder="Password" type="password" />
+                    <input placeholder="Password" type="password" ref={input => this.password = input} />
                   </InputGroup>
                 </FormGroup>
                 <div className="custom-control custom-control-alternative custom-checkbox">
@@ -97,7 +106,7 @@ class Login extends React.Component {
                   </label>
                 </div>
                 <div className="text-center">
-                  <Button className="my-4" color="primary" type="button">
+                    <Button className="my-4" color="primary" type="submit">
                     Sign in
                   </Button>
                 </div>

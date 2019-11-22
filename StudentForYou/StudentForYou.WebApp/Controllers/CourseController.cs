@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
@@ -8,9 +7,14 @@ using StudentForYou.WebApp.Models;
 namespace StudentForYou.WebApp.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class CourseController : DataBaseController
     {
+        //private readonly ICourseDAL _courseDal;
+
+        //public CourseController(ICourseDAL courseDal)
+        //{
+        //    _courseDal = courseDal;
+        //}
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
@@ -21,29 +25,33 @@ namespace StudentForYou.WebApp.Controllers
                 var qry = "select cou_id, cou_name, cou_difficulty, cou_description, cou_creation_date from courses";
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            var tmp = new Course();
-                            tmp.CourseID = reader.GetInt32(0);
-                            tmp.CourseName = reader.GetString(1);
-                            tmp.CourseDescription = reader.GetString(3);
-                            tmp.CourseDifficulty = reader.GetInt32(2);
-                            tmp.CourseCreationDate = reader.GetDateTime(4);
+                            var tmp = new Course
+                            {
+                                CourseID = reader.GetInt32(0),
+                                CourseName = reader.GetString(1),
+                                CourseDescription = reader.GetString(3),
+                                CourseDifficulty = reader.GetInt32(2),
+                                CourseCreationDate = reader.GetDateTime(4)
+                            };
                             list.Add(tmp);
                         }
                     }
                 }
+
                 con.Close();
             }
-            return list;
-        }
 
+            return list;
+           // return _courseDal.SelectCourses();
+        }
         [HttpGet("{courseID}/GetCourse")]
         public Course GetCourse(int courseID)
         {
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
                 con.Open();
                 var qry = "select cou.cou_id, cou.cou_name, cou.cou_difficulty, cou.cou_description, cou.cou_creation_date from courses cou where cou.cou_id = @cou_id";
@@ -81,9 +89,9 @@ namespace StudentForYou.WebApp.Controllers
         public void PutIntoCourses([FromBody] Course course)
         {
             var qry = "INSERT INTO courses(cou_name, cou_difficulty, cou_description, cou_creation_date) VALUES (@cou_name, @cou_difficulty, @cou_description, @cou_creation_date)";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@cou_name", course.CourseName.Trim());
