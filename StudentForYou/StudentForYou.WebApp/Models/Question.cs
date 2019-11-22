@@ -14,5 +14,16 @@ namespace StudentForYou.WebApp.Models
         public string QuestionText { get; set; }
         public string QuestionName { get; set; }
         public DateTime QuestionCreationDate { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Question;
+
+            if (QuestionText != other.QuestionText || QuestionName != other.QuestionName)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
