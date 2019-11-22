@@ -7,19 +7,11 @@ namespace StudentForYou.WebApp.Models
 {
     public class Review
     {
-        public int reviewID;
-        public int userID;
-        public int courseID;
-        public string text;
-        public DateTime creationDate;
+        public int ReviewID { get; set; }
+        public int UserID { get; set; }
+        public int CourseID { get; set; }
+        public string ReviewText { get; set; }
+        public DateTime ReviewCreationDate { get; set; }
 
-        public Review(int reviewID, int userID, int courseID, string text, DateTime creationDate)
-        {
-            this.reviewID = reviewID;
-            this.userID = userID;
-            this.courseID = courseID;
-            this.text = text;
-            this.creationDate = creationDate;
-        }
     }
 }

@@ -90,7 +90,7 @@ namespace StudentForYou.WebApp.Controllers
             }
         }
         [HttpPost("PostCourse")]
-        public void PutIntoCourses([FromBody] Course course)
+        public void PostCourse([FromBody] Course course)
         {
             var qry = "INSERT INTO courses(cou_name, cou_difficulty, cou_description, cou_creation_date) VALUES (@cou_name, @cou_difficulty, @cou_description, @cou_creation_date)";
             using (var con = new MySqlConnection(GetConnectionString()))
@@ -100,7 +100,7 @@ namespace StudentForYou.WebApp.Controllers
                     con.Open();
                     cmd.Parameters.AddWithValue("@cou_name", course.CourseName.Trim());
                     cmd.Parameters.AddWithValue("@cou_description", course.CourseDescription.Trim());
-                    cmd.Parameters.AddWithValue("@cou_creation_date", course.CourseCreationDate);
+                    cmd.Parameters.AddWithValue("@cou_creation_date", DateTime.Now);
                     cmd.Parameters.AddWithValue("@cou_difficulty", course.CourseDifficulty);
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -123,13 +123,37 @@ namespace StudentForYou.WebApp.Controllers
                     {
                         while (reader.Read())
                         {
-                            list.Add(new Review(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetString(3), reader.GetDateTime(4)));
+                            var tmp = new Review();
+                            tmp.ReviewID = reader.GetInt32(0);
+                            tmp.CourseID = reader.GetInt32(1);
+                            tmp.UserID = reader.GetInt32(2);
+                            tmp.ReviewText = reader.GetString(3);
+                            tmp.ReviewCreationDate = reader.GetDateTime(4);
+                            list.Add(tmp);
                         }
                     }
                 }
                 con.Close();
             }
             return list;
+        }
+        [HttpPost("{courseID}/PostReview")]
+        public void PostReview([FromBody] Review review)
+        {
+            var qry = "INSERT INTO courses_reviews(cor_cou_id, cor_user_id, cor_text, cor_creation_date) VALUES (@cor_cou_id, @cor_user_id, @cor_text, @cor_creation_date)";
+            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@cor_cou_id", review.CourseID);
+                    cmd.Parameters.AddWithValue("@cor_text", review.ReviewText.Trim());
+                    cmd.Parameters.AddWithValue("@cor_creation_date", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@cor_user_id", review.UserID);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
         }
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
         //{

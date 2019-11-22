@@ -13,74 +13,68 @@ import {
     Row,
     Col
 } from "reactstrap";
-// core components
 import { Link } from 'react-router-dom';
 
-class CoursesDetails extends React.Component {
+class QuestionDetails extends React.Component {
     constructor(props) {
         super(props);
     }
-
     state = {
         loading: true,
-        course: null,
-        'items': [],
-        reviewText: '',
-        userID: ''
+        question: null,
+        checker: 0
+    };
+
+    async componentDidMount() {
+        if (this.state.checker == 0) {
+            const { match: { params } } = this.props;
+            const url = "https://localhost:44341/api/question/GetOneQuestion/" + params.questionID;
+            const response = await fetch(url);
+            const data = await response.json();
+            this.setState({ question: data, loading: false });
+            this.state.checker = 10;
+        }
+        if (this.state.checker == 1) {
+
+            const { match: { params } } = this.props;
+            const url = "https://localhost:44341/api/Question/addLike/" + params.questionID;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(response => {
+                return response.json()
+            })
+            this.state.checker = 10;
+        }
+        if (this.state.checker == 2) {
+            const { match: { params } } = this.props;
+            const url = "https://localhost:44341/api/Question/addDislike/" + params.questionID;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(response => {
+                return response.json()
+            })
+            this.state.checker = 10;
+        }
     }
 
-    componentDidMount() {
-        this.GetCourse();
-        this.GetReviews();
+    addLike() {
+        this.state.checker = 1;
+        this.componentDidMount();
+    }
+    addDislike() {
+        this.state.checker = 2;
+        this.componentDidMount();
     }
 
-    GetReviews() {
-        const { match: { params } } = this.props;
-        const url = "https://localhost:44341/api/course/" + params.courseID + "/GetReviews";
-        fetch(url)
-            .then(results => results.json())
-            .then(results => this.setState({ 'items': results }));
-    }
 
-    async GetCourse() {
-        const { match: { params } } = this.props;
-        const url = "https://localhost:44341/api/course/" + params.courseID + "/GetCourse";
-        const response = await fetch(url);
-        const data = await response.json();
-        this.setState({ course: data, loading: false });
-    }
-
-    changeHandler = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
-    reviewSubmitHandler = e => {
-        const { match: { params } } = this.props;
-        e.preventDefault();
-        const data = {
-            reviewText: this.state.reviewText,
-            courseID: parseInt(params.courseID),
-            userID: 0
-        };
-        console.log(data);
-        console.log("https://localhost:44341/api/course/" + params.courseID + "/PostReview");
-
-        fetch('https://localhost:44341/api/course/' + params.courseID + '/PostReview', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        window.location.reload();
-    }
-            
-
-        
     render() {
-        const { reviewText } = this.state;
-        if (!this.state.course) {
+        if (!this.state.question) {
             /*If course is null*/
             return <div></div>;
         }
@@ -96,20 +90,37 @@ class CoursesDetails extends React.Component {
                             <Card className="bg-secondary shadow">
                                 <Form>
                                     <CardHeader className="bg-white border-0">
-                                        <Row className="align-items-center">
-                                            <Col xs="7">
-                                                <h3 className="mb-0">Course {this.state.course.courseName} Details</h3>
+                                        <Row className="justify-content-md-center">
+                                            <Col className = "text-center" xs = "9">
+                                                <h3 className="mb-0"> {this.state.question.questionName}</h3>
                                             </Col>
-                                            <Col className="text-right" xs="3">
+                                            <Col className="text-right" xs lg="0">
+                                                <Link to="/admin/index">
+                                                    <Button
+                                                        type="submit"
+                                                        color="primary"
+                                                        size="sm">
+                                                        Back
+                                                    </Button>
+                                                </Link>
                                             </Col>
-                                            <Col className="text-right" xs="2">
-                                                <Link to="/admin/courses"><Button
+                                            <Col className="text-right" xs lg="0">
+                                                <Button
+                                                    onClick={this.addLike}
                                                     type="submit"
                                                     color="primary"
-                                                    size="sm"
-                                                >
-                                                    Save changes
-                                            </Button></Link>
+                                                    size="sm">
+                                                    Like
+                                                </Button>
+                                            </Col>
+                                            <Col className="text-right" xs lg="0">
+                                                <Button
+                                                    onClick={this.addDislike}
+                                                    type="submit"
+                                                    color="primary"
+                                                    size="sm">
+                                                    Dislike
+                                                </Button>
                                             </Col>
                                         </Row>
                                     </CardHeader>
@@ -129,7 +140,7 @@ class CoursesDetails extends React.Component {
                                                             className="form-control-alternative"
                                                             id="input-question-name"
                                                             placeholder="The title of the course"
-                                                            value={this.state.course.courseName}
+                                                            value={this.state.question.questionName}
                                                             type="text" required />
                                                     </FormGroup>
                                                 </Col>
@@ -140,13 +151,6 @@ class CoursesDetails extends React.Component {
                                                             htmlFor="input-question-difficulty">
                                                             Difficulty
                                                 </label>
-                                                        <Input
-                                                            className="form-control-alternative"
-                                                            id="input-question-difficulty"
-                                                            placeholder="Course Difficulty ?/10"
-                                                            value={this.state.course.courseDifficulty}
-                                                            type="number" min="0" max="10"
-                                                            required />
                                                     </FormGroup>
                                                 </Col>
                                             </Row>
@@ -162,40 +166,10 @@ class CoursesDetails extends React.Component {
                                                         className="form-control-alternative"
                                                         placeholder="Describe the course, the things you learn, topics..."
                                                         rows="8"
-                                                        value={this.state.course.courseDescription}
+                                                        value={this.state.question.questionText}
                                                         type="textarea"
                                                         required />
                                                 </FormGroup>
-                                            </Col>
-                                        </div>
-                                        <hr className="my-4" />
-                                        {/* Reviews */}
-                                        <h6 className="heading-small text-muted mb-4">User course reviews</h6>
-                                        <div className="pl-lg-4">
-                                            <Col md="12">
-                                                <Form onSubmit={this.reviewSubmitHandler}>
-                                                    {this.state.items.map(function (item, index) {
-                                                        return (
-                                                            <li> {item.reviewText}</li>
-                                                        )
-                                                    })}
-                                                    <Row>
-                                                        <Col className="pt-4 mb-0">
-                                                            <Input
-                                                                className="form-control-alternative"
-                                                                name="reviewText"
-                                                                value={reviewText}
-                                                                onChange={this.changeHandler}
-                                                                placeholder="Write a course review"
-                                                                type="text" required />
-                                                        </Col>
-                                                    </Row>
-                                                    <Row>
-                                                        <Col className="text-right pt-4 mb-0" >
-                                                            <Button color="primary" size="sm" type="submit" >Save Review</Button>
-                                                        </Col>
-                                                    </Row>
-                                                </Form>
                                             </Col>
                                         </div>
                                         <hr className="my-4" />
@@ -207,7 +181,7 @@ class CoursesDetails extends React.Component {
                                                     <label className="form-control-label">Images containing helpful course information</label>
                                                     <Input
                                                         className="form-control-alternative"
-                                                        placeholder="Course images..."
+                                                        placeholder="Describe the course, the things you learn, topics..."
                                                         rows="8"
                                                         type="textarea" />
                                                 </FormGroup>
@@ -224,4 +198,4 @@ class CoursesDetails extends React.Component {
     }
 }
 
-export default CoursesDetails;
+export default QuestionDetails;
