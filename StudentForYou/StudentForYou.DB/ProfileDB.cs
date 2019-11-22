@@ -8,10 +8,10 @@ namespace StudentForYou.DB
 {
     public class ProfileDB : DataBase
     {
-
+        public QuestionsDB db;
         public ProfileDB()
         {
-            var db = new QuestionsDB();
+            db = new QuestionsDB();
             db.InsertedComment += new QuestionsDB.Del(UpdateUserKarma);
             db.InsertedLike += new QuestionsDB.Del(UpdateUserKarma);
             db.InsertedQuestion += new QuestionsDB.Del(UpdateUserKarma);

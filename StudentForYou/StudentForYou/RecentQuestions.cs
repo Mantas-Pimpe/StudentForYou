@@ -13,6 +13,7 @@ namespace StudentForYou
         int A = 1;
         User user;
         Question details = new Question();
+        ProfileDB profileDB = new ProfileDB();
         QuestionsDB db = new QuestionsDB();
         public RecentQuestions(User user)
         {

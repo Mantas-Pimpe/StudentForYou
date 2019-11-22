@@ -29,8 +29,8 @@ namespace StudentForYou
 
         private void SaveBtn_Click(object sender, EventArgs e, List<Question> questionList)
         {
-            var db = new QuestionsDB();
-            db.InsertIntoQuestions(qns_name: questiontxt.Text, qns_text: questiontxt.Text, qns_creation_date: DateTime.Now, qns_user_id: user.userID);
+            var profileDB = new ProfileDB();
+            profileDB.db.InsertIntoQuestions(new Question(0, 0, 0, 0, questiontxt.Text, questiontxt.Text, DateTime.Now, user.userID));
 
             var rpf = new RecentQuestions(user);
             rpf.Show();

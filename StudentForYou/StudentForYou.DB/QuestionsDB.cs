@@ -13,7 +13,7 @@ namespace StudentForYou.DB
         public event Del InsertedLike;
         public QuestionsDB()
         {
-            InsertedComment += new Del(AddLike);
+            InsertedComment += new Del(AddComment);
         }
 
         public void InsertIntoQuestions(Question question)
@@ -24,7 +24,6 @@ namespace StudentForYou.DB
             {
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@qns_name", question.questionName.Trim());
                     cmd.Parameters.AddWithValue("@qns_text", question.questionName.Trim());
                     cmd.Parameters.AddWithValue("@qns_creation_date", question.questionCreationDate);
@@ -43,15 +42,14 @@ namespace StudentForYou.DB
             List<Question> questionList = new List<Question>();
             using (var con = conManager.OpenConnection(lazyConnection))
             {
-                con.Open();
-                var qry = "select qns.qns_id, qns.qns_likes, qns.qns_views, qns.qns_comments, qns.qns_text, qns.qns_name, qns.qns_creation_date from questions qns";
+                var qry = "select qns.qns_id, qns.qns_likes, qns.qns_views, qns.qns_comments, qns.qns_text, qns.qns_name, qns.qns_creation_date, qns.qns_user_id from questions qns";
                 using (var cmd = new MySqlCommand(qry, con))
                 {
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            questionList.Add(new Question(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetString(4), reader.GetString(5), reader.GetDateTime(6)));
+                            questionList.Add(new Question(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetString(4), reader.GetString(5), reader.GetDateTime(6), reader.GetInt32(7)));
                         }
                     }
                 }
@@ -67,7 +65,6 @@ namespace StudentForYou.DB
             {
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -83,7 +80,6 @@ namespace StudentForYou.DB
             {
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
                     cmd.ExecuteNonQuery();
                     conManager.CloseConnection(con);
@@ -98,7 +94,6 @@ namespace StudentForYou.DB
             {
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
                     cmd.ExecuteNonQuery();
                     conManager.CloseConnection(con);
@@ -113,7 +108,6 @@ namespace StudentForYou.DB
             {
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question.questionID);
                     cmd.ExecuteNonQuery();
                     conManager.CloseConnection(con);
