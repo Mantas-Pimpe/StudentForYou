@@ -62,10 +62,10 @@ namespace StudentForYou.DB
 
         public Message(int messageID, string messageText, int senderID, DateTime messageTime)
         {
-            var tmpDB = new ProfileDB();
+            //var tmpDB = new ProfileDB();
             this.messageID = messageID;
             this.messageText = messageText;
-            messageSender = tmpDB.GetUser(senderID);
+            //messageSender = tmpDB.GetUser(senderID);
             this.messageTime = messageTime;
         }
     }
@@ -100,6 +100,15 @@ namespace StudentForYou.DB
 
     public class DataBase
     {
+       public Lazy<MySqlConnection> lazyConnection;
+     public   ConnectionManager conManager;
+        public DataBase()
+        {
+            lazyConnection = new Lazy<MySqlConnection>(() => new MySqlConnection(GetConnectionString()));
+            conManager = new ConnectionManager();
+        }
+       
+
         public string GetConnectionString()
         {
             MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();

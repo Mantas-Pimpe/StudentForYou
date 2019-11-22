@@ -8,6 +8,7 @@ import Chart from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 // reactstrap components
 import {
+  Media,
   Button,
   Card,
   CardHeader,
@@ -35,11 +36,24 @@ import { Link } from 'react-router-dom';
 class Index extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            'items': [],
+             activeNav: 1,
+             chartExample1Data: "data1"
+        }
     }
-  state = {
-    activeNav: 1,
-    chartExample1Data: "data1",
-  };
+
+    GetQuestion() {
+        const url = "https://localhost:44341/api/Question";
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'items': results }));
+    }
+
+    componentDidMount() {
+        this.GetQuestion();
+
+    }
   toggleNavs = (e, index) => {
     e.preventDefault();
     this.setState({
@@ -52,7 +66,6 @@ class Index extends React.Component {
     };
     wow.bind(this);
     setTimeout(() => wow(), 1000);
-    // this.chartReference.update();
   };
   componentWillMount() {
     if (window.Chart) {
@@ -90,17 +103,26 @@ class Index extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">/argon/</th>
-                      <td>4,569</td>
-                      <td>340</td>
-                      <td>
-                        <i className="fas fa-arrow-up text-success mr-3" />{" "}
-                        46,53%
-                      </td>
-                      <td>2019/11/19</td>
-                    </tr>
-                  </tbody>
+                    {this.state.items.map(function (item, index) {
+                      return (
+                       <tr>
+                         <th scope="row">
+                           <Media className="align-items-center">
+                             <Media>
+                               <span className="mb-0 text-sm">
+                                 <Link to={`/admin/index/question-${item.questionID}`}>{item.questionName}</Link>
+                               </span>
+                             </Media>
+                           </Media>
+                         </th>
+                         <td align="center">{item.questionLikes}</td>
+                         <td align="center">{item.questionViews}</td>
+                         <td align="center">{item.questionAnswers}</td>
+                         <td align="center">{item.questionCreationDate}</td>
+                       </tr>)
+                      }
+                    )}
+                   </tbody>
                 </Table>
               </Card>
             </Col>
