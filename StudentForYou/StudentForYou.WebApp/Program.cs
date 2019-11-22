@@ -13,6 +13,9 @@ namespace StudentForYou.WebApp
     {
         public static void Main(string[] args)
         {
+
+            
+            Console.ReadLine();
             CreateWebHostBuilder(args).Build().Run();
         }
 
