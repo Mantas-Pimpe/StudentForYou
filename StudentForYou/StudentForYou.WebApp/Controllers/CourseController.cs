@@ -50,7 +50,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("{courseID}/GetCourse")]
         public Course GetCourse(int courseID)
         {
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
                 con.Open();
                 var qry = "select cou.cou_id, cou.cou_name, cou.cou_difficulty, cou.cou_description, cou.cou_creation_date from courses cou where cou.cou_id = @cou_id";
@@ -93,9 +93,9 @@ namespace StudentForYou.WebApp.Controllers
         public void PutIntoCourses([FromBody] Course course)
         {
             var qry = "INSERT INTO courses(cou_name, cou_difficulty, cou_description, cou_creation_date) VALUES (@cou_name, @cou_difficulty, @cou_description, @cou_creation_date)";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@cou_name", course.CourseName.Trim());
@@ -112,7 +112,7 @@ namespace StudentForYou.WebApp.Controllers
         public List<Review> GetReviews(int courseID)
         {
             var list = new List<Review>();
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
                 con.Open();
                 var qry = "select cor_id, cor_cou_id, cor_user_id, cor_text, cor_creation_date from courses_reviews where cor_cou_id = @cor_cou_id";
@@ -134,7 +134,7 @@ namespace StudentForYou.WebApp.Controllers
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
         //{
         //    var qry = "INSERT INTO courses_files(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";
-        //    using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+        //    using (var con = new MySqlConnection(GetConnectionString()))
         //    {
         //        using (MySqlCommand cmd = new MySqlCommand(qry, con))
         //        {
