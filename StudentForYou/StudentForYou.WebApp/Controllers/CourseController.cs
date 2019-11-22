@@ -7,9 +7,14 @@ using StudentForYou.WebApp.Models;
 namespace StudentForYou.WebApp.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class CourseController : DataBaseController
     {
+        //private readonly ICourseDAL _courseDal;
+
+        //public CourseController(ICourseDAL courseDal)
+        //{
+        //    _courseDal = courseDal;
+        //}
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
@@ -21,7 +26,7 @@ namespace StudentForYou.WebApp.Controllers
                 var qry = "select cou_id, cou_name, cou_difficulty, cou_description, cou_creation_date from courses";
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         { 
@@ -36,18 +41,18 @@ namespace StudentForYou.WebApp.Controllers
                                 courseRef.CourseCreationDate = reader.GetDateTime(4);
                                 return courseRef;
                             };
-
-
                             list.Add(ReadData(reader, tmp));
                         }
                     }
                 }
+
                 con.Close();
             }
+            
             CheckList.ReplaceList(list);
-            return list;
-        }
 
+           // return _courseDal.SelectCourses();
+        }
         [HttpGet("{courseID}/GetCourse")]
         public Course GetCourse(int courseID)
         {
