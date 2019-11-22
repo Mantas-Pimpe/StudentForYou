@@ -24,14 +24,21 @@ namespace StudentForYou.WebApp.Controllers
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                        {
+                        { 
                             var tmp = new Course();
-                            tmp.CourseID = reader.GetInt32(0);
-                            tmp.CourseName = reader.GetString(1);
-                            tmp.CourseDescription = reader.GetString(3);
-                            tmp.CourseDifficulty = reader.GetInt32(2);
-                            tmp.CourseCreationDate = reader.GetDateTime(4);
-                            list.Add(tmp);
+                            Func<MySqlDataReader, Course, Course> ReadData = delegate (MySqlDataReader readerRef, Course courseRef)
+                             {
+
+                                 courseRef.CourseID = reader.GetInt32(0);
+                                 courseRef.CourseName = reader.GetString(1);
+                                 courseRef.CourseDescription = reader.GetString(3);
+                                 courseRef.CourseDifficulty = reader.GetInt32(2);
+                                 courseRef.CourseCreationDate = reader.GetDateTime(4);
+                                 return courseRef;
+                             };
+
+
+                            list.Add(ReadData(reader, tmp));
                         }
                     }
                 }
@@ -57,13 +64,16 @@ namespace StudentForYou.WebApp.Controllers
                         {
                             if (!reader.IsDBNull(0))
                             {
-                                tmp.CourseID = reader.GetInt32(0);
-                                tmp.CourseName = reader.GetString(1);
-                                tmp.CourseDescription = reader.GetString(3);
-                                tmp.CourseDifficulty = reader.GetInt32(2);
-                                tmp.CourseCreationDate = reader.GetDateTime(4);
-                                con.Close();
-                                return tmp;
+                                Func<MySqlDataReader, Course, Course> ReadData = delegate (MySqlDataReader readerRef, Course courseRef)
+                                {
+
+                                    courseRef.CourseID = reader.GetInt32(0);
+                                    courseRef.CourseName = reader.GetString(1);
+                                    courseRef.CourseDescription = reader.GetString(3);
+                                    courseRef.CourseDifficulty = reader.GetInt32(2);
+                                    courseRef.CourseCreationDate = reader.GetDateTime(4);
+                                    return courseRef;
+                                };
                             }
                         }
                         tmp.CourseID = 99;

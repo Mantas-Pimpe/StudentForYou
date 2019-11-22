@@ -13,30 +13,17 @@ namespace StudentForYou.DB
        public MySqlConnection OpenConnection(Lazy<MySqlConnection> lazyConnection)
         {
             MySqlConnection con = lazyConnection.Value;
-            try
-            {
+
              con.Open();
             return con;
-            }
-            catch (MySqlException e)
-            {
-
-                throw;
-            }
-           
+        
+       
 
         }
        public MySqlConnection CloseConnection(MySqlConnection con)
         {
-            ; try
-            {
-                con.Close();
-            }
-            catch (MySqlException e)
-            {
 
-                throw;
-            }
+            con.Close();
             return con;
         }
 
