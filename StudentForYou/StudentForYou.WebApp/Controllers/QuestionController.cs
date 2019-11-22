@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
@@ -38,12 +38,12 @@ namespace StudentForYou.WebApp.Controllers
                         }
                     }
                 }
-
-                con.Close();
+              con.Close();
             }
 
-            return questionList;
+           return questionList;
         }
+
 
         [HttpGet("getComments/{question_id}")]
         public List<Comment> GetComments(int question_id)
@@ -191,3 +191,4 @@ namespace StudentForYou.WebApp.Controllers
         }
     }
 }
+
