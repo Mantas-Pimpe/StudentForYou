@@ -7,8 +7,7 @@ namespace StudentForYou.DB
 {
     public class GroupChatDB : DataBase
     {
-        ConnectionManager conManager;
-        Lazy<MySqlConnection> lazyConnection;
+  
         public GroupChatDB()
         {
             conManager = new ConnectionManager();
@@ -19,7 +18,7 @@ namespace StudentForYou.DB
         {
             var qry = "INSERT INTO chat_group(chg_user_id, chg_course_id, chg_text, chg_creation_date) VALUES (@chg_user_id, @chg_course_id, @chg_text, @chg_creation_date)";
 
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             { 
             using (var cmd = new MySqlCommand(qry, con))
             {
@@ -36,7 +35,7 @@ namespace StudentForYou.DB
         public List<GroupMessage> GetGroupMessages(Course course)
         {
             List<GroupMessage> list = new List<GroupMessage>();
-            using (MySqlConnection con = conManager.OpenConnection(lazyConnection))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
                 var qry = "select chg_id, chg_user_id, chg_course_id, chg_text, chg_creation_date from chat_group where chg_course_id = @chg_course_id order by chg_creation_date";
                 using (var cmd = new MySqlCommand(qry, con))
