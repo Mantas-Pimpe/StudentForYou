@@ -41,7 +41,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StudentForYou.DB\StudentForYou.DB.csproj" />
-=======
     <None Remove="ClientApp\src\views\NewQuestion.jsx" />
   </ItemGroup>
 
