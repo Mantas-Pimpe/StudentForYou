@@ -17,19 +17,14 @@ namespace StudentForYou.WebApp.Models
 
         public User()
         {
-           
-                configPrivacy = ConfigurationManager.AppSettings["PrivacySetting"];
+
+            configPrivacy = ConfigurationManager.AppSettings["PrivacySetting"];
             configPrivacy.ToLower();
-            if(configPrivacy!="public"||configPrivacy!="private")
+            if (configPrivacy != "public" || configPrivacy != "private")
             {
                 configPrivacy = "private";
             }
-            
-
         }
-
-
-
         //public Image userImage;
     }
 }
