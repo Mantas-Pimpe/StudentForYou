@@ -120,7 +120,7 @@ namespace StudentForYou.WebApp.Controllers
         }
 
         [HttpPut("newquestion/{qns_uses_id}/{qns_name}/{qns_text}")]
-        public void PutIntoQuestions(int qns_user_id, string qns_name, string qns_text,
+        public void PutQuestions(int qns_user_id, string qns_name, string qns_text,
              DateTime qns_creation_date, int qns_views = 0, int qns_likes = 0, int qns_comments = 0)
         {
             var qry =
@@ -132,7 +132,7 @@ namespace StudentForYou.WebApp.Controllers
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_name", qns_name.Trim());
                     cmd.Parameters.AddWithValue("@qns_text", qns_text.Trim());
-                    cmd.Parameters.AddWithValue("@qns_creation_date", qns_creation_date);
+                    cmd.Parameters.AddWithValue("@qns_creation_date", DateTime.Now);
                     cmd.Parameters.AddWithValue("@qns_user_id", qns_user_id);
                     cmd.Parameters.AddWithValue("@qns_views", qns_views);
                     cmd.Parameters.AddWithValue("@qns_likes", qns_likes);

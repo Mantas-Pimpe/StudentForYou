@@ -79,7 +79,7 @@ class AddQuestion extends React.Component {
                                     <hr className="my-4" />
                                     <div className="pl-lg-4 pr-lg-4">
                                         <Row>
-                                            <Col md="8">
+                                            <Col md="12">
                                                 <FormGroup>
                                                     <label
                                                         className="form-control-label"

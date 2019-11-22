@@ -91,11 +91,25 @@ class QuestionDetails extends React.Component {
                                 <Form>
                                     <CardHeader className="bg-white border-0">
                                         <Row className="justify-content-md-center">
-                                            <Col className = "text-center" xs = "9">
-                                                <h3 className="mb-0"> {this.state.question.questionName}</h3>
+                                            <Col xs = "9">
+                                                <h3 className="mb-0"> {this.state.question.questionName} Details</h3>
                                             </Col>
-                                            <Col className="text-right" xs lg="0">
-                                                <Link to="/admin/index">
+                                            <Col className="text-right" lg="3">
+                                                <Button
+                                                    onClick={this.addLike}
+                                                    type="submit"
+                                                    color="primary"
+                                                    size="sm">
+                                                    <i class="fa fa-thumbs-up" />
+                                                </Button>
+                                                <Button
+                                                    onClick={this.addDislike}
+                                                    type="submit"
+                                                    color="primary"
+                                                    size="sm">
+                                                   <i class="fa fa-thumbs-down" />
+                                                </Button>
+                                                <Link to="/admin/index" className="pl-1">
                                                     <Button
                                                         type="submit"
                                                         color="primary"
@@ -104,67 +118,40 @@ class QuestionDetails extends React.Component {
                                                     </Button>
                                                 </Link>
                                             </Col>
-                                            <Col className="text-right" xs lg="0">
-                                                <Button
-                                                    onClick={this.addLike}
-                                                    type="submit"
-                                                    color="primary"
-                                                    size="sm">
-                                                    Like
-                                                </Button>
-                                            </Col>
-                                            <Col className="text-right" xs lg="0">
-                                                <Button
-                                                    onClick={this.addDislike}
-                                                    type="submit"
-                                                    color="primary"
-                                                    size="sm">
-                                                    Dislike
-                                                </Button>
-                                            </Col>
                                         </Row>
                                     </CardHeader>
                                     <CardBody>
                                         <h6 className="heading-small text-muted mb-4">
-                                            Course Information
+                                            About the question
                                         </h6>
                                         <div className="pl-lg-4">
                                             <Row>
-                                                <Col md="8">
+                                                <Col md="12">
                                                     <FormGroup>
                                                         <label
                                                             className="form-control-label"
-                                                            htmlFor="input-question-name">Course title
+                                                            htmlFor="input-question-name">Question Title
                                                 </label>
                                                         <Input
                                                             className="form-control-alternative"
                                                             id="input-question-name"
-                                                            placeholder="The title of the course"
+                                                            placeholder="Question name"
                                                             value={this.state.question.questionName}
                                                             type="text" required />
-                                                    </FormGroup>
-                                                </Col>
-                                                <Col md="4">
-                                                    <FormGroup>
-                                                        <label
-                                                            className="form-control-label"
-                                                            htmlFor="input-question-difficulty">
-                                                            Difficulty
-                                                </label>
                                                     </FormGroup>
                                                 </Col>
                                             </Row>
                                         </div>
                                         <hr className="my-4" />
                                         {/* Description */}
-                                        <h6 className="heading-small text-muted mb-4">Detailed Course Information</h6>
+                                        <h6 className="heading-small text-muted mb-4">Detailed Question Information</h6>
                                         <div className="pl-lg-4">
                                             <Col md="12">
                                                 <FormGroup>
-                                                    <label className="form-control-label">Course description</label>
+                                                    <label className="form-control-label">Question</label>
                                                     <Input
                                                         className="form-control-alternative"
-                                                        placeholder="Describe the course, the things you learn, topics..."
+                                                        placeholder="Ask your question in detail"
                                                         rows="8"
                                                         value={this.state.question.questionText}
                                                         type="textarea"
@@ -172,21 +159,7 @@ class QuestionDetails extends React.Component {
                                                 </FormGroup>
                                             </Col>
                                         </div>
-                                        <hr className="my-4" />
-                                        {/* Files*/}
-                                        <h6 className="heading-small text-muted mb-4">Course Files</h6>
-                                        <div className="pl-lg-4">
-                                            <Col md="12">
-                                                <FormGroup>
-                                                    <label className="form-control-label">Images containing helpful course information</label>
-                                                    <Input
-                                                        className="form-control-alternative"
-                                                        placeholder="Describe the course, the things you learn, topics..."
-                                                        rows="8"
-                                                        type="textarea" />
-                                                </FormGroup>
-                                            </Col>
-                                        </div>
+                                        
                                     </CardBody>
                                 </Form>
                             </Card>
