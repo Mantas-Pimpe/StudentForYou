@@ -14,10 +14,9 @@ namespace StudentForYou.WebApp.Models
 
         public string configPrivacy { get; set; }
         public DateTime userCreationDate { get; set; }
-
+        //public Image userImage{ get; set; };
         public User()
         {
-
             configPrivacy = ConfigurationManager.AppSettings["PrivacySetting"];
             configPrivacy.ToLower();
             if (configPrivacy != "public" || configPrivacy != "private")
@@ -25,6 +24,5 @@ namespace StudentForYou.WebApp.Models
                 configPrivacy = "private";
             }
         }
-        //public Image userImage;
     }
 }

@@ -7,12 +7,18 @@ using StudentForYou.WebApp.Models;
 namespace StudentForYou.WebApp.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class CourseController : DataBaseController
     {
+        //private readonly ICourseDAL _courseDal;
+
+        //public CourseController(ICourseDAL courseDal)
+        //{
+        //    _courseDal = courseDal;
+        //}
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
+            
             var list = new List<Course>();
             using (var con = new MySqlConnection(GetConnectionString()))
             {
@@ -20,7 +26,7 @@ namespace StudentForYou.WebApp.Controllers
                 var qry = "select cou_id, cou_name, cou_difficulty, cou_description, cou_creation_date from courses";
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         { 
@@ -35,17 +41,18 @@ namespace StudentForYou.WebApp.Controllers
                                 courseRef.CourseCreationDate = reader.GetDateTime(4);
                                 return courseRef;
                             };
-
-
                             list.Add(ReadData(reader, tmp));
                         }
                     }
                 }
+
                 con.Close();
             }
-            return list;
-        }
+            
+            CheckList.ReplaceList(list);
 
+           // return _courseDal.SelectCourses();
+        }
         [HttpGet("{courseID}/GetCourse")]
         public Course GetCourse(int courseID)
         {
@@ -154,6 +161,7 @@ namespace StudentForYou.WebApp.Controllers
                 }
             }
         }
+
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
         //{
         //    var qry = "INSERT INTO courses_files(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";

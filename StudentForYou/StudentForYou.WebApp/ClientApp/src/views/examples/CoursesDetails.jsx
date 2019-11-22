@@ -124,7 +124,7 @@ class CoursesDetails extends React.Component {
                                                         <label
                                                             className="form-control-label"
                                                             htmlFor="input-question-name">Course title
-                                                </label>
+                                                        </label>
                                                         <Input
                                                             className="form-control-alternative"
                                                             id="input-question-name"

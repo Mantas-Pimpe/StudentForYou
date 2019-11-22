@@ -11,6 +11,10 @@ using StudentForYou.WebApp.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StudentForYou.WebApp.Controllers;
+using Unity;
+using System.Web.Http;
+using Unity.Lifetime;
 
 namespace StudentForYou.WebApp
 {
@@ -59,6 +63,11 @@ namespace StudentForYou.WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //var config = new HttpConfiguration();
+            //var container = new UnityContainer();
+            //container.RegisterType<ICourseDAL, CourseDAL>(new HierarchicalLifetimeManager());
+            //config.DependencyResolver = new UnityResolver(container);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
