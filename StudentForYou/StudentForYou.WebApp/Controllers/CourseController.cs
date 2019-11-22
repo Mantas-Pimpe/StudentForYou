@@ -18,6 +18,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
+            
             var list = new List<Course>();
             using (var con = new MySqlConnection(GetConnectionString()))
             {
@@ -47,8 +48,9 @@ namespace StudentForYou.WebApp.Controllers
 
                 con.Close();
             }
+            
+            CheckList.ReplaceList(list);
 
-            return list;
            // return _courseDal.SelectCourses();
         }
         [HttpGet("{courseID}/GetCourse")]
@@ -159,6 +161,7 @@ namespace StudentForYou.WebApp.Controllers
                 }
             }
         }
+
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
         //{
         //    var qry = "INSERT INTO courses_files(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";

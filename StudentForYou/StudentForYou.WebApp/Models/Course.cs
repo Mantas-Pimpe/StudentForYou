@@ -13,5 +13,16 @@ namespace StudentForYou.WebApp.Models
         public int CourseDifficulty { get; set; }
         public DateTime CourseCreationDate { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            var other = obj as Course;
+
+            if (CourseName != other.CourseName || CourseDescription != other.CourseDescription)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
