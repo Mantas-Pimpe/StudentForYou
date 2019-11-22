@@ -7,24 +7,13 @@ namespace StudentForYou.WebApp.Models
 {
     public class Question
     {
-        public int questionID;
-        public int questionLikes;
-        public int questionViews;
-        public int questionAnswers;
-        public string questionText;
-        public string questionName;
-        public DateTime questionCreationDate;
+        public int questionID { get; set; }
+        public int questionLikes { get; set; }
+        public int questionViews { get; set; }
+        public int questionAnswers { get; set; }
+        public string questionText { get; set; }
+        public string questionName { get; set; }
+        public DateTime questionCreationDate { get; set; }
 
-        public Question(int questionID, int questionLikes, int questionViews, int questionAnswers, string questionText, string questionName, DateTime questionCreationDate)
-        {
-            this.questionID = questionID;
-            this.questionLikes = questionLikes;
-            this.questionViews = questionViews;
-            this.questionAnswers = questionAnswers;
-            this.questionText = questionText;
-            this.questionName = questionName;
-            this.questionName = questionName;
-            this.questionCreationDate = questionCreationDate;
-        }
     }
 }

@@ -5,18 +5,10 @@ namespace StudentForYou.WebApp.Models
 {
     public class Message
     {
-        public int messageID;
-        public string messageText;
-        public User messageSender;
-        public DateTime messageTime;
+        public int MessageID { get; set; }
+        public string MessageText { get; set; }
+        public User MessageSender { get; set; }
+        public DateTime MessageTime { get; set; }
 
-        public Message(int messageID, string messageText, int senderID, DateTime messageTime)
-        {
-            //var tmpDB = new ProfileController();
-            this.messageID = messageID;
-            this.messageText = messageText;
-            //messageSender = tmpDB.GetUser(senderID);
-            this.messageTime = messageTime;
-        }
     }
 }

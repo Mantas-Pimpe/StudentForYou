@@ -16,13 +16,45 @@ import {
 import { Link } from 'react-router-dom';
 
 class CoursesAdd extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            courseName: '',
+            courseDifficulty: '',
+            courseDescription: ''
+        }
+    }
+    changeHandler = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    submitHandler = e => {
+        e.preventDefault();
+        const data = {
+            courseName: this.state.courseName,
+            courseDifficulty: parseInt(this.state.courseDifficulty),
+            courseDescription: this.state.courseDescription
+        };
+
+        fetch('https://localhost:44341/api/course/PostCourse', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        this.props.history.push("/admin/courses");
+    }
     render() {
+        const { courseName, courseDifficulty, courseDescription } = this.state;
         return (
             <>
                 {/* Page content */}
-                <Container className="mt--7" fluid>
+                < Container className="mt--7" fluid >
                     {/* Table */}
-                    <Row >
+                    < Row >
                         <div className="col">
                             <Card className="bg-secondary shadow">
                                 <CardHeader className="bg-white border-0">
@@ -37,35 +69,39 @@ class CoursesAdd extends React.Component {
                                         </div>
                                     </Row>
                                 </CardHeader>
-                                <Form className="pt-4">
+                                <Form className="pt-4" onSubmit={this.submitHandler}>
                                     <div className="pl-lg-4 pr-lg-4">
                                         <Row>
                                             <Col md="8">
                                                 <FormGroup>
                                                     <label
                                                         className="form-control-label"
-                                                        htmlFor="input-question-name">Question name
+                                                        htmlFor="input-course-name">course title
                                                 </label>
                                                     <Input
                                                         className="form-control-alternative"
-                                                        id="input-question-name"
-                                                        placeholder="A short name that would describe your question"
-                                                        type="text" required/>
+                                                        name="courseName"
+                                                        placeholder="A short title that would describe your course"
+                                                        value={courseName}
+                                                        onChange={this.changeHandler}
+                                                        type="text" required />
                                                 </FormGroup>
                                             </Col>
                                             <Col md="4">
                                                 <FormGroup>
                                                     <label
                                                         className="form-control-label"
-                                                        htmlFor="input-question-difficulty">
+                                                        htmlFor="input-course-difficulty">
                                                         Difficulty
                                                 </label>
                                                     <Input
                                                         className="form-control-alternative"
-                                                        id="input-question-difficulty"
-                                                        placeholder="Question Difficulty ?/10"
+                                                        name="courseDifficulty"
+                                                        placeholder="course Difficulty ?/10"
+                                                        value={courseDifficulty}
+                                                        onChange={this.changeHandler}
                                                         type="number" min="0" max="10"
-                                                        required/>
+                                                        required />
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -76,6 +112,9 @@ class CoursesAdd extends React.Component {
                                                     <Input
                                                         className="form-control-alternative"
                                                         placeholder="Describe the course, the things you learn, topics..."
+                                                        name="courseDescription"
+                                                        value={courseDescription}
+                                                        onChange={this.changeHandler}
                                                         rows="8"
                                                         type="textarea"
                                                         required />
@@ -84,15 +123,15 @@ class CoursesAdd extends React.Component {
                                         </Row>
                                         <Row>
                                             <div className="col text-right pb-4">
-                                                <Button color="primary" size="sm" type="submit">Save</Button>
+                                                <Button color="primary" size="sm" type="submit" >Save</Button>
                                             </div>
                                         </Row>
                                     </div>
                                 </Form>
                             </Card>
                         </div>
-                    </Row>
-                </Container>
+                    </Row >
+                </Container >
             </>
         );
     }
