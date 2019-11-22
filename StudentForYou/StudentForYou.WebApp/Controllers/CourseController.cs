@@ -26,16 +26,16 @@ namespace StudentForYou.WebApp.Controllers
                         while (reader.Read())
                         { 
                             var tmp = new Course();
-                            Func<MySqlDataReader, Course, Course> ReadData = delegate (MySqlDataReader readerRef, Course courseRef)
-                             {
-
-                                 courseRef.CourseID = reader.GetInt32(0);
-                                 courseRef.CourseName = reader.GetString(1);
-                                 courseRef.CourseDescription = reader.GetString(3);
-                                 courseRef.CourseDifficulty = reader.GetInt32(2);
-                                 courseRef.CourseCreationDate = reader.GetDateTime(4);
-                                 return courseRef;
-                             };
+                            Func<MySqlDataReader,Course, Course> ReadData = delegate(MySqlDataReader readerRef,Course courseRef) 
+                            {
+                               
+                                courseRef.CourseID = reader.GetInt32(0);
+                                courseRef.CourseName = reader.GetString(1);
+                                courseRef.CourseDescription = reader.GetString(3);
+                                courseRef.CourseDifficulty = reader.GetInt32(2);
+                                courseRef.CourseCreationDate = reader.GetDateTime(4);
+                                return courseRef;
+                            };
 
 
                             list.Add(ReadData(reader, tmp));
@@ -74,6 +74,8 @@ namespace StudentForYou.WebApp.Controllers
                                     courseRef.CourseCreationDate = reader.GetDateTime(4);
                                     return courseRef;
                                 };
+                                return ReadData(reader, tmp);
+                                
                             }
                         }
                         tmp.CourseID = 99;
