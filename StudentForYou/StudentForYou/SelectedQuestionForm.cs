@@ -13,9 +13,10 @@ namespace StudentForYou
         User user;
         Question question;
         QuestionsDB questionsDB = new QuestionsDB();
-        ProfileDB profileDB = new ProfileDB();
+        ProfileDB profileDB;
         public SelectedQuestionForm(Question question, User user)
         {
+            profileDB = new ProfileDB();
             InitializeComponent();
             this.user = user;
             this.question = question;

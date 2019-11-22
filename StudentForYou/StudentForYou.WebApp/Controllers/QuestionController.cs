@@ -23,7 +23,7 @@ namespace StudentForYou.WebApp.Controllers
                 using (var cmd = new MySqlCommand(qry, con))
                 {
 
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    using (var reader = cmd.ExecuteReader())
                     { 
                         while (reader.Read())
                         {
@@ -81,7 +81,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetOneQuestion/{questionID}")]
         public Question GetOneQuestion(int questionID)
         {
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
                 con.Open();
                 var qry = "select qns.qns_id, qns.qns_likes, qns.qns_views, qns.qns_comments, qns.qns_text, qns.qns_name, qns.qns_creation_date from questions qns where qns.qns_id = @qns_id";
@@ -163,9 +163,9 @@ namespace StudentForYou.WebApp.Controllers
         public void AddLike(int question_id)
         {
             var qry = "UPDATE questions SET qns_likes = qns_likes + 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question_id);
@@ -179,9 +179,9 @@ namespace StudentForYou.WebApp.Controllers
         public void AddDislike(int question_id)
         {
             var qry = "UPDATE questions SET qns_likes = qns_likes - 1 WHERE qns_id = @qns_id";
-            using (MySqlConnection con = new MySqlConnection(GetConnectionString()))
+            using (var con = new MySqlConnection(GetConnectionString()))
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
+                using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
                     cmd.Parameters.AddWithValue("@qns_id", question_id);

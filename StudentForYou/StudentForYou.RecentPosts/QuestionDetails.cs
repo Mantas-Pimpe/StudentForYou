@@ -140,9 +140,10 @@ namespace StudentForYou.RecentPosts
         public int questionAnswers;
         public string questionText;
         public string questionName;
+        public int questionAuthorID;
         public DateTime questionCreationDate;
 
-        public Question(int questionID, int questionLikes, int questionViews, int questionAnswers, string questionText, string questionName, DateTime questionCreationDate)
+        public Question(int questionID, int questionLikes, int questionViews, int questionAnswers, string questionText, string questionName, DateTime questionCreationDate, int questionAuthorID)
         {
             this.questionID = questionID;
             this.questionLikes = questionLikes;
@@ -150,7 +151,7 @@ namespace StudentForYou.RecentPosts
             this.questionAnswers = questionAnswers;
             this.questionText = questionText;
             this.questionName = questionName;
-            this.questionName = questionName;
+            this.questionAuthorID = questionAuthorID;
             this.questionCreationDate = questionCreationDate;
         }
 
