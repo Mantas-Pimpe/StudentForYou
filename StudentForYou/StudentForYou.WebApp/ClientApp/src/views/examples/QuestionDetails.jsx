@@ -1,4 +1,5 @@
-﻿import React from "react";
+﻿
+import React from "react";
 // reactstrap components
 import {
     Button,
@@ -12,13 +13,75 @@ import {
     Row,
     Col
 } from "reactstrap";
-// core components
+import { Link } from 'react-router-dom';
 
 class QuestionDetails extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    state = {
+        loading: true,
+        question: null,
+        checker: 0
+    };
+
+    async componentDidMount() {
+        if (this.state.checker == 0) {
+            const { match: { params } } = this.props;
+            const url = "https://localhost:44341/api/question/GetOneQuestion/" + params.questionID;
+            const response = await fetch(url);
+            const data = await response.json();
+            this.setState({ question: data, loading: false });
+            this.state.checker = 10;
+        }
+        if (this.state.checker == 1) {
+
+            const { match: { params } } = this.props;
+            const url = "https://localhost:44341/api/Question/addLike/" + params.questionID;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(response => {
+                return response.json()
+            })
+            this.state.checker = 10;
+        }
+        if (this.state.checker == 2) {
+            const { match: { params } } = this.props;
+            const url = "https://localhost:44341/api/Question/addDislike/" + params.questionID;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(response => {
+                return response.json()
+            })
+            this.state.checker = 10;
+        }
+    }
+
+    addLike() {
+        this.state.checker = 1;
+        this.componentDidMount();
+    }
+    addDislike() {
+        this.state.checker = 2;
+        this.componentDidMount();
+    }
 
 
-    
     render() {
+        if (!this.state.question) {
+            /*If course is null*/
+            return <div></div>;
+        }
+        if (this.state.loading) {
+            /*While info is loading from DB*/
+            return <div></div>;
+        }
         return (
             <div>
                 <Container className="mt--7 pl-lg-4 pr-lg-4" fluid>
@@ -27,20 +90,37 @@ class QuestionDetails extends React.Component {
                             <Card className="bg-secondary shadow">
                                 <Form>
                                     <CardHeader className="bg-white border-0">
-                                        <Row className="align-items-center">
-                                            <Col xs="7">
-                                                <h3 className="mb-0">Course XXX Details</h3>
+                                        <Row className="justify-content-md-center">
+                                            <Col className = "text-center" xs = "9">
+                                                <h3 className="mb-0"> {this.state.question.questionName}</h3>
                                             </Col>
-                                            <Col className="text-right" xs="3">
+                                            <Col className="text-right" xs lg="0">
+                                                <Link to="/admin/index">
+                                                    <Button
+                                                        type="submit"
+                                                        color="primary"
+                                                        size="sm">
+                                                        Back
+                                                    </Button>
+                                                </Link>
                                             </Col>
-                                            <Col className="text-right" xs="2">
+                                            <Col className="text-right" xs lg="0">
                                                 <Button
+                                                    onClick={this.addLike}
                                                     type="submit"
                                                     color="primary"
-                                                    size="sm"
-                                                >
-                                                    Save changes
-                      </Button>
+                                                    size="sm">
+                                                    Like
+                                                </Button>
+                                            </Col>
+                                            <Col className="text-right" xs lg="0">
+                                                <Button
+                                                    onClick={this.addDislike}
+                                                    type="submit"
+                                                    color="primary"
+                                                    size="sm">
+                                                    Dislike
+                                                </Button>
                                             </Col>
                                         </Row>
                                     </CardHeader>
@@ -54,12 +134,13 @@ class QuestionDetails extends React.Component {
                                                     <FormGroup>
                                                         <label
                                                             className="form-control-label"
-                                                            htmlFor="input-question-name">Question name
+                                                            htmlFor="input-question-name">Course title
                                                 </label>
                                                         <Input
                                                             className="form-control-alternative"
                                                             id="input-question-name"
-                                                            placeholder="A short name that would describe your question"
+                                                            placeholder="The title of the course"
+                                                            value={this.state.question.questionName}
                                                             type="text" required />
                                                     </FormGroup>
                                                 </Col>
@@ -70,12 +151,6 @@ class QuestionDetails extends React.Component {
                                                             htmlFor="input-question-difficulty">
                                                             Difficulty
                                                 </label>
-                                                        <Input
-                                                            className="form-control-alternative"
-                                                            id="input-question-difficulty"
-                                                            placeholder="Question Difficulty ?/10"
-                                                            type="number" min="0" max="10"
-                                                            required />
                                                     </FormGroup>
                                                 </Col>
                                             </Row>
@@ -91,6 +166,7 @@ class QuestionDetails extends React.Component {
                                                         className="form-control-alternative"
                                                         placeholder="Describe the course, the things you learn, topics..."
                                                         rows="8"
+                                                        value={this.state.question.questionText}
                                                         type="textarea"
                                                         required />
                                                 </FormGroup>
