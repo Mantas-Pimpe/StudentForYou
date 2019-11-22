@@ -44,7 +44,7 @@ namespace StudentForYou.WebApp.Controllers
                 }
                 con.Close();
             }
-            ReplaceList(list);
+            CheckList.ReplaceList(list);
             return list;
         }
 
@@ -157,23 +157,6 @@ namespace StudentForYou.WebApp.Controllers
             }
         }
 
-        static List<T> ReplaceList<T>(List<T> list)
-        {
-            for (int i = 0; i < list.Count; i++)
-            {
-                for (int j = 0; j < list.Count; j++)
-                {
-                    if (j != i)
-                    {
-                        if (list[i].Equals(list[j]))
-                        {
-                            list.Remove(list[j]);
-                        }
-                    }
-                }
-            }
-            return list;
-        }
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
         //{
         //    var qry = "INSERT INTO courses_files(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";

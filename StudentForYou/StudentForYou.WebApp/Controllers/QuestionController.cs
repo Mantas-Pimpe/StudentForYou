@@ -41,7 +41,7 @@ namespace StudentForYou.WebApp.Controllers
                 }
               con.Close();
             }
-
+            CheckList.ReplaceList(questionList);
            return questionList;
         }
 
