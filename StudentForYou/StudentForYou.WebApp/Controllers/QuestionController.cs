@@ -95,14 +95,18 @@ namespace StudentForYou.WebApp.Controllers
                         {
                             if (!reader.IsDBNull(0))
                             {
-                                tmp.QuestionID = reader.GetInt32(0);
-                                tmp.QuestionLikes = reader.GetInt32(1);
-                                tmp.QuestionViews = reader.GetInt32(2);
-                                tmp.QuestionAnswers = reader.GetInt32(3);
-                                tmp.QuestionText = reader.GetString(4);
-                                tmp.QuestionName = reader.GetString(5);
-                                tmp.QuestionCreationDate = reader.GetDateTime(6);
-                                return tmp;
+                                Func<MySqlDataReader, Question, Question> getQuestion =(reader, question) =>
+                                {
+                                    question.QuestionID = reader.GetInt32(0);
+                                    question.QuestionLikes = reader.GetInt32(1);
+                                    question.QuestionViews = reader.GetInt32(2);
+                                    question.QuestionAnswers = reader.GetInt32(3);
+                                    question.QuestionText = reader.GetString(4);
+                                    question.QuestionName = reader.GetString(5);
+                                    question.QuestionCreationDate = reader.GetDateTime(6);
+                                    return question;
+                                };
+                                return getQuestion(reader, tmp);
                             }
                         }
                         tmp.QuestionID = 99;
