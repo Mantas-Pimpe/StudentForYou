@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
@@ -168,6 +169,25 @@ namespace StudentForYou.WebApp.Controllers
         //        }
         //    }
         //}
+
+        public bool CheckUsernameRequirements(string username)
+        {
+
+
+            int minValue = int.Parse(ConfigurationManager.AppSettings["minUsernameValue"]);
+            int maxValue = int.Parse(ConfigurationManager.AppSettings["maxUsernameValue"]);
+
+            int usernameLenght; 
+            if(username.Length<minValue)
+            {
+                return false;
+            }
+            if(username.Length>maxValue)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
 
