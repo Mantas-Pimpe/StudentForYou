@@ -7,18 +7,13 @@ using StudentForYou.WebApp.Models;
 namespace StudentForYou.WebApp.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class CourseController : DataBaseController
     {
-        //private readonly ICourseDAL _courseDal;
-
-        //public CourseController(ICourseDAL courseDal)
-        //{
-        //    _courseDal = courseDal;
-        //}
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
-            
+
             var list = new List<Course>();
             using (var con = new MySqlConnection(GetConnectionString()))
             {
@@ -29,29 +24,28 @@ namespace StudentForYou.WebApp.Controllers
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
-                        { 
+                        {
                             var tmp = new Course();
-                            Func<MySqlDataReader,Course, Course> ReadData = delegate(MySqlDataReader readerRef,Course courseRef) 
-                            {
-                               
-                                courseRef.CourseID = reader.GetInt32(0);
-                                courseRef.CourseName = reader.GetString(1);
-                                courseRef.CourseDescription = reader.GetString(3);
-                                courseRef.CourseDifficulty = reader.GetInt32(2);
-                                courseRef.CourseCreationDate = reader.GetDateTime(4);
-                                return courseRef;
-                            };
-                            list.Add(ReadData(reader, tmp));
+                            Func<MySqlDataReader, Course, Course> readData = delegate (MySqlDataReader readerRef, Course courseRef)
+                             {
+
+                                 courseRef.CourseID = reader.GetInt32(0);
+                                 courseRef.CourseName = reader.GetString(1);
+                                 courseRef.CourseDescription = reader.GetString(3);
+                                 courseRef.CourseDifficulty = reader.GetInt32(2);
+                                 courseRef.CourseCreationDate = reader.GetDateTime(4);
+                                 return courseRef;
+                             };
+                            list.Add(readData(reader, tmp));
                         }
                     }
                 }
 
                 con.Close();
             }
-            
             CheckList.ReplaceList(list);
-            return null;
-           // return _courseDal.SelectCourses();
+            return list;
+            // return _courseDal.SelectCourses();
         }
         [HttpGet("{courseID}/GetCourse")]
         public Course GetCourse(int courseID)
@@ -70,7 +64,7 @@ namespace StudentForYou.WebApp.Controllers
                         {
                             if (!reader.IsDBNull(0))
                             {
-                                Func<MySqlDataReader, Course, Course> ReadData = delegate (MySqlDataReader readerRef, Course courseRef)
+                                Func<MySqlDataReader, Course, Course> readData = delegate (MySqlDataReader readerRef, Course courseRef)
                                 {
 
                                     courseRef.CourseID = reader.GetInt32(0);
@@ -80,8 +74,8 @@ namespace StudentForYou.WebApp.Controllers
                                     courseRef.CourseCreationDate = reader.GetDateTime(4);
                                     return courseRef;
                                 };
-                                return ReadData(reader, tmp);
-                                
+                                return readData(reader, tmp);
+
                             }
                         }
                         tmp.CourseID = 99;
