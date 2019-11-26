@@ -26,50 +26,41 @@ class QuestionDetails extends React.Component {
     };
 
     async componentDidMount() {
-        if (this.state.checker == 0) {
-            const { match: { params } } = this.props;
-            const url = "https://localhost:44341/api/question/GetOneQuestion/" + params.questionID;
-            const response = await fetch(url);
-            const data = await response.json();
-            this.setState({ question: data, loading: false });
-            this.state.checker = 10;
-        }
-        if (this.state.checker == 1) {
+        this.getQuestion();
+    }
 
-            const { match: { params } } = this.props;
-            const url = "https://localhost:44341/api/Question/addLike/" + params.questionID;
-            fetch(url, {
-                method: 'PUT',
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            }).then(response => {
-                return response.json()
-            })
-            this.state.checker = 10;
-        }
-        if (this.state.checker == 2) {
-            const { match: { params } } = this.props;
-            const url = "https://localhost:44341/api/Question/addDislike/" + params.questionID;
-            fetch(url, {
-                method: 'PUT',
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            }).then(response => {
-                return response.json()
-            })
-            this.state.checker = 10;
-        }
+    async getQuestion() {
+        const { match: { params } } = this.props;
+        const url = "https://localhost:44341/api/question/GetOneQuestion/" + params.questionID;
+        const response = await fetch(url);
+        const data = await response.json();
+        this.setState({ question: data, loading: false });
     }
 
     addLike() {
-        this.state.checker = 1;
-        this.componentDidMount();
+        const { match: { params } } = this.props;
+        const url = "https://localhost:44341/api/Question/addLike/" + params.questionID;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(response => {
+            return response.json()
+        })
     }
+
     addDislike() {
-        this.state.checker = 2;
-        this.componentDidMount();
+        const { match: { params } } = this.props;
+        const url = "https://localhost:44341/api/Question/addDislike/" + params.questionID;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(response => {
+            return response.json()
+        })
     }
 
 
@@ -96,14 +87,14 @@ class QuestionDetails extends React.Component {
                                             </Col>
                                             <Col className="text-right" lg="3">
                                                 <Button
-                                                    onClick={this.addLike}
+                                                    onClick={() => this.addLike()}
                                                     type="submit"
                                                     color="primary"
                                                     size="sm">
                                                     <i class="fa fa-thumbs-up" />
                                                 </Button>
                                                 <Button
-                                                    onClick={this.addDislike}
+                                                    onClick={() => this.addDislike()}
                                                     type="submit"
                                                     color="primary"
                                                     size="sm">
