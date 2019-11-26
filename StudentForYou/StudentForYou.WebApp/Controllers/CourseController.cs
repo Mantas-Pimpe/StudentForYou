@@ -50,7 +50,7 @@ namespace StudentForYou.WebApp.Controllers
             }
             
             CheckList.ReplaceList(list);
-
+            return null;
            // return _courseDal.SelectCourses();
         }
         [HttpGet("{courseID}/GetCourse")]

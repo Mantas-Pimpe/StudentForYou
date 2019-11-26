@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Profile", "St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.DB", "StudentForYou.DB\StudentForYou.DB.csproj", "{14EF7E94-A570-4F5F-AE15-1DD078DD19B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.WebApp", "StudentForYou.WebApp\StudentForYou.WebApp.csproj", "{7BBE219A-918F-49BE-B3AB-7948D209B8BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForYou.WebApp", "StudentForYou.WebApp\StudentForYou.WebApp.csproj", "{7BBE219A-918F-49BE-B3AB-7948D209B8BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
