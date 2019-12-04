@@ -21,7 +21,6 @@ namespace StudentForYou.WebApp.Controllers
                 var qry = "select qns.qns_id, qns.qns_likes, qns.qns_views, qns.qns_comments, qns.qns_text, qns.qns_name, qns.qns_creation_date from questions qns";
                 using (var cmd = new MySqlCommand(qry, con))
                 {
-
                     using (var reader = cmd.ExecuteReader())
                     { 
                         while (reader.Read())

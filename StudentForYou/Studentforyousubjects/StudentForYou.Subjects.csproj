@@ -63,6 +63,10 @@
       <Project>{14ef7e94-a570-4f5f-ae15-1dd078dd19b6}</Project>
       <Name>StudentForYou.DB</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StudentForYou.RecentPosts\StudentForYou.RecentPosts.csproj">
+      <Project>{d4193337-7dd7-4389-86c4-21be0f6b5360}</Project>
+      <Name>StudentForYou.RecentPosts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

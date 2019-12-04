@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
@@ -92,6 +93,9 @@ namespace StudentForYou.WebApp.Controllers
         [HttpPost("PostCourse")]
         public void PostCourse([FromBody] Course course)
         {
+            var tuple = WhiteSpaceRemover.CleanCourseBeforePost(course.CourseName, course.CourseDescription);
+            course.CourseName = tuple.Result.Item1;
+            course.CourseDescription = tuple.Result.Item2;
             var qry = "INSERT INTO courses(cou_name, cou_difficulty, cou_description, cou_creation_date) VALUES (@cou_name, @cou_difficulty, @cou_description, @cou_creation_date)";
             using (var con = new MySqlConnection(GetConnectionString()))
             {
@@ -140,6 +144,8 @@ namespace StudentForYou.WebApp.Controllers
         [HttpPost("{courseID}/PostReview")]
         public void PostReview([FromBody] Review review)
         {
+            var text = WhiteSpaceRemover.CleanReviewBeforePost(review.ReviewText);
+            review.ReviewText = text.Result;
             var qry = "INSERT INTO courses_reviews(cor_cou_id, cor_user_id, cor_text, cor_creation_date) VALUES (@cor_cou_id, @cor_user_id, @cor_text, @cor_creation_date)";
             using (var con = new MySqlConnection(GetConnectionString()))
             {

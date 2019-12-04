@@ -16,6 +16,9 @@ import {
 // core components
 import Messenger from "../../components/Chat/Messenger/index.js";
 class CoursesChat extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <div>
@@ -23,7 +26,7 @@ class CoursesChat extends React.Component {
                     <Row>
                         <Col className="order-xl-1" xl="12">
                             <Card className="bg-secondary shadow">
-                                <Messenger />
+                                <Messenger id={this.props}/>
                             </Card>
                         </Col>
                     </Row>
