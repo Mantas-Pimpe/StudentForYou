@@ -132,6 +132,19 @@ class QuestionDetails extends React.Component {
         })
     }
 
+    addAnswer() {
+        const { match: { params } } = this.props;
+        const url = "https://localhost:44341/api/Question/addAnswer/" + params.questionID;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(response => {
+            return response.json()
+        })
+    }
+
 
     render() {
         const { commentText } = this.state;
@@ -253,7 +266,7 @@ class QuestionDetails extends React.Component {
                                                     </Row>
                                                     <Row>
                                                         <Col className="text-right pt-4 mb-0" >
-                                                            <Button color="primary" size="sm" type="submit" >Save answer</Button>
+                                                            <Button color="primary" size="sm" type="submit" onClick={() => this.addAnswer()} >Save answer</Button>
                                                         </Col>
                                                     </Row>
                                                 </Form>

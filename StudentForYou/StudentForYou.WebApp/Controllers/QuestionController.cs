@@ -217,6 +217,22 @@ namespace StudentForYou.WebApp.Controllers
             }
         }
 
+        [HttpPut("addAnswer/{question_id}")]
+        public void AddAnswer(int question_id)
+        {
+            var qry = "UPDATE questions SET qns_comments = qns_comments + 1 WHERE qns_id = @qns_id";
+            using (var con = new MySqlConnection(GetConnectionString()))
+            {
+                using (var cmd = new MySqlCommand(qry, con))
+                {
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@qns_id", question_id);
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
         [HttpPut("addLikeForAnswer/{comment_id}")]
         public void AddLikeForAnswer(int comment_id)
         {
