@@ -61,19 +61,19 @@ namespace StudentForYou.WebApp.Controllers
             }
         }
 
-        [HttpPut("addView/{question_id}")]
+        [HttpPost("addView/{question_id}")]
         public void AddView(int question_id)
         {
             db.UpdateIncreaseByNumber("questions", "qns_views", "qns_id", question_id, 1);
         }
 
-        [HttpPut("addLike/{question_id}")]
+        [HttpPost("addLike/{question_id}")]
         public void AddLike(int question_id)
         {
             db.UpdateIncreaseByNumber("questions", "qns_likes", "qns_id", question_id, 1);
         }
 
-        [HttpPut("addDislike/{question_id}")]
+        [HttpPost("addDislike/{question_id}")]
         public void AddDislike(int question_id)
         {
             db.UpdateIncreaseByNumber("questions", "qns_likes", "qns_id", question_id, -1);

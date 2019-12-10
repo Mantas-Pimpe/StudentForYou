@@ -108,19 +108,17 @@ class CoursesDetails extends React.Component {
                                 <Form>
                                     <CardHeader className="bg-white border-0">
                                         <Row className="align-items-center">
-                                            <Col xs="7">
+                                            <Col xs="8">
                                                 <h3 className="mb-0">Course {this.state.course.courseName} Details</h3>
                                             </Col>
-                                            <Col className="text-right" xs="3">
-                                            </Col>
-                                            <Col className="text-right" xs="2">
-                                                <Link to="/admin/courses">
+                                            <Col className="text-right" xs="4">
+                                                <Link to="/admin/courses" className="mr-3">
                                                     <Button
                                                         onClick={() => this.DeleteCourse()}
                                                         type="submit"
                                                         color="primary"
                                                         size="sm">
-                                                        DeleteCourse
+                                                        Delete course
                                                     </Button>
                                                 </Link>
                                                 <Link to="/admin/courses"><Button

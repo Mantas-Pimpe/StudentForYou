@@ -70,10 +70,10 @@ class CoursesList extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.items.map(function (item) {
+                                        {this.state.items.map(function (item, index) {
                                             return (
                                                 <tr>
-                                                    <td scope="row">
+                                                    <th scope="row">
                                                         <Media className="align-items-center">
                                                             <Media>
                                                                 <span className="mb-0 text-sm">
@@ -81,7 +81,7 @@ class CoursesList extends React.Component {
                                                                 </span>
                                                             </Media>
                                                         </Media>
-                                                    </td>
+                                                    </th>
                                                     <td align="center">{item.courseDifficulty}/10</td>
                                                     <td align="center">
                                                         <Link to={`/admin/courses/chat-${item.courseID}`}><Button

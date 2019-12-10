@@ -98,6 +98,7 @@ namespace StudentForYou.DB
             con.Open();
 
             var query = "select * from " + table;
+            //var query = "select * from " + table + " where " + whereString + " = " + id;
             var update = new MySqlCommand();
             update.Connection = con;
             update.CommandType = CommandType.Text;
@@ -111,6 +112,7 @@ namespace StudentForYou.DB
             da.Fill(ds, table);
 
             ds.Tables[0].AsEnumerable().Where(x => x.Field<int>(whereString) == id).FirstOrDefault()[whatToIncrease] = number;
+            //ds.Tables[0].Rows[0][whatToIncrease] = number;
 
             da.Update(ds.Tables[0]);
             con.Close();
