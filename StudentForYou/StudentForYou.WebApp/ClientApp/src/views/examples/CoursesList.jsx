@@ -24,16 +24,21 @@ class CoursesList extends React.Component {
             'items': []
         }
     }
+
     getCourses() {
         const url = "https://localhost:44341/api/course/GetCourses";
         fetch(url)
             .then(results => results.json())
             .then(results => this.setState({ 'items': results }));
     }
+
     componentDidMount() {
         this.getCourses();
     }
 
+    componentDidUpdate() {
+        this.getCourses();
+    }
     
     render() {
         return (

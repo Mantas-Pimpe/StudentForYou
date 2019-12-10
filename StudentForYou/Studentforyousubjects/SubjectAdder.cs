@@ -9,7 +9,7 @@ namespace Studentforyousubjects
         string subjectName;
         string courseDescription;
         int difficulty;
-        CoursesDB db = new CoursesDB();
+        //CoursesDB db = new CoursesDB();
 
         public void GetInfo(string nameInfo, string courseInfo, int difficultyInfo)
         {
@@ -19,7 +19,7 @@ namespace Studentforyousubjects
         }
         public void WriteToDB()
         {
-            db.InsertIntoCourses(subjectName, difficulty, courseDescription, DateTime.Now);
+           // db.InsertIntoCourses(subjectName, difficulty, courseDescription, DateTime.Now);
         }
     }
 }

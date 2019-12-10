@@ -63,6 +63,16 @@ class QuestionDetails extends React.Component {
         })
     }
 
+    DeleteCourse() {
+        const { match: { params } } = this.props;
+        fetch("https://localhost:44341/api/Question/DeleteCourse/" + params.questionID, {
+            method: 'DELETE',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ questionID: params.questionID })
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))
+    }
 
     render() {
         if (!this.state.question) {
@@ -82,10 +92,19 @@ class QuestionDetails extends React.Component {
                                 <Form>
                                     <CardHeader className="bg-white border-0">
                                         <Row className="justify-content-md-center">
-                                            <Col xs = "9">
+                                            <Col xs="9">
                                                 <h3 className="mb-0"> {this.state.question.questionName} Details</h3>
                                             </Col>
                                             <Col className="text-right" lg="3">
+                                                <Link to="/admin/index">
+                                                    <Button
+                                                        onClick={() => this.DeleteCourse()}
+                                                        type="submit"
+                                                        color="primary"
+                                                        size="sm">
+                                                        DeleteCourse
+                                                    </Button>
+                                                </Link>
                                                 <Button
                                                     onClick={() => this.addLike()}
                                                     type="submit"
@@ -98,7 +117,7 @@ class QuestionDetails extends React.Component {
                                                     type="submit"
                                                     color="primary"
                                                     size="sm">
-                                                   <i class="fa fa-thumbs-down" />
+                                                    <i class="fa fa-thumbs-down" />
                                                 </Button>
                                                 <Link to="/admin/index" className="pl-1">
                                                     <Button
@@ -150,7 +169,7 @@ class QuestionDetails extends React.Component {
                                                 </FormGroup>
                                             </Col>
                                         </div>
-                                        
+
                                     </CardBody>
                                 </Form>
                             </Card>

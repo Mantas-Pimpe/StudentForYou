@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
+using StudentForYou.DB;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -10,115 +11,30 @@ namespace StudentForYou.WebApp.Controllers
     [ApiController]
     public class QuestionController : DataBaseController
     {
-        // GET: api/Question
+        DataTableDB db = new DataTableDB();
         [HttpGet]
         public List<Question> Get()
         {
-            var questionList = new List<Question>();
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                con.Open();
-                var qry = "select qns.qns_id, qns.qns_likes, qns.qns_views, qns.qns_comments, qns.qns_text, qns.qns_name, qns.qns_creation_date from questions qns";
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    { 
-                        while (reader.Read())
-                        {
-                            var tmp = new Question();
-                            tmp.QuestionID = reader.GetInt32(0);
-                            tmp.QuestionLikes = reader.GetInt32(1);
-                            tmp.QuestionViews = reader.GetInt32(2);
-                            tmp.QuestionAnswers = reader.GetInt32(3);
-                            tmp.QuestionText = reader.GetString(4);
-                            tmp.QuestionName = reader.GetString(5);
-                            tmp.QuestionCreationDate = reader.GetDateTime(6);
-                            questionList.Add(tmp);
-                        }
-                    }
-                }
-              con.Close();
-            }
-            CheckList.ReplaceList(questionList);
-           return questionList;
+            var query = "select qns.qns_id QuestionID, qns.qns_likes QuestionLikes, qns.qns_views QuestionViews, qns.qns_comments QuestionAnswers, qns.qns_text QuestionText, qns.qns_name QuestionName, qns.qns_creation_date QuestionCreationDate from questions qns";
+            var list = db.GetList<Question>(query);
+            //CheckList.ReplaceList(questionList);
+            return list;
         }
 
 
         [HttpGet("getComments/{question_id}")]
         public List<Comment> GetComments(int question_id)
         {
-            var list = new List<Comment>();
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                con.Open();
-                var qry = "select com.com_id, com.com_user_id, com.com_text, com.com_creation_date, com.com_qns_id from comments com where com.com_qns_id = @qns_id";
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    cmd.Parameters.AddWithValue("@qns_id", question_id);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var tmp = new Comment();
-                            tmp.CommentID = reader.GetInt32(0);
-                            tmp.QuestionID = reader.GetInt32(1);
-                            tmp.CommentText = reader.GetString(2);
-                            tmp.CommentDate = reader.GetDateTime(3);
-                            tmp.UserID = reader.GetInt32(4);
-                            list.Add(tmp);
-                        }
-                    }
-                }
-
-                con.Close();
-            }
-
+            var query = "select com.com_id CommentID, com.com_user_id UserID, com.com_text CommentText, com.com_creation_date CommentDate, com.com_qns_id QuestionID from comments com where com.com_qns_id = " + question_id;
+            var list = db.GetList<Comment>(query);
             return list;
         }
 
         [HttpGet("GetOneQuestion/{questionID}")]
         public Question GetOneQuestion(int questionID)
         {
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                con.Open();
-                var qry = "select qns.qns_id, qns.qns_likes, qns.qns_views, qns.qns_comments, qns.qns_text, qns.qns_name, qns.qns_creation_date from questions qns where qns.qns_id = @qns_id";
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    cmd.Parameters.AddWithValue("@qns_id", questionID);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        var tmp = new Question();
-                        while (reader.Read())
-                        {
-                            if (!reader.IsDBNull(0))
-                            {
-                                Func<MySqlDataReader, Question, Question> getQuestion =(reader, question) =>
-                                {
-                                    question.QuestionID = reader.GetInt32(0);
-                                    question.QuestionLikes = reader.GetInt32(1);
-                                    question.QuestionViews = reader.GetInt32(2);
-                                    question.QuestionAnswers = reader.GetInt32(3);
-                                    question.QuestionText = reader.GetString(4);
-                                    question.QuestionName = reader.GetString(5);
-                                    question.QuestionCreationDate = reader.GetDateTime(6);
-                                    return question;
-                                };
-                                return getQuestion(reader, tmp);
-                            }
-                        }
-                        tmp.QuestionID = 99;
-                        tmp.QuestionLikes = 0;
-                        tmp.QuestionViews = 0;
-                        tmp.QuestionAnswers = 0;
-                        tmp.QuestionText = "Question MISSING";
-                        tmp.QuestionName = "Question MISSING";
-                        tmp.QuestionCreationDate = DateTime.Now;
-                        con.Close();
-                        return tmp;
-                    }
-                }
-            }
+            var query = "select qns.qns_id QuestionID, qns.qns_likes QuestionLikes, qns.qns_views QuestionViews, qns.qns_comments QuestionAnswers, qns.qns_text QuestionText, qns.qns_name QuestionName, qns.qns_creation_date QuestionCreationDate from questions qns where qns.qns_id = " + questionID;
+            return db.GetItem<Question>(query);
         }
 
         [HttpPut("newquestion/{qns_uses_id}/{qns_name}/{qns_text}")]
@@ -148,49 +64,26 @@ namespace StudentForYou.WebApp.Controllers
         [HttpPut("addView/{question_id}")]
         public void AddView(int question_id)
         {
-            const string qry = "UPDATE questions SET qns_views = qns_views + 1 WHERE qns_id = @qns_id";
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@qns_id", question_id);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
+            db.UpdateIncreaseByNumber("questions", "qns_views", "qns_id", question_id, 1);
         }
 
         [HttpPut("addLike/{question_id}")]
         public void AddLike(int question_id)
         {
-            var qry = "UPDATE questions SET qns_likes = qns_likes + 1 WHERE qns_id = @qns_id";
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@qns_id", question_id);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
+            db.UpdateIncreaseByNumber("questions", "qns_likes", "qns_id", question_id, 1);
         }
 
         [HttpPut("addDislike/{question_id}")]
         public void AddDislike(int question_id)
         {
-            var qry = "UPDATE questions SET qns_likes = qns_likes - 1 WHERE qns_id = @qns_id";
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@qns_id", question_id);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
+            db.UpdateIncreaseByNumber("questions", "qns_likes", "qns_id", question_id, -1);
+        }
+
+        [HttpDelete("DeleteQuestion/{question_id}")]
+        public void DeleteQuestion(int question_id)
+        {
+            db.DeleteRow("questions", "qns_id", question_id);
+            db.DeleteRow("comments", "com_qns_id", question_id);
         }
     }
 }

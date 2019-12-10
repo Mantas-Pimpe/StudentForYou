@@ -42,6 +42,17 @@ class CoursesDetails extends React.Component {
             .then(results => this.setState({ 'items': results }));
     }
 
+    DeleteCourse() {
+        const { match: { params } } = this.props;
+        fetch("https://localhost:44341/api/course/" + params.courseID + "/DeleteCourse", {
+            method: 'DELETE',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ courseID: params.courseID })
+        })
+            .then(res => res.json()) 
+            .then(res => console.log(res))
+    }
+
     async GetCourse() {
         const { match: { params } } = this.props;
         const url = "https://localhost:44341/api/course/" + params.courseID + "/GetCourse";
@@ -103,6 +114,15 @@ class CoursesDetails extends React.Component {
                                             <Col className="text-right" xs="3">
                                             </Col>
                                             <Col className="text-right" xs="2">
+                                                <Link to="/admin/courses">
+                                                    <Button
+                                                        onClick={() => this.DeleteCourse()}
+                                                        type="submit"
+                                                        color="primary"
+                                                        size="sm">
+                                                        DeleteCourse
+                                                    </Button>
+                                                </Link>
                                                 <Link to="/admin/courses"><Button
                                                     type="submit"
                                                     color="primary"

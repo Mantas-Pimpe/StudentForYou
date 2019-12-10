@@ -68,6 +68,7 @@
     <Compile Include="ProfileDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionsDB.cs" />
+    <Compile Include="DataTableDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
