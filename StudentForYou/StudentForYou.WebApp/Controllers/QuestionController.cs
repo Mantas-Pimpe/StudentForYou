@@ -117,17 +117,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpPut("addLikeForAnswer/{comment_id}")]
         public void AddLikeForAnswer(int comment_id)
         {
-            var qry = "UPDATE comments SET com_likes = com_likes + 1 WHERE com_id = @com_id";
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@com_id", comment_id);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
+            db.UpdateIncreaseByNumber("comments", "com_likes", "com_id", comment_id, 1);
         }
 
     }
