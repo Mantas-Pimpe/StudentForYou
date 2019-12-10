@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 class QuestionDetails extends React.Component {
     constructor(props) {
         super(props);
+        this.addLikeForAnswer = this.addLikeForAnswer.bind(this);
     }
     state = {
         loading: true,
@@ -25,14 +26,12 @@ class QuestionDetails extends React.Component {
         'items': [],
         commentText: '',
         userID: '',
-        questionID: '',
-        answerID: '',
-        commentID:''
+        questionID: ''
     };
 
     async componentDidMount() {
         this.getQuestion();
-        this.addView();
+        /*this.addView();*/
         this.GetAnswers();
     }
 
@@ -105,10 +104,11 @@ class QuestionDetails extends React.Component {
         })
     }
 
-    addLikeForAnswer(id) {
+    addLikeForAnswer(commentID) {
+        console.log(commentID);
         const { match: { params } } = this.props;
-        console.log(id);
-        const url = "https://localhost:44341/api/Question/addLikeForAnswer/" + id;
+        const url = "https://localhost:44341/api/Question/addLikeForAnswer/" + commentID;
+        console.log(url);
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -148,6 +148,7 @@ class QuestionDetails extends React.Component {
 
     render() {
         const { commentText } = this.state;
+        const { commentID } = this.state;
         if (!this.state.question) {
             /*If course is null*/
             return <div></div>;
@@ -205,7 +206,7 @@ class QuestionDetails extends React.Component {
                                                         <label
                                                             className="form-control-label"
                                                             htmlFor="input-question-name">Question Title
-                                                </label>
+                                                        </label>
                                                         <Input
                                                             className="form-control-alternative"
                                                             id="input-question-name"
@@ -236,23 +237,51 @@ class QuestionDetails extends React.Component {
                                         <hr className="my-4" />
                                         {/* Question answers */}
                                         <h6 className="heading-small text-muted mb-4">Question answers</h6>
+                                        <div className="pl-lg-5 pr-lg-5">
+                                            {this.state.items.map((item) => (
+                                                <Row className="mb-4">
+                                                    <Col md="11">
+                                                        <Input
+                                                            className="form-control-alternative"
+                                                            placeholder="Ask your question in detail"
+                                                            rows="2"
+                                                            align="left"
+                                                            value={item.commentText}
+                                                            type="textarea"
+                                                            readonly/>
+                                                    </Col>
+                                                    <Col md="1">
+                                                       <Row className="mb-1">
+                                                          <Button
+                                                            align="left"
+                                                            onClick={() => {
+                                                                console.log(item.commentID);
+                                                                this.addLikeForAnswer.call(this, item.commentID);
+                                                            }}
+                                                            type="submit"
+                                                            color="primary"
+                                                            size="sm">
+                                                            <i class="fas fa-angle-double-up"></i>
+                                                          </Button>
+                                                       </Row>
+                                                       <Row className="mb-1">
+                                                          <Button
+                                                            align="left"
+                                                            type="submit"
+                                                            color="primary"
+                                                            size="sm">
+                                                            <i class="fas fa-trash"></i>
+                                                          </Button>
+                                                       </Row>
+                                                    </Col>
+                                                </Row>
+
+                                                    ))}
+                                        </div>
+                                        {/*New answer*/}
                                         <div className="pl-lg-4">
                                             <Col md="12">
                                                 <Form onSubmit={this.answersSubmitHandler}>
-                                                    {this.state.items.map(function (item, index) {
-                                                        return (
-                                                            <tr>
-                                                                <td align="center">{item.commentText}</td>
-                                                                <Button
-                                                                    onClick={() => this.addLikeForAnswer(item.commentID)}
-                                                                        type="submit"
-                                                                        color="primary"
-                                                                        size="sm">
-                                                                        <i class="fas fa-angle-double-up"></i>
-                                                                    </Button>
-                                                            </tr>
-                                                        )
-                                                    })}
                                                     <Row>
                                                         <Col className="pt-4 mb-0">
                                                             <Input

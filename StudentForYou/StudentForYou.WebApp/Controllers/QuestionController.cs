@@ -43,8 +43,6 @@ namespace StudentForYou.WebApp.Controllers
                 }
               con.Close();
             }
-           //var results = await Task.WhenAll(tasks);
-           //return results;
            CheckList.ReplaceList(questionList);
            return questionList;
         }
