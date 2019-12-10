@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
+using StudentForYou.DB;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -10,88 +12,29 @@ namespace StudentForYou.WebApp.Controllers
     [ApiController]
     public class CourseController : DataBaseController
     {
+        DataTableDB db = new DataTableDB();
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
-
-            var list = new List<Course>();
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                con.Open();
-                var qry = "select cou_id, cou_name, cou_difficulty, cou_description, cou_creation_date from courses";
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var tmp = new Course();
-                            Func<MySqlDataReader, Course, Course> readData = delegate (MySqlDataReader readerRef, Course courseRef)
-                             {
-
-                                 courseRef.CourseID = reader.GetInt32(0);
-                                 courseRef.CourseName = reader.GetString(1);
-                                 courseRef.CourseDescription = reader.GetString(3);
-                                 courseRef.CourseDifficulty = reader.GetInt32(2);
-                                 courseRef.CourseCreationDate = reader.GetDateTime(4);
-                                 return courseRef;
-                             };
-                            list.Add(readData(reader, tmp));
-                        }
-                    }
-                }
-
-                con.Close();
-            }
-            CheckList.ReplaceList(list);
+            var query = "select cou_id CourseID, cou_name CourseName, cou_difficulty CourseDifficulty, cou_description CourseDescription, cou_creation_date CourseCreationDate from courses";
+            var list = db.GetList<Course>(query);
+            //CheckList.ReplaceList(questionList);
             return list;
-            // return _courseDal.SelectCourses();
         }
+
         [HttpGet("{courseID}/GetCourse")]
         public Course GetCourse(int courseID)
         {
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                con.Open();
-                var qry = "select cou.cou_id, cou.cou_name, cou.cou_difficulty, cou.cou_description, cou.cou_creation_date from courses cou where cou.cou_id = @cou_id";
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    cmd.Parameters.AddWithValue("@cou_id", courseID);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        var tmp = new Course();
-                        while (reader.Read())
-                        {
-                            if (!reader.IsDBNull(0))
-                            {
-                                Func<MySqlDataReader, Course, Course> readData = delegate (MySqlDataReader readerRef, Course courseRef)
-                                {
-
-                                    courseRef.CourseID = reader.GetInt32(0);
-                                    courseRef.CourseName = reader.GetString(1);
-                                    courseRef.CourseDescription = reader.GetString(3);
-                                    courseRef.CourseDifficulty = reader.GetInt32(2);
-                                    courseRef.CourseCreationDate = reader.GetDateTime(4);
-                                    return courseRef;
-                                };
-                                return readData(reader, tmp);
-
-                            }
-                        }
-                        tmp.CourseID = 99;
-                        tmp.CourseName = "Course MISSING";
-                        tmp.CourseDescription = "COURSE MISSING";
-                        tmp.CourseDifficulty = 0;
-                        tmp.CourseCreationDate = new DateTime(2000, 01, 01);
-                        con.Close();
-                        return tmp;
-                    }
-                }
-            }
+            var query = "select cou.cou_id CourseID, cou.cou_name CourseName, cou.cou_difficulty CourseDifficulty, cou.cou_description CourseDescription, cou.cou_creation_date CourseCreationDate from courses cou where cou.cou_id = " + courseID;
+            return db.GetItem<Course>(query);
         }
+
         [HttpPost("PostCourse")]
         public void PostCourse([FromBody] Course course)
         {
+            var tuple = WhiteSpaceRemover.CleanCourseBeforePost(course.CourseName, course.CourseDescription);
+            course.CourseName = tuple.Result.Item1;
+            course.CourseDescription = tuple.Result.Item2;
             var qry = "INSERT INTO courses(cou_name, cou_difficulty, cou_description, cou_creation_date) VALUES (@cou_name, @cou_difficulty, @cou_description, @cou_creation_date)";
             using (var con = new MySqlConnection(GetConnectionString()))
             {
@@ -111,35 +54,16 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("{courseID}/GetReviews")]
         public List<Review> GetReviews(int courseID)
         {
-            var list = new List<Review>();
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                con.Open();
-                var qry = "select cor_id, cor_cou_id, cor_user_id, cor_text, cor_creation_date from courses_reviews where cor_cou_id = @cor_cou_id";
-                using (MySqlCommand cmd = new MySqlCommand(qry, con))
-                {
-                    cmd.Parameters.AddWithValue("@cor_cou_id", courseID);
-                    using (MySqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var tmp = new Review();
-                            tmp.ReviewID = reader.GetInt32(0);
-                            tmp.CourseID = reader.GetInt32(1);
-                            tmp.UserID = reader.GetInt32(2);
-                            tmp.ReviewText = reader.GetString(3);
-                            tmp.ReviewCreationDate = reader.GetDateTime(4);
-                            list.Add(tmp);
-                        }
-                    }
-                }
-                con.Close();
-            }
+            var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from courses_reviews where cor_cou_id = " + courseID;
+            var list = db.GetList<Review>(query);
             return list;
         }
+
         [HttpPost("{courseID}/PostReview")]
         public void PostReview([FromBody] Review review)
         {
+            var text = WhiteSpaceRemover.CleanReviewBeforePost(review.ReviewText);
+            review.ReviewText = text.Result;
             var qry = "INSERT INTO courses_reviews(cor_cou_id, cor_user_id, cor_text, cor_creation_date) VALUES (@cor_cou_id, @cor_user_id, @cor_text, @cor_creation_date)";
             using (var con = new MySqlConnection(GetConnectionString()))
             {
@@ -154,6 +78,13 @@ namespace StudentForYou.WebApp.Controllers
                     con.Close();
                 }
             }
+        }
+
+        [HttpDelete("{courseID}/DeleteCourse")]
+        public void DeleteQuestion(int courseID)
+        {
+            db.DeleteRow("courses", "cou_id", courseID);
+            db.DeleteRow("courses_reviews", "cor_cou_id", courseID);
         }
 
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)

@@ -24,16 +24,21 @@ class CoursesList extends React.Component {
             'items': []
         }
     }
-    GetCourses() {
+
+    getCourses() {
         const url = "https://localhost:44341/api/course/GetCourses";
         fetch(url)
             .then(results => results.json())
             .then(results => this.setState({ 'items': results }));
     }
+
     componentDidMount() {
-        this.GetCourses();
+        this.getCourses();
     }
 
+    componentDidUpdate() {
+        this.getCourses();
+    }
     
     render() {
         return (
@@ -62,11 +67,10 @@ class CoursesList extends React.Component {
                                             <th scope="col" width="60%" >Course</th>
                                             <th scope="col" width="20%" className="text-center">Difficulty</th>
                                             <th scope="col" width="20%" className="text-center">Course Chat</th>
-                                            <th scope="col" />
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.items.map(function (item) {
+                                        {this.state.items.map(function (item, index) {
                                             return (
                                                 <tr>
                                                     <th scope="row">

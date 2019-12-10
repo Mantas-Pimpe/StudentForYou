@@ -5,7 +5,8 @@ namespace StudentForYou.WebApp.Models
 {
     public class GroupMessage : Message
     {
-        public Course Course { get; set; }
+        //public Course Course { get; set; }
+        public int CourseID { get; set; }
 
     }
 }

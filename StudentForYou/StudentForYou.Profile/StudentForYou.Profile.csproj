@@ -51,10 +51,6 @@
       <Project>{14ef7e94-a570-4f5f-ae15-1dd078dd19b6}</Project>
       <Name>StudentForYou.DB</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StudentForYou.WebApp\StudentForYou.WebApp.csproj">
-      <Project>{7bbe219a-918f-49be-b3ab-7948d209b8bd}</Project>
-      <Name>StudentForYou.WebApp</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

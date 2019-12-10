@@ -9,7 +9,7 @@ namespace StudentForYouProfile
     {
         private const int maximumUsernameLength = 15;
         private const int minimumUsernameLength = 3;
-        ProfileDB db = new ProfileDB();
+        //ProfileDB db = new ProfileDB();
         public int IsUsernameTaken(string username)
         {
             // return 0 if everything checks out
@@ -30,10 +30,10 @@ namespace StudentForYouProfile
                 return 4;
             }
 
-            if (db.CheckIfUsernameTaken(username))
+            /*if (db.CheckIfUsernameTaken(username))
             {
                 return 1;
-            }
+            }*/
 
             return 0;
 
@@ -41,7 +41,7 @@ namespace StudentForYouProfile
 
         public void CreateNewUser(string username, string password)
         {
-            db.InsertIntoUsers(username, DateTime.Now, password);
+            //db.InsertIntoUsers(username, DateTime.Now, password);
         }
 
     }

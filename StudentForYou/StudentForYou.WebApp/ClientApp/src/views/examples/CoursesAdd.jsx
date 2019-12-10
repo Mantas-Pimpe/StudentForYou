@@ -47,6 +47,7 @@ class CoursesAdd extends React.Component {
 
         this.props.history.push("/admin/courses");
     }
+
     render() {
         const { courseName, courseDifficulty, courseDescription } = this.state;
         return (

@@ -20,16 +20,13 @@
   flex: 1;
   border: none;
   font-size: 14px;
-  color: black;
+  color: white;
   height: 40px;
   background: none;
 }
 
-
-
 .compose .toolbar-button {
   color: #bbbbbf;
-  margin-left: 15px;
 }
 
 .compose .toolbar-button:hover {

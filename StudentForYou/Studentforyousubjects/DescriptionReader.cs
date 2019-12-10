@@ -25,8 +25,8 @@ namespace Studentforyousubjects
 
             }
             var text = File.ReadAllText(filePath);
-            var whiteSpaceRemover = new StudentForYou.WhiteSpaceRemover();
-            text = whiteSpaceRemover.RemoveMultipleWhiteSpaces(text);
+            //var whiteSpaceRemover = new StudentForYou.WhiteSpaceRemover();
+            //text = whiteSpaceRemover.RemoveMultipleWhiteSpaces(text);
             return text;
 
         }

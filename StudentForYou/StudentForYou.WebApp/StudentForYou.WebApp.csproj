@@ -44,7 +44,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StudentForYou.DB\StudentForYou.DB.csproj" />
+    <ProjectReference Include="..\StudentForYou.Profile\StudentForYou.Profile.csproj" />
+    <ProjectReference Include="..\StudentForYou.RecentPosts\StudentForYou.RecentPosts.csproj" />
+    <ProjectReference Include="..\Studentforyousubjects\StudentForYou.Subjects.csproj" />
+    <None Remove="ClientApp\package.json" />
     <None Remove="ClientApp\src\views\NewQuestion.jsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\package.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
