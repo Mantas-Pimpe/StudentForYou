@@ -31,7 +31,6 @@ class QuestionDetails extends React.Component {
 
     async componentDidMount() {
         this.getQuestion();
-        /*this.addView();*/
         this.GetAnswers();
     }
 
@@ -60,8 +59,6 @@ class QuestionDetails extends React.Component {
             questionID: parseInt(params.questionID),
             userID: 0
         };
-        console.log(data);
-        console.log("https://localhost:44341/api/Question/PostQuestionAnswer/" + params.questionID);
 
         fetch('https://localhost:44341/api/Question/PostQuestionAnswer/' + params.questionID, {
             method: 'POST',
@@ -78,19 +75,6 @@ class QuestionDetails extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    addView() {
-        const { match: { params } } = this.props;
-        const url = "https://localhost:44341/api/Question/addView/" + params.questionID;
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        }).then(response => {
-            return response.json()
-        })
-    }
-
     addLike() {
         const { match: { params } } = this.props;
         const url = "https://localhost:44341/api/Question/addLike/" + params.questionID;
@@ -105,8 +89,6 @@ class QuestionDetails extends React.Component {
     }
 
     addLikeForAnswer(commentID) {
-        console.log(commentID);
-        const { match: { params } } = this.props;
         const url = "https://localhost:44341/api/Question/addLikeForAnswer/" + commentID;
         console.log(url);
         fetch(url, {

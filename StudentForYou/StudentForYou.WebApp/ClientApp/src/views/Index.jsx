@@ -59,6 +59,19 @@ class Index extends React.Component {
             parseOptions(Chart, chartOptions());
         }
     }
+
+    addView(questionID) {
+        const url = "https://localhost:44341/api/Question/addView/" + questionID;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(response => {
+            return response.json()
+        })
+    }
+
     render() {
         return (
             <>
@@ -90,24 +103,22 @@ class Index extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.items.map(function (item, index) {
-                                            return (
-                                                <tr>
-                                                    <th scope="row">
-                                                        <Media className="align-items-center">
-                                                            <Media>
-                                                                <span className="mb-0 text-sm">
-                                                                    <Link to={`/admin/index/question-${item.questionID}`}>{item.questionName}</Link>
-                                                                </span>
-                                                            </Media>
+                                        {this.state.items.map((item) => (
+                                            <tr>
+                                                <th scope="row">
+                                                    <Media className="align-items-center">
+                                                        <Media>
+                                                            <span className="mb-0 text-sm">
+                                                                <Link to={`/admin/index/question-${item.questionID}`} onClick={() => this.addView(item.questionID)}>{item.questionName}</Link>
+                                                            </span>
                                                         </Media>
-                                                    </th>
-                                                    <td align="center">{item.questionLikes}</td>
-                                                    <td align="center">{item.questionViews}</td>
-                                                    <td align="center">{item.questionAnswers}</td>
-                                                    <td align="center">{item.questionCreationDate}</td>
-                                                </tr>)
-                                        }
+                                                    </Media>
+                                                </th>
+                                                <td align="center">{item.questionLikes}</td>
+                                                <td align="center">{item.questionViews}</td>
+                                                <td align="center">{item.questionAnswers}</td>
+                                                <td align="center">{item.questionCreationDate}</td>
+                                            </tr>)
                                         )}
                                     </tbody>
                                 </Table>
