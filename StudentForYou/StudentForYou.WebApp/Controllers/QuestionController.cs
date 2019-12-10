@@ -107,6 +107,11 @@ namespace StudentForYou.WebApp.Controllers
             db.UpdateIncreaseByNumber("questions", "qns_views", "qns_id", question_id, 1);
         }
 
+        [HttpPost("addAnswer/{question_id}")]
+        public void AddAnswer(int question_id)
+        {
+            db.UpdateIncreaseByNumber("questions", "qns_comments", "qns_id", question_id, 1);
+        }
 
         [HttpPost("addDislike/{question_id}")]
         public void AddDislike(int question_id)
@@ -121,7 +126,7 @@ namespace StudentForYou.WebApp.Controllers
             db.DeleteRow("comments", "com_qns_id", question_id);
         }
 
-        [HttpPut("addLikeForAnswer/{comment_id}")]
+        [HttpPost("addLikeForAnswer/{comment_id}")]
         public void AddLikeForAnswer(int comment_id)
         {
             db.UpdateIncreaseByNumber("comments", "com_likes", "com_id", comment_id, 1);

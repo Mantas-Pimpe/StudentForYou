@@ -81,10 +81,11 @@ namespace StudentForYou.WebApp.Controllers
         }
 
         [HttpDelete("{courseID}/DeleteCourse")]
-        public void DeleteQuestion(int courseID)
+        public void DeleteCourse(int courseID)
         {
             db.DeleteRow("courses", "cou_id", courseID);
             db.DeleteRow("courses_reviews", "cor_cou_id", courseID);
+            db.DeleteRow("chat_group", "chg_course_id", courseID);
         }
 
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
