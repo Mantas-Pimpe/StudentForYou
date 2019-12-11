@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StudentForYouDatabaseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="chat_group">
+          <Key>
+            <PropertyRef Name="chg_id" />
+          </Key>
+          <Property Name="chg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chg_user_id" Type="int" Nullable="false" />
+          <Property Name="chg_course_id" Type="int" Nullable="false" />
+          <Property Name="chg_text" Type="text" Nullable="false" />
+          <Property Name="chg_creation_date" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chat_personal">
+          <Key>
+            <PropertyRef Name="chp_id" />
+          </Key>
+          <Property Name="chp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chp_send_user_id" Type="int" Nullable="false" />
+          <Property Name="chp_receive_user_id" Type="int" Nullable="false" />
+          <Property Name="chp_text" Type="text" Nullable="false" />
+          <Property Name="chp_creation_date" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="com_id" />
+          </Key>
+          <Property Name="com_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="com_user_id" Type="int" Nullable="false" />
+          <Property Name="com_text" Type="text" Nullable="false" />
+          <Property Name="com_creation_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="com_qns_id" Type="int" Nullable="false" />
+          <Property Name="com_likes" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courses">
+          <Key>
+            <PropertyRef Name="cou_id" />
+          </Key>
+          <Property Name="cou_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cou_name" Type="text" Nullable="false" />
+          <Property Name="cou_difficulty" Type="int" Nullable="false" />
+          <Property Name="cou_description" Type="text" Nullable="false" />
+          <Property Name="cou_creation_date" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courses_files">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="file" Type="blob" Nullable="false" />
+          <Property Name="file_name" Type="text" Nullable="false" />
+          <Property Name="file_cou_id" Type="int" Nullable="false" />
+          <Property Name="file_user_id" Type="int" Nullable="false" />
+          <Property Name="file_creation_date" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courses_reviews">
+          <Key>
+            <PropertyRef Name="cor_id" />
+          </Key>
+          <Property Name="cor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cor_cou_id" Type="int" Nullable="false" />
+          <Property Name="cor_user_id" Type="int" Nullable="false" />
+          <Property Name="cor_text" Type="text" Nullable="false" />
+          <Property Name="cor_creation_date" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="questions">
+          <Key>
+            <PropertyRef Name="qns_id" />
+          </Key>
+          <Property Name="qns_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="qns_name" Type="text" Nullable="false" />
+          <Property Name="qns_text" Type="text" Nullable="false" />
+          <Property Name="qns_creation_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="qns_user_id" Type="int" />
+          <Property Name="qns_likes" Type="int" Nullable="false" />
+          <Property Name="qns_views" Type="int" Nullable="false" />
+          <Property Name="qns_comments" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_username" Type="text" Nullable="false" />
+          <Property Name="user_bio" Type="text" Nullable="false" />
+          <Property Name="user_creation_date" Type="date" Nullable="false" />
+          <Property Name="user_image" Type="blob" Nullable="false" />
+          <Property Name="user_password" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="StudentForYouDatabaseModelStoreContainer">
+          <EntitySet Name="chat_group" EntityType="Self.chat_group" Schema="dx01fvQECG" store:Type="Tables" />
+          <EntitySet Name="chat_personal" EntityType="Self.chat_personal" Schema="dx01fvQECG" store:Type="Tables" />
+          <EntitySet Name="comments" EntityType="Self.comments" Schema="dx01fvQECG" store:Type="Tables" />
+          <EntitySet Name="courses" EntityType="Self.courses" Schema="dx01fvQECG" store:Type="Tables" />
+          <EntitySet Name="courses_files" EntityType="Self.courses_files" Schema="dx01fvQECG" store:Type="Tables" />
+          <EntitySet Name="courses_reviews" EntityType="Self.courses_reviews" Schema="dx01fvQECG" store:Type="Tables" />
+          <EntitySet Name="questions" EntityType="Self.questions" Schema="dx01fvQECG" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dx01fvQECG" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentForYouDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="chat_group">
+          <Key>
+            <PropertyRef Name="chg_id" />
+          </Key>
+          <Property Name="chg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chg_user_id" Type="Int32" Nullable="false" />
+          <Property Name="chg_course_id" Type="Int32" Nullable="false" />
+          <Property Name="chg_text" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="chg_creation_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="chat_personal">
+          <Key>
+            <PropertyRef Name="chp_id" />
+          </Key>
+          <Property Name="chp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chp_send_user_id" Type="Int32" Nullable="false" />
+          <Property Name="chp_receive_user_id" Type="Int32" Nullable="false" />
+          <Property Name="chp_text" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="chp_creation_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="com_id" />
+          </Key>
+          <Property Name="com_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="com_user_id" Type="Int32" Nullable="false" />
+          <Property Name="com_text" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="com_creation_date" Type="DateTime" Nullable="false" />
+          <Property Name="com_qns_id" Type="Int32" Nullable="false" />
+          <Property Name="com_likes" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courses">
+          <Key>
+            <PropertyRef Name="cou_id" />
+          </Key>
+          <Property Name="cou_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cou_name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cou_difficulty" Type="Int32" Nullable="false" />
+          <Property Name="cou_description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cou_creation_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courses_files">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="file" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="file_name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="file_cou_id" Type="Int32" Nullable="false" />
+          <Property Name="file_user_id" Type="Int32" Nullable="false" />
+          <Property Name="file_creation_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courses_reviews">
+          <Key>
+            <PropertyRef Name="cor_id" />
+          </Key>
+          <Property Name="cor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cor_cou_id" Type="Int32" Nullable="false" />
+          <Property Name="cor_user_id" Type="Int32" Nullable="false" />
+          <Property Name="cor_text" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cor_creation_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="qns_id" />
+          </Key>
+          <Property Name="qns_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="qns_name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="qns_text" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="qns_creation_date" Type="DateTime" Nullable="false" />
+          <Property Name="qns_user_id" Type="Int32" />
+          <Property Name="qns_likes" Type="Int32" Nullable="false" />
+          <Property Name="qns_views" Type="Int32" Nullable="false" />
+          <Property Name="qns_comments" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_username" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_bio" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_creation_date" Type="DateTime" Nullable="false" />
+          <Property Name="user_image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="user_password" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="dx01fvQECGEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="chat_group" EntityType="Self.chat_group" />
+          <EntitySet Name="chat_personal" EntityType="Self.chat_personal" />
+          <EntitySet Name="comments" EntityType="Self.comment" />
+          <EntitySet Name="courses1" EntityType="StudentForYouDatabaseModel.courses" />
+          <EntitySet Name="courses_files" EntityType="Self.courses_files" />
+          <EntitySet Name="courses_reviews" EntityType="Self.courses_reviews" />
+          <EntitySet Name="questions" EntityType="Self.question" />
+          <EntitySet Name="users" EntityType="Self.user" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentForYouDatabaseModelStoreContainer" CdmEntityContainer="dx01fvQECGEntities1">
+          <EntitySetMapping Name="chat_group">
+            <EntityTypeMapping TypeName="StudentForYouDatabaseModel.chat_group">
+              <MappingFragment StoreEntitySet="chat_group">
+                <ScalarProperty Name="chg_id" ColumnName="chg_id" />
+                <ScalarProperty Name="chg_user_id" ColumnName="chg_user_id" />
+                <ScalarProperty Name="chg_course_id" ColumnName="chg_course_id" />
+                <ScalarProperty Name="chg_text" ColumnName="chg_text" />
+                <ScalarProperty Name="chg_creation_date" ColumnName="chg_creation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chat_personal">
+            <EntityTypeMapping TypeName="StudentForYouDatabaseModel.chat_personal">
+              <MappingFragment StoreEntitySet="chat_personal">
+                <ScalarProperty Name="chp_id" ColumnName="chp_id" />
+                <ScalarProperty Name="chp_send_user_id" ColumnName="chp_send_user_id" />
+                <ScalarProperty Name="chp_receive_user_id" ColumnName="chp_receive_user_id" />
+                <ScalarProperty Name="chp_text" ColumnName="chp_text" />
+                <ScalarProperty Name="chp_creation_date" ColumnName="chp_creation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="StudentForYouDatabaseModel.comment">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="com_id" ColumnName="com_id" />
+                <ScalarProperty Name="com_user_id" ColumnName="com_user_id" />
+                <ScalarProperty Name="com_text" ColumnName="com_text" />
+                <ScalarProperty Name="com_creation_date" ColumnName="com_creation_date" />
+                <ScalarProperty Name="com_qns_id" ColumnName="com_qns_id" />
+                <ScalarProperty Name="com_likes" ColumnName="com_likes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses1">
+            <EntityTypeMapping TypeName="StudentForYouDatabaseModel.courses">
+              <MappingFragment StoreEntitySet="courses">
+                <ScalarProperty Name="cou_id" ColumnName="cou_id" />
+                <ScalarProperty Name="cou_name" ColumnName="cou_name" />
+                <ScalarProperty Name="cou_difficulty" ColumnName="cou_difficulty" />
+                <ScalarProperty Name="cou_description" ColumnName="cou_description" />
+                <ScalarProperty Name="cou_creation_date" ColumnName="cou_creation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses_files">
+            <EntityTypeMapping TypeName="StudentForYouDatabaseModel.courses_files">
+              <MappingFragment StoreEntitySet="courses_files">
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
+                <ScalarProperty Name="file" ColumnName="file" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="file_cou_id" ColumnName="file_cou_id" />
+                <ScalarProperty Name="file_user_id" ColumnName="file_user_id" />
+                <ScalarProperty Name="file_creation_date" ColumnName="file_creation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses_reviews">
+            <EntityTypeMapping TypeName="StudentForYouDatabaseModel.courses_reviews">
+              <MappingFragment StoreEntitySet="courses_reviews">
+                <ScalarProperty Name="cor_id" ColumnName="cor_id" />
+                <ScalarProperty Name="cor_cou_id" ColumnName="cor_cou_id" />
+                <ScalarProperty Name="cor_user_id" ColumnName="cor_user_id" />
+                <ScalarProperty Name="cor_text" ColumnName="cor_text" />
+                <ScalarProperty Name="cor_creation_date" ColumnName="cor_creation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="questions">
+            <EntityTypeMapping TypeName="StudentForYouDatabaseModel.question">
+              <MappingFragment StoreEntitySet="questions">
+                <ScalarProperty Name="qns_id" ColumnName="qns_id" />
+                <ScalarProperty Name="qns_name" ColumnName="qns_name" />
+                <ScalarProperty Name="qns_text" ColumnName="qns_text" />
+                <ScalarProperty Name="qns_creation_date" ColumnName="qns_creation_date" />
+                <ScalarProperty Name="qns_user_id" ColumnName="qns_user_id" />
+                <ScalarProperty Name="qns_likes" ColumnName="qns_likes" />
+                <ScalarProperty Name="qns_views" ColumnName="qns_views" />
+                <ScalarProperty Name="qns_comments" ColumnName="qns_comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="StudentForYouDatabaseModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_username" ColumnName="user_username" />
+                <ScalarProperty Name="user_bio" ColumnName="user_bio" />
+                <ScalarProperty Name="user_creation_date" ColumnName="user_creation_date" />
+                <ScalarProperty Name="user_image" ColumnName="user_image" />
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

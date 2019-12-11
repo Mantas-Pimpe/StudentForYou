@@ -52,7 +52,7 @@ namespace StudentForYou.WebApp.Controllers
                 using (var cmd = new MySqlCommand(qry, con))
                 {
                     con.Open();
-                    //cmd.Parameters.AddWithValue("@com_id", comment.CommentID);
+                    //cmd.Parameters.AddWithValue("@com_id", Comment.CommentID);
                     cmd.Parameters.AddWithValue("@com_user_id", comment.UserID);
                     cmd.Parameters.AddWithValue("@com_text", comment.CommentText);
                     cmd.Parameters.AddWithValue("com_creation_date", DateTime.Now);

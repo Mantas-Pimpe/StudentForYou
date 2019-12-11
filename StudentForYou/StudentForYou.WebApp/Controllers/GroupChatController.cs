@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using StudentForYou.WebApp.Models;
+using StudentForYou.DB;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -13,7 +13,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpPost]
         public void Post([FromBody] GroupMessage message)
         {
-            var qry = "INSERT INTO chat_group(chg_user_id, chg_course_id, chg_text, chg_creation_date) VALUES (@chg_user_id, @chg_course_id, @chg_text, @chg_creation_date)";
+            var qry = "INSERT INTO GroupMessage(chg_user_id, chg_course_id, chg_text, chg_creation_date) VALUES (@chg_user_id, @chg_course_id, @chg_text, @chg_creation_date)";
             using (var con = new MySqlConnection(GetConnectionString()))
             {
                 con.Open();
@@ -35,7 +35,7 @@ namespace StudentForYou.WebApp.Controllers
             using (var con = new MySqlConnection(GetConnectionString()))
             {
                 con.Open();
-                var qry = "select chg_id, chg_user_id, chg_course_id, chg_text, chg_creation_date from chat_group where chg_course_id = @chg_course_id order by chg_creation_date";
+                var qry = "select chg_id, chg_user_id, chg_course_id, chg_text, chg_creation_date from GroupMessage where chg_course_id = @chg_course_id order by chg_creation_date";
                 using (var cmd = new MySqlCommand(qry, con))
                 {
                     cmd.Parameters.AddWithValue("@chg_course_id", courseID);

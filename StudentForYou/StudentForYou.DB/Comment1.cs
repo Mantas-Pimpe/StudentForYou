@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace StudentForYou.WebApp.Models
+using System;
+namespace StudentForYou.DB
 {
-    public class Comment
+    public partial class Comment
     {
         public int CommentID { get; set; }
         public int QuestionID { get; set; }

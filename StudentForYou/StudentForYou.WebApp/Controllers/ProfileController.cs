@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using StudentForYou.WebApp.Models;
+using StudentForYou.DB;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -21,7 +20,7 @@ namespace StudentForYou.WebApp.Controllers
             {
                 con.Open();
                 var qry =
-                    "select user.user_id, user.user_username, user.user_bio, user.user_creation_date, user.user_image from users user where user.user_id = @user_id";
+                    "select User.user_id, User.user_username, User.user_bio, User.user_creation_date, User.user_image from users User where User.user_id = @user_id";
                 var tmp = new User();
                 using (var cmd = new MySqlCommand(qry, con))
                 {
@@ -68,17 +67,17 @@ namespace StudentForYou.WebApp.Controllers
 
         //GET: api/Profile
         //[HttpGet("GetLoginId/{user_username:string}/{user_password:string}")]
-        //public int? GetUserLoginId([FromBody] User user)
+        //public int? GetUserLoginId([FromBody] User User)
         //{
         //    using (var con = new MySqlConnection(GetConnectionString()))
         //    {
         //        con.Open();
         //        var qry =
-        //            "select user.user_id from users user where user.user_username = @user_username and user.user_password = @user_password";
+        //            "select User.user_id from users User where User.user_username = @user_username and User.user_password = @user_password";
         //        using (var cmd = new MySqlCommand(qry, con))
         //        {
-        //            cmd.Parameters.AddWithValue("@user_username", user.UserName);
-        //            cmd.Parameters.AddWithValue("@user_password", user.UserPassword);
+        //            cmd.Parameters.AddWithValue("@user_username", User.UserName);
+        //            cmd.Parameters.AddWithValue("@user_password", User.UserPassword);
         //            using (var reader = cmd.ExecuteReader())
         //            {
         //                while (reader.Read())
@@ -132,7 +131,7 @@ namespace StudentForYou.WebApp.Controllers
 
         //public bool CheckIfUsernameTaken(string username)
         //{
-        //    const string qry = "select user.user_username from users user";
+        //    const string qry = "select User.user_username from users User";
         //    using (var con = new MySqlConnection(GetConnectionString()))
         //    {
         //        con.Open();
@@ -177,7 +176,6 @@ namespace StudentForYou.WebApp.Controllers
             int minValue = int.Parse(ConfigurationManager.AppSettings["minUsernameValue"]);
             int maxValue = int.Parse(ConfigurationManager.AppSettings["maxUsernameValue"]);
 
-            int usernameLenght; 
             if(username.Length<minValue)
             {
                 return false;

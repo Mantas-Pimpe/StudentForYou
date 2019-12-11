@@ -38,7 +38,7 @@ class Index extends React.Component {
             .then(results => this.setState({ 'items': results }));
     }
 
-    getCoursesAmount() {
+    getQuestionAmount() {
         const url = "https://localhost:44341/api/Question/GetQuestionAmount";
         fetch(url)
             .then(results => results.json())
@@ -47,12 +47,11 @@ class Index extends React.Component {
 
     componentDidMount() {
         this.getQuestion();
-        this.getCoursesAmount();
+        this.getQuestionAmount();
     }
 
     componentDidUpdate() {
         this.getQuestion();
-        this.getCoursesAmount();
     }
 
     toggleNavs = (e, index) => {

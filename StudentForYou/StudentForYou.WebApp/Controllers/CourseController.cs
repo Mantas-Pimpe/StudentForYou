@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
 using StudentForYou.DB;
 using System.Linq;
@@ -13,21 +11,24 @@ namespace StudentForYou.WebApp.Controllers
     [ApiController]
     public class CourseController : DataBaseController
     {
-        DataTableDB db = new DataTableDB();
+        DataTableDB datatable = new DataTableDB();
+        EntityFrameworkDB<Course> efCourse = new EntityFrameworkDB<Course>();
+        EntityFrameworkDB<Review> efReview = new EntityFrameworkDB<Review>();
+
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
-            var query = "select cou_id CourseID, cou_name CourseName, cou_difficulty CourseDifficulty, cou_description CourseDescription, cou_creation_date CourseCreationDate from courses";
-            var list = db.GetList<Course>(query);
-            //CheckList.ReplaceList(questionList);
-            return list;
+            /*var query = "select cou_id CourseID, cou_name CourseName, cou_difficulty CourseDifficulty, cou_description CourseDescription, cou_creation_date CourseCreationDate from courses";
+            var list = datatable.GetList<Course>(query);*/
+            return efCourse.GetModelList().ToList();
         }
 
         [HttpGet("{courseID}/GetCourse")]
         public Course GetCourse(int courseID)
         {
-            var query = "select cou.cou_id CourseID, cou.cou_name CourseName, cou.cou_difficulty CourseDifficulty, cou.cou_description CourseDescription, cou.cou_creation_date CourseCreationDate from courses cou where cou.cou_id = " + courseID;
-            return db.GetItem<Course>(query);
+            /*var query = "select cou.cou_id CourseID, cou.cou_name CourseName, cou.cou_difficulty CourseDifficulty, cou.cou_description CourseDescription, cou.cou_creation_date CourseCreationDate from courses cou where cou.cou_id = " + courseID;
+            return datatable.GetItem<Course>(query);*/
+            return efCourse.GetModelByID(courseID);
         }
 
         [HttpPost("PostCourse")]
@@ -36,28 +37,17 @@ namespace StudentForYou.WebApp.Controllers
             var tuple = WhiteSpaceRemover.CleanCourseBeforePost(course.CourseName, course.CourseDescription);
             course.CourseName = tuple.Result.Item1;
             course.CourseDescription = tuple.Result.Item2;
-            var qry = "INSERT INTO courses(cou_name, cou_difficulty, cou_description, cou_creation_date) VALUES (@cou_name, @cou_difficulty, @cou_description, @cou_creation_date)";
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@cou_name", course.CourseName.Trim());
-                    cmd.Parameters.AddWithValue("@cou_description", course.CourseDescription.Trim());
-                    cmd.Parameters.AddWithValue("@cou_creation_date", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@cou_difficulty", course.CourseDifficulty);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
+
+            efCourse.InsertModel(course);
+            efCourse.Save();
         }
 
         [HttpGet("{courseID}/GetReviews")]
         public List<Review> GetReviews(int courseID)
         {
-            var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from courses_reviews where cor_cou_id = " + courseID;
-            var list = db.GetList<Review>(query);
-            return list;
+            /*var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from Review where cor_cou_id = " + courseID;
+            var list = datatable.GetList<Review>(query);*/
+            return efReview.GetModelList().Where(e => e.ReviewID == courseID).ToList();
         }
 
         [HttpPost("{courseID}/PostReview")]
@@ -65,41 +55,32 @@ namespace StudentForYou.WebApp.Controllers
         {
             var text = WhiteSpaceRemover.CleanReviewBeforePost(review.ReviewText);
             review.ReviewText = text.Result;
-            var qry = "INSERT INTO courses_reviews(cor_cou_id, cor_user_id, cor_text, cor_creation_date) VALUES (@cor_cou_id, @cor_user_id, @cor_text, @cor_creation_date)";
-            using (var con = new MySqlConnection(GetConnectionString()))
-            {
-                using (var cmd = new MySqlCommand(qry, con))
-                {
-                    con.Open();
-                    cmd.Parameters.AddWithValue("@cor_cou_id", review.CourseID);
-                    cmd.Parameters.AddWithValue("@cor_text", review.ReviewText.Trim());
-                    cmd.Parameters.AddWithValue("@cor_creation_date", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@cor_user_id", review.UserID);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
-            }
+
+            efReview.InsertModel(review);
+            efReview.Save();
         }
 
         [HttpDelete("{courseID}/DeleteCourse")]
         public void DeleteCourse(int courseID)
         {
-            db.DeleteRow("courses", "cou_id", courseID);
-            db.DeleteRow("courses_reviews", "cor_cou_id", courseID);
-            db.DeleteRow("chat_group", "chg_course_id", courseID);
+            /*datatable.DeleteRow("courses", "cou_id", courseID);
+            datatable.DeleteRow("Review", "cor_cou_id", courseID);
+            datatable.DeleteRow("GroupMessage", "chg_course_id", courseID);*/
+            efReview.DeleteModel(courseID);
+            datatable.DeleteRow("Review", "cor_cou_id", courseID);
+            datatable.DeleteRow("GroupMessage", "chg_course_id", courseID);
         }
 
         [HttpGet("GetCourseAmount")]
         public int GetCourseAmount()
         {
-            return db.GetListAmount(GetCourses());
+            return datatable.GetListAmount(GetCourses());
         }
 
         [HttpGet("GetCourseAverage")]
         public double GetCourseAverage()
         {
-            var list = GetCourses();
-            var tmp = list.AsEnumerable()
+            var tmp = GetCourses().AsEnumerable()
                         .Select(g => g.CourseDifficulty).Average();
             return tmp;
         }
@@ -107,11 +88,8 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetMostReviewed")]
         public IEnumerable<NameValue> GetMostReviewed()
         {
-            var reviews = GetAllReviews();
-            var courses = GetCourses();
-
-            var list = courses.AsEnumerable()
-                .Join(reviews,
+            var list = GetCourses().AsEnumerable()
+                .Join(GetAllReviews(),
                       k1 => k1.CourseID,
                       k2 => k2.CourseID,
                       (k1, k2) => new NameValue
@@ -136,13 +114,15 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetAllReviews")]
         public List<Review> GetAllReviews()
         {
-            var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from courses_reviews";
-            var list = db.GetList<Review>(query);
-            return list;
+            /*var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from Review";
+            var list = datatable.GetList<Review>(query);*/
+            return efReview.GetModelList().ToList();
         }
-        //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
+
+
+        //public void UploadFile(User User, Course course, string filePath, DateTime creationDate)
         //{
-        //    var qry = "INSERT INTO courses_files(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";
+        //    var qry = "INSERT INTO CourseFile(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";
         //    using (var con = new MySqlConnection(GetConnectionString()))
         //    {
         //        using (MySqlCommand cmd = new MySqlCommand(qry, con))
@@ -151,7 +131,7 @@ namespace StudentForYou.WebApp.Controllers
         //            cmd.Parameters.AddWithValue("@file", System.IO.File.ReadAllBytes(filePath));
         //            cmd.Parameters.AddWithValue("@file_name", filePath.Trim());
         //            cmd.Parameters.AddWithValue("@file_cou_id", course.courseID);
-        //            cmd.Parameters.AddWithValue("@file_user_id", user.userID);
+        //            cmd.Parameters.AddWithValue("@file_user_id", User.userID);
         //            cmd.Parameters.AddWithValue("@file_creation_date", creationDate);
         //            cmd.ExecuteNonQuery();
         //            con.Close();
@@ -166,7 +146,7 @@ namespace StudentForYou.WebApp.Controllers
         //    using (var con = new MySqlConnection(GetConnectionString()))
         //    {
         //        con.Open();
-        //        var qry = "select file_id, file, file_name, file_cou_id, file_user_id, file_creation_date from courses_files where file_cou_id = @file_cou_id";
+        //        var qry = "select file_id, file, file_name, file_cou_id, file_user_id, file_creation_date from CourseFile where file_cou_id = @file_cou_id";
         //        using (var cmd = new MySqlCommand(qry, con))
         //        {
         //            cmd.Parameters.AddWithValue("@file_cou_id", courseID);

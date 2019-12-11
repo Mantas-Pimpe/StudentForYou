@@ -1,15 +1,12 @@
-﻿using System;
-using StudentForYou.WebApp.Controllers;
-
-namespace StudentForYou.WebApp.Models
+using System;
+namespace StudentForYou.DB
 {
-    public class Message
+    public partial class GroupMessage
     {
         public int MessageID { get; set; }
         public string MessageText { get; set; }
-        //public User MessageSender { get; set; }
         public int MessageSenderID { get; set; }
         public DateTime MessageTime { get; set; }
-
+        public int CourseID { get; set; }
     }
 }
