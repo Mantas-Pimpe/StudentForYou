@@ -2,11 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentForYou.DB
 {
@@ -90,6 +87,11 @@ namespace StudentForYou.DB
                 }
             }
             return obj;
+        }
+
+        public int GetListAmount<T>(List <T> list)
+        {
+            return list.AsEnumerable().Count();
         }
 
         public void UpdateIncreaseByNumber(string table, string whatToIncrease, string whereString, int id, int number)

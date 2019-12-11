@@ -1,6 +1,4 @@
-﻿
-import React from "react";
-// reactstrap components
+﻿import React from "react";
 import {
     Button,
     Card,
@@ -13,7 +11,6 @@ import {
     Row,
     Col
 } from "reactstrap";
-// core components
 import { Link } from 'react-router-dom';
 
 class CoursesDetails extends React.Component {

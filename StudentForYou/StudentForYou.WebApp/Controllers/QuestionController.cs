@@ -132,6 +132,11 @@ namespace StudentForYou.WebApp.Controllers
             db.UpdateIncreaseByNumber("comments", "com_likes", "com_id", comment_id, 1);
         }
 
+        [HttpGet("GetQuestionAmount")]
+        public int GetQuestionAmount()
+        {
+            return db.GetListAmount(Get());
+        }
     }
 }
 

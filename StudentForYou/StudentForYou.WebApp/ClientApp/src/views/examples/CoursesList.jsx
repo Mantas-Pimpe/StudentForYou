@@ -21,7 +21,10 @@ class CoursesList extends React.Component {
     constructor() {
         super();
         this.state = {
-            'items': []
+            'items': [],
+            'mostReviewed': [],
+            'amount': 0,
+            'average': 0
         }
     }
 
@@ -32,14 +35,42 @@ class CoursesList extends React.Component {
             .then(results => this.setState({ 'items': results }));
     }
 
+    getCoursesAmount() {
+        const url = "https://localhost:44341/api/course/GetCourseAmount";
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'amount': results }));
+    }
+
+    getMostReviewed() {
+        const url = "https://localhost:44341/api/course/GetMostReviewed";
+        console.log('sssssssss');
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'mostReviewed': results }));
+    }
+
+    getCoursesAverage() {
+        const url = "https://localhost:44341/api/course/GetCourseAverage";
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'average': results }));
+    }
+
     componentDidMount() {
         this.getCourses();
+        this.getCoursesAmount();
+        this.getCoursesAverage();
+        this.getMostReviewed();
     }
 
     componentDidUpdate() {
         this.getCourses();
+        /*this.getCoursesAmount();
+        this.getCoursesAverage();
+        this.getMostReviewed();*/
     }
-    
+
     render() {
         return (
             <>
@@ -70,7 +101,7 @@ class CoursesList extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.items.map(function (item, index) {
+                                        {this.state.items.map(function(item, index) {
                                             return (
                                                 <tr>
                                                     <th scope="row">
@@ -95,7 +126,18 @@ class CoursesList extends React.Component {
                                     </tbody>
                                 </Table>
                                 <CardFooter className="py-4">
-                                    <nav aria-label="...">
+                                    <Row className="align-items-center">
+                                        <div className="col text-left">
+                                            <h5 className="mb-0">Number of courses: {this.state.amount}</h5>
+                                            <h5 className="mb-0">Average of courses: {this.state.average.toFixed(2)}</h5>
+                                            {this.state.mostReviewed.map(function(mostReviewed, index) {
+                                                return (
+                                                    <h5 className="mb-0">Most reviewed course: {mostReviewed.name} ({mostReviewed.value})</h5>
+                                                )
+                                            })}
+                                        </div>
+                                    </Row>
+                                    <nav aria-label="..." >
                                         <Pagination
                                             className="pagination justify-content-end mb-0"
                                             listClassName="justify-content-end mb-0">
@@ -144,7 +186,7 @@ class CoursesList extends React.Component {
                             </Card>
                         </div>
                     </Row>
-                 </Container>
+                </Container>
             </>
         );
     }

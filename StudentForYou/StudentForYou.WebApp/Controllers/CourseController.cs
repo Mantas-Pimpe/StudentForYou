@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
 using StudentForYou.DB;
+using System.Linq;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -88,6 +89,57 @@ namespace StudentForYou.WebApp.Controllers
             db.DeleteRow("chat_group", "chg_course_id", courseID);
         }
 
+        [HttpGet("GetCourseAmount")]
+        public int GetCourseAmount()
+        {
+            return db.GetListAmount(GetCourses());
+        }
+
+        [HttpGet("GetCourseAverage")]
+        public double GetCourseAverage()
+        {
+            var list = GetCourses();
+            var tmp = list.AsEnumerable()
+                        .Select(g => g.CourseDifficulty).Average();
+            return tmp;
+        }
+
+        [HttpGet("GetMostReviewed")]
+        public IEnumerable<NameValue> GetMostReviewed()
+        {
+            var reviews = GetAllReviews();
+            var courses = GetCourses();
+
+            var list = courses.AsEnumerable()
+                .Join(reviews,
+                      k1 => k1.CourseID,
+                      k2 => k2.CourseID,
+                      (k1, k2) => new NameValue
+                      {
+                          Name = k1.CourseName,
+                          Value = k2.CourseID
+                      })
+
+                .GroupBy(l => l.Name)
+                .Select(group => new NameValue
+                {
+                    Name = group.Key,
+                    Value = group.Count()
+                }); //All of the courses that have reviews and a sum of them
+
+            var maxValue = list.Select(m => m.Value).Max();
+            list = list.Where(x => x.Value == maxValue);
+
+            return list;
+        }
+
+        [HttpGet("GetAllReviews")]
+        public List<Review> GetAllReviews()
+        {
+            var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from courses_reviews";
+            var list = db.GetList<Review>(query);
+            return list;
+        }
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
         //{
         //    var qry = "INSERT INTO courses_files(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";
