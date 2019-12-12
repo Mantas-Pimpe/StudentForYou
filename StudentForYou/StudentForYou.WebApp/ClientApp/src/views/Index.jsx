@@ -19,6 +19,7 @@ import {
     parseOptions
 } from "../variables/charts.jsx";
 import { Link } from 'react-router-dom';
+import AddQuestion from "./examples/AddQuestion.jsx";
 
 class Index extends React.Component {
     constructor(props) {
@@ -28,35 +29,23 @@ class Index extends React.Component {
             activeNav: 1,
             chartExample1Data: "data1",
             searchKey: '',
-            firstLoad: true,
-            a: 1,
-            loading: true
+            loading: true,
+            counter:0
         }
     }
 
     async GetQuestion() {
-        if (this.state.firstLoad == true && this.state.searchKey == '') {
-            //console.log((this.state.searchKey).length)
-            const url = "https://localhost:44341/api/Question";
-            const response = await fetch(url);
-            const data = await response.json();
-            this.setState({ 'items': data, loading: false });
-            /*fetch(url)
-                .then(results => results.json())
-                .then(results => this.setState({ 'items': results }));*/
-        }
-        else if (this.state.searchKey != '')
-        {
-            //console.log(this.state.searchKey);
+        const url = "https://localhost:44341/api/Question";
+        const response = await fetch(url);
+        const data = await response.json();
+        this.setState({ 'items': data, loading: false});
+    }
 
-            const url = "https://localhost:44341/api/Question/getQuestionsSortedBy/" + this.state.searchKey;
-            const response = await fetch(url);
-            const data = await response.json();
-            this.setState({ 'items': data, loading : false});
-            /*fetch(url)
-                .then(results => results.json())
-                .then(results => this.setState({ 'items': results }));*/
-        }
+    async GetQuestionsBySearchKey() {
+        const url = "https://localhost:44341/api/Question/getQuestionsSortedBy/" + this.state.searchKey;
+        const response = await fetch(url);
+        const data = await response.json();
+        this.setState({ 'items': data, loading: false });
     }
 
     async componentDidMount() {
@@ -64,7 +53,11 @@ class Index extends React.Component {
     }
 
     async componentDidUpdate() {
-        this.GetQuestion();
+        while (this.state.counter < 10) {
+            this.GetQuestion();
+            this.state.counter + 1;
+        }
+        //this.GetQuestion();
     }
 
     toggleNavs = (e, index) => {
@@ -103,23 +96,7 @@ class Index extends React.Component {
     handleChange = event => {
         this.setState({
             searchKey: event.target.value,
-            firstLoad: false
         });
-        if (this.state.a < (this.state.searchKey).length) {
-            this.setState({ a: (this.state.searchKey).length });
-        }
-        if ((this.state.searchKey).length == 1 && this.state.a > (this.state.searchKey).length) {
-            this.setState({
-                firstLoad: true,
-                a : 1
-            });
-        }
-        /*if (this.state.searchKey === '') {
-            this.setState({
-                firstLoad:true
-            });
-            console.log('labukas');
-        }*/
     }
 
     render() {
@@ -145,7 +122,7 @@ class Index extends React.Component {
                                                     <InputGroupText>
                                                         <i className="fas fa-search"
                                                             onClick={() => {
-                                                                this.GetQuestion();
+                                                                this.GetQuestionsBySearchKey();
                                                             }}
                                                         />
                                                     </InputGroupText>
@@ -156,11 +133,21 @@ class Index extends React.Component {
                                                     value={this.state.searchKey}
                                                     onChange={this.handleChange}
                                                     required />
+                                                <InputGroupAddon addonType="apend">
+                                                    <InputGroupText>
+                                                        <i className="fas fa-backspace"
+                                                            onClick={() => {
+                                                                this.GetQuestion();
+                                                                this.setState({ searchKey:'' });
+                                                            }}
+                                                        />
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
                                             </InputGroup>
                                         </div>
                                         <div className="col text-right">
                                             <Link to="/admin/index/add-question">
-                                                <Button color="primary" size="sm">Ask a question </Button>
+                                                <Button color="primary" size="sm" onClick={() => { this.setState({ counter:0 }); }}>Ask a question </Button>
                                             </Link>
                                         </div>
                                     </Row>
