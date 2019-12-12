@@ -22,17 +22,23 @@ namespace StudentForYou.WebApp.Controllers
             return list;
         }
 
-        public Question ReturnOneQuestion(int iD, int likes, int views, int answers, string text, string name, DateTime date)
+        [HttpGet("getQuestionsSortedBy/{key}")]
+        public List<Question> GetSortedList(string key)
         {
-            var question = new Question();
-            question.QuestionID = iD;
-            question.QuestionLikes = likes;
-            question.QuestionViews = views;
-            question.QuestionAnswers = answers;
-            question.QuestionText = text;
-            question.QuestionName = name;
-            question.QuestionCreationDate = date;
-            return question;
+            var query = "select qns.qns_id QuestionID, qns.qns_likes QuestionLikes, qns.qns_views QuestionViews, qns.qns_comments QuestionAnswers, qns.qns_text QuestionText, qns.qns_name QuestionName, qns.qns_creation_date QuestionCreationDate from questions qns";
+            var list = db.GetList<Question>(query);
+            key.ToLower();
+            for (int i = 0; i < list.Count; i++)
+            {
+                string name = list[i].QuestionName.ToLower();
+                if (!name.Contains(key))
+                {
+                    list.RemoveAt(i);
+                    i--;
+                }
+            }
+            return list;
+
         }
 
         [HttpGet("getComments/{question_id}")]

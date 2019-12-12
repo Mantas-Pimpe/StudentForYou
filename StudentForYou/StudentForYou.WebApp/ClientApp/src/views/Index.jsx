@@ -8,7 +8,11 @@ import {
     Table,
     Container,
     Row,
-    Col
+    Col,
+    InputGroupAddon,
+    InputGroupText,
+    Input,
+    InputGroup
 } from "reactstrap";
 import {
     chartOptions,
@@ -22,22 +26,44 @@ class Index extends React.Component {
         this.state = {
             'items': [],
             activeNav: 1,
-            chartExample1Data: "data1"
+            chartExample1Data: "data1",
+            searchKey: '',
+            firstLoad: true,
+            a: 1,
+            loading: true
         }
     }
 
-    GetQuestion() {
-        const url = "https://localhost:44341/api/Question";
-        fetch(url)
-            .then(results => results.json())
-            .then(results => this.setState({ 'items': results }));
+    async GetQuestion() {
+        if (this.state.firstLoad == true && this.state.searchKey == '') {
+            //console.log((this.state.searchKey).length)
+            const url = "https://localhost:44341/api/Question";
+            const response = await fetch(url);
+            const data = await response.json();
+            this.setState({ 'items': data, loading: false });
+            /*fetch(url)
+                .then(results => results.json())
+                .then(results => this.setState({ 'items': results }));*/
+        }
+        else if (this.state.searchKey != '')
+        {
+            //console.log(this.state.searchKey);
+
+            const url = "https://localhost:44341/api/Question/getQuestionsSortedBy/" + this.state.searchKey;
+            const response = await fetch(url);
+            const data = await response.json();
+            this.setState({ 'items': data, loading : false});
+            /*fetch(url)
+                .then(results => results.json())
+                .then(results => this.setState({ 'items': results }));*/
+        }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.GetQuestion();
     }
 
-    componentDidUpdate() {
+    async componentDidUpdate() {
         this.GetQuestion();
     }
 
@@ -72,7 +98,35 @@ class Index extends React.Component {
         })
     }
 
+
+
+    handleChange = event => {
+        this.setState({
+            searchKey: event.target.value,
+            firstLoad: false
+        });
+        if (this.state.a < (this.state.searchKey).length) {
+            this.setState({ a: (this.state.searchKey).length });
+        }
+        if ((this.state.searchKey).length == 1 && this.state.a > (this.state.searchKey).length) {
+            this.setState({
+                firstLoad: true,
+                a : 1
+            });
+        }
+        /*if (this.state.searchKey === '') {
+            this.setState({
+                firstLoad:true
+            });
+            console.log('labukas');
+        }*/
+    }
+
     render() {
+        if (this.state.loading) {
+            /*While info is loading from DB*/
+            return <div></div>;
+        }
         return (
             <>
                 {/* Page content */}
@@ -84,6 +138,25 @@ class Index extends React.Component {
                                     <Row className="align-items-center">
                                         <div className="col">
                                             <h3 className="mb-0">Recent Questions</h3>
+                                        </div>
+                                        <div className="col text-right">
+                                            <InputGroup className="input-group-alternative">
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText>
+                                                        <i className="fas fa-search"
+                                                            onClick={() => {
+                                                                this.GetQuestion();
+                                                            }}
+                                                        />
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+                                                <Input
+                                                    placeholder="Search"
+                                                    type="text"
+                                                    value={this.state.searchKey}
+                                                    onChange={this.handleChange}
+                                                    required />
+                                            </InputGroup>
                                         </div>
                                         <div className="col text-right">
                                             <Link to="/admin/index/add-question">
