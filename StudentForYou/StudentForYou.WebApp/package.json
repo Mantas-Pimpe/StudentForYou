@@ -27,7 +27,7 @@
     "react-toggle": "^4.1.1",
     "reactstrap": "^6.3.0",
     "rimraf": "^2.6.2",
-    "webpack": "4.41.0"
+    "webpack": "^4.41.2"
   },
   "devDependencies": {
     "ajv": "^6.9.1",
