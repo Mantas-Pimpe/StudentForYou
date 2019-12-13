@@ -30,7 +30,7 @@ class Index extends React.Component {
             chartExample1Data: "data1",
             searchKey: '',
             loading: true,
-            counter:0
+            'amount': 0
         }
     }
 
@@ -50,6 +50,7 @@ class Index extends React.Component {
 
     async componentDidMount() {
         this.GetQuestion();
+        this.getQuestionAmount();
     }
 
     async componentDidUpdate() {
