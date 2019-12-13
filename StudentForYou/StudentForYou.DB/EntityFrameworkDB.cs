@@ -1,43 +1,44 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StudentForYou.DB
 {
     public class EntityFrameworkDB<T> : IEntityFrameworkDB<T> where T : class
     {
         private StudentForYouEntities db;
-        private IDbSet<T> dbEntity;
 
-        public EntityFrameworkDB()
+        public EntityFrameworkDB(StudentForYouEntities context)
         {
-            db = new StudentForYouEntities();
-            dbEntity = db.Set<T>();
+            db = context;
         }
 
         public IEnumerable<T> GetModelList()
         {
-            return dbEntity;
+            return db.Set<T>().AsNoTracking();
         }
-
+        
         public T GetModelByID(int id)
         {
-            return dbEntity.Find(id);
+            return db.Set<T>().Find(id);
         }
 
         public void InsertModel(T model)
         {
-            dbEntity.Add(model);
+            db.Set<T>().Add(model);
         }
 
         public void DeleteModel(int id)
         {
-            T model = dbEntity.Find(id);
-            dbEntity.Remove(model);
+            var entity = GetModelByID(id);
+            db.Set<T>().Remove(entity);
         }
 
         public void UpdateModel(T model)
         {
-            db.Entry(model).State = EntityState.Modified;
+            db.Set<T>().Update(model);
         }
 
         public void Save()

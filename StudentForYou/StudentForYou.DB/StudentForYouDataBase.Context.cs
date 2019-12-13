@@ -9,22 +9,16 @@
 
 namespace StudentForYou.DB
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
+    using Microsoft.EntityFrameworkCore;
+    //using System.Data.Entity;
+
     public partial class StudentForYouEntities : DbContext
     {
-        public StudentForYouEntities()
-            : base("name=StudentForYouEntities")
+        public StudentForYouEntities(DbContextOptions<StudentForYouEntities> options)
+            : base(options)
         {
         }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
+
         public virtual DbSet<GroupMessage> chat_group { get; set; }
         public virtual DbSet<PersonalChat> chat_personal { get; set; }
         public virtual DbSet<Comment> comments { get; set; }

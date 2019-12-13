@@ -154,6 +154,7 @@
       <DependentUpon>StudentForYouDataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="IEntityFrameworkDB.cs" />
+    <Compile Include="Interfaces\ICoursesDB.cs" />
     <Compile Include="PersonalChat.cs">
       <DependentUpon>StudentForYouDataBase.tt</DependentUpon>
     </Compile>

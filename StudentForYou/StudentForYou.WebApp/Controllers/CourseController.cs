@@ -4,23 +4,30 @@ using Microsoft.AspNetCore.Mvc;
 using StudentForYou.WebApp.Models;
 using StudentForYou.DB;
 using System.Linq;
+using System.Data;
+using System.Linq;
+using MySql.Data.MySqlClient;
+using StudentForYou.DB.Interfaces;
 
 namespace StudentForYou.WebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseController : DataBaseController
+    public class CourseController : EntityFrameworkDB<Course>, ICoursesDB
     {
         DataTableDB datatable = new DataTableDB();
-        EntityFrameworkDB<Course> efCourse = new EntityFrameworkDB<Course>();
-        EntityFrameworkDB<Review> efReview = new EntityFrameworkDB<Review>();
+        public CourseController(StudentForYouEntities context)
+            : base(context)
+        {
+
+        }
 
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
             /*var query = "select cou_id CourseID, cou_name CourseName, cou_difficulty CourseDifficulty, cou_description CourseDescription, cou_creation_date CourseCreationDate from courses";
             var list = datatable.GetList<Course>(query);*/
-            return efCourse.GetModelList().ToList();
+            return GetModelList().ToList();
         }
 
         [HttpGet("{courseID}/GetCourse")]
@@ -28,18 +35,19 @@ namespace StudentForYou.WebApp.Controllers
         {
             /*var query = "select cou.cou_id CourseID, cou.cou_name CourseName, cou.cou_difficulty CourseDifficulty, cou.cou_description CourseDescription, cou.cou_creation_date CourseCreationDate from courses cou where cou.cou_id = " + courseID;
             return datatable.GetItem<Course>(query);*/
-            return efCourse.GetModelByID(courseID);
+            return GetModelByID(courseID);
         }
 
         [HttpPost("PostCourse")]
+
         public void PostCourse([FromBody] Course course)
         {
             var tuple = WhiteSpaceRemover.CleanCourseBeforePost(course.CourseName, course.CourseDescription);
             course.CourseName = tuple.Result.Item1;
             course.CourseDescription = tuple.Result.Item2;
 
-            efCourse.InsertModel(course);
-            efCourse.Save();
+            InsertModel(course);
+            Save();
         }
 
         [HttpGet("{courseID}/GetReviews")]
@@ -47,7 +55,8 @@ namespace StudentForYou.WebApp.Controllers
         {
             /*var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from Review where cor_cou_id = " + courseID;
             var list = datatable.GetList<Review>(query);*/
-            return efReview.GetModelList().Where(e => e.ReviewID == courseID).ToList();
+            //return GetModelList().Where(e => e.ReviewID == courseID).ToList();
+            return new List<Review>();
         }
 
         [HttpPost("{courseID}/PostReview")]
@@ -56,8 +65,8 @@ namespace StudentForYou.WebApp.Controllers
             var text = WhiteSpaceRemover.CleanReviewBeforePost(review.ReviewText);
             review.ReviewText = text.Result;
 
-            efReview.InsertModel(review);
-            efReview.Save();
+            //InsertModel(review);
+            Save();
         }
 
         [HttpDelete("{courseID}/DeleteCourse")]
@@ -66,9 +75,9 @@ namespace StudentForYou.WebApp.Controllers
             /*datatable.DeleteRow("courses", "cou_id", courseID);
             datatable.DeleteRow("Review", "cor_cou_id", courseID);
             datatable.DeleteRow("GroupMessage", "chg_course_id", courseID);*/
-            efReview.DeleteModel(courseID);
-            datatable.DeleteRow("Review", "cor_cou_id", courseID);
-            datatable.DeleteRow("GroupMessage", "chg_course_id", courseID);
+            DeleteModel(courseID);
+            /*datatable.DeleteRow("Review", "cor_cou_id", courseID);
+            datatable.DeleteRow("GroupMessage", "chg_course_id", courseID);*/
         }
 
         [HttpGet("GetCourseAmount")]
@@ -116,7 +125,8 @@ namespace StudentForYou.WebApp.Controllers
         {
             /*var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from Review";
             var list = datatable.GetList<Review>(query);*/
-            return efReview.GetModelList().ToList();
+            //return GetModelList().ToList();
+            return new List<Review>();
         }
 
 
