@@ -131,7 +131,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetAllReviews")]
         public List<Review> GetAllReviews()
         {
-            var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from Review";
+            var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from courses_reviews";
             var list = db.GetList<Review>(query);
             return list;
             //return efReview.GetModelList().ToList();

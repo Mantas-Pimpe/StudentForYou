@@ -12,7 +12,11 @@ import {
     InputGroupAddon,
     InputGroupText,
     Input,
-    InputGroup
+    InputGroup,
+    CardFooter,
+    PaginationItem,
+    PaginationLink,
+    Pagination
 } from "reactstrap";
 import {
     chartOptions,
@@ -46,6 +50,13 @@ class Index extends React.Component {
         const response = await fetch(url);
         const data = await response.json();
         this.setState({ 'items': data, loading: false });
+    }
+
+    getQuestionAmount() {
+        const url = "https://localhost:44341/api/Question/GetQuestionAmount";
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'amount': results }));
     }
 
     async componentDidMount() {

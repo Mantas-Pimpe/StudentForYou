@@ -27,6 +27,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetQuestionAmount")]
         public int GetQuestionAmount()
         {
+
             return db.GetListAmount(Get());
         }
 
