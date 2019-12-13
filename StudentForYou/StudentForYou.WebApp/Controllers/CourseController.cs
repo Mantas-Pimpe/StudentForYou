@@ -26,7 +26,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetCourseAmount")]
         public int GetCourseAmount()
         {
-            return datatable.GetListAmount(GetCourses());
+            return db.GetListAmount(GetCourses());
         }
 
         [HttpGet("GetCourseAverage")]
