@@ -34,6 +34,10 @@ class QuestionDetails extends React.Component {
         this.GetAnswers();
     }
 
+    componentDidUpdate() {
+        this.getQuestion();
+    }
+
     async getQuestion() {
         const { match: { params } } = this.props;
         const url = "https://localhost:44341/api/question/GetOneQuestion/" + params.questionID;
@@ -92,7 +96,7 @@ class QuestionDetails extends React.Component {
         const url = "https://localhost:44341/api/Question/addLikeForAnswer/" + commentID;
         console.log(url);
         fetch(url, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
@@ -125,11 +129,20 @@ class QuestionDetails extends React.Component {
             .then(res => console.log(res))
     }
 
+    DeleteAnswer(commentID) {
+        fetch("https://localhost:44341/api/Question/deleteComment/" + commentID, {
+            method: 'DELETE',
+            headers: { 'content-type': 'application/json' }
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))
+    }
+
     addAnswer() {
         const { match: { params } } = this.props;
         const url = "https://localhost:44341/api/Question/addAnswer/" + params.questionID;
         fetch(url, {
-            method: 'PUT',
+            method: 'Post',
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
@@ -255,9 +268,9 @@ class QuestionDetails extends React.Component {
                                                        <Row className="mb-1">
                                                           <Button
                                                             align="left"
-                                                            onClick={() => {
-                                                                console.log(item.commentID);
-                                                                this.addLikeForAnswer.call(this, item.commentID);
+                                                                onClick={() => {
+                                                                    console.log(item.commentID);
+                                                                    this.addLikeForAnswer(item.commentID);
                                                             }}
                                                             type="submit"
                                                             color="primary"
@@ -268,6 +281,7 @@ class QuestionDetails extends React.Component {
                                                        <Row className="mb-1">
                                                           <Button
                                                             align="left"
+                                                            onClick={() => this.DeleteAnswer.call(this, item.commentID)}
                                                             type="submit"
                                                             color="primary"
                                                             size="sm">

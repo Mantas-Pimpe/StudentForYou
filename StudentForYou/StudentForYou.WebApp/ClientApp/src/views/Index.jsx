@@ -53,10 +53,6 @@ class Index extends React.Component {
     }
 
     async componentDidUpdate() {
-        while (this.state.counter < 10) {
-            this.GetQuestion();
-            this.state.counter + 1;
-        }
         //this.GetQuestion();
     }
 
