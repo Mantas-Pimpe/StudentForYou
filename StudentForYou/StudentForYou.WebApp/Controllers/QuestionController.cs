@@ -24,6 +24,12 @@ namespace StudentForYou.WebApp.Controllers
             return list;
         }
 
+        [HttpGet("GetQuestionAmount")]
+        public int GetQuestionAmount()
+        {
+            return db.GetListAmount(Get());
+        }
+
         [HttpGet("getQuestionsSortedBy/{key}")]
         public List<Question> GetSortedList(string key)
         {

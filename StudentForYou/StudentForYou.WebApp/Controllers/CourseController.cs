@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
 using StudentForYou.DB;
+using System.Linq;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -19,6 +20,46 @@ namespace StudentForYou.WebApp.Controllers
             var query = "select cou_id CourseID, cou_name CourseName, cou_difficulty CourseDifficulty, cou_description CourseDescription, cou_creation_date CourseCreationDate from courses";
             var list = db.GetList<Course>(query);
             //CheckList.ReplaceList(questionList);
+            return list;
+        }
+
+        [HttpGet("GetCourseAmount")]
+        public int GetCourseAmount()
+        {
+            return datatable.GetListAmount(GetCourses());
+        }
+
+        [HttpGet("GetCourseAverage")]
+        public double GetCourseAverage()
+        {
+            var tmp = GetCourses().AsEnumerable()
+                        .Select(g => g.CourseDifficulty).Average();
+            return tmp;
+        }
+
+        [HttpGet("GetMostReviewed")]
+        public IEnumerable<NameValue> GetMostReviewed()
+        {
+            var list = GetCourses().AsEnumerable()
+                .Join(GetAllReviews(),
+                      k1 => k1.CourseID,
+                      k2 => k2.CourseID,
+                      (k1, k2) => new NameValue
+                      {
+                          Name = k1.CourseName,
+                          Value = k2.CourseID
+                      })
+
+                .GroupBy(l => l.Name)
+                .Select(group => new NameValue
+                {
+                    Name = group.Key,
+                    Value = group.Count()
+                }); //All of the courses that have reviews and a sum of them
+
+            var maxValue = list.Select(m => m.Value).Max();
+            list = list.Where(x => x.Value == maxValue);
+
             return list;
         }
 

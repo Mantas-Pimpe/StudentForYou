@@ -21,8 +21,32 @@ class CoursesList extends React.Component {
     constructor() {
         super();
         this.state = {
-            'items': []
+            'items': [],
+            'mostReviewed': [],
+            'amount': 0,
+            'average': 0
         }
+    }
+
+    getCoursesAmount() {
+        const url = "https://localhost:44341/api/course/GetCourseAmount";
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'amount': results }));
+    }
+
+    getMostReviewed() {
+        const url = "https://localhost:44341/api/course/GetMostReviewed";
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'mostReviewed': results }));
+    }
+
+    getCoursesAverage() {
+        const url = "https://localhost:44341/api/course/GetCourseAverage";
+        fetch(url)
+            .then(results => results.json())
+            .then(results => this.setState({ 'average': results }));
     }
 
     getCourses() {
@@ -34,6 +58,9 @@ class CoursesList extends React.Component {
 
     componentDidMount() {
         this.getCourses();
+        this.getCoursesAmount();
+        this.getCoursesAverage();
+        this.getMostReviewed();
     }
 
     componentDidUpdate() {
@@ -95,7 +122,18 @@ class CoursesList extends React.Component {
                                     </tbody>
                                 </Table>
                                 <CardFooter className="py-4">
-                                    <nav aria-label="...">
+                                    <Row className="align-items-center">
+                                        <div className="col text-left">
+                                            <h5 className="mb-0">Number of courses: {this.state.amount}</h5>
+                                            <h5 className="mb-0">Average of courses: {this.state.average.toFixed(2)}</h5>
+                                            {this.state.mostReviewed.map(function (mostReviewed, index) {
+                                                return (
+                                                    <h5 className="mb-0">Most reviewed course: {mostReviewed.name} ({mostReviewed.value})</h5>
+                                                )
+                                            })}
+                                        </div>
+                                    </Row>
+                                    <nav aria-label="..." >
                                         <Pagination
                                             className="pagination justify-content-end mb-0"
                                             listClassName="justify-content-end mb-0">
