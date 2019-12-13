@@ -36,6 +36,7 @@ class QuestionDetails extends React.Component {
 
     componentDidUpdate() {
         this.getQuestion();
+        this.GetAnswers();
     }
 
     async getQuestion() {
@@ -72,7 +73,6 @@ class QuestionDetails extends React.Component {
             },
             body: JSON.stringify(data)
         })
-        window.location.reload();
     }
 
     changeHandler = (e) => {
@@ -142,7 +142,7 @@ class QuestionDetails extends React.Component {
         const { match: { params } } = this.props;
         const url = "https://localhost:44341/api/Question/addAnswer/" + params.questionID;
         fetch(url, {
-            method: 'Post',
+            method: 'POST',
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
@@ -150,6 +150,8 @@ class QuestionDetails extends React.Component {
             return response.json()
         })
     }
+
+
 
     render() {
         const { commentText } = this.state;

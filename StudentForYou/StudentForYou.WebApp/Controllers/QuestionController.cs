@@ -123,6 +123,11 @@ namespace StudentForYou.WebApp.Controllers
             db.UpdateIncreaseByNumber("questions", "qns_views", "qns_id", question_id, 1);
         }
 
+        [HttpPost("addAnswer/{question_id}")]
+        public void AddAnswer(int question_id)
+        {
+            db.UpdateIncreaseByNumber("questions", "qns_comments", "qns_id", question_id, 1);
+        }
 
         [HttpPost("addDislike/{question_id}")]
         public void AddDislike(int question_id)
