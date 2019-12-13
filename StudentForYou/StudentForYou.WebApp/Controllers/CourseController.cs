@@ -128,6 +128,15 @@ namespace StudentForYou.WebApp.Controllers
             db.DeleteRow("courses_reviews", "cor_cou_id", courseID);
         }
 
+        [HttpGet("GetAllReviews")]
+        public List<Review> GetAllReviews()
+        {
+            var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from Review";
+            var list = db.GetList<Review>(query);
+            return list;
+            //return efReview.GetModelList().ToList();
+        }
+
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)
         //{
         //    var qry = "INSERT INTO courses_files(file, file_name, file_cou_id, file_user_id, file_creation_date) VALUES (@file, @file_name, @file_cou_id, @file_user_id, @file_creation_date)";
