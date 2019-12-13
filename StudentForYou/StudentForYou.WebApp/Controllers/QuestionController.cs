@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
 using StudentForYou.DB;
+using System.Configuration;
+using System.Linq;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -22,25 +24,39 @@ namespace StudentForYou.WebApp.Controllers
             return list;
         }
 
-        public Question ReturnOneQuestion(int iD, int likes, int views, int answers, string text, string name, DateTime date)
+        [HttpGet("GetQuestionAmount")]
+        public int GetQuestionAmount()
         {
-            var question = new Question();
-            question.QuestionID = iD;
-            question.QuestionLikes = likes;
-            question.QuestionViews = views;
-            question.QuestionAnswers = answers;
-            question.QuestionText = text;
-            question.QuestionName = name;
-            question.QuestionCreationDate = date;
-            return question;
+
+            return db.GetListAmount(Get());
+        }
+
+        [HttpGet("getQuestionsSortedBy/{key}")]
+        public List<Question> GetSortedList(string key)
+        {
+            var query = "select qns.qns_id QuestionID, qns.qns_likes QuestionLikes, qns.qns_views QuestionViews, qns.qns_comments QuestionAnswers, qns.qns_text QuestionText, qns.qns_name QuestionName, qns.qns_creation_date QuestionCreationDate from questions qns";
+            var list = db.GetList<Question>(query);
+            key.ToLower();
+            for (int i = 0; i < list.Count; i++)
+            {
+                string name = list[i].QuestionName.ToLower();
+                if (!name.Contains(key))
+                {
+                    list.RemoveAt(i);
+                    i--;
+                }
+            }
+            return list;
+
         }
 
         [HttpGet("getComments/{question_id}")]
         public List<Comment> GetComments(int question_id)
         {
-            var query = "select com.com_id CommentID, com.com_user_id UserID, com.com_text CommentText, com.com_creation_date CommentDate, com.com_qns_id QuestionID from comments com where com.com_qns_id = " + question_id;
+            var query = "select com.com_id CommentID, com.com_user_id UserID, com.com_text CommentText, com.com_creation_date CommentDate, com.com_qns_id QuestionID, com.com_likes Likes from comments com where com.com_qns_id = " + question_id;
             var list = db.GetList<Comment>(query);
-            return list;
+            var listInDescOrder = list.OrderByDescending(q => q.Likes).ToList();
+            return listInDescOrder;
         }
 
         [HttpPost("PostQuestionAnswer/{questionID}")]
@@ -119,6 +135,18 @@ namespace StudentForYou.WebApp.Controllers
             db.UpdateIncreaseByNumber("questions", "qns_likes", "qns_id", question_id, -1);
         }
 
+        [HttpPost("addAnswer/{question_id}")]
+        public void AddAnswer(int question_id)
+        {
+            db.UpdateIncreaseByNumber("questions", "qns_comments", "qns_id", question_id, 1);
+        }
+
+        [HttpDelete("deleteComment/{comment_id}")]
+        public void DeleteComment(int comment_id)
+        {
+            db.DeleteRow("comments", "com_id", comment_id);
+        }
+
         [HttpDelete("DeleteQuestion/{question_id}")]
         public void DeleteQuestion(int question_id)
         {
@@ -131,7 +159,6 @@ namespace StudentForYou.WebApp.Controllers
         {
             db.UpdateIncreaseByNumber("comments", "com_likes", "com_id", comment_id, 1);
         }
-
     }
 }
 

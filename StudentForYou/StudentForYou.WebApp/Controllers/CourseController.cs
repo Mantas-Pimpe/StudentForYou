@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
 using StudentForYou.DB;
+using System.Linq;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -19,6 +20,46 @@ namespace StudentForYou.WebApp.Controllers
             var query = "select cou_id CourseID, cou_name CourseName, cou_difficulty CourseDifficulty, cou_description CourseDescription, cou_creation_date CourseCreationDate from courses";
             var list = db.GetList<Course>(query);
             //CheckList.ReplaceList(questionList);
+            return list;
+        }
+
+        [HttpGet("GetCourseAmount")]
+        public int GetCourseAmount()
+        {
+            return db.GetListAmount(GetCourses());
+        }
+
+        [HttpGet("GetCourseAverage")]
+        public double GetCourseAverage()
+        {
+            var tmp = GetCourses().AsEnumerable()
+                        .Select(g => g.CourseDifficulty).Average();
+            return tmp;
+        }
+
+        [HttpGet("GetMostReviewed")]
+        public IEnumerable<NameValue> GetMostReviewed()
+        {
+            var list = GetCourses().AsEnumerable()
+                .Join(GetAllReviews(),
+                      k1 => k1.CourseID,
+                      k2 => k2.CourseID,
+                      (k1, k2) => new NameValue
+                      {
+                          Name = k1.CourseName,
+                          Value = k2.CourseID
+                      })
+
+                .GroupBy(l => l.Name)
+                .Select(group => new NameValue
+                {
+                    Name = group.Key,
+                    Value = group.Count()
+                }); //All of the courses that have reviews and a sum of them
+
+            var maxValue = list.Select(m => m.Value).Max();
+            list = list.Where(x => x.Value == maxValue);
+
             return list;
         }
 
@@ -86,6 +127,15 @@ namespace StudentForYou.WebApp.Controllers
             db.DeleteRow("courses", "cou_id", courseID);
             db.DeleteRow("courses_reviews", "cor_cou_id", courseID);
             db.DeleteRow("chat_group", "chg_course_id", courseID);
+        }
+
+        [HttpGet("GetAllReviews")]
+        public List<Review> GetAllReviews()
+        {
+            var query = "select cor_id ReviewID, cor_cou_id CourseID, cor_user_id UserID, cor_text ReviewText, cor_creation_date ReviewCreationDate from courses_reviews";
+            var list = db.GetList<Review>(query);
+            return list;
+            //return efReview.GetModelList().ToList();
         }
 
         //public void UploadFile(User user, Course course, string filePath, DateTime creationDate)

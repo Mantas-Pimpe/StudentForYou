@@ -145,5 +145,10 @@ namespace StudentForYou.DB
             con.Close();
             da.Dispose();
         }
+
+        public int GetListAmount<T>(List<T> list)
+        {
+            return list.AsEnumerable().Count();
+        }
     }
 }

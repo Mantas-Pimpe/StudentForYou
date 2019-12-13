@@ -129,6 +129,15 @@ class QuestionDetails extends React.Component {
             .then(res => console.log(res))
     }
 
+    DeleteAnswer(commentID) {
+        fetch("https://localhost:44341/api/Question/deleteComment/" + commentID, {
+            method: 'DELETE',
+            headers: { 'content-type': 'application/json' }
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))
+    }
+
     addAnswer() {
         const { match: { params } } = this.props;
         const url = "https://localhost:44341/api/Question/addAnswer/" + params.questionID;
@@ -261,9 +270,9 @@ class QuestionDetails extends React.Component {
                                                        <Row className="mb-1">
                                                           <Button
                                                             align="left"
-                                                            onClick={() => {
-                                                                console.log(item.commentID);
-                                                                this.addLikeForAnswer.call(this, item.commentID);
+                                                                onClick={() => {
+                                                                    console.log(item.commentID);
+                                                                    this.addLikeForAnswer(item.commentID);
                                                             }}
                                                             type="submit"
                                                             color="primary"
@@ -274,6 +283,7 @@ class QuestionDetails extends React.Component {
                                                        <Row className="mb-1">
                                                           <Button
                                                             align="left"
+                                                            onClick={() => this.DeleteAnswer.call(this, item.commentID)}
                                                             type="submit"
                                                             color="primary"
                                                             size="sm">

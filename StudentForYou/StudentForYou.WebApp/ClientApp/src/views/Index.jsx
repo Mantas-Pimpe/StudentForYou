@@ -8,13 +8,22 @@ import {
     Table,
     Container,
     Row,
-    Col
+    Col,
+    InputGroupAddon,
+    InputGroupText,
+    Input,
+    InputGroup,
+    CardFooter,
+    PaginationItem,
+    PaginationLink,
+    Pagination
 } from "reactstrap";
 import {
     chartOptions,
     parseOptions
 } from "../variables/charts.jsx";
 import { Link } from 'react-router-dom';
+import AddQuestion from "./examples/AddQuestion.jsx";
 
 class Index extends React.Component {
     constructor(props) {
@@ -22,23 +31,41 @@ class Index extends React.Component {
         this.state = {
             'items': [],
             activeNav: 1,
-            chartExample1Data: "data1"
+            chartExample1Data: "data1",
+            searchKey: '',
+            loading: true,
+            'amount': 0
         }
     }
 
-    GetQuestion() {
+    async GetQuestion() {
         const url = "https://localhost:44341/api/Question";
+        const response = await fetch(url);
+        const data = await response.json();
+        this.setState({ 'items': data, loading: false});
+    }
+
+    async GetQuestionsBySearchKey() {
+        const url = "https://localhost:44341/api/Question/getQuestionsSortedBy/" + this.state.searchKey;
+        const response = await fetch(url);
+        const data = await response.json();
+        this.setState({ 'items': data, loading: false });
+    }
+
+    getQuestionAmount() {
+        const url = "https://localhost:44341/api/Question/GetQuestionAmount";
         fetch(url)
             .then(results => results.json())
-            .then(results => this.setState({ 'items': results }));
+            .then(results => this.setState({ 'amount': results }));
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.GetQuestion();
+        this.getQuestionAmount();
     }
 
-    componentDidUpdate() {
-        this.GetQuestion();
+    async componentDidUpdate() {
+        //this.GetQuestion();
     }
 
     toggleNavs = (e, index) => {
@@ -72,7 +99,19 @@ class Index extends React.Component {
         })
     }
 
+
+
+    handleChange = event => {
+        this.setState({
+            searchKey: event.target.value,
+        });
+    }
+
     render() {
+        if (this.state.loading) {
+            /*While info is loading from DB*/
+            return <div></div>;
+        }
         return (
             <>
                 {/* Page content */}
@@ -86,8 +125,37 @@ class Index extends React.Component {
                                             <h3 className="mb-0">Recent Questions</h3>
                                         </div>
                                         <div className="col text-right">
+                                            <InputGroup className="input-group-alternative">
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText>
+                                                        <i className="fas fa-search"
+                                                            onClick={() => {
+                                                                this.GetQuestionsBySearchKey();
+                                                            }}
+                                                        />
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+                                                <Input
+                                                    placeholder="Search"
+                                                    type="text"
+                                                    value={this.state.searchKey}
+                                                    onChange={this.handleChange}
+                                                    required />
+                                                <InputGroupAddon addonType="apend">
+                                                    <InputGroupText>
+                                                        <i className="fas fa-backspace"
+                                                            onClick={() => {
+                                                                this.GetQuestion();
+                                                                this.setState({ searchKey:'' });
+                                                            }}
+                                                        />
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+                                            </InputGroup>
+                                        </div>
+                                        <div className="col text-right">
                                             <Link to="/admin/index/add-question">
-                                                <Button color="primary" size="sm">Ask a question </Button>
+                                                <Button color="primary" size="sm" onClick={() => { this.setState({ counter:0 }); }}>Ask a question </Button>
                                             </Link>
                                         </div>
                                     </Row>
@@ -122,6 +190,58 @@ class Index extends React.Component {
                                         )}
                                     </tbody>
                                 </Table>
+                                <CardFooter className="py-4">
+                                    <Row className="align-items-center">
+                                        <div className="col text-left">
+                                            <h5 className="mb-0">Number of questions: {this.state.amount}</h5>
+                                        </div>
+                                    </Row>
+                                    <nav aria-label="..." >
+                                        <Pagination
+                                            className="pagination justify-content-end mb-0"
+                                            listClassName="justify-content-end mb-0">
+                                            <PaginationItem className="disabled">
+                                                <PaginationLink
+                                                    href="#pablo"
+                                                    onClick={e => e.preventDefault()}
+                                                    tabIndex="-1">
+                                                    <i className="fas fa-angle-left" />
+                                                    <span className="sr-only">Previous</span>
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem className="active">
+                                                <PaginationLink
+                                                    href="#pablo"
+                                                    onClick={e => e.preventDefault()}>
+                                                    1
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    href="#pablo"
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    2 <span className="sr-only">(current)</span>
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    href="#pablo"
+                                                    onClick={e => e.preventDefault()}>
+                                                    3
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    href="#pablo"
+                                                    onClick={e => e.preventDefault()}>
+                                                    <i className="fas fa-angle-right" />
+                                                    <span className="sr-only">Next</span>
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                        </Pagination>
+                                    </nav>
+                                </CardFooter>
                             </Card>
                         </Col>
                     </Row>

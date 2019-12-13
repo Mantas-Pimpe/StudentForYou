@@ -45,13 +45,7 @@ class AddQuestion extends React.Component {
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
-        }).then(response => {
-            return response.json()
         })
-    }
-
-    componentDidMount() {
-        this.AddNewQuestion();
     }
 
     render() {
