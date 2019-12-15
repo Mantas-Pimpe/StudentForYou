@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou", "StudentForYou\StudentForYou.csproj", "{5E9F816D-D3CC-4EFB-8EA6-3584C184C7CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Subjects", "Studentforyousubjects\StudentForYou.Subjects.csproj", "{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Chat", "StundentForYou.Chat\StudentForYou.Chat.csproj", "{DBD815BD-32AE-4B17-B1AE-73364088D40D}"
@@ -17,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.DB", "Student
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForYou.WebApp", "StudentForYou.WebApp\StudentForYou.WebApp.csproj", "{7BBE219A-918F-49BE-B3AB-7948D209B8BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.WebAppTests", "StudentForYou.WebAppTests\StudentForYou.WebAppTests.csproj", "{9A2E79B6-03BC-4F14-A65A-851EE19C4BC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentForYou.WebAppTests", "StudentForYou.WebAppTests\StudentForYou.WebAppTests.csproj", "{9A2E79B6-03BC-4F14-A65A-851EE19C4BC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E9F816D-D3CC-4EFB-8EA6-3584C184C7CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E9F816D-D3CC-4EFB-8EA6-3584C184C7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E9F816D-D3CC-4EFB-8EA6-3584C184C7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E9F816D-D3CC-4EFB-8EA6-3584C184C7CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU

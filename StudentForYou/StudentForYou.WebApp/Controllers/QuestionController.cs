@@ -135,11 +135,7 @@ namespace StudentForYou.WebApp.Controllers
             db.UpdateIncreaseByNumber("questions", "qns_likes", "qns_id", question_id, -1);
         }
 
-        [HttpPost("addAnswer/{question_id}")]
-        public void AddAnswer(int question_id)
-        {
-            db.UpdateIncreaseByNumber("questions", "qns_comments", "qns_id", question_id, 1);
-        }
+      
 
         [HttpDelete("deleteComment/{comment_id}")]
         public void DeleteComment(int comment_id)
