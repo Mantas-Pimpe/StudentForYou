@@ -14,25 +14,28 @@ namespace StudentForYou.WebApp.Controllers
     public class CourseController : DataBaseController
     {
         DataTableDB db = new DataTableDB();
+        public IListManager<Course> courseListManager;
+        public CourseController()
+        {
+        courseListManager = new CourseListManager();
+        }
+
         [HttpGet("GetCourses")]
         public List<Course> GetCourses()
         {
-            var query = "select cou_id CourseID, cou_name CourseName, cou_difficulty CourseDifficulty, cou_description CourseDescription, cou_creation_date CourseCreationDate from courses";
-            var list = db.GetList<Course>(query);
-            //CheckList.ReplaceList(questionList);
-            return list;
+            return courseListManager.GetList();
         }
-
         [HttpGet("GetCourseAmount")]
         public int GetCourseAmount()
         {
-            return db.GetListAmount(GetCourses());
+           
+            return db.GetListAmount(courseListManager.GetList());
         }
 
         [HttpGet("GetCourseAverage")]
         public double GetCourseAverage()
         {
-            var tmp = GetCourses().AsEnumerable()
+            var tmp = courseListManager.GetList().AsEnumerable()
                         .Select(g => g.CourseDifficulty).Average();
             return tmp;
         }
@@ -40,7 +43,7 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetMostReviewed")]
         public IEnumerable<NameValue> GetMostReviewed()
         {
-            var list = GetCourses().AsEnumerable()
+            var list =courseListManager.GetList().AsEnumerable()
                 .Join(GetAllReviews(),
                       k1 => k1.CourseID,
                       k2 => k2.CourseID,

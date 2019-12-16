@@ -15,20 +15,19 @@ namespace StudentForYou.WebApp.Controllers
     public class QuestionController : DataBaseController
     {
         DataTableDB db = new DataTableDB();
+        public IListManager<Question> questionListManager;
+
         [HttpGet]
         public List<Question> Get()
         {
-            var query = "select qns.qns_id QuestionID, qns.qns_likes QuestionLikes, qns.qns_views QuestionViews, qns.qns_comments QuestionAnswers, qns.qns_text QuestionText, qns.qns_name QuestionName, qns.qns_creation_date QuestionCreationDate from questions qns";
-            var list = db.GetList<Question>(query);
-            //CheckList.ReplaceList(questionList);
-            return list;
+            questionListManager = new QuestionListManager();
+            return questionListManager.GetList();
         }
-
         [HttpGet("GetQuestionAmount")]
         public int GetQuestionAmount()
         {
-
-            return db.GetListAmount(Get());
+            questionListManager = new QuestionListManager();
+            return db.GetListAmount(questionListManager.GetList());
         }
 
         [HttpGet("getQuestionsSortedBy/{key}")]

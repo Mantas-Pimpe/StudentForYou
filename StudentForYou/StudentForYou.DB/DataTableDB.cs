@@ -149,7 +149,7 @@ namespace StudentForYou.DB
             conManager.CloseConnection(con);
             da.Dispose();
         }
-
+        
         public int GetListAmount<T>(List<T> list)
         {
             return list.AsEnumerable().Count();

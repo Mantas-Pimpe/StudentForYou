@@ -177,7 +177,6 @@ namespace StudentForYou.WebApp.Controllers
             int minValue = int.Parse(ConfigurationManager.AppSettings["minUsernameValue"]);
             int maxValue = int.Parse(ConfigurationManager.AppSettings["maxestutisUsernameValue"]);
 
-            int usernameLenght; 
             if(username.Length<minValue)
             {
                 return false;
