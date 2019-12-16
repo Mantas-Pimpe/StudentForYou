@@ -14,7 +14,7 @@ namespace StudentForYou.DB
     {
         Lazy<MySqlConnection> lazyConnection;
         ConnectionManager conManager;
-        DataTableDB()
+       public DataTableDB()
         {
          conManager = new ConnectionManager();
          lazyConnection = new Lazy<MySqlConnection>(() => new MySqlConnection(GetConnectionString()));
