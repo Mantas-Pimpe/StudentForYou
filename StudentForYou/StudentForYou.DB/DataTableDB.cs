@@ -16,7 +16,7 @@ namespace StudentForYou.DB
         ConnectionManager conManager;
         DataTableDB()
         {
-            conManager = new ConnectionManager();
+         conManager = new ConnectionManager();
          lazyConnection = new Lazy<MySqlConnection>(() => new MySqlConnection(GetConnectionString()));
         }
         public string GetConnectionString()
@@ -32,15 +32,14 @@ namespace StudentForYou.DB
         
         public T GetItem<T>(string query)
         {
-            using (var con = new MySqlConnection(GetConnectionString()))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
                 using (var cmd = new MySqlCommand(query, con))
                 {
-                    con.Open();
                     DataTable dt = new DataTable();
                     dt.Load(cmd.ExecuteReader());
                     T item = GetConvertedDataTableItem<T>(dt.Rows[0]);
-                    con.Close();
+                    conManager.CloseConnection(con);
                     return item;
                 }
             }
@@ -54,14 +53,13 @@ namespace StudentForYou.DB
 
         public DataTable GetDataTable(string query)
         {
-            using (var con = new MySqlConnection(GetConnectionString()))
+            using (var con = conManager.OpenConnection(lazyConnection))
             {
                 using (var cmd = new MySqlCommand(query, con))
                 {
-                    con.Open();
                     DataTable dt = new DataTable();
                     dt.Load(cmd.ExecuteReader());
-                    con.Close();
+                    conManager.CloseConnection(con);
                     return dt;
                 }
             }
@@ -101,8 +99,7 @@ namespace StudentForYou.DB
 
         public void UpdateIncreaseByNumber(string table, string whatToIncrease, string whereString, int id, int number)
         {
-            var con = new MySqlConnection(GetConnectionString());
-            con.Open();
+            var con = conManager.OpenConnection(lazyConnection);
 
             var query = "select * from " + table;
             //var query = "select * from " + table + " where " + whereString + " = " + id;
@@ -122,7 +119,7 @@ namespace StudentForYou.DB
             //ds.Tables[0].Rows[0][whatToIncrease] = number;
 
             da.Update(ds.Tables[0]);
-            con.Close();
+            conManager.CloseConnection(con);
             da.Dispose();
         }
 
@@ -149,7 +146,7 @@ namespace StudentForYou.DB
                 row.Delete();
 
             da.Update(ds.Tables[0]);
-            con.Close();
+            conManager.CloseConnection(con);
             da.Dispose();
         }
 
