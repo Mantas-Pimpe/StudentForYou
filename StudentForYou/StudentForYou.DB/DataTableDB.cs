@@ -12,6 +12,13 @@ namespace StudentForYou.DB
 {
     public class DataTableDB
     {
+        Lazy<MySqlConnection> lazyConnection;
+        ConnectionManager conManager;
+        DataTableDB()
+        {
+            conManager = new ConnectionManager();
+         lazyConnection = new Lazy<MySqlConnection>(() => new MySqlConnection(GetConnectionString()));
+        }
         public string GetConnectionString()
         {
             var builder = new MySqlConnectionStringBuilder();
@@ -22,7 +29,7 @@ namespace StudentForYou.DB
             builder.Password = "LgbVCXMkIm";
             return builder.ConnectionString;
         }
-
+        
         public T GetItem<T>(string query)
         {
             using (var con = new MySqlConnection(GetConnectionString()))
