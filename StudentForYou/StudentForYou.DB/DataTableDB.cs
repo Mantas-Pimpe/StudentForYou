@@ -152,6 +152,7 @@ namespace StudentForYou.DB
         
         public int GetListAmount<T>(List<T> list)
         {
+           // int sum = numbers.Aggregate(func: (result, item) => result + item);
             return list.AsEnumerable().Count();
         }
     }
