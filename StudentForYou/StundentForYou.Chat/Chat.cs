@@ -2,6 +2,7 @@
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
 
 namespace StudentForYouChat
 {
@@ -86,7 +87,7 @@ namespace StudentForYouChat
             }
             catch (Exception ex)
             {
-                MyEvent(ex.ToString());
+                
             }
         }
 
