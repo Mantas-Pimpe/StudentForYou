@@ -34,7 +34,10 @@ class Index extends React.Component {
             chartExample1Data: "data1",
             searchKey: '',
             loading: true,
-            'amount': 0
+            'amount': 0,
+            firstLoad: true,
+            isClicked: 0,
+            isClickedQuestion: true
         }
     }
 
@@ -42,13 +45,14 @@ class Index extends React.Component {
         const url = "https://localhost:44341/api/Question";
         const response = await fetch(url);
         const data = await response.json();
-        this.setState({ 'items': data, loading: false});
+        this.setState({ 'items': data, loading: false, firstLoad:false });
     }
 
     async GetQuestionsBySearchKey() {
         const url = "https://localhost:44341/api/Question/getQuestionsSortedBy/" + this.state.searchKey;
         const response = await fetch(url);
         const data = await response.json();
+        this.setState({ 'items': []});
         this.setState({ 'items': data, loading: false });
     }
 
@@ -64,8 +68,29 @@ class Index extends React.Component {
         this.getQuestionAmount();
     }
 
-    async componentDidUpdate() {
-        //this.GetQuestion();
+
+    async componentDidUpdate(preProps, preState) {
+        if (this.state.isClickedQuestion === true) {
+            this.GetQuestion();
+            this.getQuestionAmount();
+            this.setState({ isClickedQuestion: false });
+        }
+
+        if (this.state.isClicked == 0) {
+            this.GetQuestion();
+            this.getQuestionAmount();
+            this.setState({ isClicked: 1 });
+        }
+
+        if (this.state.searchKey !== preState.searchKey) {
+            this.GetQuestionsBySearchKey();
+            if ((this.state.searchKey).length === 0) {
+                this.setState({ firstLoad:true });
+            }
+        }
+        if ((this.state.searchKey).length === 0 && this.state.firstLoad === true) {
+            this.GetQuestion();
+        }
     }
 
     toggleNavs = (e, index) => {
@@ -94,12 +119,18 @@ class Index extends React.Component {
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
-        }).then(response => {
-            return response.json()
         })
     }
 
+    whatDo(id) {
+        this.addView(id);
+        this.setState({ isClickedQuestion: true });
+    }
 
+
+    change() {
+        this.setState({ isClicked: 1});
+    }
 
     handleChange = event => {
         this.setState({
@@ -129,9 +160,6 @@ class Index extends React.Component {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText>
                                                         <i className="fas fa-search"
-                                                            onClick={() => {
-                                                                this.GetQuestionsBySearchKey();
-                                                            }}
                                                         />
                                                     </InputGroupText>
                                                 </InputGroupAddon>
@@ -141,21 +169,11 @@ class Index extends React.Component {
                                                     value={this.state.searchKey}
                                                     onChange={this.handleChange}
                                                     required />
-                                                <InputGroupAddon addonType="apend">
-                                                    <InputGroupText>
-                                                        <i className="fas fa-backspace"
-                                                            onClick={() => {
-                                                                this.GetQuestion();
-                                                                this.setState({ searchKey:'' });
-                                                            }}
-                                                        />
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
                                             </InputGroup>
                                         </div>
                                         <div className="col text-right">
                                             <Link to="/admin/index/add-question">
-                                                <Button color="primary" size="sm" onClick={() => { this.setState({ counter:0 }); }}>Ask a question </Button>
+                                                <Button color="primary" size="sm" onClick={() => this.change()}>Ask a question </Button>
                                             </Link>
                                         </div>
                                     </Row>
@@ -177,7 +195,7 @@ class Index extends React.Component {
                                                     <Media className="align-items-center">
                                                         <Media>
                                                             <span className="mb-0 text-sm">
-                                                                <Link to={`/admin/index/question-${item.questionID}`} onClick={() => this.addView(item.questionID)}>{item.questionName}</Link>
+                                                                <Link to={`/admin/index/question-${item.questionID}`} onClick={() => this.whatDo(item.questionID)}>{item.questionName}</Link>
                                                             </span>
                                                         </Media>
                                                     </Media>
