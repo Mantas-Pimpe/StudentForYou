@@ -16,6 +16,7 @@ import {
 // core components
 import { Link } from 'react-router-dom';
 
+
 class CoursesDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -223,11 +224,9 @@ class CoursesDetails extends React.Component {
                                             <Col md="12">
                                                 <FormGroup>
                                                     <label className="form-control-label">Images containing helpful course information</label>
-                                                    <Input
-                                                        className="form-control-alternative"
-                                                        placeholder="Course images..."
-                                                        rows="8"
-                                                        type="textarea" />
+                                                    <div>
+                                                        <SubmitComponent />
+                                                        </div>
                                                 </FormGroup>
                                             </Col>
                                         </div>
