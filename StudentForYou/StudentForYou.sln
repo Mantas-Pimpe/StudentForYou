@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Subjects", "Studentforyousubjects\StudentForYou.Subjects.csproj", "{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.Chat", "StundentForYou.Chat\StudentForYou.Chat.csproj", "{DBD815BD-32AE-4B17-B1AE-73364088D40D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.RecentPosts", "StudentForYou.RecentPosts\StudentForYou.RecentPosts.csproj", "{D4193337-7DD7-4389-86C4-21BE0F6B5360}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentForYou.DB", "StudentForYou.DB\StudentForYou.DB.csproj", "{14EF7E94-A570-4F5F-AE15-1DD078DD19B6}"
@@ -25,10 +23,6 @@ Global
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5CA3B2F-0EE4-400D-A3E7-4BFDBD9C4EFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBD815BD-32AE-4B17-B1AE-73364088D40D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBD815BD-32AE-4B17-B1AE-73364088D40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBD815BD-32AE-4B17-B1AE-73364088D40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBD815BD-32AE-4B17-B1AE-73364088D40D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4193337-7DD7-4389-86C4-21BE0F6B5360}.Release|Any CPU.ActiveCfg = Release|Any CPU

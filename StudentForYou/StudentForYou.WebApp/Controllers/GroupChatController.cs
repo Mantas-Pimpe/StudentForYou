@@ -47,9 +47,7 @@ namespace StudentForYou.WebApp.Controllers
                 {
                     writer.WriteLine(message.MessageText + message.MessageTime + "\n" + e.ToString());
                 }
-              
-               // File.WriteAllText(filePath, e.ToString());
-         
+                     
             }
             }
         [HttpGet("{courseID}/Get")]
