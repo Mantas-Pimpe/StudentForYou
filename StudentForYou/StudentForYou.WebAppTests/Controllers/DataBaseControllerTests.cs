@@ -13,22 +13,30 @@ namespace StudentForYou.WebApp.Controllers.Tests
     [TestClass()]
     public class DataBaseControllerTests
     {
+        Func<string, string, int, Course> CreateTestCourse = delegate (string name, string description, int difficulty)
+             {
+                 var tCourse = new Course();
+                 tCourse.CourseDescription = name;
+                 tCourse.CourseDescription = description;
+                 tCourse.CourseDifficulty = difficulty;
+                return tCourse;
+
+            };
+
         [TestMethod()]
         public void PutCourseTest()
         {
             var controller = new DataBaseController();
-
-            Course testCourse = new Course();
             int expectedDifficulty = 5;
             string expectedName = "testcourse";
             string expectedDescription = "this is a test course";
+           
 
-            testCourse.CourseDifficulty = 5;
-            testCourse.CourseName = "testcourse";
-            testCourse.CourseDescription = "this is a test course";
+
 
             using (TransactionScope ts = new TransactionScope())
-            {
+            {   var testCourse = CreateTestCourse(expectedName, expectedDescription, expectedDifficulty);
+                Console.WriteLine(testCourse.CourseDescription);
                 var courseController = new CourseController();
                 courseController.PostCourse(testCourse);
                 var testingList = courseController.GetCourses();
@@ -44,17 +52,14 @@ namespace StudentForYou.WebApp.Controllers.Tests
         public void DeleteCourseTest()
         {
             var controller = new DataBaseController();
-            Course testCourse = new Course();
-            int expectedDifficulty = 1;
-            string expectedName = "deletecourse";
-            string expectedDescription = "coursetotestdeletion";
-
-            testCourse.CourseDifficulty = 1;
-            testCourse.CourseName = "deletecourse";
-            testCourse.CourseDescription = "coursetotestdeletion";
+            var expectedDifficulty = 1;
+            var expectedName = "deletecourse";
+            var expectedDescription = "coursetotestdeletion";
+        
+          
 
             using (TransactionScope ts = new TransactionScope())
-            {
+            {  var testCourse = CreateTestCourse(expectedName, expectedDescription, expectedDifficulty);
                 var courseController = new CourseController();
                 courseController.PostCourse(testCourse);
                 var testingList = courseController.GetCourses();
@@ -82,12 +87,10 @@ namespace StudentForYou.WebApp.Controllers.Tests
         public void PostReviewTest()
         {
             var courseController = new CourseController();
-            Course testCourse = new Course();
+          
             using (TransactionScope ts = new TransactionScope())
             {
-                testCourse.CourseDifficulty = 5;
-                testCourse.CourseName = "reviewtestcourse";
-                testCourse.CourseDescription = "test";
+                var testCourse = CreateTestCourse("reviewtestcourse", "test", 5);
                 courseController.PostCourse(testCourse);
                 var testingList = courseController.GetCourses();
                 foreach(Course c in testingList)

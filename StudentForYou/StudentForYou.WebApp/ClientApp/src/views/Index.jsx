@@ -24,7 +24,6 @@ import {
 } from "../variables/charts.jsx";
 import { Link } from 'react-router-dom';
 import AddQuestion from "./examples/AddQuestion.jsx";
-import Example1 from "./components/examplecomponent.jsx";
 
 class Index extends React.Component {
     constructor(props) {
