@@ -7,18 +7,18 @@ namespace StudentForYou
 {
     public class WhiteSpaceRemover
     {
-        public async static Task<Tuple<string, string>> CleanCourseBeforePost(string name, string description)
+        public Tuple<string, string> CleanCourseBeforePost(string name, string description)
         {
-            var a = await RemoveMultipleWhiteSpaces(name);
-            var b = await RemoveMultipleWhiteSpaces(description);
+            var a = RemoveMultipleWhiteSpaces(name);
+            var b = RemoveMultipleWhiteSpaces(description);
             return Tuple.Create(a, b);
         }
-        public async static Task<string> CleanReviewBeforePost(string review)
+        public string CleanReviewBeforePost(string review)
         {
-            var a = await Task.Run(() => RemoveMultipleWhiteSpaces(review));
+            var a = RemoveMultipleWhiteSpaces(review);
             return a;
         }
-        public async static Task<string> RemoveMultipleWhiteSpaces(string notCleanText)
+        public string RemoveMultipleWhiteSpaces(string notCleanText)
         {
             var cleanedText = Regex.Replace(notCleanText, "\\s+", " ");
             return cleanedText;

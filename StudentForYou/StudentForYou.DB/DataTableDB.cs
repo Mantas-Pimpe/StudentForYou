@@ -2,11 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentForYou.DB
 {
@@ -36,7 +33,7 @@ namespace StudentForYou.DB
             {
                 using (var cmd = new MySqlCommand(query, con))
                 {
-                    DataTable dt = new DataTable();
+                    var dt = new DataTable();
                     dt.Load(cmd.ExecuteReader());
                     T item = GetConvertedDataTableItem<T>(dt.Rows[0]);
                     conManager.CloseConnection(con);
@@ -57,7 +54,7 @@ namespace StudentForYou.DB
             {
                 using (var cmd = new MySqlCommand(query, con))
                 {
-                    DataTable dt = new DataTable();
+                    var dt = new DataTable();
                     dt.Load(cmd.ExecuteReader());
                     conManager.CloseConnection(con);
                     return dt;
@@ -67,13 +64,7 @@ namespace StudentForYou.DB
 
         public List<T> ConvertDataTable<T>(DataTable dt)
         {
-            List<T> data = new List<T>();
-            foreach (DataRow row in dt.Rows)
-            {
-                T item = GetConvertedDataTableItem<T>(row);
-                data.Add(item);
-            }
-            return data;
+            return dt.Rows.Cast<DataRow>().Select(row => GetConvertedDataTableItem<T>(row)).ToList();
         }
 
         public T GetConvertedDataTableItem<T>(DataRow dr)
@@ -85,9 +76,6 @@ namespace StudentForYou.DB
             {
                 foreach (PropertyInfo pro in temp.GetProperties())
                 {
-                    //System.Diagnostics.Debug.WriteLine(pro.Name);
-                    //System.Diagnostics.Debug.WriteLine(column.ColumnName);
-
                     if (pro.Name == column.ColumnName)
                         pro.SetValue(obj, dr[column.ColumnName], null);
                     else
@@ -102,7 +90,6 @@ namespace StudentForYou.DB
             var con = conManager.OpenConnection(lazyConnection);
 
             var query = "select * from " + table;
-            //var query = "select * from " + table + " where " + whereString + " = " + id;
             var update = new MySqlCommand();
             update.Connection = con;
             update.CommandType = CommandType.Text;
@@ -116,7 +103,6 @@ namespace StudentForYou.DB
             da.Fill(ds, table);
 
             ds.Tables[0].AsEnumerable().Where(x => x.Field<int>(whereString) == id).FirstOrDefault()[whatToIncrease] = number;
-            //ds.Tables[0].Rows[0][whatToIncrease] = number;
 
             da.Update(ds.Tables[0]);
             conManager.CloseConnection(con);

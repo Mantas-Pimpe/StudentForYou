@@ -224,9 +224,6 @@ class CoursesDetails extends React.Component {
                                             <Col md="12">
                                                 <FormGroup>
                                                     <label className="form-control-label">Images containing helpful course information</label>
-                                                    <div>
-                                                        <SubmitComponent />
-                                                        </div>
                                                 </FormGroup>
                                             </Col>
                                         </div>

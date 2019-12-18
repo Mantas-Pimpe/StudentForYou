@@ -41,7 +41,7 @@ class Index extends React.Component {
         }
     }
 
-    async GetQuestion() {
+    async getQuestions() {
         const url = "https://localhost:44341/api/Question";
         const response = await fetch(url);
         const data = await response.json();
@@ -64,20 +64,20 @@ class Index extends React.Component {
     }
 
     async componentDidMount() {
-        this.GetQuestion();
+        this.getQuestions();
         this.getQuestionAmount();
     }
 
 
     async componentDidUpdate(preProps, preState) {
         if (this.state.isClickedQuestion === true) {
-            this.GetQuestion();
+            this.getQuestions();
             this.getQuestionAmount();
             this.setState({ isClickedQuestion: false });
         }
 
         if (this.state.isClicked == 0) {
-            this.GetQuestion();
+            this.getQuestions();
             this.getQuestionAmount();
             this.setState({ isClicked: 1 });
         }
@@ -89,7 +89,7 @@ class Index extends React.Component {
             }
         }
         if ((this.state.searchKey).length === 0 && this.state.firstLoad === true) {
-            this.GetQuestion();
+            this.getQuestions();
         }
     }
 
