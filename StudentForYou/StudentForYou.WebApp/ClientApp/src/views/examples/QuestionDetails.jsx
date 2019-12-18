@@ -34,11 +34,6 @@ class QuestionDetails extends React.Component {
         this.GetAnswers();
     }
 
-    componentDidUpdate() {
-        this.getQuestion();
-        this.GetAnswers();
-    }
-
     async getQuestion() {
         const { match: { params } } = this.props;
         const url = "https://localhost:44341/api/question/GetOneQuestion/" + params.questionID;
@@ -73,6 +68,8 @@ class QuestionDetails extends React.Component {
             },
             body: JSON.stringify(data)
         })
+        this.getQuestion();
+        this.GetAnswers();
     }
 
     changeHandler = (e) => {
@@ -136,6 +133,7 @@ class QuestionDetails extends React.Component {
         })
             .then(res => res.json())
             .then(res => console.log(res))
+        this.GetAnswers();
     }
 
     addAnswer() {
@@ -149,6 +147,7 @@ class QuestionDetails extends React.Component {
         }).then(response => {
             return response.json()
         })
+        this.GetAnswers();
     }
 
 

@@ -111,8 +111,7 @@ namespace StudentForYou.DB
 
         public void DeleteRow(string table, string whereString, int id)
         {
-            var con = new MySqlConnection(GetConnectionString());
-            con.Open();
+            var con = conManager.OpenConnection(lazyConnection);
              
             var query = "select * from " + table + " where " + whereString + " = " + id;
             var delete = new MySqlCommand();
