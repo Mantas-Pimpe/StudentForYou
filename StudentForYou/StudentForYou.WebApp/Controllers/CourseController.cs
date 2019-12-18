@@ -35,9 +35,18 @@ namespace StudentForYou.WebApp.Controllers
         [HttpGet("GetCourseAverage")]
         public double GetCourseAverage()
         {
-            var tmp = courseListManager.GetList().AsEnumerable()
-                        .Select(g => g.CourseDifficulty).Average();
-            return tmp;
+            var tmp = courseListManager.GetList();
+            List<int> difficulties = new List<int>();
+               foreach(Course c in tmp)
+            {
+                difficulties.Add(c.CourseDifficulty);
+            }
+            var average = difficulties.Aggregate(
+                0,
+                (result, item) => result + item,
+                result => (double)result / difficulties.Count);
+
+            return average; 
         }
 
         [HttpGet("GetMostReviewed")]

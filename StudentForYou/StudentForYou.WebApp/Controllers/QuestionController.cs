@@ -14,6 +14,7 @@ namespace StudentForYou.WebApp.Controllers
     [ApiController]
     public class QuestionController : DataBaseController
     {
+       public Action<string,string,string,int,int> dbMethod;
         DataTableDB db = new DataTableDB();
         public IListManager<Question> questionListManager;
 
@@ -113,25 +114,30 @@ namespace StudentForYou.WebApp.Controllers
         [HttpPost("addLike/{question_id}")]
         public void AddLike(int question_id)
         {
-            db.UpdateIncreaseByNumber("questions", "qns_likes", "qns_id", question_id, 1);
+            dbMethod = db.UpdateIncreaseByNumber;
+            dbMethod("questions", "qns_likes", "qns_id", question_id, 1);
         }
 
         [HttpPost("addView/{question_id}")]
         public void AddView(int question_id)
         {
-            db.UpdateIncreaseByNumber("questions", "qns_views", "qns_id", question_id, 1);
+
+            dbMethod = db.UpdateIncreaseByNumber;
+            dbMethod("questions", "qns_views", "qns_id", question_id, 1);
         }
 
         [HttpPost("addAnswer/{question_id}")]
         public void AddAnswer(int question_id)
         {
-            db.UpdateIncreaseByNumber("questions", "qns_comments", "qns_id", question_id, 1);
+            dbMethod = db.UpdateIncreaseByNumber;
+            dbMethod("questions", "qns_views", "qns_id", question_id, 1);
         }
 
         [HttpPost("addDislike/{question_id}")]
         public void AddDislike(int question_id)
         {
-            db.UpdateIncreaseByNumber("questions", "qns_likes", "qns_id", question_id, -1);
+            dbMethod = db.UpdateIncreaseByNumber; 
+            dbMethod("questions", "qns_likes", "qns_id", question_id, -1);
         }
 
       

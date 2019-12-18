@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
+using System.IO;
+using System.Configuration;
 
 namespace StudentForYou.WebApp.Controllers
 {
@@ -10,12 +12,20 @@ namespace StudentForYou.WebApp.Controllers
     [ApiController]
     public class GroupChatController : DataBaseController
     {
+
+        public delegate void MyDel(string message);
+        public event MyDel MyEvent;
         [HttpPost]
         public void Post([FromBody] GroupMessage message)
         {
             var qry = "INSERT INTO chat_group(chg_user_id, chg_course_id, chg_text, chg_creation_date) VALUES (@chg_user_id, @chg_course_id, @chg_text, @chg_creation_date)";
+
+            try
+            { 
             using (var con = new MySqlConnection(GetConnectionString()))
             {
+                   
+                    
                 con.Open();
                 using (var cmd = new MySqlCommand(qry, con))
                 {
@@ -28,6 +38,18 @@ namespace StudentForYou.WebApp.Controllers
                 }
             }
         }
+            catch (Exception e)
+            {
+                var logName = ConfigurationManager.AppSettings["logfilename"];
+                MyEvent(message.MessageText + message.MessageTime + "\n" + e.ToString());
+                string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                using (StreamWriter writer = new StreamWriter(Path.Combine(docPath, logName), true))
+                {
+                    writer.WriteLine(message.MessageText + message.MessageTime + "\n" + e.ToString());
+                }
+                     
+            }
+            }
         [HttpGet("{courseID}/Get")]
         public List<GroupMessage> Get(int courseID)
         {
