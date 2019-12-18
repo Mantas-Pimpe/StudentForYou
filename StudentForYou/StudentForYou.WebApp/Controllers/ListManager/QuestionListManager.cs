@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using StudentForYou.DB;
+﻿using StudentForYou.DB;
 using StudentForYou.WebApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentForYou.WebApp.Controllers
 {

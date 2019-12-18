@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using StudentForYou.WebApp.Models;
 using StudentForYou.DB;
-using System.Configuration;
 using System.Linq;
 
 namespace StudentForYou.WebApp.Controllers
@@ -14,7 +12,7 @@ namespace StudentForYou.WebApp.Controllers
     [ApiController]
     public class QuestionController : DataBaseController
     {
-       public Action<string,string,string,int,int> dbMethod;
+        public Action<string,string,string,int,int> dbMethod;
         DataTableDB db = new DataTableDB();
         public IListManager<Question> questionListManager;
 
