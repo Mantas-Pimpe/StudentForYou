@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionManager.cs" />
+    <Compile Include="EntityFramework\EntityFrameworkDB.cs" />
+    <Compile Include="EntityFramework\IEntityFrameworkDB.cs" />
+    <Compile Include="EntityFramework\ModelInterfaces\ICoursesDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataTableDB.cs" />
   </ItemGroup>
@@ -77,5 +80,6 @@
       <Name>StudentForYou.RecentPosts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
