@@ -7,45 +7,44 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Transactions;
-
 namespace StudentForYou.WebApp.Controllers.Tests
 {
     [TestClass()]
     public class DataBaseControllerTests
     {
-        Func<string, string, int, Course> CreateTestCourse = delegate (string name, string description, int difficulty)
+        Course testCourse;
+        Func<string, string, int, Course> CreateTestCourse = delegate (string testname, string testdescription, int testdifficulty)
              {
                  var tCourse = new Course();
-                 tCourse.CourseDescription = name;
-                 tCourse.CourseDescription = description;
-                 tCourse.CourseDifficulty = difficulty;
+                 tCourse.CourseName = testname;
+                 tCourse.CourseDescription = testdescription;
+                 tCourse.CourseDifficulty = testdifficulty;
                 return tCourse;
 
             };
 
         [TestMethod()]
         public void PutCourseTest()
-        {
-            var controller = new DataBaseController();
+        {  
             int expectedDifficulty = 5;
             string expectedName = "testcourse";
             string expectedDescription = "this is a test course";
-           
+            var testCourse = CreateTestCourse(expectedName, expectedDescription, expectedDifficulty);
 
 
+             var controller = new DataBaseController();
+                using (TransactionScope ts = new TransactionScope())
+                {   
+                   
+                    var courseController = new CourseController();
+                    courseController.PostCourse(testCourse);
+                    var testingList = courseController.GetCourses();
+                    Assert.IsTrue(
+                    testingList.Exists(c => c.CourseName == expectedName && c.CourseDescription == expectedDescription && c.CourseDifficulty == expectedDifficulty)
 
-            using (TransactionScope ts = new TransactionScope())
-            {   var testCourse = CreateTestCourse(expectedName, expectedDescription, expectedDifficulty);
-                Console.WriteLine(testCourse.CourseDescription);
-                var courseController = new CourseController();
-                courseController.PostCourse(testCourse);
-                var testingList = courseController.GetCourses();
-                Assert.IsTrue(
-                testingList.Exists(c => c.CourseName == expectedName && c.CourseDescription == expectedDescription && c.CourseDifficulty == expectedDifficulty)
-
-                    );
-            }
-
+                        );
+                }
+            
         }
 
         [TestMethod()]
@@ -59,7 +58,8 @@ namespace StudentForYou.WebApp.Controllers.Tests
           
 
             using (TransactionScope ts = new TransactionScope())
-            {  var testCourse = CreateTestCourse(expectedName, expectedDescription, expectedDifficulty);
+            {  
+                testCourse = CreateTestCourse(expectedName, expectedDescription, expectedDifficulty);
                 var courseController = new CourseController();
                 courseController.PostCourse(testCourse);
                 var testingList = courseController.GetCourses();
@@ -90,7 +90,7 @@ namespace StudentForYou.WebApp.Controllers.Tests
           
             using (TransactionScope ts = new TransactionScope())
             {
-                var testCourse = CreateTestCourse("reviewtestcourse", "test", 5);
+                 testCourse = CreateTestCourse("reviewtestcourse", "test", 5);
                 courseController.PostCourse(testCourse);
                 var testingList = courseController.GetCourses();
                 foreach(Course c in testingList)
@@ -113,8 +113,18 @@ namespace StudentForYou.WebApp.Controllers.Tests
             }
 
         }
+        [TestMethod()]
 
-
+        public void RegexTest()
+        {
+            var spaceRemover = new WhiteSpaceRemover();
+            var tCourse = CreateTestCourse("abab   aabb   aaa", "lala    aaa   aa", 5);
+            var tuple = WhiteSpaceRemover.CleanCourseBeforePost(tCourse.CourseName, tCourse.CourseDescription);
+            var cleanString1 = tuple.Result.Item1;
+            var cleanString2 = tuple.Result.Item2;
+            Assert.IsTrue(cleanString1 == "abab aabb aaa" && cleanString2== "lala aaa aa");
+               
+        }
 
     }
 
