@@ -5,7 +5,7 @@ namespace StudentForYou.DB
 {
     public class ConnectionManager
     {
-        public delegate void MyDel(string message);
+        public delegate void MyDel(string info);
         public event MyDel MyEvent;
 
         public MySqlConnection OpenConnection(Lazy<MySqlConnection> lazyConnection)
@@ -14,10 +14,12 @@ namespace StudentForYou.DB
             try
             {
                 con.Open();
+            
             }
             catch (MySqlException ex)
             {
-                ex.ToString();
+                MyEvent(ex.ToString());
+                
             }
             
                 return con;
