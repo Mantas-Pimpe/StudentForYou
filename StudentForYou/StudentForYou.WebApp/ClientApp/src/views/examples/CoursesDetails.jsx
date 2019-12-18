@@ -224,9 +224,11 @@ class CoursesDetails extends React.Component {
                                             <Col md="12">
                                                 <FormGroup>
                                                     <label className="form-control-label">Images containing helpful course information</label>
-                                                    <div>
-                                                        <SubmitComponent />
-                                                        </div>
+                                                    <Input
+                                                        className="form-control-alternative"
+                                                        placeholder="Course images..."
+                                                        rows="8"
+                                                        type="textarea" />
                                                 </FormGroup>
                                             </Col>
                                         </div>
